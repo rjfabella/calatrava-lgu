@@ -182,10 +182,42 @@ function buildFooter(){
   document.body.appendChild(footer);
 }
 
-/** Call once per page: builds header + footer and starts the reveal observer. */
+// ── UNDER-CONSTRUCTION NOTICE ──
+// The site is a work in progress. Show a one-time notice per browser session
+// (set NOTICE_EVERY_LOAD = true to show it on every page navigation instead).
+const TOURISM_URL = 'https://rjfabella.github.io/calatrava-tourism-portal/';
+const NOTICE_EVERY_LOAD = false;
+
+function closeNotice(){ document.getElementById('uc-notice')?.classList.remove('open'); }
+
+function buildNotice(){
+  if (!NOTICE_EVERY_LOAD) {
+    try { if (sessionStorage.getItem('uc-seen')) return; sessionStorage.setItem('uc-seen', '1'); } catch (e) {}
+  }
+  const el = document.createElement('div');
+  el.className = 'uc-notice open';
+  el.id = 'uc-notice';
+  el.innerHTML = `
+    <div class="uc-card" role="dialog" aria-modal="true" aria-labelledby="uc-title">
+      <img class="uc-seal" src="assets/logos/Calatrava_Romblon_web.png" alt="Municipal seal of Calatrava">
+      <div class="uc-eyebrow">Pasensya na &middot; Please pardon our progress</div>
+      <h2 class="uc-title" id="uc-title">This site is under construction</h2>
+      <p class="uc-text">The official government portal of the Municipality of Calatrava is still being built. Information here is preliminary and may change. Thank you for your patience.</p>
+      <div class="uc-actions">
+        <button class="uc-btn uc-btn-primary" onclick="closeNotice()">Continue to preview</button>
+        <a class="uc-btn uc-btn-ghost" href="${TOURISM_URL}">Visit the Tourism Portal</a>
+      </div>
+    </div>`;
+  document.body.appendChild(el);
+  el.addEventListener('click', (e) => { if (e.target === el) closeNotice(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNotice(); });
+}
+
+/** Call once per page: builds header + footer, the notice, and starts the reveal observer. */
 function initChrome(active){
   buildHeader(active);
   buildFooter();
+  buildNotice();
   observeReveal();
 }
 
