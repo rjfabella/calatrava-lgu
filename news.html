@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News &amp; Bulletins — Municipality of Calatrava, Romblon</title>
+<meta name="description" content="Latest news, announcements, ordinances, and public bulletins from the Municipality of Calatrava, Romblon.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>News</span></nav>
+    <h1>News &amp; <em>bulletins</em></h1>
+    <p>Announcements, ordinances, biddings, and events from the Municipality of Calatrava.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:920px">
+    <div class="news-list" id="newsList"><!-- rendered from data/news.json --></div>
+  </div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+const FALLBACK = { items: [
+  { date: "2026-06-15", tag: "Announcement", title: "Business permit renewal period extended", summary: "Visit the BPLO at the Municipal Hall for details." }
+]};
+
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function renderNews(items){
+  document.getElementById('newsList').innerHTML = items.map(it => {
+    const d = new Date(it.date);
+    const valid = !isNaN(d);
+    const day = valid ? d.getDate() : '';
+    const mo = valid ? `${MONTHS[d.getMonth()]} ${d.getFullYear()}` : it.date;
+    const media = it.image ? `<div class="card-media" style="border-radius:4px;margin-bottom:1rem;max-width:420px"><img src="${it.image}" alt="" onerror="this.parentElement.remove()"></div>` : '';
+    return `<article class="news-row reveal">
+      <div class="news-date"><div class="day">${day}</div><div class="mo">${mo}</div></div>
+      <div>
+        <div class="card-tag">${it.tag || 'News'}</div>
+        <h3>${it.title}</h3>
+        ${media}
+        <p>${it.summary || ''}</p>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+(async function(){
+  initChrome('news');
+  const d = await loadJSON('data/news.json', FALLBACK);
+  const items = (d.items || []).slice().sort((a,b) => new Date(b.date) - new Date(a.date));
+  renderNews(items);
+  observeReveal();
+})();
+</script>
+</body>
+</html>

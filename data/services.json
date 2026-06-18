@@ -1,0 +1,93 @@
+{
+  "groups": [
+    {
+      "id": "admin",
+      "icon": "doc",
+      "title": "Administrative & Governance Services",
+      "services": [
+        { "name": "Certificate of Live Birth", "desc": "Request a certified true copy or register a new birth.", "fee": "₱100", "time": "1–3 days", "office": "Local Civil Registry" },
+        { "name": "Marriage Certificate / License", "desc": "Application for marriage license and certified copies.", "fee": "₱200", "time": "10-day posting", "office": "Local Civil Registry" },
+        { "name": "Death Certificate", "desc": "Registration and certified copies of death records.", "fee": "₱100", "time": "1–3 days", "office": "Local Civil Registry" },
+        { "name": "Community Tax Certificate (Cedula)", "desc": "Required for many government transactions.", "fee": "₱5+", "time": "Same day", "office": "Treasurer's Office" }
+      ]
+    },
+    {
+      "id": "business",
+      "icon": "store",
+      "title": "Business & Permits",
+      "services": [
+        { "name": "New Business Permit", "desc": "Mayor's permit for newly registered businesses.", "fee": "Varies", "time": "3–5 days", "office": "BPLO / Treasurer" },
+        { "name": "Business Permit Renewal", "desc": "Annual renewal of the Mayor's permit (Jan 1–20).", "fee": "Varies", "time": "1–3 days", "office": "BPLO / Treasurer" },
+        { "name": "Barangay Clearance", "desc": "Prerequisite clearance from the barangay.", "fee": "₱50–₱100", "time": "Same day", "office": "Barangay Hall" }
+      ]
+    },
+    {
+      "id": "finance",
+      "icon": "coins",
+      "title": "Financial Management Services",
+      "services": [
+        { "name": "Real Property Tax Payment", "desc": "Pay annual amilyar; discounts for early payment.", "fee": "Per assessment", "time": "Same day", "office": "Treasurer's Office" },
+        { "name": "Tax Declaration", "desc": "Issuance or transfer of property tax declaration.", "fee": "₱100", "time": "1–3 days", "office": "Assessor's Office" }
+      ]
+    },
+    {
+      "id": "health",
+      "icon": "health",
+      "title": "Health & Social Welfare Services",
+      "services": [
+        { "name": "Rural Health Unit Consultation", "desc": "Free primary care at the Municipal Health Office.", "fee": "Free", "time": "Walk-in", "office": "Municipal Health Office" },
+        { "name": "Immunization & Vaccination", "desc": "Routine immunization for infants and adults.", "fee": "Free", "time": "Per schedule", "office": "Municipal Health Office" },
+        { "name": "Senior Citizen / PWD ID", "desc": "Registration and benefits enrollment.", "fee": "Free", "time": "1–3 days", "office": "MSWDO / OSCA" },
+        { "name": "Financial / Burial Assistance (AICS)", "desc": "Assistance for qualified indigent residents.", "fee": "Free", "time": "Case basis", "office": "MSWDO" }
+      ]
+    },
+    {
+      "id": "agri",
+      "icon": "leaf",
+      "title": "Agricultural & Environmental Services",
+      "services": [
+        { "name": "Farmer / Fisherfolk Registration", "desc": "Enroll in RSBSA for programs and subsidies.", "fee": "Free", "time": "1–3 days", "office": "Municipal Agriculture Office" },
+        { "name": "Seeds & Seedling Distribution", "desc": "Planting materials and technical assistance.", "fee": "Free", "time": "Per schedule", "office": "Municipal Agriculture Office" },
+        { "name": "Tree-Cutting / Environmental Permit", "desc": "Clearance for regulated environmental activities.", "fee": "Varies", "time": "3–5 days", "office": "MENRO" }
+      ]
+    },
+    {
+      "id": "infra",
+      "icon": "tools",
+      "title": "Infrastructure & Public Works",
+      "services": [
+        { "name": "Building Permit", "desc": "Permit to construct, renovate, or demolish.", "fee": "Varies", "time": "5–10 days", "office": "Municipal Engineering" },
+        { "name": "Occupancy Permit", "desc": "Certificate of occupancy for completed structures.", "fee": "Varies", "time": "3–5 days", "office": "Municipal Engineering" }
+      ]
+    },
+    {
+      "id": "education",
+      "icon": "book",
+      "title": "Education, Youth & Culture",
+      "services": [
+        { "name": "Educational Assistance / Scholarship", "desc": "Financial aid for qualified students.", "fee": "Free", "time": "Per program", "office": "Mayor's Office / SK" },
+        { "name": "SK & Youth Programs", "desc": "Sangguniang Kabataan activities and registration.", "fee": "Free", "time": "Per schedule", "office": "SK Federation" }
+      ]
+    },
+    {
+      "id": "planning",
+      "icon": "map",
+      "title": "Planning & Development",
+      "services": [
+        { "name": "Zoning / Locational Clearance", "desc": "Verify land use prior to development.", "fee": "Varies", "time": "3–5 days", "office": "MPDO" },
+        { "name": "Project & Data Requests", "desc": "Development data and project status inquiries.", "fee": "Free", "time": "3–5 days", "office": "MPDO" }
+      ]
+    }
+  ],
+  "online": [
+    { "name": "Online Appointment", "desc": "Book a slot at a municipal office.", "href": "#", "status": "Coming soon" },
+    { "name": "Document Request", "desc": "Request certificates for pickup or delivery.", "href": "#", "status": "Coming soon" },
+    { "name": "Feedback & Complaints", "desc": "Submit a report or suggestion to the LGU.", "href": "contact.html", "status": "Available" }
+  ],
+  "hotlines": [
+    { "name": "MDRRMO / Emergency", "number": "0000-000-0000" },
+    { "name": "Municipal Police Station", "number": "0000-000-0000" },
+    { "name": "Rural Health Unit", "number": "0000-000-0000" },
+    { "name": "Bureau of Fire Protection", "number": "0000-000-0000" }
+  ]
+}

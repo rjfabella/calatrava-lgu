@@ -1,0 +1,8 @@
+{
+  "name": "calatrava-lgu",
+  "private": true,
+  "description": "Official government portal of the Municipality of Calatrava, Romblon — static site (HTML/CSS/JS) hosted on GitHub Pages.",
+  "scripts": {
+    "dev": "npx --yes http-server . -p 5173 -c-1"
+  }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government — Municipality of Calatrava, Romblon</title>
+<meta name="description" content="Elected officials, vision and mission, history, and departments of the Municipality of Calatrava, Romblon.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Government</span></nav>
+    <h1>The <em>Government</em></h1>
+    <p>The men and women who serve the Municipality of Calatrava, and the vision that guides our work.</p>
+  </div>
+</section>
+
+<!-- VISION & MISSION -->
+<section class="section" id="vision">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Our direction</span><h2 class="s-title">Vision &amp; <em>Mission</em></h2></div>
+    <div class="vm-grid">
+      <div class="vm-card reveal"><h3>Vision</h3><p id="visionText"></p></div>
+      <div class="vm-card reveal"><h3>Mission</h3><p id="missionText"></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ELECTED OFFICIALS -->
+<section class="section sand">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Serving 2025–2028</span><h2 class="s-title">Elected <em>officials</em></h2></div>
+    <div class="officials-grid" id="officials"><!-- rendered from data/officials.json --></div>
+  </div>
+</section>
+
+<!-- DEPARTMENTS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Offices &amp; departments</span><h2 class="s-title">Who does <em>what</em></h2></div>
+    <div class="svc-list" id="departments"><!-- rendered from data/officials.json --></div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="section sand" id="history">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Our story</span><h2 class="s-title">History of <em>Calatrava</em></h2></div>
+    <div class="prose" id="historyProse"></div>
+  </div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+const FALLBACK = {
+  vision: "A progressive, resilient municipality with empowered citizens under transparent and responsive governance.",
+  mission: "To deliver efficient public services and uphold the welfare of every Calatravanhon.",
+  history: ["[Add the history of Calatrava here — this content is rendered from data/officials.json.]"],
+  elected: [{ name: "[Mayor's Name]", role: "Municipal Mayor", term: "2025–2028", photo: "" }],
+  departments: [{ name: "Office of the Mayor", head: "[Name]" }]
+};
+
+function renderOfficial(o, lead){
+  const photo = o.photo ? `<img src="${o.photo}" alt="${o.name}" onerror="this.style.display='none'">` : '';
+  return `<div class="official reveal">
+    <div class="official-photo">${photo}</div>
+    <h3>${o.name}</h3>
+    <div class="role">${o.role}</div>
+    <div class="term">${o.term || ''}</div>
+  </div>`;
+}
+
+(async function(){
+  initChrome('about');
+  const d = await loadJSON('data/officials.json', FALLBACK);
+
+  document.getElementById('visionText').textContent = d.vision || '';
+  document.getElementById('missionText').textContent = d.mission || '';
+
+  document.getElementById('officials').innerHTML = (d.elected || []).map(renderOfficial).join('');
+
+  document.getElementById('departments').innerHTML = (d.departments || []).map(dep =>
+    `<div class="svc-item"><h3>${dep.name}</h3><div class="svc-meta">Head: <b>${dep.head || 'TBA'}</b></div></div>`).join('');
+
+  document.getElementById('historyProse').innerHTML = (d.history || []).map(p => `<p>${p}</p>`).join('');
+
+  observeReveal();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transparency — Municipality of Calatrava, Romblon</title>
+<meta name="description" content="Full Disclosure Policy documents of the Municipality of Calatrava: budget, procurement, bids and awards, plans, reports, and ordinances.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Transparency</span></nav>
+    <h1>Transparency <em>seal</em></h1>
+    <p id="intro"></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" id="sections"><!-- rendered from data/transparency.json --></div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+const FALLBACK = {
+  intro: "In compliance with the DILG Full Disclosure Policy, the Municipality of Calatrava publishes the following documents for public scrutiny.",
+  sections: [{ title: "Budget & Finance", docs: [{ title: "Annual Budget", sub: "Current fiscal year", href: "#" }] }]
+};
+
+const DOC_ICON = '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>';
+
+function renderSections(sections){
+  document.getElementById('sections').innerHTML = sections.map(sec =>
+    `<div class="svc-group">
+      <div class="svc-group-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${DOC_ICON}</svg><h2>${sec.title}</h2></div>
+      <div class="doc-list">
+        ${(sec.docs || []).map(doc =>
+          `<a class="doc-row" href="${doc.href || '#'}"${(doc.href||'').endsWith('.pdf') ? ' target="_blank" rel="noopener"' : ''}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${DOC_ICON}</svg>
+            <span><span class="doc-title">${doc.title}</span><br><span class="doc-sub">${doc.sub || ''}</span></span>
+            <span class="doc-go">View &rarr;</span>
+          </a>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+(async function(){
+  initChrome('transparency');
+  const d = await loadJSON('data/transparency.json', FALLBACK);
+  document.getElementById('intro').textContent = d.intro || '';
+  renderSections(d.sections || []);
+  observeReveal();
+})();
+</script>
+</body>
+</html>

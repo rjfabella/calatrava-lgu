@@ -1,0 +1,39 @@
+{
+  "welcome": {
+    "name": "[Mayor's Name]",
+    "role": "Municipal Mayor",
+    "photo": "",
+    "message": [
+      "Welcome to the official website of the Municipality of Calatrava. This portal is part of our commitment to open, accessible, and accountable governance.",
+      "Here you can transact with our offices, follow the programs and projects of your local government, and reach us directly. Our doors — and our records — are open to you."
+    ]
+  },
+  "vision": "A progressive, resilient, and God-loving municipality with empowered citizens enjoying a sustainable quality of life under transparent and responsive governance.",
+  "mission": "To deliver efficient public services, promote inclusive economic growth, protect the environment, and uphold the welfare of every Calatravanhon.",
+  "history": [
+    "Calatrava is a municipality on the northern tip of Tablas Island in the Province of Romblon. [Add the founding story, etymology of the name, and key historical milestones here.]",
+    "[Describe the town's growth, notable events, and cultural heritage. This placeholder text is rendered from data/officials.json and can be edited freely.]"
+  ],
+  "elected": [
+    { "name": "[Mayor's Name]",        "role": "Municipal Mayor",        "term": "2025–2028", "photo": "" },
+    { "name": "[Vice Mayor's Name]",   "role": "Vice Mayor",             "term": "2025–2028", "photo": "" },
+    { "name": "[Councilor 1]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
+    { "name": "[Councilor 2]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
+    { "name": "[Councilor 3]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
+    { "name": "[Councilor 4]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
+    { "name": "[Councilor 5]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
+    { "name": "[Councilor 6]",         "role": "SB Member",              "term": "2025–2028", "photo": "" }
+  ],
+  "departments": [
+    { "name": "Municipal Administrator's Office", "head": "[Name]" },
+    { "name": "Municipal Treasurer's Office",     "head": "[Name]" },
+    { "name": "Municipal Assessor's Office",      "head": "[Name]" },
+    { "name": "Municipal Planning & Development", "head": "[Name]" },
+    { "name": "Local Civil Registry",             "head": "[Name]" },
+    { "name": "Municipal Health Office",          "head": "[Name]" },
+    { "name": "Municipal Social Welfare (MSWDO)", "head": "[Name]" },
+    { "name": "Municipal Agriculture Office",     "head": "[Name]" },
+    { "name": "Municipal Engineering Office",     "head": "[Name]" },
+    { "name": "Disaster Risk Reduction (MDRRMO)", "head": "[Name]" }
+  ]
+}

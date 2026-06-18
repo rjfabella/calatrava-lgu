@@ -1,0 +1,42 @@
+{
+  "name": "Municipality of Calatrava",
+  "province": "Romblon",
+  "country": "Republic of the Philippines",
+  "tagline": "Serving the people of Calatrava with integrity, transparency, and progress.",
+  "motto": "Abante pang gador, Calatrava!",
+  "heroEyebrow": "Official Government Portal",
+  "heroTitle": "A municipality that <em>works for you</em>",
+  "heroSub": "Access public services, stay informed on local news and ordinances, and connect with your local government — all in one place.",
+  "heroSlides": [
+    "assets/hero/Calatrava_Aerial_web.jpg"
+  ],
+  "elgu": {
+    "title": "Online Services are here",
+    "text": "Transact with the municipal government online — request documents, book appointments, and follow up on applications without lining up at the Municipal Hall.",
+    "cta": "Go to Online Services",
+    "href": "services.html#online"
+  },
+  "stats": [
+    { "num": "7", "label": "Barangays" },
+    { "num": "11,342", "label": "Population · 2020" },
+    { "num": "Tablas", "label": "Island" },
+    { "num": "24", "suffix": "/7", "label": "Emergency Response" }
+  ],
+  "quickServices": [
+    { "id": "civil",    "title": "Civil Registry",  "desc": "Birth, marriage & death certificates and corrections.", "href": "services.html#civil",    "icon": "doc" },
+    { "id": "business", "title": "Business Permit", "desc": "New permits, renewals, and barangay clearances.",       "href": "services.html#business", "icon": "store" },
+    { "id": "health",   "title": "Health Services", "desc": "Rural health unit, vaccinations, and assistance.",      "href": "services.html#health",   "icon": "health" },
+    { "id": "help",     "title": "Citizen Help Desk","desc": "Questions, requests, and feedback to the LGU.",         "href": "contact.html",           "icon": "help" }
+  ],
+  "programs": [
+    { "tag": "Health", "title": "Universal Health Care Caravan", "desc": "Free medical missions and check-ups rotating across all 7 barangays." },
+    { "tag": "Livelihood", "title": "Calatrava Livelihood Program", "desc": "Skills training, starter kits, and support for local entrepreneurs and farmers." },
+    { "tag": "Infrastructure", "title": "Farm-to-Market Roads", "desc": "Ongoing road concreting connecting upland barangays to the town center." }
+  ],
+  "recognitions": [
+    { "name": "Seal of Good Local Governance", "sub": "DILG", "icon": "award" },
+    { "name": "Full Disclosure Policy", "sub": "Compliant", "icon": "doc" },
+    { "name": "NPC Registered", "sub": "Data Privacy Act", "icon": "shield" },
+    { "name": "eGovPH Ready", "sub": "DICT", "icon": "online" }
+  ]
+}

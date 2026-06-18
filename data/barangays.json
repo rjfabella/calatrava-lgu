@@ -1,0 +1,12 @@
+{
+  "intro": "The Municipality of Calatrava is composed of 7 barangays on the northern tip of Tablas Island. Population figures are from the 2020 Census of Population (PSA).",
+  "barangays": [
+    { "name": "Balogo",      "captain": "[Punong Barangay]", "population": "2,052" },
+    { "name": "Linao",       "captain": "[Punong Barangay]", "population": "1,624" },
+    { "name": "Pagsangahan", "captain": "[Punong Barangay]", "population": "880" },
+    { "name": "Pangulo",     "captain": "[Punong Barangay]", "population": "1,750" },
+    { "name": "Poblacion",   "captain": "[Punong Barangay]", "population": "1,764" },
+    { "name": "San Roque",   "captain": "[Punong Barangay]", "population": "1,927" },
+    { "name": "Talisay",     "captain": "[Punong Barangay]", "population": "1,345" }
+  ]
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Municipality of Calatrava, Romblon</title>
+<meta name="description" content="Public services of the Municipality of Calatrava: civil registry, business permits, treasury, health and social welfare, online services, and emergency hotlines.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Services</span></nav>
+    <h1>Public <em>services</em></h1>
+    <p>Requirements, fees, and processing times for transactions with the Municipality of Calatrava. Tap any office to learn more.</p>
+  </div>
+</section>
+
+<!-- ONLINE SERVICES -->
+<section class="section tight" id="online">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Skip the line</span><h2 class="s-title">Online <em>services</em></h2></div>
+    <div class="cards" id="onlineServices"><!-- rendered from data/services.json --></div>
+  </div>
+</section>
+
+<!-- SERVICE GROUPS -->
+<section class="section sand">
+  <div class="container" id="serviceGroups"><!-- rendered from data/services.json --></div>
+</section>
+
+<!-- EMERGENCY HOTLINES -->
+<section class="section dark" id="hotline">
+  <div class="container">
+    <div class="section-head"><span class="s-label">In an emergency</span><h2 class="s-title">Hotlines &amp; <em>response</em></h2></div>
+    <div class="doc-list" id="hotlines"><!-- rendered from data/services.json --></div>
+  </div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+const FALLBACK = {
+  online: [{ name: "Feedback & Complaints", desc: "Submit a report or suggestion.", href: "contact.html", status: "Available" }],
+  groups: [{
+    id: "civil", icon: "doc", title: "Civil Registry",
+    services: [{ name: "Birth Certificate", desc: "Certified true copy.", fee: "₱100", time: "1–3 days", office: "Local Civil Registry" }]
+  }],
+  hotlines: [{ name: "MDRRMO / Emergency", number: "0000-000-0000" }]
+};
+
+function renderOnline(list){
+  document.getElementById('onlineServices').innerHTML = list.map(o =>
+    `<article class="card reveal"><div class="card-body">
+      <div class="card-tag">${o.status || ''}</div>
+      <h3 class="card-title">${o.name}</h3>
+      <p class="card-text">${o.desc || ''}</p>
+      <a href="${o.href || '#'}" class="card-link">${o.status === 'Available' ? 'Open' : 'Notify me'}</a>
+    </div></article>`).join('');
+}
+
+function renderGroups(groups){
+  document.getElementById('serviceGroups').innerHTML = groups.map(g =>
+    `<div class="svc-group" id="${g.id}">
+      <div class="svc-group-head">${svgIcon(g.icon)}<h2>${g.title}</h2></div>
+      <div class="svc-list">
+        ${(g.services || []).map(s =>
+          `<div class="svc-item">
+            <h3>${s.name}</h3>
+            <p>${s.desc || ''}</p>
+            <div class="svc-meta">Fee: <b>${s.fee || 'N/A'}</b> &nbsp;&middot;&nbsp; ${s.time || ''} &nbsp;&middot;&nbsp; ${s.office || ''}</div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function renderHotlines(list){
+  document.getElementById('hotlines').innerHTML = list.map(h =>
+    `<a class="doc-row" href="tel:${(h.number||'').replace(/[^0-9+]/g,'')}">
+      ${svgIcon('help')}
+      <span><span class="doc-title">${h.name}</span><br><span class="doc-sub">${h.number}</span></span>
+      <span class="doc-go">Call &rarr;</span>
+    </a>`).join('');
+}
+
+(async function(){
+  initChrome('services');
+  const d = await loadJSON('data/services.json', FALLBACK);
+  renderOnline(d.online || []);
+  renderGroups(d.groups || []);
+  renderHotlines(d.hotlines || []);
+  observeReveal();
+  // jump to in-page anchor after async render
+  if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+})();
+</script>
+</body>
+</html>

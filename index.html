@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Municipality of Calatrava, Romblon — Official Government Portal</title>
+<meta name="description" content="Official website of the Local Government Unit of Calatrava, Province of Romblon, Philippines. Public services, news, ordinances, and transparency.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- EMERGENCY STRIP -->
+<div class="emerg">
+  <div class="emerg-inner">
+    <b>EMERGENCY HOTLINES</b>
+    <span>MDRRMO <a href="tel:0000000000">0000-000-0000</a></span>
+    <span>Police <a href="tel:0000000000">0000-000-0000</a></span>
+    <span>Fire <a href="tel:0000000000">0000-000-0000</a></span>
+    <span>RHU <a href="tel:0000000000">0000-000-0000</a></span>
+  </div>
+</div>
+
+<!-- HERO (rotating banners) -->
+<section class="hero">
+  <div class="hero-slides" id="heroSlides" aria-hidden="true"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow" id="heroEyebrow">Official Government Portal</div>
+    <h1 class="hero-title" id="heroTitle">A municipality that <em>works for you</em></h1>
+    <p class="hero-sub" id="heroSub"></p>
+    <p class="hero-motto" id="heroMotto"></p>
+    <div class="hero-actions">
+      <a href="services.html" class="btn btn-primary">Browse Services</a>
+      <a href="news.html" class="btn btn-ghost">Latest News</a>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<!-- QUICK SERVICES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head row">
+      <div>
+        <span class="s-label">How can we help?</span>
+        <h2 class="s-title">Popular <em>services</em></h2>
+      </div>
+      <a href="services.html" class="see-all">All services &rarr;</a>
+    </div>
+    <div class="qs-grid" id="quickServices"><!-- rendered from data/site.json --></div>
+  </div>
+</section>
+
+<!-- eLGU / ONLINE SERVICES BAND -->
+<div class="elgu">
+  <div class="elgu-inner">
+    <div class="elgu-text">
+      <h2 id="elguTitle">Online Services are here</h2>
+      <p id="elguText"></p>
+    </div>
+    <a class="btn btn-primary" id="elguCta" href="services.html#online">Go to Online Services</a>
+  </div>
+</div>
+
+<!-- MAYOR'S WELCOME -->
+<section class="section sand">
+  <div class="container">
+    <div class="welcome">
+      <div class="welcome-photo reveal"><img id="mayorPhoto" src="" alt="" onerror="this.parentElement.style.background='var(--deep)';this.style.display='none'"></div>
+      <div class="welcome-text reveal">
+        <span class="s-label">Message from the Mayor</span>
+        <h2 class="s-title" style="margin-bottom:1.25rem">Welcome to <em>Calatrava</em></h2>
+        <div id="mayorMessage"></div>
+        <div class="welcome-sign" id="mayorSign"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS & PROJECTS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head row">
+      <div>
+        <span class="s-label">Uswag Calatrava</span>
+        <h2 class="s-title">Programs &amp; <em>projects</em></h2>
+      </div>
+      <a href="news.html" class="see-all">More updates &rarr;</a>
+    </div>
+    <div class="prog-grid" id="programs"><!-- rendered from data/site.json --></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section dark tight">
+  <div class="container">
+    <div class="stats" id="stats"><!-- rendered from data/site.json --></div>
+  </div>
+</section>
+
+<!-- LATEST NEWS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head row">
+      <div>
+        <span class="s-label">Stay informed</span>
+        <h2 class="s-title">Latest <em>news &amp; bulletins</em></h2>
+      </div>
+      <a href="news.html" class="see-all">All news &rarr;</a>
+    </div>
+    <div class="cards" id="latestNews"><!-- rendered from data/news.json --></div>
+  </div>
+</section>
+
+<!-- RECOGNITION / SEALS -->
+<section class="section dark">
+  <div class="container">
+    <div class="section-head" style="text-align:center">
+      <span class="s-label" style="display:block">Good governance</span>
+      <h2 class="s-title">Recognition &amp; <em>certifications</em></h2>
+    </div>
+    <div class="seals" id="recognitions"><!-- rendered from data/site.json --></div>
+  </div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+const FALLBACK_SITE = {
+  heroEyebrow: "Official Government Portal",
+  heroTitle: "A municipality that <em>works for you</em>",
+  heroSub: "Access public services, stay informed, and connect with your local government — all in one place.",
+  heroSlides: [],
+  elgu: { title: "Online Services are here", text: "Transact with the municipal government online.", cta: "Go to Online Services", href: "services.html#online" },
+  stats: [
+    { num: "7", label: "Barangays" },
+    { num: "11,342", label: "Population · 2020" },
+    { num: "Tablas", label: "Island" },
+    { num: "24", suffix: "/7", label: "Emergency Response" }
+  ],
+  quickServices: [
+    { title: "Civil Registry", desc: "Birth, marriage & death certificates.", href: "services.html#admin", icon: "doc" },
+    { title: "Business Permit", desc: "New permits and renewals.", href: "services.html#business", icon: "store" },
+    { title: "Health Services", desc: "Rural health unit and assistance.", href: "services.html#health", icon: "health" },
+    { title: "Citizen Help Desk", desc: "Requests and feedback to the LGU.", href: "contact.html", icon: "help" }
+  ],
+  programs: [
+    { tag: "Health", title: "Universal Health Care Caravan", desc: "Free medical missions across all 7 barangays." }
+  ],
+  recognitions: [
+    { name: "Seal of Good Local Governance", sub: "DILG", icon: "award" }
+  ]
+};
+
+function buildSlider(slides){
+  const wrap = document.getElementById('heroSlides');
+  const dots = document.getElementById('heroDots');
+  if (!slides.length) { wrap.innerHTML = '<div class="hero-slide active" style="background:var(--deep)"></div>'; return; }
+  wrap.innerHTML = slides.map((src, i) =>
+    `<div class="hero-slide${i === 0 ? ' active' : ''}"><img src="${src}" alt="" onerror="this.style.display='none'"></div>`).join('');
+  dots.innerHTML = slides.map((_, i) =>
+    `<button class="hero-dot${i === 0 ? ' active' : ''}" aria-label="Slide ${i+1}" onclick="goSlide(${i})"></button>`).join('');
+  if (slides.length > 1) window._heroTimer = setInterval(() => goSlide((window._heroIdx + 1) % slides.length), 6000);
+  window._heroIdx = 0;
+}
+function goSlide(i){
+  const s = document.querySelectorAll('.hero-slide'), d = document.querySelectorAll('.hero-dot');
+  if (!s.length) return;
+  s.forEach((el,n)=>el.classList.toggle('active', n===i));
+  d.forEach((el,n)=>el.classList.toggle('active', n===i));
+  window._heroIdx = i;
+}
+
+function renderSite(s){
+  document.getElementById('heroEyebrow').textContent = s.heroEyebrow;
+  document.getElementById('heroTitle').innerHTML = s.heroTitle;
+  document.getElementById('heroSub').textContent = s.heroSub;
+  document.getElementById('heroMotto').textContent = s.motto || '';
+  buildSlider(s.heroSlides || []);
+
+  const e = s.elgu || {};
+  document.getElementById('elguTitle').textContent = e.title || 'Online Services';
+  document.getElementById('elguText').textContent = e.text || '';
+  const cta = document.getElementById('elguCta');
+  cta.textContent = e.cta || 'Go to Online Services';
+  cta.href = e.href || 'services.html#online';
+
+  document.getElementById('quickServices').innerHTML = (s.quickServices || []).map(q =>
+    `<a class="qs-card" href="${q.href}">
+      ${svgIcon(q.icon, 'qs-ico')}
+      <h3>${q.title}</h3>
+      <p>${q.desc}</p>
+      <div class="qs-go">Go &rarr;</div>
+    </a>`).join('');
+
+  document.getElementById('programs').innerHTML = (s.programs || []).map(p =>
+    `<div class="prog-card reveal"><div class="prog-tag">${p.tag || 'Program'}</div><h3>${p.title}</h3><p>${p.desc || ''}</p></div>`).join('');
+
+  document.getElementById('stats').innerHTML = (s.stats || []).map(st =>
+    `<div class="stat"><div class="stat-num">${st.num}${st.suffix ? `<sup>${st.suffix}</sup>` : ''}</div><div class="stat-lbl">${st.label}</div></div>`).join('');
+
+  document.getElementById('recognitions').innerHTML = (s.recognitions || []).map(r =>
+    `<div class="seal-chip">${svgIcon(r.icon, 'seal-ico')}<div class="seal-name">${r.name}</div><div class="seal-sub">${r.sub || ''}</div></div>`).join('');
+}
+
+function renderWelcome(o){
+  const w = o.welcome || {};
+  if (w.photo) document.getElementById('mayorPhoto').src = w.photo;
+  document.getElementById('mayorMessage').innerHTML = (w.message || []).map(p => `<p style="font-size:16.5px;line-height:1.85;margin-bottom:1.1rem">${p}</p>`).join('');
+  document.getElementById('mayorSign').innerHTML = `${w.name || ''}<small>${w.role || ''}</small>`;
+}
+
+function renderLatestNews(n){
+  const items = (n.items || []).slice(0, 3);
+  document.getElementById('latestNews').innerHTML = items.map(it => {
+    const d = new Date(it.date);
+    const meta = isNaN(d) ? it.date : d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    const media = it.image ? `<div class="card-media"><img src="${it.image}" alt="" onerror="this.parentElement.remove()"></div>` : '';
+    return `<article class="card reveal">
+      ${media}
+      <div class="card-body">
+        <div class="card-tag">${it.tag || 'News'}</div>
+        <h3 class="card-title">${it.title}</h3>
+        <div class="card-meta">${meta}</div>
+        <p class="card-text">${it.summary || ''}</p>
+        <a href="news.html" class="card-link">Read more</a>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+(async function(){
+  initChrome('home');
+  const [site, officials, news] = await Promise.all([
+    loadJSON('data/site.json', FALLBACK_SITE),
+    loadJSON('data/officials.json', { welcome: { name: "[Mayor's Name]", role: 'Municipal Mayor', message: ['Welcome to the official website of the Municipality of Calatrava.'] } }),
+    loadJSON('data/news.json', { items: [] })
+  ]);
+  renderSite(site);
+  renderWelcome(officials);
+  renderLatestNews(news);
+  observeReveal();
+})();
+</script>
+</body>
+</html>

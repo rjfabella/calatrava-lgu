@@ -1,0 +1,46 @@
+{
+  "address": "Municipal Hall, Poblacion, Calatrava, Romblon, Philippines",
+  "hours": "Monday–Friday, 8:00 AM – 5:00 PM",
+  "email": "andagaotour@gmail.com",
+  "phone": "0966 439 3711",
+  "facebook": "https://www.facebook.com/calatrava.romblon.217551/",
+  "mapEmbed": "https://www.google.com/maps?q=Calatrava,Romblon&output=embed",
+  "directory": [
+    {
+      "office": "Office of the Mayor",
+      "head": "[Mayor's Name]",
+      "phone": "0000-000-0000",
+      "email": "mayor@calatrava.gov.ph"
+    },
+    {
+      "office": "Office of the Vice Mayor / SB",
+      "head": "[Vice Mayor's Name]",
+      "phone": "0000-000-0000",
+      "email": "sb@calatrava.gov.ph"
+    },
+    {
+      "office": "Local Civil Registry",
+      "head": "[Name]",
+      "phone": "0000-000-0000",
+      "email": "lcr@calatrava.gov.ph"
+    },
+    {
+      "office": "Treasurer's Office",
+      "head": "[Name]",
+      "phone": "0000-000-0000",
+      "email": "treasury@calatrava.gov.ph"
+    },
+    {
+      "office": "Municipal Health Office",
+      "head": "[Name]",
+      "phone": "0000-000-0000",
+      "email": "rhu@calatrava.gov.ph"
+    },
+    {
+      "office": "MDRRMO (Disaster / Emergency)",
+      "head": "[Name]",
+      "phone": "0000-000-0000",
+      "email": "mdrrmo@calatrava.gov.ph"
+    }
+  ]
+}

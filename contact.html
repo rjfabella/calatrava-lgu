@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Municipality of Calatrava, Romblon</title>
+<meta name="description" content="Contact the Municipality of Calatrava: office directory, address, hours, and location map.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></nav>
+    <h1>Get in <em>touch</em></h1>
+    <p id="addressLine"></p>
+  </div>
+</section>
+
+<!-- DIRECTORY -->
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Office directory</span><h2 class="s-title">Reach the right <em>office</em></h2></div>
+    <div class="dir-grid" id="directory"><!-- rendered from data/contact.json --></div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section sand tight">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Find us</span><h2 class="s-title">Municipal <em>hall</em></h2></div>
+    <div class="map-wrap"><iframe id="map" title="Map to Calatrava Municipal Hall" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe></div>
+  </div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+const FALLBACK = {
+  address: "Municipal Hall, Poblacion, Calatrava, Romblon, Philippines",
+  hours: "Monday–Friday, 8:00 AM – 5:00 PM",
+  email: "info@calatrava.gov.ph",
+  phone: "0000-000-0000",
+  mapEmbed: "https://www.google.com/maps?q=Calatrava,Romblon&output=embed",
+  directory: [{ office: "Office of the Mayor", head: "[Mayor's Name]", phone: "0000-000-0000", email: "mayor@calatrava.gov.ph" }]
+};
+
+function renderDirectory(d){
+  const tel = n => (n || '').replace(/[^0-9+]/g,'');
+  document.getElementById('directory').innerHTML = (d.directory || []).map(o =>
+    `<div class="dir-card reveal">
+      <h3>${o.office}</h3>
+      <div class="dir-line"><span>Head</span> ${o.head || 'TBA'}</div>
+      <div class="dir-line"><span>Phone</span> <a href="tel:${tel(o.phone)}">${o.phone || '—'}</a></div>
+      <div class="dir-line"><span>Email</span> <a href="mailto:${o.email}">${o.email || '—'}</a></div>
+    </div>`).join('');
+}
+
+(async function(){
+  initChrome('contact');
+  const d = await loadJSON('data/contact.json', FALLBACK);
+  document.getElementById('addressLine').innerHTML =
+    `${d.address || ''}<br>${d.hours || ''} &middot; <a href="tel:${(d.phone||'').replace(/[^0-9+]/g,'')}" style="color:var(--gl)">${d.phone || ''}</a> &middot; <a href="mailto:${d.email}" style="color:var(--gl)">${d.email || ''}</a>`;
+  renderDirectory(d);
+  if (d.mapEmbed) document.getElementById('map').src = d.mapEmbed;
+  observeReveal();
+})();
+</script>
+</body>
+</html>

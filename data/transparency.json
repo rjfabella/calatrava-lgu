@@ -1,0 +1,39 @@
+{
+  "intro": "In compliance with the Full Disclosure Policy of the Department of the Interior and Local Government (DILG), the Municipality of Calatrava publishes the following documents for public scrutiny. Replace the placeholder links with the actual PDF documents.",
+  "sections": [
+    {
+      "title": "Budget & Finance",
+      "docs": [
+        { "title": "Annual Budget", "sub": "Current fiscal year appropriation", "href": "#" },
+        { "title": "Statement of Receipts & Expenditures", "sub": "Quarterly SRE reports", "href": "#" },
+        { "title": "Annual Procurement Plan", "sub": "APP for the current year", "href": "#" },
+        { "title": "20% Development Fund Utilization", "sub": "Projects and status", "href": "#" }
+      ]
+    },
+    {
+      "title": "Bids & Awards",
+      "docs": [
+        { "title": "Invitation to Bid", "sub": "Current open biddings", "href": "news.html" },
+        { "title": "Notice of Award", "sub": "Awarded contracts", "href": "#" },
+        { "title": "BAC Resolutions", "sub": "Bids and Awards Committee", "href": "#" }
+      ]
+    },
+    {
+      "title": "Plans & Reports",
+      "docs": [
+        { "title": "Citizen's Charter", "sub": "Service standards (ARTA / RA 11032)", "href": "services.html" },
+        { "title": "Comprehensive Development Plan", "sub": "CDP and CLUP", "href": "#" },
+        { "title": "Annual Accomplishment Report", "sub": "Programs and outcomes", "href": "#" },
+        { "title": "Local Disaster Risk Reduction Plan", "sub": "LDRRM plan and fund", "href": "#" }
+      ]
+    },
+    {
+      "title": "Governance & Ordinances",
+      "docs": [
+        { "title": "Municipal Ordinances", "sub": "Enacted local legislation", "href": "#" },
+        { "title": "SB Resolutions", "sub": "Sangguniang Bayan resolutions", "href": "#" },
+        { "title": "Executive Orders", "sub": "Issued by the Mayor", "href": "#" }
+      ]
+    }
+  ]
+}

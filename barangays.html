@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barangays — Municipality of Calatrava, Romblon</title>
+<meta name="description" content="The 7 barangays of the Municipality of Calatrava, Romblon, with their barangay officials and population.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Barangays</span></nav>
+    <h1>Our <em>barangays</em></h1>
+    <p id="intro"></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="brgy-grid" id="barangays"><!-- rendered from data/barangays.json --></div>
+  </div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+const FALLBACK = {
+  intro: "The Municipality of Calatrava is composed of 7 barangays on the northern tip of Tablas Island.",
+  barangays: [{ name: "Poblacion", captain: "[Punong Barangay]", population: "1,764" }]
+};
+
+(async function(){
+  initChrome('barangays');
+  const d = await loadJSON('data/barangays.json', FALLBACK);
+  document.getElementById('intro').textContent = d.intro || '';
+  document.getElementById('barangays').innerHTML = (d.barangays || []).map(b =>
+    `<div class="brgy-item">
+      <h3>${b.name}</h3>
+      <div class="brgy-cap">Brgy. Captain: ${b.captain || 'TBA'}</div>
+      <div class="brgy-meta">Population: <b>${b.population || '—'}</b></div>
+    </div>`).join('');
+  observeReveal();
+})();
+</script>
+</body>
+</html>

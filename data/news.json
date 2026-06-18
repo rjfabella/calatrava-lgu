@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "date": "2026-06-15",
+      "tag": "Announcement",
+      "title": "Business permit renewal period extended",
+      "summary": "The deadline for the annual renewal of business permits has been extended. Visit the BPLO at the Municipal Hall or check the requirements online.",
+      "image": ""
+    },
+    {
+      "id": "2",
+      "date": "2026-06-08",
+      "tag": "Health",
+      "title": "Free immunization drive in all 7 barangays",
+      "summary": "The Municipal Health Office will conduct a free immunization and deworming program. See the schedule per barangay below.",
+      "image": ""
+    },
+    {
+      "id": "3",
+      "date": "2026-05-30",
+      "tag": "Ordinance",
+      "title": "Sangguniang Bayan passes solid waste ordinance",
+      "summary": "A new ordinance strengthening segregation-at-source and the municipal materials recovery facility has been approved on third reading.",
+      "image": ""
+    },
+    {
+      "id": "4",
+      "date": "2026-05-21",
+      "tag": "Bidding",
+      "title": "Invitation to bid: farm-to-market road project",
+      "summary": "The Bids and Awards Committee invites eligible contractors to bid for the concreting of a farm-to-market road. Documents available at the BAC Secretariat.",
+      "image": ""
+    },
+    {
+      "id": "5",
+      "date": "2026-05-12",
+      "tag": "Event",
+      "title": "11th Pangisraan Festival — schedule of activities",
+      "summary": "Magkaradya, kita! The schedule for the town's Pangisraan Festival has been released — civic parade, agri-trade fair, street dancing, and cultural night.",
+      "image": "assets/hero/Welcome_to_Pangisraan11.jpg"
+    }
+  ]
+}
