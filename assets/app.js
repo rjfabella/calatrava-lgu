@@ -204,8 +204,8 @@ function buildNotice(){
       <h2 class="uc-title" id="uc-title">This site is under construction</h2>
       <p class="uc-text">The official government portal of the Municipality of Calatrava is still being built. Information here is preliminary and may change. Thank you for your patience.</p>
       <div class="uc-actions">
-        <button class="uc-btn uc-btn-primary" onclick="closeNotice()">Continue to preview</button>
-        <a class="uc-btn uc-btn-ghost" href="${TOURISM_URL}">Visit the Tourism Portal</a>
+        <button class="uc-btn uc-btn-primary" onclick="closeNotice()" style="display: none;">Continue to preview</button>
+        <a class="uc-btn uc-btn-ghost" href="${TOURISM_URL}">Go back to Tourism Portal</a>
       </div>
     </div>`;
   document.body.appendChild(el);
