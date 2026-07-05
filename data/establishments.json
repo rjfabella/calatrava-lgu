@@ -247,5 +247,15 @@
     "socials": "https://www.facebook.com/profile.php?id=61591121484421",
     "mapsUrl": "https://maps.app.goo.gl/TebdYfyRadCuBD8F8",
     "image": "assets/establishments/Ciolyn.jpg"
+  },
+  {
+    "id": "karl's-events-place",
+    "name": "Karl's Events Place",
+    "category": "events place",
+    "address": "Pangulo, Calatrava, Romblon",
+    "phone": "0928 362 7949",
+    "socials": "https://www.facebook.com/karlseventsplace",
+    "mapsUrl": "",
+    "image": ""
   }
 ]
