@@ -368,10 +368,13 @@ then set `welcome.photo` and `elected[0].photo` in `officials.json`.
 - Official photos for all officials (photo fields empty; initials monograms
   render in their place, so this degrades cleanly)
 - Barangay captains for all 7 barangays (shown as "To be announced")
-- **PNP / BFP / RHU hotline numbers** — empty in `services.json` and rendered
-  as pending rows. These are the public emergency hotlines and are NOT the
-  office-head mobile numbers in `contact.json`; ask the MDRRMO for the real
-  ones rather than reusing a head's cell. Only the MDRRMO hotline is real.
+- ~~Emergency hotlines~~ **DONE 2026-09-10** — all six are real, from the
+  LGU's official "Calatrava Hotlines" infographic: Emergency Command Center
+  0930 326 4161, Police 0998 598 5883, Fire 0999 433 3661, Health
+  0907 237 1460, Coastguard 0995 660 2401, Sanitation 0929 436 2082. Office
+  names follow the infographic so they match the posted version residents
+  see. These are public hotlines and remain distinct from the office-head
+  mobile numbers in `contact.json`.
 - Real news items — `data/news.json` is deliberately empty; the page shows an
   empty state until the PIO publishes or the Facebook sync is switched on
 - A designated Data Protection Officer (`dpo` in `contact.json`, empty)

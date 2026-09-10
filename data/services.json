@@ -104,10 +104,13 @@
     { "name": "Document Request", "desc": "Request certificates for pickup or delivery.", "href": "#", "status": "Coming soon" },
     { "name": "Feedback & Complaints", "desc": "Submit a report or suggestion to the LGU.", "href": "contact.html", "status": "Available" }
   ],
+  "_hotlinesNote": "All six are real, from the LGU's official 'Calatrava Hotlines' infographic (supplied 2026-09-10). Office names follow that infographic so they match the printed/posted version residents see. Ordered by urgency rather than the poster's layout. Anything without a real number must be left blank — services.html renders a blank as a non-clickable pending row instead of a dead tel: link.",
   "hotlines": [
-    { "name": "Calatrava Emergency Hotline (MDRRMO)", "number": "0930 326 4161" },
-    { "name": "Municipal Police Station", "number": "" },
-    { "name": "Rural Health Unit", "number": "" },
-    { "name": "Bureau of Fire Protection", "number": "" }
+    { "name": "Emergency Command Center", "number": "0930 326 4161" },
+    { "name": "Police Department", "number": "0998 598 5883" },
+    { "name": "Fire Department", "number": "0999 433 3661" },
+    { "name": "Health Department", "number": "0907 237 1460" },
+    { "name": "Coastguard", "number": "0995 660 2401" },
+    { "name": "Sanitation Department", "number": "0929 436 2082" }
   ]
 }
