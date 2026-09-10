@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -34,18 +34,27 @@ const FALLBACK = {
 
 const DOC_ICON = '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>';
 
+const DOC_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${DOC_ICON}</svg>`;
+
+function renderDoc(doc){
+  const href = doc.href || '';
+  const body = `${DOC_SVG}
+    <span><span class="doc-title">${doc.title}</span><br><span class="doc-sub">${doc.sub || ''}</span></span>`;
+
+  if (!href || doc.status === 'pending')
+    return `<div class="doc-row is-pending">${body}<span class="doc-go">Pending</span></div>`;
+
+  const external = /^https?:/.test(href) || /\.(pdf|pptx?|docx?|xlsx?)$/i.test(href);
+  return `<a class="doc-row" href="${href}"${external ? ' target="_blank" rel="noopener"' : ''}>
+    ${body}<span class="doc-go">View &rarr;</span>
+  </a>`;
+}
+
 function renderSections(sections){
   document.getElementById('sections').innerHTML = sections.map(sec =>
     `<div class="svc-group">
-      <div class="svc-group-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${DOC_ICON}</svg><h2>${sec.title}</h2></div>
-      <div class="doc-list">
-        ${(sec.docs || []).map(doc =>
-          `<a class="doc-row" href="${doc.href || '#'}"${(doc.href||'').endsWith('.pdf') ? ' target="_blank" rel="noopener"' : ''}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${DOC_ICON}</svg>
-            <span><span class="doc-title">${doc.title}</span><br><span class="doc-sub">${doc.sub || ''}</span></span>
-            <span class="doc-go">View &rarr;</span>
-          </a>`).join('')}
-      </div>
+      <div class="svc-group-head">${DOC_SVG}<h2>${sec.title}</h2></div>
+      <div class="doc-list">${(sec.docs || []).map(renderDoc).join('')}</div>
     </div>`).join('');
 }
 

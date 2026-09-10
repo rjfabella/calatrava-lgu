@@ -1,0 +1,373 @@
+{
+  "_source": "Organizational Chart 2026.pptx, supplied by the Municipal HR office (assets/contents/Organizational Chart 2026.pptx)",
+  "_note": "Salary grades (SG) are included as supplied. Review before deciding whether SG is shown publicly per-position or summarized.",
+  "offices": [
+    {
+      "office": "Office of the Municipal Mayor",
+      "head": {
+        "name": "ENGR. ROBERT M. FABELLA",
+        "salaryGrade": "27",
+        "position": "Municipal Mayor"
+      },
+      "staff": [
+        {
+          "name": "VACANT",
+          "salaryGrade": "17",
+          "position": "Executive Assistant II"
+        },
+        {
+          "name": "ANAMHER GRACE C. FERRERA",
+          "salaryGrade": "15",
+          "position": "Administrative Officer IV (HRMO II)"
+        },
+        {
+          "name": "ERROL M. FALCUTILA",
+          "salaryGrade": "11",
+          "position": "Administrative Officer II"
+        },
+        {
+          "name": "MARIA SOCORRO F. FEDELICIO",
+          "salaryGrade": "6",
+          "position": "Administrative Aide VI"
+        },
+        {
+          "name": "DAVEN A. FAJUTAGANA",
+          "salaryGrade": "6",
+          "position": "Administrative Aide VI"
+        },
+        {
+          "name": "JANREY F. FACTOR",
+          "salaryGrade": "4",
+          "position": "Administrative Aide IV"
+        },
+        {
+          "name": "LANIE M. GALLANO",
+          "salaryGrade": "4",
+          "position": "Administrative Aide IV"
+        },
+        {
+          "name": "ROEL M. CAUNCA",
+          "salaryGrade": "1",
+          "position": "Administrative Aide I"
+        },
+        {
+          "name": "EMILIO M. FIEDACAN",
+          "salaryGrade": "1",
+          "position": "Administrative Aide I"
+        },
+        {
+          "name": "AGOSTO M. FALCUTILA",
+          "salaryGrade": "1",
+          "position": "Administrative Aide I"
+        },
+        {
+          "name": "VACANT",
+          "salaryGrade": "1",
+          "position": "Administrative Aide I"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Vice Mayor",
+      "head": {
+        "name": "HON. ELIZER F. FIEDACAN",
+        "salaryGrade": "25",
+        "position": "Municipal Vice Mayor"
+      },
+      "staff": [
+        {
+          "name": "DILBERT S. MOTIN",
+          "salaryGrade": "24",
+          "position": "SB Member"
+        },
+        {
+          "name": "HERBERT F. FALCUTILA",
+          "salaryGrade": "24",
+          "position": "SB Member"
+        },
+        {
+          "name": "ROBERTO M. FESALBON",
+          "salaryGrade": "24",
+          "position": "SB Member"
+        },
+        {
+          "name": "CARLO C. FETALVERO",
+          "salaryGrade": "24",
+          "position": "SB Member"
+        },
+        {
+          "name": "JOSEPH M. FEDELICIO",
+          "salaryGrade": "24",
+          "position": "SB Secretary"
+        },
+        {
+          "name": "MERLITO M. SIXON",
+          "salaryGrade": "24",
+          "position": "SB Member"
+        },
+        {
+          "name": "RAMON F. MAGBATA, JR.",
+          "salaryGrade": "24",
+          "position": "SB Member"
+        },
+        {
+          "name": "ARLYN F. ESPINO",
+          "salaryGrade": "4",
+          "position": "Administrative Aide IV"
+        },
+        {
+          "name": "ALAN M. FAMINI",
+          "salaryGrade": "24",
+          "position": "SB Member"
+        },
+        {
+          "name": "VONN CHRISTIAN M. FRUELDA",
+          "salaryGrade": "24",
+          "position": "SB Member"
+        },
+        {
+          "name": "EMIL RALPH M. FAJEL",
+          "salaryGrade": "24",
+          "position": "SK Mun. Federation President"
+        },
+        {
+          "name": "NORVELKIMWELL F. FALCUTILA",
+          "salaryGrade": "24",
+          "position": "LnB President"
+        },
+        {
+          "name": "RAMON F. REANDELAR",
+          "salaryGrade": "24",
+          "position": "IPMR"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Treasurer",
+      "head": {
+        "name": "CHARLEMAGNE F. FORTU",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Treasurer)"
+      },
+      "staff": [
+        {
+          "name": "RENE F. FAMIS",
+          "salaryGrade": "8",
+          "position": "Administrative Assistant II"
+        },
+        {
+          "name": "SARAH JEAN M. FAJEL",
+          "salaryGrade": "6",
+          "position": "Administrative Aide VI"
+        },
+        {
+          "name": "VACANT",
+          "salaryGrade": "5",
+          "position": "Administrative Aide V"
+        },
+        {
+          "name": "RODOLFO P. FAJUTNAO",
+          "salaryGrade": "5",
+          "position": "Administrative Aide V"
+        },
+        {
+          "name": "JAN PAULO M. FALCULAN",
+          "salaryGrade": "5",
+          "position": "Administrative Aide V"
+        }
+      ]
+    },
+    {
+      "office": "Municipal Planning & Development Office",
+      "head": {
+        "name": "ENGR. BERLITO F. FAJEL, JR.",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Planning and Development Coordinator)"
+      },
+      "staff": [
+        {
+          "name": "ENGR. JILLIAN A. FALCUTILA",
+          "salaryGrade": "15",
+          "position": "Statistician II"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Budget Officer",
+      "head": {
+        "name": "JEANLYN F. FALLARIA",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Budget Officer)"
+      },
+      "staff": []
+    },
+    {
+      "office": "Office of the Municipal Assessor",
+      "head": {
+        "name": "ENGR. VINCENT D. DE CARDO",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Assessor)"
+      },
+      "staff": []
+    },
+    {
+      "office": "Office of the Municipal Accountant",
+      "head": {
+        "name": "ARIEL F. FAMADULAN",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Accountant)"
+      },
+      "staff": [
+        {
+          "name": "ESPENOSA M. FEROLINO",
+          "salaryGrade": "9",
+          "position": "Administrative Assistant III (Senior Bookkeeper)"
+        },
+        {
+          "name": "ERICCA MOAJE",
+          "salaryGrade": "8",
+          "position": "Administrative Assistant II"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Civil Registrar",
+      "head": {
+        "name": "BELCEZAR F. FAJUTAGANA",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Civil Registrar)"
+      },
+      "staff": [
+        {
+          "name": "VACANT",
+          "salaryGrade": "6",
+          "position": "Administrative Aide VI"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Engineer",
+      "head": {
+        "name": "ENGR. LAUREANO F. FALCUTILA, III",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Engineer)"
+      },
+      "staff": [
+        {
+          "name": "ENGR. DREXTHER JAY F. FABITO",
+          "salaryGrade": "16",
+          "position": "Engineer II"
+        },
+        {
+          "name": "DAISY JANE F. RABINO",
+          "salaryGrade": "11",
+          "position": "Administrative Officer II"
+        },
+        {
+          "name": "ARJUN I. AQUINO",
+          "salaryGrade": "4",
+          "position": "Administrative Aide IV (Driver)"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Health Officer",
+      "head": {
+        "name": "DR. JENNIE F. MATTA",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Health Officer)"
+      },
+      "staff": [
+        {
+          "name": "VACANT",
+          "salaryGrade": "17",
+          "position": "Dentist II"
+        },
+        {
+          "name": "ANNIE F. FALCUTILA",
+          "salaryGrade": "16",
+          "position": "Nurse II"
+        },
+        {
+          "name": "FREEZER F. MIRABETE",
+          "salaryGrade": "4",
+          "position": "Dental Aide"
+        },
+        {
+          "name": "LOGIN F. JOLEJOLE",
+          "salaryGrade": "11",
+          "position": "Midwife II"
+        },
+        {
+          "name": "LAIREEN F. YLING",
+          "salaryGrade": "11",
+          "position": "Midwife II"
+        },
+        {
+          "name": "EDWARD RUSSELL F. BAGNATE",
+          "salaryGrade": "6",
+          "position": "Sanitation Inspector"
+        },
+        {
+          "name": "WALTER F. FALCUNIT",
+          "salaryGrade": "4",
+          "position": "Driver II"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Agriculturist",
+      "head": {
+        "name": "ERWIN M. MORTEL",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Agriculturist)"
+      },
+      "staff": [
+        {
+          "name": "GRACE ELLEN F. CULPA",
+          "salaryGrade": "10",
+          "position": "Agricultural Technologist"
+        },
+        {
+          "name": "DENNIS EVERN F. FABITO",
+          "salaryGrade": "10",
+          "position": "Agricultural Technologist"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Social Welfare and Development Officer",
+      "head": {
+        "name": "LEVIE F. FAJILAN",
+        "salaryGrade": "24",
+        "position": "MGDH I (Municipal Social Welfare and Development Officer)"
+      },
+      "staff": []
+    },
+    {
+      "office": "Municipal Disaster Risk Reduction and Management Office",
+      "head": {
+        "name": "JOHN ARVILL F. RABINO",
+        "salaryGrade": "15",
+        "position": "MDRRMO II"
+      },
+      "staff": [
+        {
+          "name": "GERARDO M. MARFIL",
+          "salaryGrade": "8",
+          "position": "LDRRM Assistant"
+        },
+        {
+          "name": "RICARDO F. FAMIS",
+          "salaryGrade": "8",
+          "position": "LDRRM Assistant"
+        },
+        {
+          "name": "GERWIN M. FETALCURIN",
+          "salaryGrade": "8",
+          "position": "LDRRM Assistant"
+        }
+      ]
+    }
+  ]
+}

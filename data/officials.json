@@ -1,6 +1,6 @@
 {
   "welcome": {
-    "name": "[Mayor's Name]",
+    "name": "Engr. Robert M. Fabella",
     "role": "Municipal Mayor",
     "photo": "",
     "message": [
@@ -8,32 +8,54 @@
       "Here you can transact with our offices, follow the programs and projects of your local government, and reach us directly. Our doors — and our records — are open to you."
     ]
   },
-  "vision": "A progressive, resilient, and God-loving municipality with empowered citizens enjoying a sustainable quality of life under transparent and responsive governance.",
-  "mission": "To deliver efficient public services, promote inclusive economic growth, protect the environment, and uphold the welfare of every Calatravanhon.",
+  "vision": "A premiere gateway of the province with vibrant, productive and sustainable eco-tourism, whose people are God-loving and living in a safe, peaceful, healthy and ecologically-balanced environment guided by dynamic, transparent and responsive leaders.",
+  "mission": "The local government of Calatrava shall: ensure and support the preservation and enrichment of the Filipino culture; enhance public moral among the people; promote health and safety in the community; ensure the right of the people to a balanced ecology; encourage and support the development of appropriate and new scientific and technological capabilities; promote economic prosperity and social justice; create a self-reliant community; and preserve the comfort and convenience of the inhabitants.",
+  "_missionNote": "The Citizen's Charter states the mission as eight numbered commitments. `mission` keeps them as one sentence for anywhere that needs a single string; `missionLead` + `missionPoints` are the same text split back out, which is what the homepage renders — a list is far easier to scan than a long centred paragraph.",
+  "missionLead": "The local government of Calatrava shall:",
+  "missionPoints": [
+    "Ensure and support the preservation and enrichment of the Filipino culture",
+    "Enhance public moral among the people",
+    "Promote health and safety in the community",
+    "Ensure the right of the people to a balanced ecology",
+    "Encourage and support the development of appropriate and new scientific and technological capabilities",
+    "Promote economic prosperity and social justice",
+    "Create a self-reliant community",
+    "Preserve the comfort and convenience of the inhabitants"
+  ],
+  "mandate": "To keep with the policy of the State, Republic Act No. 11032, known as the \"Ease of Doing Business and Efficient Government Service Delivery Act of 2018,\" has been adopted by the Local Government Unit to establish its own Citizen's Charter containing the procedures, fees, processing time, and requirements for our services.",
+  "servicePledge": "We, the officials and employees of the Municipality of Calatrava, Romblon, pledge and commit to deliver the quality public services as promised in this Citizen's Charter. Specifically, we will serve with integrity; be prompt and timely; display procedures, fees and charges; provide adequate and correct information; be consistent in applying the rules; provide a feedback mechanism; be polite and courteous; demonstrate sensitivity, appropriate behaviour and professionalism; wear proper uniform and identification; be available during office hours; respond to complaints; provide a comfortable waiting area; and treat everyone equally.",
   "history": [
     "Calatrava is a municipality on the northern tip of Tablas Island in the Province of Romblon. [Add the founding story, etymology of the name, and key historical milestones here.]",
     "[Describe the town's growth, notable events, and cultural heritage. This placeholder text is rendered from data/officials.json and can be edited freely.]"
   ],
   "elected": [
-    { "name": "[Mayor's Name]",        "role": "Municipal Mayor",        "term": "2025–2028", "photo": "" },
-    { "name": "[Vice Mayor's Name]",   "role": "Vice Mayor",             "term": "2025–2028", "photo": "" },
-    { "name": "[Councilor 1]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
-    { "name": "[Councilor 2]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
-    { "name": "[Councilor 3]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
-    { "name": "[Councilor 4]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
-    { "name": "[Councilor 5]",         "role": "SB Member",              "term": "2025–2028", "photo": "" },
-    { "name": "[Councilor 6]",         "role": "SB Member",              "term": "2025–2028", "photo": "" }
+    { "name": "Engr. Robert M. Fabella", "role": "Municipal Mayor", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Elizer F. Fiedacan", "role": "Municipal Vice Mayor", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Herbert F. Falcutila", "role": "SB Member", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Dilbert S. Motin", "role": "SB Member", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Carlo C. Fetalvero", "role": "SB Member", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Roberto M. Fesalbon", "role": "SB Member", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Ramon F. Magbata, Jr.", "role": "SB Member", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Merlito M. Sixon", "role": "SB Member", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Vonn Christian M. Fruelda", "role": "SB Member", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Alan M. Famini", "role": "SB Member", "term": "2025–2028", "photo": "" },
+    { "name": "Hon. Norvelkimwell F. Falcutila", "role": "Liga ng mga Barangay President", "term": "Ex officio", "photo": "" },
+    { "name": "Hon. Emil Ralph M. Fajel", "role": "SK Municipal Federation President", "term": "Ex officio", "photo": "" },
+    { "name": "Hon. Ramon F. Reandelar", "role": "Indigenous Peoples Mandatory Representative", "term": "Ex officio", "photo": "" }
   ],
   "departments": [
-    { "name": "Municipal Administrator's Office", "head": "[Name]" },
-    { "name": "Municipal Treasurer's Office",     "head": "[Name]" },
-    { "name": "Municipal Assessor's Office",      "head": "[Name]" },
-    { "name": "Municipal Planning & Development", "head": "[Name]" },
-    { "name": "Local Civil Registry",             "head": "[Name]" },
-    { "name": "Municipal Health Office",          "head": "[Name]" },
-    { "name": "Municipal Social Welfare (MSWDO)", "head": "[Name]" },
-    { "name": "Municipal Agriculture Office",     "head": "[Name]" },
-    { "name": "Municipal Engineering Office",     "head": "[Name]" },
-    { "name": "Disaster Risk Reduction (MDRRMO)", "head": "[Name]" }
+    { "name": "Office of the Municipal Mayor", "head": "Engr. Robert M. Fabella", "headTitle": "Municipal Mayor" },
+    { "name": "Office of the Municipal Vice Mayor", "head": "Hon. Elizer F. Fiedacan", "headTitle": "Municipal Vice Mayor" },
+    { "name": "Office of the Municipal Treasurer", "head": "Charlemagne F. Fortu", "headTitle": "Municipal Treasurer" },
+    { "name": "Municipal Planning & Development Office", "head": "Engr. Berlito F. Fajel, Jr.", "headTitle": "Municipal Planning and Development Coordinator" },
+    { "name": "Office of the Municipal Budget Officer", "head": "Jeanlyn F. Fallaria", "headTitle": "Municipal Budget Officer" },
+    { "name": "Office of the Municipal Assessor", "head": "Engr. Vincent D. De Cardo", "headTitle": "Municipal Assessor" },
+    { "name": "Office of the Municipal Accountant", "head": "Ariel F. Famadulan", "headTitle": "Municipal Accountant" },
+    { "name": "Office of the Municipal Civil Registrar", "head": "Belcezar F. Fajutagana", "headTitle": "Municipal Civil Registrar" },
+    { "name": "Office of the Municipal Engineer", "head": "Engr. Laureano F. Falcutila, III", "headTitle": "Municipal Engineer / Building Official" },
+    { "name": "Office of the Municipal Health Officer", "head": "Dr. Jennie F. Matta", "headTitle": "Municipal Health Officer" },
+    { "name": "Office of the Municipal Agriculturist", "head": "Erwin M. Mortel", "headTitle": "Municipal Agriculturist" },
+    { "name": "Office of the Municipal Social Welfare and Development Officer", "head": "Levie F. Fajilan", "headTitle": "Municipal Social Welfare and Development Officer" },
+    { "name": "Municipal Disaster Risk Reduction and Management Office", "head": "John Arvill F. Rabino", "headTitle": "MDRRM Officer II" }
   ]
 }

@@ -8,3 +8,10 @@ node_modules/
 # Local Claude Code settings (per-developer, not shared)
 .claude/settings.local.json
 .claude/tmp-*/
+
+# Source archive of the brand assets already extracted into assets/logos/
+assets/Calatrava.zip
+
+# Python bytecode from local runs of scripts/
+__pycache__/
+*.pyc

@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -32,8 +32,20 @@
   </div>
 </section>
 
+<!-- MANDATE & SERVICE PLEDGE -->
+<section class="section sand" id="mandate">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Republic Act No. 11032</span><h2 class="s-title">Mandate &amp; service <em>pledge</em></h2></div>
+    <div class="vm-grid">
+      <div class="vm-card reveal"><h3>Mandate</h3><p id="mandateText"></p></div>
+      <div class="vm-card reveal"><h3>Service Pledge</h3><p id="pledgeText"></p></div>
+    </div>
+    <p class="mandate-note">Source: <a href="assets/contents/Citizen's%20Charter%202023.pdf" target="_blank" rel="noopener">LGU Calatrava Citizen's Charter 2023 (Edition II)</a></p>
+  </div>
+</section>
+
 <!-- ELECTED OFFICIALS -->
-<section class="section sand">
+<section class="section">
   <div class="container">
     <div class="section-head"><span class="s-label">Serving 2025–2028</span><h2 class="s-title">Elected <em>officials</em></h2></div>
     <div class="officials-grid" id="officials"><!-- rendered from data/officials.json --></div>
@@ -41,15 +53,16 @@
 </section>
 
 <!-- DEPARTMENTS -->
-<section class="section">
+<section class="section sand" id="departments-section">
   <div class="container">
     <div class="section-head"><span class="s-label">Offices &amp; departments</span><h2 class="s-title">Who does <em>what</em></h2></div>
     <div class="svc-list" id="departments"><!-- rendered from data/officials.json --></div>
+    <p class="mandate-note"><a href="assets/contents/Organizational%20Chart%202026.pptx">Download the full Organizational Chart 2026</a></p>
   </div>
 </section>
 
 <!-- HISTORY -->
-<section class="section sand" id="history">
+<section class="section" id="history">
   <div class="container">
     <div class="section-head"><span class="s-label">Our story</span><h2 class="s-title">History of <em>Calatrava</em></h2></div>
     <div class="prose" id="historyProse"></div>
@@ -61,18 +74,23 @@
 const FALLBACK = {
   vision: "A progressive, resilient municipality with empowered citizens under transparent and responsive governance.",
   mission: "To deliver efficient public services and uphold the welfare of every Calatravanhon.",
+  mandate: "",
+  servicePledge: "",
   history: ["[Add the history of Calatrava here — this content is rendered from data/officials.json.]"],
   elected: [{ name: "[Mayor's Name]", role: "Municipal Mayor", term: "2025–2028", photo: "" }],
   departments: [{ name: "Office of the Mayor", head: "[Name]" }]
 };
 
-function renderOfficial(o, lead){
+function renderOfficial(o, i){
   const photo = o.photo ? `<img src="${o.photo}" alt="${o.name}" onerror="this.style.display='none'">` : '';
-  return `<div class="official reveal">
+  const lead = i < 2 ? ' lead-official' : '';
+  return `<div class="official${lead} reveal">
     <div class="official-photo">${photo}</div>
-    <h3>${o.name}</h3>
-    <div class="role">${o.role}</div>
-    <div class="term">${o.term || ''}</div>
+    <div>
+      <h3>${o.name}</h3>
+      <div class="role">${o.role}</div>
+      <div class="term">${o.term || ''}</div>
+    </div>
   </div>`;
 }
 
@@ -82,11 +100,16 @@ function renderOfficial(o, lead){
 
   document.getElementById('visionText').textContent = d.vision || '';
   document.getElementById('missionText').textContent = d.mission || '';
+  document.getElementById('mandateText').textContent = d.mandate || '';
+  document.getElementById('pledgeText').textContent = d.servicePledge || '';
 
   document.getElementById('officials').innerHTML = (d.elected || []).map(renderOfficial).join('');
 
   document.getElementById('departments').innerHTML = (d.departments || []).map(dep =>
-    `<div class="svc-item"><h3>${dep.name}</h3><div class="svc-meta">Head: <b>${dep.head || 'TBA'}</b></div></div>`).join('');
+    `<div class="svc-item">
+      <h3>${dep.name}</h3>
+      <div class="svc-meta">Head: <b>${dep.head || 'TBA'}</b>${dep.headTitle ? ` &middot; ${dep.headTitle}` : ''}</div>
+    </div>`).join('');
 
   document.getElementById('historyProse').innerHTML = (d.history || []).map(p => `<p>${p}</p>`).join('');
 

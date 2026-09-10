@@ -8,21 +8,12 @@
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<!-- EMERGENCY STRIP -->
-<div class="emerg">
-  <div class="emerg-inner">
-    <b>EMERGENCY HOTLINES</b>
-    <span>MDRRMO <a href="tel:0000000000">0000-000-0000</a></span>
-    <span>Police <a href="tel:0000000000">0000-000-0000</a></span>
-    <span>Fire <a href="tel:0000000000">0000-000-0000</a></span>
-    <span>RHU <a href="tel:0000000000">0000-000-0000</a></span>
-  </div>
-</div>
+<!-- The emergency band is injected just above the footer by initChrome() in assets/app.js -->
 
 <!-- HERO (rotating banners) -->
 <section class="hero">
@@ -65,6 +56,29 @@
     <a class="btn btn-primary" id="elguCta" href="services.html#online">Go to Online Services</a>
   </div>
 </div>
+
+<!-- VISION & MISSION -->
+<section class="section vm-section" id="vision-mission">
+  <div class="container">
+    <div class="section-head" style="text-align:center">
+      <span class="s-label" style="display:block">Our direction</span>
+      <h2 class="s-title">Vision &amp; <em>Mission</em></h2>
+    </div>
+    <div class="vm-home">
+      <article class="vm-home-card reveal">
+        <div class="vm-home-ico" id="visionIcon" aria-hidden="true"></div>
+        <h3>Vision</h3>
+        <p id="homeVision"></p>
+      </article>
+      <article class="vm-home-card reveal">
+        <div class="vm-home-ico" id="missionIcon" aria-hidden="true"></div>
+        <h3>Mission</h3>
+        <p id="homeMission"></p>
+      </article>
+    </div>
+    <p class="vm-home-more"><a href="about.html#mandate">Read our mandate &amp; service pledge &rarr;</a></p>
+  </div>
+</section>
 
 <!-- MAYOR'S WELCOME -->
 <section class="section sand">
@@ -123,7 +137,7 @@
       <span class="s-label" style="display:block">Good governance</span>
       <h2 class="s-title">Recognition &amp; <em>certifications</em></h2>
     </div>
-    <div class="seals" id="recognitions"><!-- rendered from data/site.json --></div>
+    <div class="certs" id="recognitions"><!-- rendered from data/site.json --></div>
   </div>
 </section>
 
@@ -163,8 +177,20 @@ function buildSlider(slides){
     `<div class="hero-slide${i === 0 ? ' active' : ''}"><img src="${src}" alt="" onerror="this.style.display='none'"></div>`).join('');
   dots.innerHTML = slides.map((_, i) =>
     `<button class="hero-dot${i === 0 ? ' active' : ''}" aria-label="Slide ${i+1}" onclick="goSlide(${i})"></button>`).join('');
-  if (slides.length > 1) window._heroTimer = setInterval(() => goSlide((window._heroIdx + 1) % slides.length), 6000);
   window._heroIdx = 0;
+
+  // WCAG 2.2.2: auto-advancing content needs a way to stop it. Skip the timer
+  // entirely for reduced-motion users, and pause while the hero is hovered or
+  // keyboard-focused so the dots can be used without the slide moving away.
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (slides.length > 1 && !still) {
+    const hero = document.querySelector('.hero');
+    const start = () => { clearInterval(window._heroTimer); window._heroTimer = setInterval(() => goSlide((window._heroIdx + 1) % slides.length), 7000); };
+    const stop = () => clearInterval(window._heroTimer);
+    ['mouseenter', 'focusin'].forEach(e => hero.addEventListener(e, stop));
+    ['mouseleave', 'focusout'].forEach(e => hero.addEventListener(e, start));
+    start();
+  }
 }
 function goSlide(i){
   const s = document.querySelectorAll('.hero-slide'), d = document.querySelectorAll('.hero-dot');
@@ -202,8 +228,40 @@ function renderSite(s){
   document.getElementById('stats').innerHTML = (s.stats || []).map(st =>
     `<div class="stat"><div class="stat-num">${st.num}${st.suffix ? `<sup>${st.suffix}</sup>` : ''}</div><div class="stat-lbl">${st.label}</div></div>`).join('');
 
-  document.getElementById('recognitions').innerHTML = (s.recognitions || []).map(r =>
-    `<div class="seal-chip">${svgIcon(r.icon, 'seal-ico')}<div class="seal-name">${r.name}</div><div class="seal-sub">${r.sub || ''}</div></div>`).join('');
+  // Each recognition shows the issuing agency's real logo when one is on disk.
+  // The line icon stays as a fallback and appears if the image 404s, so the
+  // section still renders while logo files are being collected.
+  // Certification cards: a fixed-height logo plate keeps every card identical
+  // no matter how differently proportioned the agency marks are. The icon is
+  // hidden with a class, not the `hidden` attribute — `hidden` is an HTML-only
+  // IDL attribute and does not hide an <svg> element.
+  document.getElementById('recognitions').innerHTML = (s.recognitions || []).map(r => {
+    const img = r.logo
+      ? `<img class="cert-logo" src="${r.logo}" alt="" onerror="var c=this.closest('.cert-card');this.remove();c.querySelector('.cert-ico').classList.remove('is-fallback')">`
+      : '';
+    const icon = svgIcon(r.icon, r.logo ? 'cert-ico is-fallback' : 'cert-ico');
+    return `<article class="cert-card reveal">
+      <div class="cert-plate">${img}${icon}</div>
+      <h3 class="cert-name">${r.name}</h3>
+      <div class="cert-sub">${r.sub || ''}</div>
+    </article>`;
+  }).join('');
+}
+
+function renderVisionMission(o){
+  document.getElementById('visionIcon').innerHTML = svgIcon('eye', 'vm-ico');
+  document.getElementById('missionIcon').innerHTML = svgIcon('flag', 'vm-ico');
+  document.getElementById('homeVision').textContent = o.vision || '';
+
+  // The mission is eight separate commitments — render them as a list rather
+  // than one long centred paragraph, which is hard to read at any age.
+  const mission = document.getElementById('homeMission');
+  if ((o.missionPoints || []).length) {
+    mission.innerHTML = `<span class="vm-lead">${o.missionLead || ''}</span>
+      <ul class="vm-points">${o.missionPoints.map(p => `<li>${p}</li>`).join('')}</ul>`;
+  } else {
+    mission.textContent = o.mission || '';
+  }
 }
 
 function renderWelcome(o){
@@ -218,7 +276,8 @@ function renderLatestNews(n){
   document.getElementById('latestNews').innerHTML = items.map(it => {
     const d = new Date(it.date);
     const meta = isNaN(d) ? it.date : d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
-    const media = it.image ? `<div class="card-media"><img src="${it.image}" alt="" onerror="this.parentElement.remove()"></div>` : '';
+    const alt = it.imageAlt ? it.imageAlt.replace(/"/g, '&quot;') : '';
+    const media = it.image ? `<div class="card-media"><img src="${it.image}" alt="${alt}" onerror="this.parentElement.remove()"></div>` : '';
     return `<article class="card reveal">
       ${media}
       <div class="card-body">
@@ -234,14 +293,18 @@ function renderLatestNews(n){
 
 (async function(){
   initChrome('home');
-  const [site, officials, news] = await Promise.all([
+  const [site, officials, news, newsFb] = await Promise.all([
     loadJSON('data/site.json', FALLBACK_SITE),
     loadJSON('data/officials.json', { welcome: { name: "[Mayor's Name]", role: 'Municipal Mayor', message: ['Welcome to the official website of the Municipality of Calatrava.'] } }),
-    loadJSON('data/news.json', { items: [] })
+    loadJSON('data/news.json', { items: [] }),
+    loadJSON('data/news-fb.json', { items: [] })
   ]);
   renderSite(site);
+  renderVisionMission(officials);
   renderWelcome(officials);
-  renderLatestNews(news);
+  // Staff-written bulletins and synced Facebook posts, newest first.
+  renderLatestNews({ items: [...(news.items || []), ...(newsFb.items || [])]
+    .sort((a, b) => new Date(b.date) - new Date(a.date)) });
   observeReveal();
 })();
 </script>

@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -50,12 +50,13 @@ const FALLBACK = {
 
 function renderDirectory(d){
   const tel = n => (n || '').replace(/[^0-9+]/g,'');
+  const link = (href, text) => text ? `<a href="${href}">${text}</a>` : '—';
   document.getElementById('directory').innerHTML = (d.directory || []).map(o =>
     `<div class="dir-card reveal">
       <h3>${o.office}</h3>
       <div class="dir-line"><span>Head</span> ${o.head || 'TBA'}</div>
-      <div class="dir-line"><span>Phone</span> <a href="tel:${tel(o.phone)}">${o.phone || '—'}</a></div>
-      <div class="dir-line"><span>Email</span> <a href="mailto:${o.email}">${o.email || '—'}</a></div>
+      <div class="dir-line"><span>Phone</span> ${link('tel:' + tel(o.phone), o.phone)}</div>
+      <div class="dir-line"><span>Email</span> ${link('mailto:' + o.email, o.email)}</div>
     </div>`).join('');
 }
 

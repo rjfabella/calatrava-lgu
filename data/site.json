@@ -23,7 +23,7 @@
     { "num": "24", "suffix": "/7", "label": "Emergency Response" }
   ],
   "quickServices": [
-    { "id": "civil",    "title": "Civil Registry",  "desc": "Birth, marriage & death certificates and corrections.", "href": "services.html#civil",    "icon": "doc" },
+    { "id": "civil",    "title": "Civil Registry",  "desc": "Birth, marriage & death certificates and corrections.", "href": "services.html#admin",    "icon": "doc" },
     { "id": "business", "title": "Business Permit", "desc": "New permits, renewals, and barangay clearances.",       "href": "services.html#business", "icon": "store" },
     { "id": "health",   "title": "Health Services", "desc": "Rural health unit, vaccinations, and assistance.",      "href": "services.html#health",   "icon": "health" },
     { "id": "help",     "title": "Citizen Help Desk","desc": "Questions, requests, and feedback to the LGU.",         "href": "contact.html",           "icon": "help" }
@@ -33,10 +33,11 @@
     { "tag": "Livelihood", "title": "Calatrava Livelihood Program", "desc": "Skills training, starter kits, and support for local entrepreneurs and farmers." },
     { "tag": "Infrastructure", "title": "Farm-to-Market Roads", "desc": "Ongoing road concreting connecting upland barangays to the town center." }
   ],
+  "_recognitionsNote": "Each entry may carry a `logo` path to the issuing agency's official mark in assets/logos/. Until that file exists the line `icon` renders instead, so entries stay safe to publish. Do NOT show an agency logo until the LGU confirms it actually holds that status — a seal next to an unverified claim reads as a false certification.",
   "recognitions": [
-    { "name": "Seal of Good Local Governance", "sub": "DILG", "icon": "award" },
-    { "name": "Full Disclosure Policy", "sub": "Compliant", "icon": "doc" },
-    { "name": "NPC Registered", "sub": "Data Privacy Act", "icon": "shield" },
-    { "name": "eGovPH Ready", "sub": "DICT", "icon": "online" }
+    { "name": "Seal of Good Local Governance", "sub": "DILG", "icon": "award", "logo": "assets/logos/DILG_SGLG.png" },
+    { "name": "Full Disclosure Policy", "sub": "DILG", "icon": "doc", "logo": "assets/logos/dilg.png" },
+    { "name": "NPC Registered", "sub": "Data Privacy Act", "icon": "shield", "logo": "assets/logos/NPC_Logo_1.webp" },
+    { "name": "eGovPH Ready", "sub": "DICT", "icon": "online", "logo": "assets/logos/dict.png" }
   ]
 }

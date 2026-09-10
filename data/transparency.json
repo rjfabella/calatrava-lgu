@@ -1,38 +1,60 @@
 {
-  "intro": "In compliance with the Full Disclosure Policy of the Department of the Interior and Local Government (DILG), the Municipality of Calatrava publishes the following documents for public scrutiny. Replace the placeholder links with the actual PDF documents.",
+  "intro": "In compliance with the DILG Full Disclosure Policy (Memorandum Circular No. 2010-083, as amended) and Republic Act No. 11032, the Municipality of Calatrava publishes the following documents for public scrutiny. Items marked Pending are being prepared or consolidated by the responsible office.",
   "sections": [
     {
       "title": "Budget & Finance",
       "docs": [
-        { "title": "Annual Budget", "sub": "Current fiscal year appropriation", "href": "#" },
-        { "title": "Statement of Receipts & Expenditures", "sub": "Quarterly SRE reports", "href": "#" },
-        { "title": "Annual Procurement Plan", "sub": "APP for the current year", "href": "#" },
-        { "title": "20% Development Fund Utilization", "sub": "Projects and status", "href": "#" }
+        { "title": "Annual Budget", "sub": "Current fiscal year appropriation · Municipal Budget Office", "href": "", "status": "pending" },
+        { "title": "Statement of Receipts & Expenditures", "sub": "Quarterly SRE reports · Municipal Treasurer's Office", "href": "", "status": "pending" },
+        { "title": "Annual Financial Statement / Trial Balance", "sub": "Annual · Municipal Accounting Office", "href": "", "status": "pending" },
+        { "title": "20% Development Fund Utilization", "sub": "Projects and status · Budget Office / Accounting", "href": "", "status": "pending" },
+        { "title": "Statement of Debt Service", "sub": "Municipal Treasurer's Office", "href": "", "status": "pending" }
       ]
     },
     {
       "title": "Bids & Awards",
       "docs": [
-        { "title": "Invitation to Bid", "sub": "Current open biddings", "href": "news.html" },
-        { "title": "Notice of Award", "sub": "Awarded contracts", "href": "#" },
-        { "title": "BAC Resolutions", "sub": "Bids and Awards Committee", "href": "#" }
+        { "title": "Annual Procurement Plan", "sub": "APP for the current year · BAC Secretariat", "href": "", "status": "pending" },
+        { "title": "Invitation to Bid", "sub": "Current open biddings", "href": "news.html", "status": "available" },
+        { "title": "Notice of Award", "sub": "Awarded contracts · BAC Secretariat", "href": "", "status": "pending" },
+        { "title": "BAC Resolutions", "sub": "Bids and Awards Committee", "href": "", "status": "pending" }
       ]
     },
     {
       "title": "Plans & Reports",
       "docs": [
-        { "title": "Citizen's Charter", "sub": "Service standards (ARTA / RA 11032)", "href": "services.html" },
-        { "title": "Comprehensive Development Plan", "sub": "CDP and CLUP", "href": "#" },
-        { "title": "Annual Accomplishment Report", "sub": "Programs and outcomes", "href": "#" },
-        { "title": "Local Disaster Risk Reduction Plan", "sub": "LDRRM plan and fund", "href": "#" }
+        {
+          "title": "Citizen's Charter 2023 (Edition II)",
+          "sub": "Complete charter of all 45 frontline services — requirements, fees, processing time, responsible officer · PDF",
+          "href": "assets/contents/Citizen's%20Charter%202023.pdf",
+          "status": "available"
+        },
+        { "title": "Citizen's Charter directory", "sub": "Browse the same services by office on this site", "href": "services.html#charter", "status": "available" },
+        { "title": "Comprehensive Development Plan", "sub": "CDP and CLUP · Municipal Planning and Development Office", "href": "", "status": "pending" },
+        { "title": "Annual Accomplishment Report", "sub": "Programs and outcomes · Office of the Mayor", "href": "", "status": "pending" },
+        { "title": "Local Disaster Risk Reduction Plan", "sub": "LDRRM plan and fund utilization · MDRRMO", "href": "", "status": "pending" },
+        { "title": "Gender and Development (GAD) Plan & Accomplishment Report", "sub": "Annual · MSWDO / GAD Focal Point", "href": "", "status": "pending" }
       ]
     },
     {
       "title": "Governance & Ordinances",
       "docs": [
-        { "title": "Municipal Ordinances", "sub": "Enacted local legislation", "href": "#" },
-        { "title": "SB Resolutions", "sub": "Sangguniang Bayan resolutions", "href": "#" },
-        { "title": "Executive Orders", "sub": "Issued by the Mayor", "href": "#" }
+        {
+          "title": "Organizational Chart 2026",
+          "sub": "Approved plantilla structure of all municipal offices · PowerPoint",
+          "href": "assets/contents/Organizational%20Chart%202026.pptx",
+          "status": "available"
+        },
+        { "title": "Directory of offices and department heads", "sub": "Names and positions of all department heads", "href": "about.html#departments-section", "status": "available" },
+        { "title": "Municipal Ordinances", "sub": "Enacted local legislation · Office of the Sangguniang Bayan", "href": "", "status": "pending" },
+        { "title": "SB Resolutions", "sub": "Sangguniang Bayan resolutions", "href": "", "status": "pending" },
+        { "title": "Executive Orders", "sub": "Issued by the Mayor", "href": "", "status": "pending" },
+        {
+          "title": "DILG Full Disclosure Policy Portal",
+          "sub": "National posting of LGU budget, procurement, and financial documents · fdpp.dilg.gov.ph",
+          "href": "https://fdpp.dilg.gov.ph/",
+          "status": "available"
+        }
       ]
     }
   ]
