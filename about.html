@@ -77,12 +77,16 @@ const FALLBACK = {
   mandate: "",
   servicePledge: "",
   history: ["[Add the history of Calatrava here — this content is rendered from data/officials.json.]"],
-  elected: [{ name: "[Mayor's Name]", role: "Municipal Mayor", term: "2025–2028", photo: "" }],
-  departments: [{ name: "Office of the Mayor", head: "[Name]" }]
+  elected: [{ name: "Engr. Robert M. Fabella", role: "Municipal Mayor", term: "2025–2028", photo: "" }],
+  departments: [{ name: "Office of the Municipal Mayor", head: "Engr. Robert M. Fabella" }]
 };
 
 function renderOfficial(o, i){
-  const photo = o.photo ? `<img src="${o.photo}" alt="${o.name}" onerror="this.style.display='none'">` : '';
+  // Fall back to initials when no official photo has been supplied, so the
+  // grid reads as pending rather than broken.
+  const photo = o.photo
+    ? `<img src="${o.photo}" alt="${o.name}" onerror="this.parentElement.innerHTML=monogram('${(o.name||'').replace(/'/g,'')}')">`
+    : monogram(o.name || '');
   const lead = i < 2 ? ' lead-official' : '';
   return `<div class="official${lead} reveal">
     <div class="official-photo">${photo}</div>

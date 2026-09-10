@@ -31,7 +31,7 @@
 <script>
 const FALLBACK = {
   intro: "The Municipality of Calatrava is composed of 7 barangays on the northern tip of Tablas Island.",
-  barangays: [{ name: "Poblacion", captain: "[Punong Barangay]", population: "1,764" }]
+  barangays: [{ name: "Poblacion", captain: "", population: "1,764" }]
 };
 
 (async function(){
@@ -41,7 +41,7 @@ const FALLBACK = {
   document.getElementById('barangays').innerHTML = (d.barangays || []).map(b =>
     `<div class="brgy-item">
       <h3>${b.name}</h3>
-      <div class="brgy-cap">Brgy. Captain: ${b.captain || 'TBA'}</div>
+      <div class="brgy-cap">Brgy. Captain: ${b.captain ? b.captain : '<em>To be announced</em>'}</div>
       <div class="brgy-meta">Population: <b>${b.population || '—'}</b></div>
     </div>`).join('');
   observeReveal();

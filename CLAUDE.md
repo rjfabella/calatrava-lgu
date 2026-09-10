@@ -90,7 +90,13 @@ of the above before changing site structure.
   Jost fonts, green/gold palette) driven by `:root` CSS variables. Re-theme
   there, not with inline styles or per-page stylesheets.
 - **Pages**: `index.html`, `about.html`, `services.html`, `barangays.html`,
-  `transparency.html`, `news.html`, `contact.html`.
+  `transparency.html`, `news.html`, `contact.html`, `privacy.html`.
+- **Never publish invented data.** This is a live government portal, so a
+  placeholder that *looks* real is worse than a visible gap: fake hotlines
+  were dialable, fabricated news items read as official announcements, and an
+  invented DPO address was unreachable. The pattern now is to leave the field
+  empty in JSON and let the renderer degrade honestly — a pending row, "To be
+  announced", an empty state, or an initials monogram. See `MEMORY.md`.
 - **Assets**: `assets/logos/` (municipal + provincial seals),
   `assets/hero/` (banner images), `assets/contents/` (source documents
   collected from the LGU — PDFs, DOCX, PPTX). Parse new source documents

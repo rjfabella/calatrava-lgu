@@ -40,7 +40,7 @@
     <div class="section-head">
       <span class="s-label">Full detail, per RA 11032</span>
       <h2 class="s-title">Citizen's <em>Charter</em> directory</h2>
-      <p style="max-width:640px;margin-top:.8rem;font-size:14.6px;color:var(--text);line-height:1.65">Every frontline service by office — classification, who may avail, requirements and where to secure them, fees, and processing time, from the Citizen's Charter 2023 (Edition II). <a href="assets/contents/Citizen's Charter 2023.pdf" target="_blank" rel="noopener">View the full PDF &rarr;</a></p>
+      <p class="charter-intro">Every frontline service by office — classification, who may avail, requirements and where to secure them, fees, and processing time, from the Citizen's Charter 2023 (Edition II). <a href="assets/contents/Citizen's Charter 2023.pdf" target="_blank" rel="noopener">View the full PDF<span class="sr-only"> (opens in a new tab)</span> &rarr;</a></p>
     </div>
     <div id="charterOffices"><!-- rendered from data/citizens-charter.json --></div>
   </div>
@@ -62,7 +62,7 @@ const FALLBACK = {
     id: "civil", icon: "doc", title: "Civil Registry",
     services: [{ name: "Birth Certificate", desc: "Certified true copy.", fee: "₱100", time: "1–3 days", office: "Local Civil Registry" }]
   }],
-  hotlines: [{ name: "MDRRMO / Emergency", number: "0000-000-0000" }]
+  hotlines: [{ name: "Calatrava Emergency Hotline (MDRRMO)", number: "0930 326 4161" }]
 };
 
 const CHARTER_FALLBACK = { offices: [] };
@@ -124,12 +124,25 @@ function renderCharter(offices){
 }
 
 function renderHotlines(list){
-  document.getElementById('hotlines').innerHTML = list.map(h =>
-    `<a class="doc-row" href="tel:${(h.number||'').replace(/[^0-9+]/g,'')}">
+  // A hotline is only rendered as a dialable link when there is a real number
+  // behind it. An unconfirmed number must never look callable — in an
+  // emergency a dead tel: link is worse than an honest blank.
+  document.getElementById('hotlines').innerHTML = list.map(h => {
+    const digits = (h.number || '').replace(/[^0-9+]/g, '');
+    const real = digits.length >= 7 && !/^0+$/.test(digits);
+    if (real) {
+      return `<a class="doc-row" href="tel:${digits}">
+        ${svgIcon('help')}
+        <span><span class="doc-title">${h.name}</span><br><span class="doc-sub">${h.number}</span></span>
+        <span class="doc-go">Call &rarr;</span>
+      </a>`;
+    }
+    return `<div class="doc-row is-pending">
       ${svgIcon('help')}
-      <span><span class="doc-title">${h.name}</span><br><span class="doc-sub">${h.number}</span></span>
-      <span class="doc-go">Call &rarr;</span>
-    </a>`).join('');
+      <span><span class="doc-title">${h.name}</span><br><span class="doc-sub">Number not yet confirmed &mdash; call the municipal emergency hotline above</span></span>
+      <span class="doc-go">Pending</span>
+    </div>`;
+  }).join('');
 }
 
 (async function(){

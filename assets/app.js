@@ -57,6 +57,20 @@ const ICONS = {
   eye:    '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
   flag:   '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
 };
+/**
+ * Placeholder for a person whose official photo has not been supplied yet.
+ * Returns their initials on the sand tone, which reads as a deliberate
+ * placeholder rather than a failed image. `aria-hidden` because the person's
+ * name is always rendered next to it.
+ */
+function monogram(name){
+  const initials = (name || '')
+    .replace(/\b(Engr|Hon|Dr|Atty|Mr|Mrs|Ms|Jr|Sr|II|III|IV)\.?\b/gi, '')
+    .trim().split(/\s+/).filter(Boolean)
+    .map(w => w[0]).join('').replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase();
+  return `<span class="monogram" aria-hidden="true">${initials || '&#9679;'}</span>`;
+}
+
 function svgIcon(name, cls){
   return `<svg class="${cls || ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ICONS.doc}</svg>`;
 }
@@ -208,8 +222,9 @@ function buildFooter(){
   <div class="footer-bottom">
     <p>&copy; ${new Date().getFullYear()} Municipality of Calatrava, Romblon. All rights reserved.</p>
     <p>
-      <a href="#" style="color:rgba(255,255,255,.55);text-decoration:none">Privacy Notice</a> &middot;
-      Data Protection Officer: dpo@calatrava.gov.ph
+      <a href="privacy.html">Privacy Notice</a> &middot;
+      <a href="transparency.html">Transparency</a> &middot;
+      <a href="contact.html">Contact</a>
     </p>
   </div>`;
   document.body.appendChild(footer);

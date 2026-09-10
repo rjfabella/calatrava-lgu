@@ -84,7 +84,7 @@
 <section class="section sand">
   <div class="container">
     <div class="welcome">
-      <div class="welcome-photo reveal"><img id="mayorPhoto" src="" alt="" onerror="this.parentElement.style.background='var(--deep)';this.style.display='none'"></div>
+      <div class="welcome-photo reveal" id="mayorPhotoWrap"></div>
       <div class="welcome-text reveal">
         <span class="s-label">Message from the Mayor</span>
         <h2 class="s-title" style="margin-bottom:1.25rem">Welcome to <em>Calatrava</em></h2>
@@ -143,6 +143,8 @@
 
 <script src="assets/app.js"></script>
 <script>
+const FALLBACK_NEWS = { items: [] };
+
 const FALLBACK_SITE = {
   heroEyebrow: "Official Government Portal",
   heroTitle: "A municipality that <em>works for you</em>",
@@ -175,8 +177,9 @@ function buildSlider(slides){
   if (!slides.length) { wrap.innerHTML = '<div class="hero-slide active" style="background:var(--deep)"></div>'; return; }
   wrap.innerHTML = slides.map((src, i) =>
     `<div class="hero-slide${i === 0 ? ' active' : ''}"><img src="${src}" alt="" onerror="this.style.display='none'"></div>`).join('');
-  dots.innerHTML = slides.map((_, i) =>
-    `<button class="hero-dot${i === 0 ? ' active' : ''}" aria-label="Slide ${i+1}" onclick="goSlide(${i})"></button>`).join('');
+  // A single slide needs no controls — one lone dot looks like a broken carousel.
+  dots.innerHTML = slides.length > 1 ? slides.map((_, i) =>
+    `<button class="hero-dot${i === 0 ? ' active' : ''}" aria-label="Slide ${i+1}" onclick="goSlide(${i})"></button>`).join('') : '';
   window._heroIdx = 0;
 
   // WCAG 2.2.2: auto-advancing content needs a way to stop it. Skip the timer
@@ -266,13 +269,23 @@ function renderVisionMission(o){
 
 function renderWelcome(o){
   const w = o.welcome || {};
-  if (w.photo) document.getElementById('mayorPhoto').src = w.photo;
+  // No photo yet: show the mayor's initials rather than an empty frame. An
+  // <img src=""> renders as a broken image and used to paint a large solid
+  // green block here, which read as a page error.
+  const wrap = document.getElementById('mayorPhotoWrap');
+  wrap.innerHTML = w.photo
+    ? `<img src="${w.photo}" alt="${w.name || 'Municipal Mayor'}" onerror="this.parentElement.innerHTML=monogram('${(w.name||'').replace(/'/g,'')}')">`
+    : monogram(w.name || '');
   document.getElementById('mayorMessage').innerHTML = (w.message || []).map(p => `<p style="font-size:16.5px;line-height:1.85;margin-bottom:1.1rem">${p}</p>`).join('');
   document.getElementById('mayorSign').innerHTML = `${w.name || ''}<small>${w.role || ''}</small>`;
 }
 
 function renderLatestNews(n){
   const items = (n.items || []).slice(0, 3);
+  const section = document.getElementById('latestNews').closest('section');
+  // Hide the whole section rather than show an empty grid under a heading.
+  if (!items.length) { if (section) section.hidden = true; return; }
+  if (section) section.hidden = false;
   document.getElementById('latestNews').innerHTML = items.map(it => {
     const d = new Date(it.date);
     const meta = isNaN(d) ? it.date : d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
@@ -295,7 +308,7 @@ function renderLatestNews(n){
   initChrome('home');
   const [site, officials, news, newsFb] = await Promise.all([
     loadJSON('data/site.json', FALLBACK_SITE),
-    loadJSON('data/officials.json', { welcome: { name: "[Mayor's Name]", role: 'Municipal Mayor', message: ['Welcome to the official website of the Municipality of Calatrava.'] } }),
+    loadJSON('data/officials.json', { welcome: { name: 'Engr. Robert M. Fabella', role: 'Municipal Mayor', message: ['Welcome to the official website of the Municipality of Calatrava.'] } }),
     loadJSON('data/news.json', { items: [] }),
     loadJSON('data/news-fb.json', { items: [] })
   ]);

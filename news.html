@@ -29,13 +29,21 @@
 
 <script src="assets/app.js"></script>
 <script>
-const FALLBACK = { items: [
-  { date: "2026-06-15", tag: "Announcement", title: "Business permit renewal period extended", summary: "Visit the BPLO at the Municipal Hall for details." }
-]};
+const FALLBACK = { items: [] };
+
+const EMPTY_STATE = `<div class="empty-state">
+  <h2>No bulletins published yet</h2>
+  <p>Announcements, ordinances, biddings, and events will appear here as the
+     Municipal Information Office publishes them. In the meantime you can follow
+     the municipality on
+     <a href="https://www.facebook.com/calatrava.romblon.217551/" target="_blank" rel="noopener">Facebook<span class="sr-only"> (opens in a new tab)</span></a>,
+     or <a href="contact.html">contact the Municipal Hall</a> directly.</p>
+</div>`;
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function renderNews(items){
+  if (!items.length) { document.getElementById('newsList').innerHTML = EMPTY_STATE; return; }
   document.getElementById('newsList').innerHTML = items.map(it => {
     const d = new Date(it.date);
     const valid = !isNaN(d);

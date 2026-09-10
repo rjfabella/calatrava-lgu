@@ -274,6 +274,46 @@ design and are excluded from the overflow check. Mobile menu items measure
 block are gone. It had become a dead end anyway: its "Continue" button was
 hidden in commit `2a3b767`, leaving only "Go back to Tourism Portal".
 
+**Live-site bug sweep and fixes (2026-09-10, after PR #1 went live):**
+Audited https://rjfabella.github.io/calatrava-lgu/ and fixed everything found.
+- **Fake emergency numbers were dialable.** Police / RHU / BFP rendered
+  `0000-000-0000` as working `tel:` links. `renderHotlines()` now only emits a
+  link when a number is real (7+ digits, not all zeros); anything else renders
+  as a non-clickable pending row pointing at the MDRRMO number. **Never let an
+  unconfirmed hotline look callable** — a dead `tel:` in an emergency is worse
+  than a blank.
+- **All five news items were fabricated** (invented permit extensions,
+  ordinances, bid invitations) and 87 days stale. Removed. `data/news.json`
+  now holds an empty `items` with a documented `_example`; `news.html` shows an
+  empty state, and the homepage hides its news section entirely when empty.
+- **The DPO email `dpo@calatrava.gov.ph` was invented** and unreachable (the
+  LGU has no `@calatrava.gov.ph` mailboxes). Removed from the footer. A `dpo`
+  object now sits in `data/contact.json`, empty on purpose, and `privacy.html`
+  renders it automatically once filled.
+- **New `privacy.html`** — the footer's "Privacy Notice" was `href="#"`, which
+  RA 10173 requires to be real. Written to describe what the site *actually*
+  does: no collection, no analytics, no cookies of ours, with Google
+  Fonts/Maps and GitHub Pages named as the third parties that do see requests.
+  Revisit it the moment any form or online transaction is added.
+- **`[Punong Barangay]` placeholders** replaced with a graceful "To be
+  announced"; captains are empty strings in `barangays.json` until real names
+  arrive.
+- **The Mayor's photo rendered as a 614px solid green block** (`<img src="">`
+  failing into an `onerror` that painted the wrapper `--deep`). Replaced with
+  a `monogram()` helper in `app.js` — initials on the sand tone — used for the
+  mayor's welcome and all 13 official photo slots. Reads as pending, not
+  broken. **Don't reintroduce `<img src="">`.**
+- Single-slide hero no longer renders a lone slider dot; the charter PDF link
+  got a real tap target.
+- Re-audited all 8 pages at 375px: no overflow, no text under 12.5px, no
+  contrast failures, no tap targets under 24px, no images missing alt.
+
+**`assets/logos/MBF Portrait.png` is very likely the Mayor's official
+portrait** but the monogram on the barong reads "M.B.F." while the Mayor is
+Robert M. Fabella (R.M.F.), so it was NOT wired in — misidentifying a real
+person on a government site is not a guess worth making. Ask RJ to confirm,
+then set `welcome.photo` and `elected[0].photo` in `officials.json`.
+
 **Known gaps / needs a human decision before this goes further:**
 - **`fees` and `processingTime` in `citizens-charter.json` are auto-extracted
   from the PDF's tables and are best-effort, not verified** — the PDF's
@@ -325,12 +365,16 @@ hidden in commit `2a3b767`, leaving only "Go back to Tourism Portal".
   any `data/*.json` that another session may have just produced.
 
 **Still placeholder — pending real data:**
-- Official photos for all officials (photo fields still empty strings)
-- Barangay captains for all 7 barangays
-- Emergency hotline numbers in `services.json` (still `0000-000-0000`) —
-  these are the public MDRRMO / PNP / BFP / RHU hotlines and are NOT the
-  same as the office-head mobile numbers now in `contact.json`; ask the
-  MDRRMO for the actual hotline numbers rather than reusing a head's cell
+- Official photos for all officials (photo fields empty; initials monograms
+  render in their place, so this degrades cleanly)
+- Barangay captains for all 7 barangays (shown as "To be announced")
+- **PNP / BFP / RHU hotline numbers** — empty in `services.json` and rendered
+  as pending rows. These are the public emergency hotlines and are NOT the
+  office-head mobile numbers in `contact.json`; ask the MDRRMO for the real
+  ones rather than reusing a head's cell. Only the MDRRMO hotline is real.
+- Real news items — `data/news.json` is deliberately empty; the page shows an
+  empty state until the PIO publishes or the Facebook sync is switched on
+- A designated Data Protection Officer (`dpo` in `contact.json`, empty)
 - Real news items, ongoing programs, Full Disclosure Budget/Procurement
   PDFs (Annual Budget, SRE, APP, ordinances, resolutions, executive orders
   — all marked `"status": "pending"` in `transparency.json`)

@@ -1,12 +1,41 @@
 {
   "intro": "The Municipality of Calatrava is composed of 7 barangays on the northern tip of Tablas Island. Population figures are from the 2020 Census of Population (PSA).",
   "barangays": [
-    { "name": "Balogo",      "captain": "[Punong Barangay]", "population": "2,052" },
-    { "name": "Linao",       "captain": "[Punong Barangay]", "population": "1,624" },
-    { "name": "Pagsangahan", "captain": "[Punong Barangay]", "population": "880" },
-    { "name": "Pangulo",     "captain": "[Punong Barangay]", "population": "1,750" },
-    { "name": "Poblacion",   "captain": "[Punong Barangay]", "population": "1,764" },
-    { "name": "San Roque",   "captain": "[Punong Barangay]", "population": "1,927" },
-    { "name": "Talisay",     "captain": "[Punong Barangay]", "population": "1,345" }
-  ]
+    {
+      "name": "Balogo",
+      "captain": "",
+      "population": "2,052"
+    },
+    {
+      "name": "Linao",
+      "captain": "",
+      "population": "1,624"
+    },
+    {
+      "name": "Pagsangahan",
+      "captain": "",
+      "population": "880"
+    },
+    {
+      "name": "Pangulo",
+      "captain": "",
+      "population": "1,750"
+    },
+    {
+      "name": "Poblacion",
+      "captain": "",
+      "population": "1,764"
+    },
+    {
+      "name": "San Roque",
+      "captain": "",
+      "population": "1,927"
+    },
+    {
+      "name": "Talisay",
+      "captain": "",
+      "population": "1,345"
+    }
+  ],
+  "_captainsNote": "Punong Barangay names are not yet collected (MLGOO / DILG Calatrava field office). Left empty on purpose: barangays.html shows 'To be announced' rather than a bracketed placeholder. Fill in the real names when they arrive."
 }

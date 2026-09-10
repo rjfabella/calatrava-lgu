@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Notice — Municipality of Calatrava, Romblon</title>
+<meta name="description" content="Privacy notice of the Municipality of Calatrava, Romblon, issued under the Data Privacy Act of 2012 (RA 10173): what this website collects, what it does not, and how to reach the Data Protection Officer.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Privacy Notice</span></nav>
+    <h1>Privacy <em>notice</em></h1>
+    <p>How the Municipality of Calatrava handles personal information on this website, issued under the Data Privacy Act of 2012 (RA 10173).</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="prose">
+      <p class="mandate-note" style="margin-top:0">Last reviewed: <strong>10 September 2026</strong></p>
+
+      <h2>What this website collects</h2>
+      <p><strong>This website does not collect personal information from visitors.</strong>
+         It is a set of static pages. There are no accounts, no login, no online
+         forms, no payment processing, and no advertising or analytics trackers.
+         The municipality does not place cookies on your device from this site,
+         and does not build profiles of visitors.</p>
+      <p>If and when online transactions are added — appointment booking, document
+         requests, or a feedback form — this notice will be updated first to state
+         exactly what is collected, why, how long it is kept, and who may see it.</p>
+
+      <h2>Services from other organisations</h2>
+      <p>Some pages load content from other organisations. When your browser loads
+         that content, those organisations may receive technical information such as
+         your IP address and the page you are viewing, under their own privacy
+         policies rather than ours:</p>
+      <ul>
+        <li><strong>Google Fonts</strong> — supplies the typefaces used across the site.</li>
+        <li><strong>Google Maps</strong> — the location map embedded on the
+            <a href="contact.html">Contact</a> page. This one may set cookies.</li>
+        <li><strong>GitHub Pages</strong> — hosts this website and keeps standard
+            server logs of requests.</li>
+      </ul>
+      <p>Links to the municipality's Facebook page, and to any other external site,
+         take you outside this website. We do not control what those sites collect.</p>
+
+      <h2>When you contact us</h2>
+      <p>If you email or call an office listed in our
+         <a href="contact.html">directory</a>, that office receives whatever
+         information you choose to send. It is used only to respond to your request
+         and to carry out the office's official functions, and is handled under the
+         Data Privacy Act and the municipality's records retention rules.</p>
+
+      <h2>Information published on this site</h2>
+      <p>This website publishes the names, positions, and official contact details
+         of elected officials and department heads, and documents required by the
+         DILG Full Disclosure Policy. These are published because law and regulation
+         require public disclosure of them, not on the basis of consent.</p>
+
+      <h2>Your rights</h2>
+      <p>Under the Data Privacy Act you have the right to be informed, to object, to
+         access, to rectify, to erase or block, to damages, to data portability, and
+         to lodge a complaint. To exercise any of these, contact the Data Protection
+         Officer below. You may also complain directly to the
+         <a href="https://www.privacy.gov.ph/" target="_blank" rel="noopener">National Privacy Commission<span class="sr-only"> (opens in a new tab)</span></a>.</p>
+
+      <h2>Data Protection Officer</h2>
+      <div class="vm-card" id="dpoCard" style="border-left-color:var(--ocean)">
+        <p id="dpoText">The Municipality of Calatrava is in the process of formally
+           designating its Data Protection Officer. Until that designation is
+           published here, privacy questions and requests may be addressed to the
+           Office of the Municipal Mayor, whose contact details are on the
+           <a href="contact.html">Contact</a> page.</p>
+      </div>
+
+      <h2>Changes to this notice</h2>
+      <p>This notice will be revised whenever the website changes how it handles
+         personal information. The review date at the top shows when it was last
+         updated.</p>
+    </div>
+  </div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+(async function(){
+  initChrome('');
+  // Once a DPO is named in data/contact.json, show them here instead of the
+  // interim notice. Shape: "dpo": { "name": "...", "title": "...", "email": "...", "phone": "..." }
+  const c = await loadJSON('data/contact.json', {});
+  const dpo = c.dpo;
+  if (dpo && dpo.name) {
+    const bits = [`<strong>${dpo.name}</strong>${dpo.title ? ` &mdash; ${dpo.title}` : ''}`];
+    if (dpo.email) bits.push(`<a href="mailto:${dpo.email}">${dpo.email}</a>`);
+    if (dpo.phone) bits.push(`<a href="tel:${dpo.phone.replace(/[^0-9+]/g,'')}">${dpo.phone}</a>`);
+    document.getElementById('dpoText').innerHTML = bits.join('<br>');
+  }
+  observeReveal();
+})();
+</script>
+</body>
+</html>

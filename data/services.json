@@ -106,8 +106,8 @@
   ],
   "hotlines": [
     { "name": "Calatrava Emergency Hotline (MDRRMO)", "number": "0930 326 4161" },
-    { "name": "Municipal Police Station", "number": "0000-000-0000" },
-    { "name": "Rural Health Unit", "number": "0000-000-0000" },
-    { "name": "Bureau of Fire Protection", "number": "0000-000-0000" }
+    { "name": "Municipal Police Station", "number": "" },
+    { "name": "Rural Health Unit", "number": "" },
+    { "name": "Bureau of Fire Protection", "number": "" }
   ]
 }

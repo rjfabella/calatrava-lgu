@@ -39,13 +39,16 @@
 
 <script src="assets/app.js"></script>
 <script>
+// Shown only if data/contact.json fails to load. Carries real values only —
+// an invented number or address here would be published just as readily as
+// one in the JSON.
 const FALLBACK = {
   address: "Municipal Hall, Poblacion, Calatrava, Romblon, Philippines",
   hours: "Monday–Friday, 8:00 AM – 5:00 PM",
-  email: "info@calatrava.gov.ph",
-  phone: "0000-000-0000",
+  email: "andagaoutour@gmail.com",
+  phone: "0966 439 3711",
   mapEmbed: "https://www.google.com/maps?q=Calatrava,Romblon&output=embed",
-  directory: [{ office: "Office of the Mayor", head: "[Mayor's Name]", phone: "0000-000-0000", email: "mayor@calatrava.gov.ph" }]
+  directory: [{ office: "Office of the Municipal Mayor", head: "Engr. Robert M. Fabella", phone: "0966 439 3711", email: "andagaoutour@gmail.com" }]
 };
 
 function renderDirectory(d){

@@ -5,6 +5,8 @@
   "phone": "0966 439 3711",
   "facebook": "https://www.facebook.com/calatrava.romblon.217551/",
   "mapEmbed": "https://www.google.com/maps?q=Calatrava,Romblon&output=embed",
+  "_dpoNote": "RA 10173 requires a designated Data Protection Officer with real, reachable contact details. Nobody has been named yet, so this is left empty on purpose and privacy.html shows an interim notice instead — do NOT invent an address here. Fill in name/title/email/phone once the Mayor's office designates one, and it appears automatically on privacy.html.",
+  "dpo": { "name": "", "title": "", "email": "", "phone": "" },
   "directory": [
     { "office": "Office of the Municipal Mayor", "head": "Engr. Robert M. Fabella", "phone": "0966 439 3711", "email": "andagaoutour@gmail.com" },
     { "office": "Office of the Municipal Vice Mayor / Sangguniang Bayan", "head": "Hon. Elizer F. Fiedacan", "phone": "0918 948 4364", "email": "servanezdishan0@gmail.com" },
