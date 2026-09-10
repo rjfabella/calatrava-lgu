@@ -100,6 +100,11 @@ const SOCIAL_SVG = {
 // Update the number here and it changes site-wide.
 const EMERGENCY_HOTLINE = '0930 326 4161';
 
+// Departments shown on the band's second line, in this order. Names must match
+// `hotlines[].name` in data/services.json, which is where the numbers live.
+// Sanitation is deliberately excluded — it is not an emergency service.
+const EMERGENCY_DEPARTMENTS = ['Police Department', 'Fire Department', 'Health Department', 'Coastguard'];
+
 const WARN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
 
 /** Inject the emergency hotline band. Call before buildFooter so it lands just above it. */
@@ -109,13 +114,43 @@ function buildEmergencyBand(){
   band.className = 'emg-band';
   band.innerHTML = `
     <div class="emg-inner">
-      <span class="emg-flag">${WARN_SVG}<span>Emergency?</span></span>
-      <a class="emg-call" href="tel:${tel}">
-        <span class="emg-label">Call Calatrava Emergency Hotline</span>
-        <span class="emg-number">${EMERGENCY_HOTLINE}</span>
-      </a>
+      <div class="emg-primary">
+        <span class="emg-flag">${WARN_SVG}<span>Emergency?</span></span>
+        <a class="emg-call" href="tel:${tel}">
+          <span class="emg-label">Call Calatrava Emergency Hotline</span>
+          <span class="emg-number">${EMERGENCY_HOTLINE}</span>
+        </a>
+      </div>
+      <ul class="emg-more" id="emgMore" hidden></ul>
     </div>`;
   document.body.appendChild(band);
+  fillEmergencyDepartments();
+}
+
+/**
+ * Fill the band's second line from data/services.json, so the department
+ * numbers have exactly one source of truth and can never drift from the
+ * Services page. Runs after the band is already on screen: if the fetch
+ * fails the second line simply stays hidden and the main hotline above it
+ * is unaffected.
+ */
+async function fillEmergencyDepartments(){
+  const list = document.getElementById('emgMore');
+  if (!list) return;
+  const d = await loadJSON('data/services.json', { hotlines: [] });
+  const byName = new Map((d.hotlines || []).map(h => [h.name, h.number]));
+
+  const rows = EMERGENCY_DEPARTMENTS
+    .map(name => ({ label: name.replace(/ Department$/, ''), number: byName.get(name) }))
+    .filter(r => r.number);
+  if (!rows.length) return;
+
+  list.innerHTML = rows.map(r =>
+    `<li><a href="tel:${r.number.replace(/[^0-9+]/g, '')}">
+      <span class="emg-dept">${r.label}</span>
+      <span class="emg-dept-num">${r.number}</span>
+    </a></li>`).join('');
+  list.hidden = false;
 }
 
 /** Inject the top bar + nav. `active` is the NAV_ITEMS id for the current page. */

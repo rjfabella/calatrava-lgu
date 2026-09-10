@@ -367,7 +367,15 @@ then set `welcome.photo` and `elected[0].photo` in `officials.json`.
 - Official photos for all officials (photo fields empty; initials monograms
   render in their place, so this degrades cleanly)
 - Barangay captains for all 7 barangays (shown as "To be announced")
-- ~~Emergency hotlines~~ **DONE 2026-09-10** — all six are real, from the
+- ~~Emergency hotlines~~ **DONE 2026-09-10** — the site-wide emergency band
+  now carries a second line with Police, Fire, Health and Coastguard beneath
+  the Emergency Command Center number. Those four are read from
+  `data/services.json` at runtime by `fillEmergencyDepartments()` rather than
+  duplicated into `app.js`, so the band and the Services page can never
+  drift; only the order and the command-centre number are hardcoded. If the
+  fetch fails the second line stays hidden and the main hotline is
+  unaffected. Sanitation is deliberately left off — not an emergency service.
+  All six are real, from the
   LGU's official "Calatrava Hotlines" infographic: Emergency Command Center
   0930 326 4161, Police 0998 598 5883, Fire 0999 433 3661, Health
   0907 237 1460, Coastguard 0995 660 2401, Sanitation 0929 436 2082. Office

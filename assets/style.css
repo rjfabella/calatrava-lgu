@@ -357,13 +357,23 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
 
 /* ── EMERGENCY BAND (directly above the footer, every page) ── */
 .emg-band{background:var(--danger);color:var(--white)}
-.emg-inner{max-width:1200px;margin:0 auto;padding:.9rem 2.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
+.emg-inner{max-width:1200px;margin:0 auto;padding:.9rem 2.5rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
+.emg-primary{display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
 .emg-flag{display:flex;align-items:center;gap:.55rem;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
 .emg-flag svg{width:22px;height:22px;flex-shrink:0}
 .emg-call{display:flex;flex-direction:column;gap:.15rem;text-decoration:none;color:var(--white);padding:.2rem 0}
 .emg-label{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.95)}
 .emg-number{font-size:25px;font-weight:700;letter-spacing:.01em;line-height:1.2}
 .emg-call:hover .emg-number{text-decoration:underline;text-underline-offset:4px}
+
+/* Second line: the individual departments, split off the main hotline by a
+   hairline so the command centre number stays the obvious first call. */
+.emg-more{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:.4rem 1.9rem;width:100%;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.28)}
+.emg-more a{display:flex;align-items:baseline;gap:.5rem;padding:.4rem .1rem;color:var(--white);text-decoration:none}
+.emg-more a:hover .emg-dept-num{text-decoration:underline;text-underline-offset:3px}
+.emg-dept{font-size:12.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.9)}
+.emg-dept-num{font-size:16px;font-weight:600;letter-spacing:.01em}
 
 /* ── FOOTER PARTNERS ── */
 .footer-partners{max-width:1200px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.18);text-align:center}
@@ -446,7 +456,10 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
   .stats{grid-template-columns:1fr 1fr}
   .news-row{grid-template-columns:1fr;gap:.5rem}
   .footer-grid{grid-template-columns:1fr}
-  .emg-inner{gap:.75rem;flex-direction:column;text-align:center}
+  .emg-inner{gap:.75rem;text-align:center}
+  /* Two per row on a phone rather than a four-wide squeeze. */
+  .emg-more{display:grid;grid-template-columns:1fr 1fr;gap:.2rem 1rem;justify-items:center}
+  .emg-more a{flex-direction:column;align-items:center;gap:.1rem}
   .doc-row{flex-wrap:wrap}
   .doc-row .doc-go{margin-left:0}
   .certs{grid-template-columns:1fr}
