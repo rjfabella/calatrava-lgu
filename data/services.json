@@ -1,14 +1,19 @@
 {
+  "_note": "Fee and processing time on these summary cards are reconciled against data/citizens-charter.json and the source PDF (Citizen's Charter 2023, Edition II). 'Per Local Revenue Code' means the Charter states the amount is set by the local revenue code rather than fixing it. The full per-service procedure lives on services.html#charter.",
   "groups": [
     {
       "id": "admin",
       "icon": "doc",
-      "title": "Administrative & Governance Services",
+      "title": "Civil Registry & Administrative Services",
       "services": [
-        { "name": "Certificate of Live Birth", "desc": "Request a certified true copy or register a new birth.", "fee": "₱100", "time": "1–3 days", "office": "Local Civil Registry" },
-        { "name": "Marriage Certificate / License", "desc": "Application for marriage license and certified copies.", "fee": "₱200", "time": "10-day posting", "office": "Local Civil Registry" },
-        { "name": "Death Certificate", "desc": "Registration and certified copies of death records.", "fee": "₱100", "time": "1–3 days", "office": "Local Civil Registry" },
-        { "name": "Community Tax Certificate (Cedula)", "desc": "Required for many government transactions.", "fee": "₱5+", "time": "Same day", "office": "Treasurer's Office" }
+        { "name": "Certificate of Live Birth", "desc": "Register a birth within 30 days, or request a certified copy.", "fee": "Per Local Revenue Code", "time": "15–20 minutes", "office": "Office of the Municipal Civil Registrar" },
+        { "name": "Marriage License", "desc": "Application for a marriage license, including the 10-day posting period.", "fee": "₱450", "time": "30 minutes + 10-day posting", "office": "Office of the Municipal Civil Registrar" },
+        { "name": "Marriage Certificate", "desc": "Registration of a solemnized marriage.", "fee": "₱100", "time": "10–20 minutes", "office": "Office of the Municipal Civil Registrar" },
+        { "name": "Death Certificate", "desc": "Registration and certified copies of death records.", "fee": "₱50", "time": "15–20 minutes", "office": "Office of the Municipal Civil Registrar" },
+        { "name": "Registration of Legal Instrument", "desc": "Recording of legal instruments affecting civil registry records.", "fee": "See Citizen's Charter", "time": "30 minutes", "office": "Office of the Municipal Civil Registrar" },
+        { "name": "Marriage Solemnization", "desc": "Civil wedding solemnized by the Municipal Mayor.", "fee": "See Citizen's Charter", "time": "15 minutes", "office": "Office of the Municipal Mayor" },
+        { "name": "Community Tax Certificate (Cedula)", "desc": "Required for many government transactions.", "fee": "₱5 basic + ₱1 per ₱1,000 income (max ₱5,000)", "time": "3–5 minutes", "office": "Office of the Municipal Treasurer" },
+        { "name": "SB Certifications & Copies of Ordinances", "desc": "Certified copies of resolutions and ordinances.", "fee": "₱15", "time": "3–5 minutes", "office": "Office of the Sangguniang Bayan" }
       ]
     },
     {
@@ -16,9 +21,12 @@
       "icon": "store",
       "title": "Business & Permits",
       "services": [
-        { "name": "New Business Permit", "desc": "Mayor's permit for newly registered businesses.", "fee": "Varies", "time": "3–5 days", "office": "BPLO / Treasurer" },
-        { "name": "Business Permit Renewal", "desc": "Annual renewal of the Mayor's permit (Jan 1–20).", "fee": "Varies", "time": "1–3 days", "office": "BPLO / Treasurer" },
-        { "name": "Barangay Clearance", "desc": "Prerequisite clearance from the barangay.", "fee": "₱50–₱100", "time": "Same day", "office": "Barangay Hall" }
+        { "name": "Business Permit (New / Renewal)", "desc": "Mayor's permit to operate a business in the municipality.", "fee": "Per Local Revenue Code · occupational fee ₱220 per employee, garbage fee ₱75/month", "time": "About 1 day", "office": "BPLO / Office of the Municipal Mayor" },
+        { "name": "Mayor's Permit / Clearance / Certification", "desc": "Clearances and certifications issued by the Mayor's Office.", "fee": "₱180", "time": "5–15 minutes", "office": "Office of the Municipal Mayor" },
+        { "name": "Motorized Tricycle Operator's Permit (MTOP)", "desc": "Permit to operate a tricycle-for-hire.", "fee": "None", "time": "5–10 minutes", "office": "Office of the Municipal Mayor" },
+        { "name": "Certificate of Franchise (Tricycle-for-Hire)", "desc": "Franchise issued through the Sangguniang Bayan.", "fee": "₱1,000", "time": "1–7 days", "office": "Office of the Sangguniang Bayan" },
+        { "name": "Business Tax (New / Renewal)", "desc": "Assessment and collection of local business tax.", "fee": "Per Local Revenue Code", "time": "3–10 minutes", "office": "Office of the Municipal Treasurer" },
+        { "name": "Barangay Clearance", "desc": "Prerequisite clearance from the barangay.", "fee": "Set by the barangay", "time": "Same day", "office": "Office of the Barangay Captain" }
       ]
     },
     {
@@ -26,8 +34,12 @@
       "icon": "coins",
       "title": "Financial Management Services",
       "services": [
-        { "name": "Real Property Tax Payment", "desc": "Pay annual amilyar; discounts for early payment.", "fee": "Per assessment", "time": "Same day", "office": "Treasurer's Office" },
-        { "name": "Tax Declaration", "desc": "Issuance or transfer of property tax declaration.", "fee": "₱100", "time": "1–3 days", "office": "Assessor's Office" }
+        { "name": "Real Property Tax Payment", "desc": "Pay annual amilyar; discounts for early payment.", "fee": "Per assessment under RA 7160", "time": "3–5 minutes", "office": "Office of the Municipal Treasurer" },
+        { "name": "Tax Clearance", "desc": "Certification that real property taxes are fully paid.", "fee": "None", "time": "3–5 minutes", "office": "Office of the Municipal Treasurer" },
+        { "name": "Transfer of Ownership of Tax Declaration", "desc": "Transfer a tax declaration to a new owner.", "fee": "See Citizen's Charter", "time": "10 minutes", "office": "Office of the Municipal Assessor" },
+        { "name": "Property Certification", "desc": "Certification of property holdings or no-property.", "fee": "₱150", "time": "30 minutes", "office": "Office of the Municipal Assessor" },
+        { "name": "New Assessment / Reassessment / Reclassification", "desc": "Assessment of newly discovered or reclassified property.", "fee": "See Citizen's Charter", "time": "10 minutes", "office": "Office of the Municipal Assessor" },
+        { "name": "Large Cattle Registration / Transfer", "desc": "Registration and transfer of ownership of large cattle.", "fee": "Per Local Revenue Code", "time": "3–5 minutes to 1 hour", "office": "Office of the Municipal Treasurer" }
       ]
     },
     {
@@ -35,10 +47,18 @@
       "icon": "health",
       "title": "Health & Social Welfare Services",
       "services": [
-        { "name": "Rural Health Unit Consultation", "desc": "Free primary care at the Municipal Health Office.", "fee": "Free", "time": "Walk-in", "office": "Municipal Health Office" },
-        { "name": "Immunization & Vaccination", "desc": "Routine immunization for infants and adults.", "fee": "Free", "time": "Per schedule", "office": "Municipal Health Office" },
-        { "name": "Senior Citizen / PWD ID", "desc": "Registration and benefits enrollment.", "fee": "Free", "time": "1–3 days", "office": "MSWDO / OSCA" },
-        { "name": "Financial / Burial Assistance (AICS)", "desc": "Assistance for qualified indigent residents.", "fee": "Free", "time": "Case basis", "office": "MSWDO" }
+        { "name": "Medical Consultation", "desc": "Primary care consultation at the Rural Health Unit.", "fee": "Free", "time": "Walk-in · about 10 minutes", "office": "Municipal Health Office" },
+        { "name": "Medical / Medico-Legal Certificate", "desc": "Issuance of medical and medico-legal certificates.", "fee": "₱180", "time": "3–5 minutes", "office": "Municipal Health Office" },
+        { "name": "Health Certificate", "desc": "Required for food handlers and business employees.", "fee": "₱180", "time": "5–20 minutes", "office": "Municipal Health Office" },
+        { "name": "Sanitary Permit", "desc": "Sanitation clearance for business establishments.", "fee": "Per Local Revenue Code", "time": "5–10 minutes, up to 1 day", "office": "Municipal Health Office" },
+        { "name": "Immunization (EPI)", "desc": "Routine immunization for infants and children.", "fee": "Free", "time": "About 15 minutes", "office": "Municipal Health Office" },
+        { "name": "Maternal & Child Care", "desc": "Prenatal, postnatal, and child health services.", "fee": "Free", "time": "About 15 minutes", "office": "Municipal Health Office" },
+        { "name": "Family Planning Services", "desc": "Counselling and family planning commodities.", "fee": "Free", "time": "About 40 minutes", "office": "Municipal Health Office" },
+        { "name": "National TB Program", "desc": "TB screening, diagnosis, and treatment.", "fee": "Free", "time": "About 15 minutes", "office": "Municipal Health Office" },
+        { "name": "Facility-Based Delivery (Paanakan)", "desc": "Supervised childbirth at the birthing facility.", "fee": "Free", "time": "12–24 hours", "office": "Municipal Health Office" },
+        { "name": "Medical / Burial / Educational Assistance", "desc": "Assistance for qualified indigent residents (AICS).", "fee": "Free", "time": "About 1 day", "office": "MSWDO" },
+        { "name": "Social Case Study Report", "desc": "Referral report for assistance from other agencies.", "fee": "Free", "time": "About 2 hours", "office": "MSWDO" },
+        { "name": "Pre-Marriage / Marriage Counselling", "desc": "Required counselling for marriage license applicants.", "fee": "Free", "time": "1–2 hours", "office": "MSWDO" }
       ]
     },
     {
@@ -46,9 +66,9 @@
       "icon": "leaf",
       "title": "Agricultural & Environmental Services",
       "services": [
-        { "name": "Farmer / Fisherfolk Registration", "desc": "Enroll in RSBSA for programs and subsidies.", "fee": "Free", "time": "1–3 days", "office": "Municipal Agriculture Office" },
-        { "name": "Seeds & Seedling Distribution", "desc": "Planting materials and technical assistance.", "fee": "Free", "time": "Per schedule", "office": "Municipal Agriculture Office" },
-        { "name": "Tree-Cutting / Environmental Permit", "desc": "Clearance for regulated environmental activities.", "fee": "Varies", "time": "3–5 days", "office": "MENRO" }
+        { "name": "Fishery Services", "desc": "Fisherfolk registration, licensing, and technical support.", "fee": "₱250", "time": "10–30 minutes", "office": "Office of the Municipal Agriculturist" },
+        { "name": "Agricultural / Crop Services", "desc": "Farmer registration, seeds, and technical assistance.", "fee": "Free", "time": "10–20 minutes", "office": "Office of the Municipal Agriculturist" },
+        { "name": "Livestock Services", "desc": "Livestock support, vaccination, and dispersal programs.", "fee": "Free", "time": "About 30 minutes", "office": "Office of the Municipal Agriculturist" }
       ]
     },
     {
@@ -56,8 +76,8 @@
       "icon": "tools",
       "title": "Infrastructure & Public Works",
       "services": [
-        { "name": "Building Permit", "desc": "Permit to construct, renovate, or demolish.", "fee": "Varies", "time": "5–10 days", "office": "Municipal Engineering" },
-        { "name": "Occupancy Permit", "desc": "Certificate of occupancy for completed structures.", "fee": "Varies", "time": "3–5 days", "office": "Municipal Engineering" }
+        { "name": "Building Permit & Ancillary Permits", "desc": "Permit to construct, renovate, or demolish.", "fee": "No fixed amount — computed under Rule II §6, IRR of P.D. 1096", "time": "1 hour to 1 day", "office": "Municipal Engineer / Building Official" },
+        { "name": "Occupancy Permit", "desc": "Certificate of occupancy for completed structures.", "fee": "See Citizen's Charter", "time": "30 minutes to 1 hour", "office": "Municipal Engineer / Building Official" }
       ]
     },
     {
@@ -65,7 +85,7 @@
       "icon": "book",
       "title": "Education, Youth & Culture",
       "services": [
-        { "name": "Educational Assistance / Scholarship", "desc": "Financial aid for qualified students.", "fee": "Free", "time": "Per program", "office": "Mayor's Office / SK" },
+        { "name": "Educational Assistance", "desc": "Financial aid for qualified students.", "fee": "Free", "time": "About 1 day", "office": "MSWDO" },
         { "name": "SK & Youth Programs", "desc": "Sangguniang Kabataan activities and registration.", "fee": "Free", "time": "Per schedule", "office": "SK Federation" }
       ]
     },
@@ -74,8 +94,8 @@
       "icon": "map",
       "title": "Planning & Development",
       "services": [
-        { "name": "Zoning / Locational Clearance", "desc": "Verify land use prior to development.", "fee": "Varies", "time": "3–5 days", "office": "MPDO" },
-        { "name": "Project & Data Requests", "desc": "Development data and project status inquiries.", "fee": "Free", "time": "3–5 days", "office": "MPDO" }
+        { "name": "Locational Clearance / Zoning Certification", "desc": "Verify land use prior to development.", "fee": "₱110", "time": "10–60 minutes", "office": "Municipal Planning & Development Office" },
+        { "name": "Project & Data Requests", "desc": "Development data and project status inquiries.", "fee": "Free", "time": "3–5 days", "office": "Municipal Planning & Development Office" }
       ]
     }
   ],
@@ -85,7 +105,7 @@
     { "name": "Feedback & Complaints", "desc": "Submit a report or suggestion to the LGU.", "href": "contact.html", "status": "Available" }
   ],
   "hotlines": [
-    { "name": "MDRRMO / Emergency", "number": "0000-000-0000" },
+    { "name": "Calatrava Emergency Hotline (MDRRMO)", "number": "0930 326 4161" },
     { "name": "Municipal Police Station", "number": "0000-000-0000" },
     { "name": "Rural Health Unit", "number": "0000-000-0000" },
     { "name": "Bureau of Fire Protection", "number": "0000-000-0000" }

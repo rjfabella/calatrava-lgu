@@ -33,33 +33,43 @@ The site cross-links to the separate [tourism portal](https://rjfabella.github.i
   in one place. Each page calls `initChrome('<page-id>')`.
 - **Content is data-driven:** edit the JSON in `data/` — no HTML changes needed.
   - `site.json` — hero slides, motto, eLGU band, popular services, programs, stats, recognition seals
-  - `officials.json` — mayor's welcome, vision/mission, officials, departments, history
-  - `services.json` — 8 service groups, online services, emergency hotlines
+  - `officials.json` — mayor's welcome, vision/mission, mandate and service pledge (Charter wording), elected officials, department heads, history
+  - `organization.json` — the full 2026 org chart: all 13 offices and 61 plantilla positions with title and salary grade, parsed from `assets/contents/Organizational Chart 2026.pptx`. `officials.json`'s department heads are a summary of this file — update both if HR sends a new chart.
+  - `services.json` — 8 service-group summary cards, online services, emergency hotlines (hand-curated quick reference for the homepage/services page)
+  - `citizens-charter.json` — the full Citizen's Charter 2023: all 45 frontline services by office, with classification, who may avail, requirements + where to secure, fees, and processing time, parsed from `assets/contents/Citizen's Charter 2023.pdf`. Rendered as the accordion on `services.html#charter`. `fees`/`processingTime` are auto-extracted and best-effort — verify against the PDF (cited per service as `sourcePages`) before treating a number as final.
   - `barangays.json` — the 7 barangays, captains, population
   - `news.json` — news items (sorted by date automatically)
-  - `transparency.json` — Full Disclosure document links
+  - `transparency.json` — Full Disclosure document links, including the actual Citizen's Charter PDF and Org Chart PPTX. Each entry carries a `status`: `available` renders as a link, `pending` renders as a greyed-out row (use it instead of `href: "#"` for a document the LGU hasn't submitted yet)
   - `contact.json` — office directory, address, map embed
 - **Styling:** one shared `assets/style.css` carries the design system
-  (Cormorant Garamond + Jost, green / gold palette). Re-theme via the `:root`
-  variables.
+  (Merriweather + Source Sans 3, green / gold palette). Re-theme via the
+  `:root` variables. Typography is deliberately large — an 18.5px base and a
+  12.5px floor on any text — because most of this site's users are older
+  residents. Keep new components at or above those sizes, and check any new
+  colour pairing against WCAG AA (4.5:1 body, 3:1 large text) before shipping.
 - **Assets:** `assets/logos/` (municipal + provincial seals), `assets/hero/`
   (banner images).
 
 ## Fill-in checklist (placeholders to replace)
 
-- [ ] Names of the Mayor, Vice Mayor, SB members and department heads (`officials.json`, `contact.json`)
-- [ ] Barangay captains for the 7 barangays (`barangays.json`)
+- [x] Names of the Mayor, Vice Mayor, SB members and department heads — real, from `Organizational Chart 2026.pptx` (`officials.json`, `organization.json`)
 - [ ] Official photos — drop into `assets/` and set the `photo` paths
-- [ ] Emergency hotline numbers (currently `0000-000-0000`)
-- [ ] Service fees / processing times (verify against the Citizen's Charter)
-- [ ] Real news items, programs, and Full Disclosure PDF links
+- [ ] Barangay captains for the 7 barangays (`barangays.json`)
+- [ ] Emergency hotline numbers (currently `0000-000-0000` in `services.json`)
+- [x] Per-office phone numbers and email addresses (`contact.json`) — real, from the LGU's official office directory sheet (2026-09-06); the invented `@calatrava.gov.ph` addresses were removed
+- [x] Service requirements, classification, who-may-avail — real, from `Citizen's Charter 2023.pdf` (`citizens-charter.json`)
+- [x] Service fees / processing times in `services.json` — reconciled against the Charter PDF (41 services across 8 groups); amounts the Charter does not fix read "Per Local Revenue Code" or "See Citizen's Charter"
+- [ ] Real news items, programs, and Full Disclosure budget/procurement PDF links
 - [ ] Real recognition/award seals (currently placeholder labels)
 - [ ] Municipal Hall map embed URL in `contact.json` (currently a generic Google Maps embed)
+- [ ] Term dates for elected officials (carried over as a placeholder "2025–2028", not confirmed by any source document yet)
 
 > **Real data:** the motto, brand colors, and contacts (0966 439 3711 ·
 > andagaotour@gmail.com · FB "Calatrava Romblon") are real, as are the
-> population (11,342, 2020 PSA) and the 7 barangay names/figures. Officials,
-> founding year, and emergency hotlines are placeholders to verify.
+> population (11,342, 2020 PSA), the 7 barangay names/figures, all elected
+> officials and department heads, and the full Citizen's Charter service
+> directory. Photos, barangay captains, hotlines, and founding year are
+> still placeholders to fill in.
 
 ## Run locally
 

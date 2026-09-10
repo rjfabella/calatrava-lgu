@@ -1,0 +1,57 @@
+name: Sync Facebook posts
+
+# Pulls public posts from the PIO Facebook Page into data/news-fb.json and
+# commits them. The website stays static — this only writes data files.
+#
+# Setup (one time):
+#   Settings → Secrets and variables → Actions
+#     Secret   FB_PAGE_TOKEN  — System User token from Meta Business Manager
+#     Variable FB_PAGE_ID     — the PIO Page's numeric id or username
+#
+# Note: GitHub disables scheduled workflows in repos with no activity for 60
+# days. If the sync goes quiet, check that the schedule is still enabled.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours (UTC)
+  workflow_dispatch:         # and on demand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-facebook
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install --quiet requests Pillow
+
+      - name: Fetch posts
+        env:
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          FB_PAGE_ID: ${{ vars.FB_PAGE_ID }}
+          # Uncomment to sync only posts the PIO tags explicitly:
+          # FB_REQUIRE_HASHTAG: '#Bulletin'
+        run: python scripts/sync_facebook.py
+
+      - name: Commit changes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/news-fb.json assets/news
+          if git diff --staged --quiet; then
+            echo "No new posts — nothing to commit."
+          else
+            git commit -m "Sync Facebook posts from the PIO Page"
+            git push
+          fi

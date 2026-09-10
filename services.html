@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -34,6 +34,18 @@
   <div class="container" id="serviceGroups"><!-- rendered from data/services.json --></div>
 </section>
 
+<!-- FULL CITIZEN'S CHARTER DIRECTORY -->
+<section class="section" id="charter">
+  <div class="container">
+    <div class="section-head">
+      <span class="s-label">Full detail, per RA 11032</span>
+      <h2 class="s-title">Citizen's <em>Charter</em> directory</h2>
+      <p style="max-width:640px;margin-top:.8rem;font-size:14.6px;color:var(--text);line-height:1.65">Every frontline service by office — classification, who may avail, requirements and where to secure them, fees, and processing time, from the Citizen's Charter 2023 (Edition II). <a href="assets/contents/Citizen's Charter 2023.pdf" target="_blank" rel="noopener">View the full PDF &rarr;</a></p>
+    </div>
+    <div id="charterOffices"><!-- rendered from data/citizens-charter.json --></div>
+  </div>
+</section>
+
 <!-- EMERGENCY HOTLINES -->
 <section class="section dark" id="hotline">
   <div class="container">
@@ -52,6 +64,8 @@ const FALLBACK = {
   }],
   hotlines: [{ name: "MDRRMO / Emergency", number: "0000-000-0000" }]
 };
+
+const CHARTER_FALLBACK = { offices: [] };
 
 function renderOnline(list){
   document.getElementById('onlineServices').innerHTML = list.map(o =>
@@ -78,6 +92,37 @@ function renderGroups(groups){
     </div>`).join('');
 }
 
+function renderCharter(offices){
+  document.getElementById('charterOffices').innerHTML = (offices || []).map(o =>
+    `<div class="charter-office">
+      <h3>${o.office}</h3>
+      <div class="charter-list">
+        ${(o.services || []).map(s => `
+          <details class="charter-item">
+            <summary>
+              <span class="charter-name">${s.name}</span>
+              <span class="charter-tags">${[s.classification, s.transactionType].filter(Boolean).map(t => `<span class="tag">${t}</span>`).join('')}</span>
+            </summary>
+            <div class="charter-body">
+              ${s.whoMayAvail ? `<p><b>Who may avail:</b> ${s.whoMayAvail}</p>` : ''}
+              ${(s.requirements && s.requirements.length) ? `
+                <div class="charter-req-wrap">
+                  <table class="charter-req-table">
+                    <thead><tr><th>Requirement</th><th>Where to secure</th></tr></thead>
+                    <tbody>${s.requirements.map(r => `<tr><td>${r.item}</td><td>${r.whereToSecure || '—'}</td></tr>`).join('')}</tbody>
+                  </table>
+                </div>` : `<p><i>No prior requirements listed — walk in.</i></p>`}
+              <div class="svc-meta" style="margin-top:.8rem">
+                Fee: <b>${(s.fees && s.fees.length) ? s.fees.join('; ') : 'See PDF'}</b>
+                &nbsp;&middot;&nbsp; Processing time: <b>${(s.processingTime && s.processingTime.length) ? s.processingTime.join('; ') : 'See PDF'}</b>
+              </div>
+              <p class="charter-source">Source: Citizen's Charter 2023, p. ${s.sourcePages}. Fees and processing time are auto-extracted from the PDF table — confirm against the source before quoting to a client.</p>
+            </div>
+          </details>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
 function renderHotlines(list){
   document.getElementById('hotlines').innerHTML = list.map(h =>
     `<a class="doc-row" href="tel:${(h.number||'').replace(/[^0-9+]/g,'')}">
@@ -93,6 +138,8 @@ function renderHotlines(list){
   renderOnline(d.online || []);
   renderGroups(d.groups || []);
   renderHotlines(d.hotlines || []);
+  const charter = await loadJSON('data/citizens-charter.json', CHARTER_FALLBACK);
+  renderCharter(charter.offices || []);
   observeReveal();
   // jump to in-page anchor after async render
   if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }

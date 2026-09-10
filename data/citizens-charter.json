@@ -1,0 +1,1865 @@
+{
+  "_source": "Citizen's Charter 2023, Edition II (assets/contents/Citizen's Charter 2023.pdf)",
+  "_note": "Auto-extracted from the PDF's service tables. Verify fees/processingTime/personResponsible against the source PDF before publishing -- these are page-scraped and may merge wrapped text imperfectly. requirements, classification, and whoMayAvail are extracted from bordered tables and are reliable.",
+  "offices": [
+    {
+      "office": "Office of the Municipal Mayor",
+      "services": [
+        {
+          "name": "Processing of Business Permit",
+          "category": "External",
+          "classification": "Simple, Complex",
+          "transactionType": "G2B",
+          "whoMayAvail": "Business Owners",
+          "requirements": [
+            {
+              "item": "1. Barangay Business Clearance",
+              "whereToSecure": "Office of the Barangay Captain"
+            },
+            {
+              "item": "2. Community Tax Certificate (Cedula)",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "3. Unified Business Application Form",
+              "whereToSecure": "BPLO"
+            },
+            {
+              "item": "4. Sanitary Permit",
+              "whereToSecure": "RHU"
+            },
+            {
+              "item": "5. Fire Safety Inspection Certificate",
+              "whereToSecure": "BFP"
+            },
+            {
+              "item": "6. Zoning Clearance/Certificate",
+              "whereToSecure": "MPDC"
+            },
+            {
+              "item": "7. Occupancy Permit",
+              "whereToSecure": "Mun. Engineering Office"
+            },
+            {
+              "item": "8. Proof of Annual Gross Sales (for Renewal only)",
+              "whereToSecure": "BIR 1701/1701Q Form"
+            },
+            {
+              "item": "9. Market Clearance (for Market Stall Owners only)",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "10. DTI- Proof of Business Name Registration",
+              "whereToSecure": "DTI"
+            },
+            {
+              "item": "11. NGAs Certification, if applicable",
+              "whereToSecure": ""
+            }
+          ],
+          "fees": [
+            "Php 220.00",
+            "Php 75.00",
+            "Php 250.00",
+            "Php 30.00",
+            "+ fees per Local Revenue Code (amount not fixed — see PDF)"
+          ],
+          "processingTime": [
+            "15-30 Minutes",
+            "10-15 minutes",
+            "1 Day"
+          ],
+          "personResponsible": [
+            "ANAMHER GRACE C. FERRERA BPLO Designee",
+            "Municipal Treasurer/ MTO STAFF & PERSONNEL"
+          ],
+          "sourcePages": "7-10"
+        },
+        {
+          "name": "Issuance of Mayor's Permits/Clearance/Certification",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Applicant",
+          "requirements": [
+            {
+              "item": "1. Barangay Clearance/Permits",
+              "whereToSecure": "Office of the Barangay Captain"
+            },
+            {
+              "item": "2. Community Tax Certificate (Cedula)",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "3. Official Receipt from Treasurer Office",
+              "whereToSecure": "MTO"
+            }
+          ],
+          "fees": [
+            "Php 180.00",
+            "+ fees per Local Revenue Code (amount not fixed — see PDF)"
+          ],
+          "processingTime": [
+            "5 minutes",
+            "15 minutes"
+          ],
+          "personResponsible": [
+            "MTO- Employee/Staff",
+            "MO- Staff LCE"
+          ],
+          "sourcePages": "10-11"
+        },
+        {
+          "name": "Processing of Motorized Tricycle Operator's Permit (MTOP)",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Applicant",
+          "requirements": [
+            {
+              "item": "1. Driver License",
+              "whereToSecure": "LTO"
+            },
+            {
+              "item": "2. Official Receipt (OR) or Certificate of Registration (CR)",
+              "whereToSecure": "LTO"
+            },
+            {
+              "item": "3. Community Tax Certificate (Cedula)",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "4. Certificate of TODA Membership",
+              "whereToSecure": "TODA Secretary"
+            },
+            {
+              "item": "5. Certificate of Franchise",
+              "whereToSecure": "SB Secretary"
+            },
+            {
+              "item": "6. Road Worthiness Clearance",
+              "whereToSecure": "Calatrava MPS (PNP Personnel)"
+            },
+            {
+              "item": "7. Official Receipt",
+              "whereToSecure": "MTO"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "5 mins",
+            "10 mins"
+          ],
+          "personResponsible": [
+            "MTO/Staff",
+            "MO Staff/BPLO",
+            "BPLO LCE"
+          ],
+          "sourcePages": "11-12"
+        },
+        {
+          "name": "Marriage Solemnization",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Applicant",
+          "requirements": [
+            {
+              "item": "1. Application for Marriage Contract",
+              "whereToSecure": "MCR"
+            },
+            {
+              "item": "2. Official Receipt from Treasurer Office FEES",
+              "whereToSecure": "MTO"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "15 minutes"
+          ],
+          "personResponsible": [],
+          "sourcePages": "12-14"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Sangguniang Bayan",
+      "services": [
+        {
+          "name": "Legislative Services — Certifications & Copies of Resolutions/Ordinances",
+          "category": "External",
+          "classification": "",
+          "transactionType": "G2C",
+          "whoMayAvail": "",
+          "requirements": [
+            {
+              "item": "1. Request Letter",
+              "whereToSecure": "Client"
+            },
+            {
+              "item": "1. Application Form",
+              "whereToSecure": "BPLO"
+            },
+            {
+              "item": "2. Barangay Clearance",
+              "whereToSecure": "Barangay"
+            },
+            {
+              "item": "3. Motorcycle’s Official and Confirmation Receipts (OR) (CR)",
+              "whereToSecure": "LTO"
+            },
+            {
+              "item": "4. Certificate of TODA Membership",
+              "whereToSecure": "Tricycle Operators and Drivers Association (TODA)"
+            },
+            {
+              "item": "5. Road Worthiness Clearance",
+              "whereToSecure": "Police"
+            }
+          ],
+          "fees": [
+            "Php 15.00",
+            "Php 1,000.00"
+          ],
+          "processingTime": [
+            "3 minutes",
+            "5 minutes",
+            "7 days"
+          ],
+          "personResponsible": [
+            "NG TIME",
+            "SB Secretary/Staff",
+            "MTO",
+            "SB Secretary/Staff/ SB/MTFRB",
+            "MTO/Revenue Collection Officer",
+            "SB Secretary/Staff/ MTO"
+          ],
+          "sourcePages": "14-15"
+        },
+        {
+          "name": "Legislative Services — Certificate of Franchise (Tricycle-for-Hire)",
+          "category": "External",
+          "classification": "",
+          "transactionType": "G2C",
+          "whoMayAvail": "",
+          "requirements": [
+            {
+              "item": "1. Application Form",
+              "whereToSecure": "BPLO"
+            },
+            {
+              "item": "2. Barangay Clearance",
+              "whereToSecure": "Barangay"
+            },
+            {
+              "item": "3. Motorcycle’s Official and Confirmation Receipts (OR) (CR)",
+              "whereToSecure": "LTO"
+            },
+            {
+              "item": "4. Certificate of TODA Membership",
+              "whereToSecure": "Tricycle Operators and Drivers Association (TODA)"
+            },
+            {
+              "item": "5. Road Worthiness Clearance",
+              "whereToSecure": "Police"
+            },
+            {
+              "item": "1. Five copies set of plans with Bill of Materials duly signed by the owner and signed and sealed by licensed Engineer/Architect; Proof of ownership of Land (Title, Deed of Sale, etc.)",
+              "whereToSecure": "From the Lot Owner/ Developer/Applicant"
+            },
+            {
+              "item": "2. Building Permit Application Form duly signed",
+              "whereToSecure": "From MEO/Lot/Building Owner/Developer"
+            },
+            {
+              "item": "3. Summary of Assessment of Corresponding Fee",
+              "whereToSecure": "From MEO or MPDO"
+            },
+            {
+              "item": "4. Fire Safety Clearance and Receipts",
+              "whereToSecure": "From the Fire Station Office"
+            },
+            {
+              "item": "5. Zoning Receipts",
+              "whereToSecure": "From the Office of Municipal Treasurer"
+            },
+            {
+              "item": "6. MDRRM Certification (Hazard Fee)",
+              "whereToSecure": "From MDRRMO"
+            },
+            {
+              "item": "7. Environment Compliance Certificate (If Applicable)",
+              "whereToSecure": "From DENR (if applicable)"
+            },
+            {
+              "item": "8. Construction of Safety and Health (If applicable)",
+              "whereToSecure": "From DOLE (If applicable)"
+            }
+          ],
+          "fees": [
+            "Php 1,000.00"
+          ],
+          "processingTime": [
+            "7 days",
+            "3 minutes"
+          ],
+          "personResponsible": [
+            "SB Secretary/Staff/ SB/MTFRB",
+            "MTO/Revenue Collection Officer",
+            "SB Secretary/Staff/ MTO"
+          ],
+          "sourcePages": "15-17"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Planning and Development",
+      "services": [
+        {
+          "name": "Issuance of Locational Clearance/Zoning Certification",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "",
+          "requirements": [
+            {
+              "item": "1. Five copies set of plans with Bill of Materials duly signed by the owner and signed and sealed by licensed Engineer/Architect; Proof of ownership of Land (Title, Deed of Sale, etc.)",
+              "whereToSecure": "From the Lot Owner/ Developer/Applicant"
+            },
+            {
+              "item": "2. Building Permit Application Form duly signed",
+              "whereToSecure": "From MEO/Lot/Building Owner/Developer"
+            },
+            {
+              "item": "3. Summary of Assessment of Corresponding Fee",
+              "whereToSecure": "From MEO or MPDO"
+            },
+            {
+              "item": "4. Fire Safety Clearance and Receipts",
+              "whereToSecure": "From the Fire Station Office"
+            },
+            {
+              "item": "5. Zoning Receipts",
+              "whereToSecure": "From the Office of Municipal Treasurer"
+            },
+            {
+              "item": "6. MDRRM Certification (Hazard Fee)",
+              "whereToSecure": "From MDRRMO"
+            },
+            {
+              "item": "7. Environment Compliance Certificate (If Applicable)",
+              "whereToSecure": "From DENR (if applicable)"
+            },
+            {
+              "item": "8. Construction of Safety and Health (If applicable) FEES PERSON",
+              "whereToSecure": "From DOLE (If applicable)"
+            },
+            {
+              "item": "1. Filed- up COLB",
+              "whereToSecure": "RHU"
+            },
+            {
+              "item": "6. Marriage Contract of Parents",
+              "whereToSecure": "Church/LCRO"
+            },
+            {
+              "item": "7. Barangay Certification",
+              "whereToSecure": "Barangay"
+            },
+            {
+              "item": "8. Baptismal Certificate",
+              "whereToSecure": "Church"
+            },
+            {
+              "item": "9. PSA Negative Certificate",
+              "whereToSecure": "PSA"
+            },
+            {
+              "item": "10. Community Tax Certificate",
+              "whereToSecure": "LGU/BLGU"
+            },
+            {
+              "item": "11. School Record",
+              "whereToSecure": "School"
+            },
+            {
+              "item": "12. Medical Record",
+              "whereToSecure": "Rural Health Unit"
+            },
+            {
+              "item": "13. Insurance FEES",
+              "whereToSecure": "Insurance provider"
+            }
+          ],
+          "fees": [
+            "Php 110.00"
+          ],
+          "processingTime": [
+            "10 minutes",
+            "15-60 minutes",
+            "15 minutes",
+            "15-20 minutes"
+          ],
+          "personResponsible": [
+            "Receiving Staff",
+            "Zoning Inspector Zoning Inspector Zoning Inspector/MDRRMO",
+            "MTO",
+            "MCR STAFF MCR"
+          ],
+          "sourcePages": "17-21"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Civil Registrar",
+      "services": [
+        {
+          "name": "Registering Births and Issuance of Certificate of Live Birth",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Applicant/ Parents/ Attendants at Birth",
+          "requirements": [
+            {
+              "item": "1. Filed- up COLB",
+              "whereToSecure": "RHU"
+            },
+            {
+              "item": "6. Marriage Contract of Parents",
+              "whereToSecure": "Church/LCRO"
+            },
+            {
+              "item": "7. Barangay Certification",
+              "whereToSecure": "Barangay"
+            },
+            {
+              "item": "8. Baptismal Certificate",
+              "whereToSecure": "Church"
+            },
+            {
+              "item": "9. PSA Negative Certificate",
+              "whereToSecure": "PSA"
+            },
+            {
+              "item": "10. Community Tax Certificate",
+              "whereToSecure": "LGU/BLGU"
+            },
+            {
+              "item": "11. School Record",
+              "whereToSecure": "School"
+            },
+            {
+              "item": "12. Medical Record",
+              "whereToSecure": "Rural Health Unit"
+            },
+            {
+              "item": "13. Insurance FEES",
+              "whereToSecure": "Insurance provider"
+            },
+            {
+              "item": "1. Affidavit of Affiant",
+              "whereToSecure": "Notary Public"
+            },
+            {
+              "item": "2. COLB",
+              "whereToSecure": "MCRO"
+            },
+            {
+              "item": "3. Certificate of Marriage",
+              "whereToSecure": "MCRO/Church"
+            },
+            {
+              "item": "4. Certificate of No Marriage",
+              "whereToSecure": "PSA"
+            },
+            {
+              "item": "5. Acknowledgement/Admission of Paternity FEES",
+              "whereToSecure": "Affiant Father"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "15-20 minutes",
+            "30 minutes"
+          ],
+          "personResponsible": [
+            "MCR STAFF MCR"
+          ],
+          "sourcePages": "21-22"
+        },
+        {
+          "name": "Registration of Legal Instrument",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Applicant/ Parents",
+          "requirements": [
+            {
+              "item": "1. Affidavit of Affiant",
+              "whereToSecure": "Notary Public"
+            },
+            {
+              "item": "2. COLB",
+              "whereToSecure": "MCRO"
+            },
+            {
+              "item": "3. Certificate of Marriage",
+              "whereToSecure": "MCRO/Church"
+            },
+            {
+              "item": "4. Certificate of No Marriage",
+              "whereToSecure": "PSA"
+            },
+            {
+              "item": "5. Acknowledgement/Admission of Paternity FEES",
+              "whereToSecure": "Affiant Father"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "30 minutes"
+          ],
+          "personResponsible": [
+            "MCR STAFF MCR"
+          ],
+          "sourcePages": "22-23"
+        },
+        {
+          "name": "Issuance of a Marriage License",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "A man and a woman, of legal age, and with no legal impediments to marry, who wish to enter into a special contract of permanent union for the establishment of conjugal family life.",
+          "requirements": [
+            {
+              "item": "1. Certificate of Live Birth",
+              "whereToSecure": "Personal Copy/PSA"
+            },
+            {
+              "item": "2. Residence Certificate",
+              "whereToSecure": "Office of the Barangay Captain"
+            },
+            {
+              "item": "3. Affidavit of Singleness/CENOMAR",
+              "whereToSecure": "PSA"
+            },
+            {
+              "item": "4. Consent/Advice",
+              "whereToSecure": "MCRO-Parents"
+            },
+            {
+              "item": "5. Responsible Parenthood and Family Planning Certificate",
+              "whereToSecure": "MSWDO/RHU"
+            },
+            {
+              "item": "6. Marriage Counselling Certificate",
+              "whereToSecure": "MSWDO"
+            },
+            {
+              "item": "7. Tree-Planting Certificate FEES",
+              "whereToSecure": ""
+            }
+          ],
+          "fees": [
+            "Php 450.00"
+          ],
+          "processingTime": [
+            "30 minutes"
+          ],
+          "personResponsible": [
+            "MCR STAFF",
+            "MCR STAFF MCR"
+          ],
+          "sourcePages": "23-25"
+        },
+        {
+          "name": "Registering Marriage Certificates",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Secretaries of Parish Church Court’s Liaison officer Local Chief’s Executive’s (mayor’s staff) Owners of the Document",
+          "requirements": [
+            {
+              "item": "1. Municipal Form No. 97 (Form No. 13)",
+              "whereToSecure": "MCR"
+            },
+            {
+              "item": "2. Affidavit of Both Parties",
+              "whereToSecure": ""
+            },
+            {
+              "item": "3. Affidavit of Witnesses FEES",
+              "whereToSecure": ""
+            }
+          ],
+          "fees": [
+            "Php 100.00"
+          ],
+          "processingTime": [
+            "10-20 minutes"
+          ],
+          "personResponsible": [
+            "NG TIME",
+            "MCR STAFF MCR"
+          ],
+          "sourcePages": "25-26"
+        },
+        {
+          "name": "Registering/Issuance of Death Certificates",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Relatives/Attendant of Death",
+          "requirements": [
+            {
+              "item": "1. Accomplished COD",
+              "whereToSecure": "Notary Public"
+            },
+            {
+              "item": "2. Burial Permit",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "3. Certificate of Funeral Interment",
+              "whereToSecure": "Church"
+            },
+            {
+              "item": "4. Affidavit of Two Witnesses FEES",
+              "whereToSecure": "Affiant/Notary Public"
+            }
+          ],
+          "fees": [
+            "Php 50.00"
+          ],
+          "processingTime": [
+            "15-20 minutes"
+          ],
+          "personResponsible": [
+            "NG TIME",
+            "MCR STAFF MCR"
+          ],
+          "sourcePages": "26-28"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Social Welfare and Development",
+      "services": [
+        {
+          "name": "Medical Assistance",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Needy/Indigent /In Crises Situation",
+          "requirements": [
+            {
+              "item": "1. Certificate of indigency",
+              "whereToSecure": "Barangay Captain"
+            },
+            {
+              "item": "2. Medical certificate",
+              "whereToSecure": "Attending Physician"
+            },
+            {
+              "item": "3. Hospital Bill/Prescription",
+              "whereToSecure": "Hospital, Attending Physician"
+            },
+            {
+              "item": "4. Sales Invoice",
+              "whereToSecure": "Drug store"
+            },
+            {
+              "item": "5. Valid ID FEES",
+              "whereToSecure": "CLIENT"
+            },
+            {
+              "item": "1. Certificate of Indigency",
+              "whereToSecure": "Barangay Captain"
+            },
+            {
+              "item": "2. Funeral Contract",
+              "whereToSecure": "Funeral Parlor"
+            },
+            {
+              "item": "3. Death Certificate",
+              "whereToSecure": "Hospital/MCR"
+            },
+            {
+              "item": "4. Permit to transfer",
+              "whereToSecure": "MCR"
+            },
+            {
+              "item": "5. Valid ID FEES",
+              "whereToSecure": "CLIENT"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "10 minutes",
+            "5 minutes",
+            "20 minutes",
+            "5-10 minutes",
+            "1 day"
+          ],
+          "personResponsible": [
+            "Staff responsible for AICS MSWDO",
+            "MSWDO",
+            "LCE",
+            "MTO",
+            "MUN. ACCOUNTANT"
+          ],
+          "sourcePages": "28-30"
+        },
+        {
+          "name": "Burial Assistance",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Needy/Indigent /In Crises Situation",
+          "requirements": [
+            {
+              "item": "1. Certificate of Indigency",
+              "whereToSecure": "Barangay Captain"
+            },
+            {
+              "item": "2. Funeral Contract",
+              "whereToSecure": "Funeral Parlor"
+            },
+            {
+              "item": "3. Death Certificate",
+              "whereToSecure": "Hospital/MCR"
+            },
+            {
+              "item": "4. Permit to transfer",
+              "whereToSecure": "MCR"
+            },
+            {
+              "item": "5. Valid ID FEES",
+              "whereToSecure": "CLIENT"
+            },
+            {
+              "item": "1. Certificate of enrollment",
+              "whereToSecure": "Principal"
+            },
+            {
+              "item": "2. Valid id of student",
+              "whereToSecure": "Client"
+            },
+            {
+              "item": "3. Certificate of indigency",
+              "whereToSecure": "Barangay Captain"
+            },
+            {
+              "item": "4. Valid id of parents FEES",
+              "whereToSecure": "Client"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "10 minutes",
+            "5 minutes",
+            "20 minutes",
+            "5-10 minutes",
+            "1 day"
+          ],
+          "personResponsible": [
+            "Staff responsible for AICS MSWDO",
+            "MSWDO",
+            "LCE",
+            "MTO",
+            "MUN. ACCOUNTANT"
+          ],
+          "sourcePages": "30-32"
+        },
+        {
+          "name": "Educational Assistance",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Needy/Indigent /In Crises Situation",
+          "requirements": [
+            {
+              "item": "1. Certificate of enrollment",
+              "whereToSecure": "Principal"
+            },
+            {
+              "item": "2. Valid id of student",
+              "whereToSecure": "Client"
+            },
+            {
+              "item": "3. Certificate of indigency",
+              "whereToSecure": "Barangay Captain"
+            },
+            {
+              "item": "4. Valid id of parents FEES",
+              "whereToSecure": "Client"
+            },
+            {
+              "item": "1. Duly accomplished application form FEES",
+              "whereToSecure": "MCR"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "10 minutes",
+            "5 minutes",
+            "20 minutes",
+            "5-10 minutes",
+            "1 day",
+            "45 minutes",
+            "1 Day"
+          ],
+          "personResponsible": [
+            "Staff responsible for AICS MSWDO",
+            "MSWDO",
+            "LCE",
+            "MTO",
+            "MUN. ACCOUNTANT"
+          ],
+          "sourcePages": "32-34"
+        },
+        {
+          "name": "PMC / Marriage Orientation Counselling",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "",
+          "requirements": [
+            {
+              "item": "1. Duly accomplished application form FEES",
+              "whereToSecure": "MCR"
+            },
+            {
+              "item": "1.Certificate of Indigency",
+              "whereToSecure": "Barangay Captain"
+            },
+            {
+              "item": "2.Medical Abstract",
+              "whereToSecure": "Physician"
+            },
+            {
+              "item": "3.Valid ID FEES",
+              "whereToSecure": "Client"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "45 minutes",
+            "1 Day",
+            "5 minutes",
+            "10 minutes",
+            "1hour",
+            "1 hour",
+            "1 minutes"
+          ],
+          "personResponsible": [
+            "MSWDO",
+            "MSWDO Staff MSWDO"
+          ],
+          "sourcePages": "34-35"
+        },
+        {
+          "name": "Issuance of Social Case Study Report (Referral for Medical/Financial Assistance)",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Needy/Indigent /In Crises Situation",
+          "requirements": [
+            {
+              "item": "1.Certificate of Indigency",
+              "whereToSecure": "Barangay Captain"
+            },
+            {
+              "item": "2.Medical Abstract",
+              "whereToSecure": "Physician"
+            },
+            {
+              "item": "3.Valid ID FEES",
+              "whereToSecure": "Client"
+            },
+            {
+              "item": "1. Medical Certificate",
+              "whereToSecure": "RHU"
+            },
+            {
+              "item": "2. Endorsement Letter FEES",
+              "whereToSecure": "Office of the Barangay Captain"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "10 minutes",
+            "1hour",
+            "1 hour",
+            "1 minutes",
+            "2 hours"
+          ],
+          "personResponsible": [
+            "MSWDO",
+            "MSWDO Staff MSWDO",
+            "Staff/ MSWDO"
+          ],
+          "sourcePages": "35-36"
+        },
+        {
+          "name": "Marriage Counselling",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Couple with marital conflict",
+          "requirements": [
+            {
+              "item": "1. Medical Certificate",
+              "whereToSecure": "RHU"
+            },
+            {
+              "item": "2. Endorsement Letter FEES",
+              "whereToSecure": "Office of the Barangay Captain"
+            },
+            {
+              "item": "1. Duly Notarized Deed of Conveyance (Deed of Sale, Deed of Partition, Deed of Extra- Judicial Partition, Etc.) – 2 Copies",
+              "whereToSecure": "Owner/Vendor/Buyer"
+            },
+            {
+              "item": "2. Certified Electronic Copy of Title (If with Title) – 2 Copies",
+              "whereToSecure": "Registry of Deeds"
+            },
+            {
+              "item": "3. Certification of No Title (If No Title) – 2 Copies",
+              "whereToSecure": "Registry of Deeds"
+            },
+            {
+              "item": "4. Capital Gains Tax with Receipt – 2 Copies",
+              "whereToSecure": "BIR"
+            },
+            {
+              "item": "5. Documentary Stamp Tax with Receipt – 2 Copies",
+              "whereToSecure": "BIR"
+            },
+            {
+              "item": "6. Certificate Authorizing Registration (eCAR) – 2 Copies",
+              "whereToSecure": "BIR"
+            },
+            {
+              "item": "7. Tax Declaration of Existing Real Property Subject for Transfer – 2 Copies",
+              "whereToSecure": "Owner"
+            },
+            {
+              "item": "8. Approved Survey Plan/Subdivision Plan – 2 Copies",
+              "whereToSecure": "DENR"
+            },
+            {
+              "item": "9. Payment of Real Property Tax",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "10. Certificate of Tax Clearance",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "11. Payment of Transfer Tax",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "12. Payment of Transfer Fee",
+              "whereToSecure": "MTO"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "10 minutes",
+            "2 hours"
+          ],
+          "personResponsible": [
+            "Staff/ MSWDO",
+            "MSWDO",
+            "OFFICE OF THE MUNICIPAL ASSESSOR"
+          ],
+          "sourcePages": "36-38"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Assessor",
+      "services": [
+        {
+          "name": "Transfer of Ownership of Tax Declaration",
+          "category": "External",
+          "classification": "Complex",
+          "transactionType": "G2C",
+          "whoMayAvail": "Any persons natural or judicial or their duly authorized representative, owning or administering real property may avail of this service.",
+          "requirements": [
+            {
+              "item": "1. Duly Notarized Deed of Conveyance (Deed of Sale, Deed of Partition, Deed of Extra- Judicial Partition, Etc.) – 2 Copies",
+              "whereToSecure": "Owner/Vendor/Buyer"
+            },
+            {
+              "item": "2. Certified Electronic Copy of Title (If with Title) – 2 Copies",
+              "whereToSecure": "Registry of Deeds"
+            },
+            {
+              "item": "3. Certification of No Title (If No Title) – 2 Copies",
+              "whereToSecure": "Registry of Deeds"
+            },
+            {
+              "item": "4. Capital Gains Tax with Receipt – 2 Copies",
+              "whereToSecure": "BIR"
+            },
+            {
+              "item": "5. Documentary Stamp Tax with Receipt – 2 Copies",
+              "whereToSecure": "BIR"
+            },
+            {
+              "item": "6. Certificate Authorizing Registration (eCAR) – 2 Copies",
+              "whereToSecure": "BIR"
+            },
+            {
+              "item": "7. Tax Declaration of Existing Real Property Subject for Transfer – 2 Copies",
+              "whereToSecure": "Owner"
+            },
+            {
+              "item": "8. Approved Survey Plan/Subdivision Plan – 2 Copies",
+              "whereToSecure": "DENR"
+            },
+            {
+              "item": "9. Payment of Real Property Tax",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "10. Certificate of Tax Clearance",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "11. Payment of Transfer Tax",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "12. Payment of Transfer Fee",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "13. Special Power of Attorney (SPA) if the application is not an owner – 2 Copies",
+              "whereToSecure": "Owner/Vendor/Buyer"
+            },
+            {
+              "item": "14. Valid ID – 2 Copies",
+              "whereToSecure": "Owner/Vendor/Buyer"
+            },
+            {
+              "item": "15. Duly Notarized Deed of Conveyance (Deed of Sale, Deed of Partition, Deed of Extra- Judicial Partition, Etc.) – 2 Copies FEES",
+              "whereToSecure": "Owner/Vendor/Buyer"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "10 mins"
+          ],
+          "personResponsible": [],
+          "sourcePages": "38-40"
+        },
+        {
+          "name": "New Assessment / Discovery / Reassessment / Reclassification",
+          "category": "External",
+          "classification": "Complex",
+          "transactionType": "G2C",
+          "whoMayAvail": "Any persons natural or judicial or their duly authorized representative, owning or administering real property may avail of this service.",
+          "requirements": [
+            {
+              "item": "1. Approved Building Permit – 2 Copies",
+              "whereToSecure": "Municipal Eng ineer’s Office"
+            },
+            {
+              "item": "2. Approved Building Plan – 2 Copies",
+              "whereToSecure": "Municipal Engineer’s Office"
+            },
+            {
+              "item": "3. Occupancy Permit/Certificate Completion (if any) – 2 Copies",
+              "whereToSecure": "Municipal Engineer’s Office"
+            },
+            {
+              "item": "4. Accomplished affidavit of ownership or Sworn Statement of the market value of the property, in the absence of a building permit or Certificates required under above – 2 Copies",
+              "whereToSecure": "Ow ner"
+            },
+            {
+              "item": "5. Certified true copy of the latest tax declaration (if applicable) – 2 Copies",
+              "whereToSecure": "Municipal Assessor’s Office"
+            },
+            {
+              "item": "6. Payment of Real Property Tax",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "7. Valid ID – 2 Copies FEES",
+              "whereToSecure": "Owner"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "10 mins"
+          ],
+          "personResponsible": [
+            "NG TIME",
+            "MTO STAFF/MUNICIPAL ASSESSOR"
+          ],
+          "sourcePages": "40-42"
+        },
+        {
+          "name": "Issuance of Property Certification",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C, G2B, G2G",
+          "whoMayAvail": "Any persons natural or judicial or their duly authorized representative, owning or administering real property may avail of this service.",
+          "requirements": [
+            {
+              "item": "1. Proof of Ownership (Tax Declaration, OCT/TCT/CLOA)",
+              "whereToSecure": "Owner"
+            },
+            {
+              "item": "2. Payment of Real Property Tax",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "3. Special Power of Attorney",
+              "whereToSecure": "Owner"
+            },
+            {
+              "item": "4. Valid ID FEES",
+              "whereToSecure": "Owner"
+            }
+          ],
+          "fees": [
+            "Php150"
+          ],
+          "processingTime": [
+            "30 mins"
+          ],
+          "personResponsible": [],
+          "sourcePages": "42-45"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Agriculturist",
+      "services": [
+        {
+          "name": "Fishery Services",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Registered Fisher folks",
+          "requirements": [
+            {
+              "item": "1. Payment of Motorboat/ Registration of 3 GT and below",
+              "whereToSecure": "MTO"
+            },
+            {
+              "item": "2. 3 Copies of Motorboat Registration Forms",
+              "whereToSecure": "Office of the Municipal Agriculturist"
+            },
+            {
+              "item": "3. Organization of Fisher folks and Bantay Dagat Task Force FEES",
+              "whereToSecure": "Office of the Municipal Agriculturist"
+            }
+          ],
+          "fees": [
+            "Php 250.00"
+          ],
+          "processingTime": [
+            "10 minutes",
+            "15 minutes",
+            "30 minutes"
+          ],
+          "personResponsible": [
+            "MTO- Staff Mr. ERWIN MORTEL Fishery Coordinator",
+            "MAO Staff"
+          ],
+          "sourcePages": "45-46"
+        },
+        {
+          "name": "Agricultural / Crop Services",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Crop Farmers",
+          "requirements": [
+            {
+              "item": "1. Implement Agricultural and Fishery Laws",
+              "whereToSecure": "SB Office/ National"
+            },
+            {
+              "item": "2. Provision of plant seeds and seedlings",
+              "whereToSecure": "DA- MIMAROPA"
+            },
+            {
+              "item": "3. RSBSA Farmers and Fisher folks Registration",
+              "whereToSecure": "Municipal Agriculturist"
+            },
+            {
+              "item": "4. Crop Insurance",
+              "whereToSecure": "Municipal Agriculturist"
+            },
+            {
+              "item": "5. Farm Monitoring/Supervision FEES",
+              "whereToSecure": "MAO Staff"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "20 minutes",
+            "10 minutes"
+          ],
+          "personResponsible": [
+            "Municipal Agriculturist/HVCDP Staff",
+            "Municipal Agriculturist/ PCIC Staff"
+          ],
+          "sourcePages": "46-47"
+        },
+        {
+          "name": "Livestock Services",
+          "category": "External",
+          "classification": "Complex",
+          "transactionType": "G2C",
+          "whoMayAvail": "Livestock Raisers",
+          "requirements": [
+            {
+              "item": "1. Master list of Animal and Population",
+              "whereToSecure": "MAO- Staff"
+            },
+            {
+              "item": "2. Consolidate submitted list from the Barangays",
+              "whereToSecure": "MAO- Staff"
+            },
+            {
+              "item": "3. Conduct Dog Vaccination to all Dog Population",
+              "whereToSecure": "MAO- Staff"
+            },
+            {
+              "item": "4. Distribution of Livestock and Poultry Medicine",
+              "whereToSecure": "MAO- Staff"
+            },
+            {
+              "item": "5. Conduct regular meeting to all animal raisers",
+              "whereToSecure": "MAO- Staff"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "30 minutes"
+          ],
+          "personResponsible": [],
+          "sourcePages": "47-49"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Treasurer",
+      "services": [
+        {
+          "name": "Issuance of Tax Clearance",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2B, G2C",
+          "whoMayAvail": "Individuals and Corporations who owns Real Property in the Municipality with Fully paid Tax Dues.",
+          "requirements": [
+            {
+              "item": "1. Official Receipt of the current year stating full payment.",
+              "whereToSecure": "Owner's copy of Taxpayer"
+            },
+            {
+              "item": "2. Tax Order of Payment FEES",
+              "whereToSecure": "Office of the Municipal Treasurer"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "3-5 minutes",
+            "1 minutes",
+            "5 minutes",
+            "1 minute"
+          ],
+          "personResponsible": [
+            "Receiving Clerk/ Revenue Collection Clerk",
+            "Revenue Collection Clerk"
+          ],
+          "sourcePages": "49-51"
+        },
+        {
+          "name": "Collection of Community Tax Certificate (CTC)",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2B, G2C",
+          "whoMayAvail": "Business Owners and Individual Taxpayer",
+          "requirements": [
+            {
+              "item": "1. Valid Identification Card",
+              "whereToSecure": "To be provided by Individual Taxpayer"
+            },
+            {
+              "item": "2. Client Information Slip FEES",
+              "whereToSecure": "Office of the Municipal Treasurer"
+            }
+          ],
+          "fees": [
+            "Php 5.00",
+            "Php 1.00",
+            "Php 1,000",
+            "Php 5,000"
+          ],
+          "processingTime": [
+            "3-5 minutes"
+          ],
+          "personResponsible": [
+            "Receiving Clerk/ Revenue Collection Clerk",
+            "Revenue Collection Clerk",
+            "by the Revenue Collecting Officer."
+          ],
+          "sourcePages": "51-53"
+        },
+        {
+          "name": "Collection of Real Property Taxes (RPT)",
+          "category": "External",
+          "classification": "Complex",
+          "transactionType": "G2B, G2C",
+          "whoMayAvail": "Individuals and Corporations who owns Real Property in the Municipality",
+          "requirements": [
+            {
+              "item": "1. Official Receipt of previous years or latest property tax assessment",
+              "whereToSecure": "Owner's copy of Taxpayer"
+            },
+            {
+              "item": "2. Copy of Latest tax declaration of the property FEES",
+              "whereToSecure": "Office of the Municipal Assessor"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "3-5 minutes"
+          ],
+          "personResponsible": [
+            "Receiving Clerk/ Revenue Collection Clerk",
+            "Revenue Collection Clerk"
+          ],
+          "sourcePages": "53-55"
+        },
+        {
+          "name": "Large Cattle Registration / Transfer of Ownership",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Owner of any Bovine animals",
+          "requirements": [
+            {
+              "item": "1. Barangay Certification",
+              "whereToSecure": "Office of the Barangay Captain"
+            },
+            {
+              "item": "2. Community Tax Certificate (Cedula) FEES",
+              "whereToSecure": "Office of the Municipal Treasurer"
+            }
+          ],
+          "fees": [
+            "+ fees per Local Revenue Code (amount not fixed — see PDF)"
+          ],
+          "processingTime": [
+            "3-5 minutes",
+            "30 minutes",
+            "1Hr"
+          ],
+          "personResponsible": [
+            "Receiving Clerk/ Revenue Collection Clerk",
+            "Revenue Collection Clerk"
+          ],
+          "sourcePages": "55-57"
+        },
+        {
+          "name": "Collection of Regulatory Fees and Charges",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2B, G2C",
+          "whoMayAvail": "Business Owners and Individual Taxpayer",
+          "requirements": [
+            {
+              "item": "1. Valid Identification Card",
+              "whereToSecure": "To be provided by Individual Taxpayer"
+            },
+            {
+              "item": "2. Community Tax Certificate (Cedula) FEES",
+              "whereToSecure": "Office of the Municipal Treasurer"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "3-5 minutes"
+          ],
+          "personResponsible": [
+            "Revenue Collection Clerk"
+          ],
+          "sourcePages": "57-59"
+        },
+        {
+          "name": "Collection of Business Tax (New/Renew)",
+          "category": "External",
+          "classification": "Simple, Complex",
+          "transactionType": "G2B",
+          "whoMayAvail": "Sole Proprietor, Partnership, Corporation, Cooperative",
+          "requirements": [
+            {
+              "item": "1. Barangay Clearance or Business Clearance",
+              "whereToSecure": "Office of the Barangay Captain"
+            },
+            {
+              "item": "2. Community Tax Certificate (Cedula)",
+              "whereToSecure": "Office of the Municipal Treasurer"
+            },
+            {
+              "item": "3.Previous Application Form and Mayor’s Permit/Business Permit (For Renew Only) FEES",
+              "whereToSecure": "To be provided by Individual Taxpayer"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "3-10 minutes",
+            "3 minutes"
+          ],
+          "personResponsible": [
+            ". The Revenue Collection Clerk assessed the client",
+            "Revenue Collection Clerk"
+          ],
+          "sourcePages": "59-62"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Budget Officer",
+      "services": [
+        {
+          "name": "Issuance of Certificate of Appropriation Balances",
+          "category": "Internal",
+          "classification": "Simple",
+          "transactionType": "",
+          "whoMayAvail": "LGU Offices",
+          "requirements": [
+            {
+              "item": "Request Letter FEES",
+              "whereToSecure": "Client"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "5 minutes"
+          ],
+          "personResponsible": [
+            "Budget Officer"
+          ],
+          "sourcePages": "62"
+        },
+        {
+          "name": "Cancellation of Obligation",
+          "category": "Internal",
+          "classification": "Simple",
+          "transactionType": "",
+          "whoMayAvail": "LGU Offices",
+          "requirements": [
+            {
+              "item": "Request Letter FEES",
+              "whereToSecure": "Client"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "5 minutes"
+          ],
+          "personResponsible": [
+            "Budget Officer"
+          ],
+          "sourcePages": "62-64"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Engineer / Office of the Building Official",
+      "services": [
+        {
+          "name": "Processing of Building Permit and Ancillary Permits",
+          "category": "External",
+          "classification": "Simple, Complex",
+          "transactionType": "G2B, G2C",
+          "whoMayAvail": "Building Owner",
+          "requirements": [
+            {
+              "item": "1. Application forms",
+              "whereToSecure": "1. Office of the Building Official"
+            },
+            {
+              "item": "2. Land Use and Zoning Permit",
+              "whereToSecure": "2. MPDO"
+            },
+            {
+              "item": "3. Fire Safety Evaluation Clearance and Fire Safety Inspection Certificate",
+              "whereToSecure": "3. Bureau of Fire Protection"
+            },
+            {
+              "item": "4. Five (5) copies sets of Detailed Engineering Plans, Detailed Engineering Estimates and Design Analysis signed and sealed by License Civil Engineer / Architect and other involved Professionals",
+              "whereToSecure": "4. Civil Engineer /Architect and other involved professionals"
+            },
+            {
+              "item": "5. Xerox Copy of Land Title / Tax Declaration",
+              "whereToSecure": "5. Building Owner"
+            },
+            {
+              "item": "6. Construction Safety and Health program certificate, if applicable",
+              "whereToSecure": "6. DOLE"
+            },
+            {
+              "item": "7. Environmental Compliance Certificate, if applicable",
+              "whereToSecure": "7.DENR"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "1 minute",
+            "1 hour",
+            "1 day",
+            "15 minutes",
+            "2 Hours",
+            "30 minutes"
+          ],
+          "personResponsible": [
+            "Mun. Engineer/OBO",
+            "Mun. Engineer/OBO MTO Personnel"
+          ],
+          "sourcePages": "64-66"
+        },
+        {
+          "name": "Processing of Occupancy Permit",
+          "category": "External",
+          "classification": "Simple, Complex",
+          "transactionType": "G2B",
+          "whoMayAvail": "Building Owner",
+          "requirements": [
+            {
+              "item": "1. Unified Application Form for Certificate of Occupancy",
+              "whereToSecure": "1. Office of the Building Official"
+            },
+            {
+              "item": "2. Three (3) Copies of Certificate of Completion , duly notarized",
+              "whereToSecure": "2. Building Owner"
+            },
+            {
+              "item": "3. Construction logbook, signed and sealed by the Owner’s Architect or Civil Engineer who undertook full-time inspection and supervision",
+              "whereToSecure": "3. Building Owner"
+            },
+            {
+              "item": "4. As- built plans, signed and sealed by the Owner’s Architect or Civil Engineer who undertook full-time inspection and supervision",
+              "whereToSecure": "4. Civil Engineer /Architects Practitioner"
+            },
+            {
+              "item": "5. One (1) Photocopy of the valid licenses of all involved professionals",
+              "whereToSecure": "5. Building Owner"
+            },
+            {
+              "item": "6. Captioned Photographs of site and completed building / structures showing front, sides and rear areas.",
+              "whereToSecure": "6. Building Owner"
+            },
+            {
+              "item": "7. Yellow card issued by the Electrical Service Provider",
+              "whereToSecure": "7.Building Owner"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "1 minute",
+            "30 minutes",
+            "1 hour",
+            "5- 10 minutes",
+            "5 minutes"
+          ],
+          "personResponsible": [
+            "Mun. Engineer/OBO",
+            "Mun. Engineer/OBO MTO Personnel"
+          ],
+          "sourcePages": "66-69"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Accountant",
+      "services": [
+        {
+          "name": "Processing of Disbursement Vouchers and Payrolls",
+          "category": "Internal",
+          "classification": "Simple, Complex",
+          "transactionType": "G2G",
+          "whoMayAvail": "Employees, Officials",
+          "requirements": [
+            {
+              "item": "1. Approved CAFOA",
+              "whereToSecure": "Respective Department/Office"
+            },
+            {
+              "item": "2. Vouchers with valid supporting documents (varies in every transactions) FEES",
+              "whereToSecure": "Suppliers/ Employees/ Officials"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "15 mins"
+          ],
+          "personResponsible": [],
+          "sourcePages": "69-70"
+        },
+        {
+          "name": "Issuance of Accountant's Advice for Check Disbursement",
+          "category": "Internal",
+          "classification": "Simple, Complex",
+          "transactionType": "G2G",
+          "whoMayAvail": "Employees, Officials",
+          "requirements": [
+            {
+              "item": "1. Issued Checks",
+              "whereToSecure": "MTO"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "5 mins"
+          ],
+          "personResponsible": [
+            "MUNICIPAL ACCOUNTANT"
+          ],
+          "sourcePages": "70-72"
+        }
+      ]
+    },
+    {
+      "office": "Office of the Municipal Health Officer",
+      "services": [
+        {
+          "name": "Issuance of Medical Certificate / Medico-Legal Certificate",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "",
+          "whoMayAvail": "General Population",
+          "requirements": [
+            {
+              "item": "Medical Certificate Receipt",
+              "whereToSecure": "Municipal Treasurer Office"
+            }
+          ],
+          "fees": [
+            "Php 180.00"
+          ],
+          "processingTime": [
+            "3 minutes",
+            "2 minutes"
+          ],
+          "personResponsible": [
+            "Municipal Treasurer Office issued receipt of client.",
+            "Municipal Treasurer Office staff/personnel",
+            "RHU Staff"
+          ],
+          "sourcePages": "72-73"
+        },
+        {
+          "name": "Medical Consultation",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "General Population",
+          "requirements": [
+            {
+              "item": "Colored Card with family serial number",
+              "whereToSecure": "MHO"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "1-2 minutes",
+            "3 minutes",
+            "5 minutes",
+            "2 minutes"
+          ],
+          "personResponsible": [
+            "OPD Duty",
+            "Nurse",
+            "Nurse/OPD Duty"
+          ],
+          "sourcePages": "73-75"
+        },
+        {
+          "name": "The National TB Program",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "",
+          "whoMayAvail": "All TB forms identified",
+          "requirements": [
+            {
+              "item": "None",
+              "whereToSecure": "None"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "5 minutes",
+            "6 minutes",
+            "4 minutes",
+            "2 minutes"
+          ],
+          "personResponsible": [
+            "Public Health Nurse/TB Coordinator",
+            "Public Health Nurse"
+          ],
+          "sourcePages": "75-77"
+        },
+        {
+          "name": "Expanded Program on Immunization (EPI)",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "",
+          "whoMayAvail": "0-11 months",
+          "requirements": [
+            {
+              "item": "Immunization Card/ Mother and Baby Book",
+              "whereToSecure": "Barangay Health Station/ Municipal Health Office"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "1 minute",
+            "13 minutes",
+            "2 minutes"
+          ],
+          "personResponsible": [
+            "Public Health Midwife provide information about the services.",
+            "Public Health Midwife"
+          ],
+          "sourcePages": "77-78"
+        },
+        {
+          "name": "Maternal and Child Care Services",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "All pregnant/lactating women",
+          "requirements": [
+            {
+              "item": "Mother and Baby Book",
+              "whereToSecure": "Barangay Health Station/ Municipal Health Office"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "3 minutes",
+            "5 minutes",
+            "8 minutes"
+          ],
+          "personResponsible": [
+            "Public Health Midwife"
+          ],
+          "sourcePages": "78-80"
+        },
+        {
+          "name": "Family Planning Services",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "Couples and women of reproductive age",
+          "requirements": [
+            {
+              "item": "None",
+              "whereToSecure": ""
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "3 minutes",
+            "20 minutes",
+            "12 minutes",
+            "7 minutes"
+          ],
+          "personResponsible": [
+            "Public Health Nurse/Public Health Midwife",
+            "MHO/PHN/ Midwife",
+            "Public Health Midwife"
+          ],
+          "sourcePages": "80-81"
+        },
+        {
+          "name": "Issuance of Sanitary Permit",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "G2C",
+          "whoMayAvail": "All Establishment",
+          "requirements": [
+            {
+              "item": "Official Receipt",
+              "whereToSecure": "Municipal Treasurer Office"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "5-10 minutes",
+            "1 day"
+          ],
+          "personResponsible": [
+            "Sanitation Inspector/ MHO Staff",
+            "Municipal Treasurer Office staff/personnel",
+            "Sanitation Inspector/ MHO Staff/ Municipal Health Officer"
+          ],
+          "sourcePages": "81-83"
+        },
+        {
+          "name": "Issuance of Health Certificate",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "",
+          "whoMayAvail": "Food Handler",
+          "requirements": [
+            {
+              "item": "Official Receipt",
+              "whereToSecure": "Municipal Treasurer Office"
+            }
+          ],
+          "fees": [
+            "Php 180.00"
+          ],
+          "processingTime": [
+            "5-10 minutes",
+            "10-20 minutes"
+          ],
+          "personResponsible": [
+            "Sanitation Inspector/ MHO Staff",
+            "Municipal Treasurer Office staff/personnel",
+            "MHO Staff/ Municipal Health Officer"
+          ],
+          "sourcePages": "83-84"
+        },
+        {
+          "name": "Facility-Based Delivery (Paanakan)",
+          "category": "External",
+          "classification": "Simple",
+          "transactionType": "",
+          "whoMayAvail": "Individuals",
+          "requirements": [
+            {
+              "item": "Pre-Natal Book/Mother and Baby Book",
+              "whereToSecure": "Barangay Health Station/Municipal Health Office"
+            }
+          ],
+          "fees": [],
+          "processingTime": [
+            "5 minutes",
+            "12-24 hours",
+            "4-5 minutes"
+          ],
+          "personResponsible": [
+            "Public Health Midwife",
+            "Midwife",
+            "Midwife/Nurse"
+          ],
+          "sourcePages": "84"
+        }
+      ]
+    }
+  ]
+}

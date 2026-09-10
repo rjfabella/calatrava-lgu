@@ -54,6 +54,8 @@ const ICONS = {
   map:    '<polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>',
   award:  '<circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/>',
   shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  eye:    '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+  flag:   '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
 };
 function svgIcon(name, cls){
   return `<svg class="${cls || ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ICONS.doc}</svg>`;
@@ -65,7 +67,8 @@ function svgIcon(name, cls){
 const NAV_ITEMS = [
   { id: 'home',         label: 'Home',          href: 'index.html' },
   { id: 'about',        label: 'Government',    href: 'about.html' },
-  { id: 'services',     label: 'Services',      href: 'services.html' },
+  // 'Services' was removed from the nav as redundant with the Online Services
+  // button; services.html is reached through that button and the footer.
   { id: 'barangays',    label: 'Barangays',     href: 'barangays.html' },
   { id: 'transparency', label: 'Transparency',  href: 'transparency.html' },
   { id: 'news',         label: 'News',          href: 'news.html' },
@@ -78,15 +81,39 @@ const SOCIAL_SVG = {
   phone:    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
 };
 
+// ── EMERGENCY BAND ──
+// Sits directly above the footer on every page, mirroring the tourism portal.
+// Update the number here and it changes site-wide.
+const EMERGENCY_HOTLINE = '0930 326 4161';
+
+const WARN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+
+/** Inject the emergency hotline band. Call before buildFooter so it lands just above it. */
+function buildEmergencyBand(){
+  const tel = EMERGENCY_HOTLINE.replace(/[^0-9+]/g, '');
+  const band = document.createElement('div');
+  band.className = 'emg-band';
+  band.innerHTML = `
+    <div class="emg-inner">
+      <span class="emg-flag">${WARN_SVG}<span>Emergency?</span></span>
+      <a class="emg-call" href="tel:${tel}">
+        <span class="emg-label">Call Calatrava Emergency Hotline</span>
+        <span class="emg-number">${EMERGENCY_HOTLINE}</span>
+      </a>
+    </div>`;
+  document.body.appendChild(band);
+}
+
 /** Inject the top bar + nav. `active` is the NAV_ITEMS id for the current page. */
 function buildHeader(active){
   const links = NAV_ITEMS.map(n =>
-    `<li><a href="${n.href}"${n.id === active ? ' class="active"' : ''}>${n.label}</a></li>`).join('');
+    `<li><a href="${n.href}"${n.id === active ? ' class="active" aria-current="page"' : ''}>${n.label}</a></li>`).join('');
   const mobLinks = NAV_ITEMS.map(n =>
     `<a href="${n.href}" onclick="closeMobNav()">${n.label}</a>`).join('');
 
   const header = document.createElement('div');
   header.innerHTML = `
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="topbar">
     <div class="topbar-inner">
       <span>Republic of the Philippines &middot; Province of Romblon</span>
@@ -111,9 +138,19 @@ function buildHeader(active){
   <nav class="mob-nav" id="mobNav" aria-label="Mobile navigation">
     <button class="mob-close" aria-label="Close menu" onclick="closeMobNav()">&times;</button>
     ${mobLinks}
+    <a href="services.html#online" class="mob-cta" onclick="closeMobNav()">Online Services</a>
   </nav>`;
   document.body.insertAdjacentElement('afterbegin', header);
 }
+
+// National agencies shown in the footer's "In partnership with" row. `short` is
+// the text chip that replaces the mark if the image is missing.
+const PARTNERS = [
+  { name: 'Department of the Interior and Local Government', short: 'DILG',             logo: 'assets/logos/dilg.png' },
+  { name: 'Department of Information and Communications Technology', short: 'DICT',     logo: 'assets/logos/dict.png' },
+  { name: 'National Privacy Commission', short: 'NPC',                                  logo: 'assets/logos/NPC_Logo_1.webp' },
+  { name: 'Bagong Pilipinas', short: 'Bagong Pilipinas',                                logo: 'assets/logos/Bagong_Pilipinas_Logo.png' },
+];
 
 /** Inject the footer. */
 function buildFooter(){
@@ -130,7 +167,7 @@ function buildFooter(){
       <p>Official website of the Local Government Unit of Calatrava, Province of Romblon, Republic of the Philippines.</p>
       <div class="f-social">
         <a href="https://www.facebook.com/calatrava.romblon.217551/" target="_blank" rel="noopener" aria-label="Facebook">${SOCIAL_SVG.facebook}</a>
-        <a href="mailto:andagaotour@gmail.com" aria-label="Email">${SOCIAL_SVG.mail}</a>
+        <a href="mailto:andagaoutour@gmail.com" aria-label="Email">${SOCIAL_SVG.mail}</a>
         <a href="tel:09664393711" aria-label="Phone">${SOCIAL_SVG.phone}</a>
       </div>
     </div>
@@ -165,11 +202,7 @@ function buildFooter(){
   <div class="footer-partners">
     <span class="footer-partners-label">In partnership with</span>
     <div class="footer-partners-row">
-      <span class="partner-chip">DILG</span>
-      <span class="partner-chip">DICT &middot; eGovPH</span>
-      <span class="partner-chip">Bagong Pilipinas</span>
-      <span class="partner-chip">NPC Registered</span>
-      <span class="partner-chip">Full Disclosure Policy</span>
+      ${PARTNERS.map(p => `<span class="partner-logo"><img src="${p.logo}" alt="${p.name}" title="${p.name}" onerror="this.parentElement.textContent='${p.short}';this.parentElement.className='partner-chip'"></span>`).join('')}
     </div>
   </div>
   <div class="footer-bottom">
@@ -182,41 +215,29 @@ function buildFooter(){
   document.body.appendChild(footer);
 }
 
-// ── UNDER-CONSTRUCTION NOTICE ──
-// The site is a work in progress. Show a one-time notice per browser session
-// (set NOTICE_EVERY_LOAD = true to show it on every page navigation instead).
-const TOURISM_URL = 'https://rjfabella.github.io/calatrava-tourism-portal/';
-const NOTICE_EVERY_LOAD = false;
-
-function closeNotice(){ document.getElementById('uc-notice')?.classList.remove('open'); }
-
-function buildNotice(){
-  if (!NOTICE_EVERY_LOAD) {
-    try { if (sessionStorage.getItem('uc-seen')) return; sessionStorage.setItem('uc-seen', '1'); } catch (e) {}
-  }
-  const el = document.createElement('div');
-  el.className = 'uc-notice open';
-  el.id = 'uc-notice';
-  el.innerHTML = `
-    <div class="uc-card" role="dialog" aria-modal="true" aria-labelledby="uc-title">
-      <img class="uc-seal" src="assets/logos/Calatrava_Romblon_web.png" alt="Municipal seal of Calatrava">
-      <div class="uc-eyebrow">Pasensya na &middot; Please pardon our progress</div>
-      <h2 class="uc-title" id="uc-title">This site is under construction</h2>
-      <p class="uc-text">The official government portal of the Municipality of Calatrava is still being built. Information here is preliminary and may change. Thank you for your patience.</p>
-      <div class="uc-actions">
-        <a class="uc-btn uc-btn-ghost" href="${TOURISM_URL}">Go back to Tourism Portal</a>
-      </div>
-    </div>`;
-  document.body.appendChild(el);
-  el.addEventListener('click', (e) => { if (e.target === el) closeNotice(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNotice(); });
+/**
+ * Wrap the page's own content in <main id="main"> so screen readers get a main
+ * landmark and the skip link has somewhere to land. Runs before the chrome is
+ * injected, so header/footer/band stay outside it. Element references (and the
+ * ids the page scripts render into) survive the move.
+ */
+function wrapMain(){
+  if (document.querySelector('main')) return;
+  const content = [...document.body.children].filter(el => el.tagName !== 'SCRIPT');
+  if (!content.length) return;
+  const main = document.createElement('main');
+  main.id = 'main';
+  main.setAttribute('tabindex', '-1');
+  document.body.insertBefore(main, content[0]);
+  content.forEach(el => main.appendChild(el));
 }
 
-/** Call once per page: builds header + footer, the notice, and starts the reveal observer. */
+/** Call once per page: builds header + footer and starts the reveal observer. */
 function initChrome(active){
+  wrapMain();
   buildHeader(active);
+  buildEmergencyBand();
   buildFooter();
-  buildNotice();
   observeReveal();
 }
 
