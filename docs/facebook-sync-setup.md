@@ -25,6 +25,24 @@ only required for Pages belonging to someone else.)
 
 ---
 
+## 0. Make sure a Business Portfolio owns the Page
+
+System User tokens only exist inside a Business Portfolio (the thing Meta used
+to call Business Manager), and it has to **own** the PIO Page — being an admin
+of the Page personally is not enough. Skip this step if the Page is already
+in one.
+
+1. Go to <https://business.facebook.com/> and create a portfolio if the
+   municipality has none. Name it for the LGU, not for a person.
+2. **Business Settings** → **Accounts** → **Pages** → **Add** →
+   **Add a Page** (claim it — *not* "Request access", which is for Pages
+   owned by someone else).
+3. You will need to be a Page admin to confirm the claim.
+
+> A Page can only be owned by one portfolio. If the claim fails saying it is
+> already owned, someone else's portfolio has it — find out whose before
+> going further, rather than creating a second portfolio.
+
 ## 1. Create the Meta app
 
 1. Go to <https://developers.facebook.com/apps/> → **Create App**
