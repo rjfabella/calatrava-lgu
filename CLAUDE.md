@@ -77,12 +77,11 @@ of the above before changing site structure.
     `requirements`/`classification`/`whoMayAvail` came from bordered table
     cells and are reliable.
   - `data/barangays.json` — the 7 barangays, captains, population
-  - `data/news.json` — staff-written news items (auto-sorted by date)
-  - `data/news-fb.json` — **generated**, never hand-edited: posts synced from
-    the PIO Facebook Page by `scripts/sync_facebook.py` via the
-    `sync-facebook` GitHub Action. `news.html` and the homepage merge this
-    with `news.json` and sort by date, so hand-written bulletins keep
-    rendering if the sync ever breaks. Setup: `docs/facebook-sync-setup.md`.
+  - `data/news.json` — news items, added by hand, auto-sorted by date. This is
+    the only source. **Don't propose syncing from Facebook**: the municipal
+    PIO account is a personal *Profile*, not a Page, and Meta's API cannot
+    read a Profile's posts. A full sync was built and then removed for this
+    reason — see `MEMORY.md` before revisiting.
   - `data/transparency.json` — Full Disclosure document links, including
     the actual Citizen's Charter PDF and Org Chart PPTX
   - `data/contact.json` — office directory, address, map embed
@@ -106,13 +105,11 @@ of the above before changing site structure.
 
 ## Working conventions
 
-- No build tooling, no framework, no dependencies beyond a static file
+- No build tooling, no framework, no CI, no dependencies beyond a static file
   server for local dev (`npm run dev` → `http-server` on :5173). Keep it
-  that way unless the user explicitly asks to introduce a build step.
-  The one exception, approved by RJ: `scripts/sync_facebook.py` and its
-  GitHub Action, which need `requests` + `Pillow`. Those run **only in CI**
-  and write data files — the published site is still plain static HTML with
-  zero runtime dependencies. Don't let tooling creep past that line.
+  that way unless the user explicitly asks to introduce a build step. (A
+  Python script and GitHub Action briefly existed for the Facebook sync;
+  both were removed with it, and the repo is back to zero tooling.)
 - Pages must be served over HTTP for `fetch()` of the JSON to work; don't
   "fix" the inline fallback data out of the HTML — it's intentional
   degradation, not dead code.

@@ -306,18 +306,15 @@ function renderLatestNews(n){
 
 (async function(){
   initChrome('home');
-  const [site, officials, news, newsFb] = await Promise.all([
+  const [site, officials, news] = await Promise.all([
     loadJSON('data/site.json', FALLBACK_SITE),
     loadJSON('data/officials.json', { welcome: { name: 'Engr. Robert M. Fabella', role: 'Municipal Mayor', message: ['Welcome to the official website of the Municipality of Calatrava.'] } }),
-    loadJSON('data/news.json', { items: [] }),
-    loadJSON('data/news-fb.json', { items: [] })
+    loadJSON('data/news.json', FALLBACK_NEWS)
   ]);
   renderSite(site);
   renderVisionMission(officials);
   renderWelcome(officials);
-  // Staff-written bulletins and synced Facebook posts, newest first.
-  renderLatestNews({ items: [...(news.items || []), ...(newsFb.items || [])]
-    .sort((a, b) => new Date(b.date) - new Date(a.date)) });
+  renderLatestNews({ items: (news.items || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date)) });
   observeReveal();
 })();
 </script>

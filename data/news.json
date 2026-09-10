@@ -1,5 +1,6 @@
 {
-  "_comment": "Staff-written bulletins. The five items previously here were placeholder fiction from the original scaffold and were removed once the site went live — invented announcements must never appear on an official portal. Add real items in the shape below; they merge with data/news-fb.json (synced from the PIO Facebook Page) and are sorted by date. Fields: id, date (YYYY-MM-DD), tag, title, summary, image (optional, path relative to the site root), imageAlt (describe the photo, or leave empty if the summary already says it).",
+  "_comment": "Staff-written bulletins, sorted by date at render time. This is the ONLY source for news — an automated pull from the municipal Facebook account was investigated and abandoned, because that account is a personal Profile rather than a Page and Meta's API offers no way to read a Profile's posts. Items are added here by hand until a CMS exists.",
+  "_fields": "id, date (YYYY-MM-DD), tag, title, summary, image (optional, path relative to the site root), imageAlt (describe the photo; leave empty only if the summary already conveys it), link (optional, e.g. the Facebook post or a PDF).",
   "_example": {
     "id": "1",
     "date": "2026-09-10",
@@ -7,7 +8,8 @@
     "title": "Headline of the bulletin",
     "summary": "One or two sentences explaining what residents need to know and what to do.",
     "image": "",
-    "imageAlt": ""
+    "imageAlt": "",
+    "link": ""
   },
   "items": []
 }

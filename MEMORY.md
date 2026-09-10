@@ -238,36 +238,35 @@ The charter tables and the contact map scroll inside their own containers by
 design and are excluded from the overflow check. Mobile menu items measure
 59–64px tall with a 48×48 close button.
 
-**Facebook → News sync (built 2026-09-10):**
-- RJ asked whether a plugin could show the PIO Facebook Page's posts on the
-  News tab. Meta's **Page Plugin still exists** (and Like/Comments were
-  discontinued 10 Feb 2026), but it was rejected as the primary mechanism:
-  the iframe can't take alt text or honour the site's 18.5px type, it
-  contacts Meta for every visitor before any consent (RA 10173), and posts
-  deleted on Facebook would vanish from what is meant to be a public record.
-- **Chosen instead: a scheduled GitHub Action.** `scripts/sync_facebook.py`
-  reads the Page via Graph API, writes `data/news-fb.json`, and commits.
-  The site stays static; the token never touches client code.
-- **Two findings that shaped it:** (1) no App Review needed — reading a Page
-  you administer with your own app is Standard Access; (2) **Facebook's
-  image URLs are signed and expire**, so photos are downloaded into
-  `assets/news/` rather than hotlinked, which is also what makes this an
-  archive rather than a mirror.
-- **Deliberate split:** `data/news.json` stays human-owned, `data/news-fb.json`
-  is bot-owned. No merge conflicts, and staff bulletins survive a broken sync.
-- **Token: System User token from Business Manager, expiry "Never"** (RJ's
-  choice) — belongs to the organisation, not a person, so it survives staff
-  turnover. Setup steps: `docs/facebook-sync-setup.md`.
-- **Editorial filter:** posts under 80 chars are skipped (greetings, photo
-  dumps). `FB_REQUIRE_HASHTAG: '#Bulletin'` is commented out in the workflow
-  and can be switched on if the PIO wants explicit opt-in per post.
-- **Not yet live** — needs `FB_PAGE_TOKEN` (secret) and `FB_PAGE_ID`
-  (variable) in GitHub. Verified end-to-end against a mocked Graph API:
-  filtering, headline derivation from the first line, hashtag/keyword
-  tagging, image download + prune, and the merged render all work.
-- **Maintenance debt to remember:** Graph API version is pinned to `v25.0`
-  and Meta retires versions on a ~2-year cycle; GitHub also disables cron
-  workflows after 60 days of repo inactivity.
+**Facebook → News sync: BUILT AND THEN SCRAPPED (2026-09-10). Do not retry.**
+- **Why it's dead: the municipal PIO account is a personal Facebook *Profile*,
+  not a Page.** Meta's Graph API exposes no endpoint for reading a Profile's
+  posts — that is a deliberate platform restriction, not a permissions or
+  App Review problem, so no token, app, or workaround makes it work. Every
+  automated route (Graph API, Page Plugin, third-party widgets like Juicer or
+  EmbedSocial) depends on the account being a Page.
+- **The one thing that would change this:** Facebook can convert a Profile
+  into a Page. If the LGU ever does that, the approach below was sound and
+  the removed code is recoverable from git history (commits `4c4c2a7` and
+  `ca0da4c`, removed after).
+- What was built and removed: `scripts/sync_facebook.py`, the
+  `.github/workflows/sync-facebook.yml` cron job, `docs/facebook-sync-setup.md`,
+  `data/news-fb.json`, and `assets/news/`. `news.html` and the homepage no
+  longer merge two sources; `data/news.json` is the sole source again, and
+  the repo is back to zero build tooling and zero CI.
+- **Findings worth keeping if this is ever revisited:** reading a Page you
+  administer with your own app needs no App Review (Standard Access covers
+  `pages_read_engagement`); Facebook's CDN image URLs are signed and expire
+  within weeks, so photos must be copied locally rather than hotlinked; and
+  Meta retires Graph API versions on a ~2-year cycle.
+- **The Page Plugin iframe was rejected earlier for separate reasons** that
+  still stand if anyone suggests it: it can't take alt text or honour the
+  site's 18.5px type, and it contacts Meta for every visitor before any
+  consent (RA 10173).
+- **Consequence: the News page has no content pipeline at all.** It renders an
+  empty state until someone adds items to `data/news.json` by hand. If news
+  matters, the realistic options are a small admin form following the tourism
+  portal's `admin.html` GitHub-API pattern, or staff editing the JSON.
 
 **The under-construction popup was removed (2026-09-10)** at RJ's request —
 `buildNotice()`, `closeNotice()`, `TOURISM_URL`, and the whole `.uc-*` CSS
@@ -376,7 +375,8 @@ then set `welcome.photo` and `elected[0].photo` in `officials.json`.
   see. These are public hotlines and remain distinct from the office-head
   mobile numbers in `contact.json`.
 - Real news items — `data/news.json` is deliberately empty; the page shows an
-  empty state until the PIO publishes or the Facebook sync is switched on
+  empty state until someone adds items by hand (no automated source exists —
+  see the scrapped Facebook sync above)
 - A designated Data Protection Officer (`dpo` in `contact.json`, empty)
 - Real news items, ongoing programs, Full Disclosure Budget/Procurement
   PDFs (Annual Budget, SRE, APP, ordinances, resolutions, executive orders
