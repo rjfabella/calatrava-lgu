@@ -307,11 +307,16 @@ Audited https://rjfabella.github.io/calatrava-lgu/ and fixed everything found.
 - Re-audited all 8 pages at 375px: no overflow, no text under 12.5px, no
   contrast failures, no tap targets under 24px, no images missing alt.
 
-**`assets/logos/MBF Portrait.png` is very likely the Mayor's official
-portrait** but the monogram on the barong reads "M.B.F." while the Mayor is
-Robert M. Fabella (R.M.F.), so it was NOT wired in — misidentifying a real
-person on a government site is not a guess worth making. Ask RJ to confirm,
-then set `welcome.photo` and `elected[0].photo` in `officials.json`.
+**Mayor's portrait — RESOLVED 2026-09-11.** The LGU supplied two portraits
+(`assets/images/Portrait_Mayor1.jpg`, `Portrait_Mayor2.jpg`, both 1536×2047)
+and asked for **#2** on the homepage welcome and the Government page. It is
+the same person as the earlier `MBF Portrait.png`, so the "M.B.F." monogram
+question is settled by the LGU's own instruction — the initials are simply
+not R.M.F. Both `welcome.photo` and `elected[0].photo` in `officials.json`
+now point at `Portrait_Mayor2.jpg`. The portrait is 3:4, which is exactly the
+officials-grid frame (no crop) and a ~3% top/bottom crop in the 4:5 welcome
+frame — the face is nowhere near it. `Portrait_Mayor1.jpg` and
+`MBF Portrait.png` are now unused; the latter (1.3 MB) could be deleted.
 
 **Known gaps / needs a human decision before this goes further:**
 - **`fees` and `processingTime` in `citizens-charter.json` are auto-extracted
@@ -364,8 +369,8 @@ then set `welcome.photo` and `elected[0].photo` in `officials.json`.
   any `data/*.json` that another session may have just produced.
 
 **Still placeholder — pending real data:**
-- Official photos for all officials (photo fields empty; initials monograms
-  render in their place, so this degrades cleanly)
+- Official photos for the remaining 12 officials (the Mayor's is in; the
+  others still render initials monograms, which degrades cleanly)
 - Barangay captains for all 7 barangays (shown as "To be announced")
 - ~~Emergency hotlines~~ **DONE 2026-09-10** — the site-wide emergency band
   now carries a second line with Police, Fire, Health and Coastguard beneath

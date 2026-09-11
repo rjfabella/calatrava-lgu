@@ -27,7 +27,7 @@
     <div class="section-head"><span class="s-label">Our direction</span><h2 class="s-title">Vision &amp; <em>Mission</em></h2></div>
     <div class="vm-grid">
       <div class="vm-card reveal"><h3>Vision</h3><p id="visionText"></p></div>
-      <div class="vm-card reveal"><h3>Mission</h3><p id="missionText"></p></div>
+      <div class="vm-card reveal"><h3>Mission</h3><div id="missionText"></div></div>
     </div>
   </div>
 </section>
@@ -103,7 +103,16 @@ function renderOfficial(o, i){
   const d = await loadJSON('data/officials.json', FALLBACK);
 
   document.getElementById('visionText').textContent = d.vision || '';
-  document.getElementById('missionText').textContent = d.mission || '';
+
+  // Same treatment as the homepage: the mission is eight separate commitments,
+  // so render them as a list rather than one long paragraph.
+  const mission = document.getElementById('missionText');
+  if ((d.missionPoints || []).length) {
+    mission.innerHTML = `<p class="vm-lead">${d.missionLead || ''}</p>
+      <ul class="vm-points">${d.missionPoints.map(p => `<li>${p}</li>`).join('')}</ul>`;
+  } else {
+    mission.innerHTML = `<p>${d.mission || ''}</p>`;
+  }
   document.getElementById('mandateText').textContent = d.mandate || '';
   document.getElementById('pledgeText').textContent = d.servicePledge || '';
 

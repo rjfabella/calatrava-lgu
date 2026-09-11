@@ -283,6 +283,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .vm-points li{position:relative;padding-left:1.5rem;margin-bottom:.55rem;font-size:16.5px;line-height:1.6}
 .vm-points li:last-child{margin-bottom:0}
 .vm-points li::before{content:'';position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+/* Inside the Government page's left-aligned card the list fills the width. */
+.vm-card .vm-points{display:block;max-width:none}
+.vm-card .vm-points li{font-size:17px;line-height:1.7;margin-bottom:.65rem}
+.vm-card .vm-lead{margin-bottom:.8rem}
 .vm-home-more{text-align:center;margin-top:1.6rem}
 .vm-home-more a{font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ocean);
   text-decoration:none;border-bottom:2px solid var(--ocean);padding-bottom:3px}
