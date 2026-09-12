@@ -314,10 +314,13 @@ Audited https://rjfabella.github.io/calatrava-lgu/ and fixed everything found.
   filename — the studio portraits carry a "HON. NAME / ROLE" caption band.
   `SB-EMM` didn't match Emil Ralph M. Fajel's initials, but its caption reads
   "HON. EMIL RALPH F. FAJEL", which settled it.
-- Two officials came with a second file: `SB-VCM2` / `SB-RFR2` are the studio
-  portraits matching the set, `SB-VCM` / `SB-RFR` are candids (a selfie and an
-  event photo). The "2" versions are used; the candids are committed but
-  unreferenced.
+- Two officials came with a second file. **RJ chose the candids** (`SB-VCM`,
+  a selfie; `SB-RFR`, an event photo) over the studio "2" versions, which
+  were then deleted. Both candids were cropped to 3:4 — RFR anchored to the
+  top edge because his head sits right at it, VCM trimmed evenly at the
+  sides. RFR is only 508×677 (its native width); at the grid's 153×203 that
+  is still 2.5× density, so it is fine, but it will look soft if the frame
+  ever grows much.
 - **The files were cropped and downscaled in place** (originals are with the
   LGU). The studio photos are 2:3 with the caption band in the bottom ~11%;
   the grid frame is 3:4. Removing the band by cropping to `width × 4/3` from
@@ -326,12 +329,14 @@ Audited https://rjfabella.github.io/calatrava-lgu/ and fixed everything found.
   caption sat higher than the others and needed a tighter crop. All are now
   900×1200 JPEG, roughly half their original weight. **If a new portrait
   arrives, crop it the same way** or its caption will show through the frame.
-- **Two name discrepancies between official LGU sources**, left as-is in the
-  JSON (which follows the org chart) and flagged to RJ:
-  1. Org chart: *Emil Ralph **M.** Fajel* — photo caption: *Emil Ralph **F.**
-     Fajel*. Different middle initial.
-  2. Org chart: *Norvelkimwell F. Falcutila* — photo caption: *Norvel Kimwell
-     Falcutila* (two words). The org chart also spells it as one word.
+- **Two names differed between the org chart and the photo captions; RJ
+  ruled the photos are correct** and both `officials.json` and
+  `organization.json` were updated to match (2026-09-12):
+  1. *Emil Ralph **M.** Fajel* → **Emil Ralph F. Fajel**
+  2. *Norvelkimwell F. Falcutila* → **Norvel Kimwell Falcutila** (two words,
+     and no middle initial — the caption carries none, so none was kept)
+  The org chart PPTX in `assets/contents/` still has the old spellings; it is
+  the source document and is left untouched.
 - `Banner.jpg` (2048×853) arrived in the same drop with no instruction. It
   is committed but not wired in — presumably a future hero slide.
 
