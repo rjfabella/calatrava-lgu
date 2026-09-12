@@ -335,8 +335,13 @@ Audited https://rjfabella.github.io/calatrava-lgu/ and fixed everything found.
   1. *Emil Ralph M. Fajel* — **the org chart was right after all.** RJ first
      said to follow the photo caption ("F."), then corrected himself: the
      middle initial is **M.** The photo's caption is the one with the typo.
-  2. *Norvelkimwell F. Falcutila* → **Norvel Kimwell Falcutila** (two words,
-     and no middle initial — the caption carries none, so none was kept)
+  2. **NorvelKimwell F. Falcutila** — also the org chart's version, with RJ's
+     capitalisation (one word, capital K, "F." restored). The photo caption's
+     two-word spelling without the initial was the error. Briefly changed to
+     the caption's form and reverted the same day.
+  **Net result: both names follow the org chart. The photo captions are the
+  ones with typos.** The order of events matters only so nobody "corrects"
+  either name from the photos again.
   The org chart PPTX in `assets/contents/` still has the old spellings; it is
   the source document and is left untouched.
 - `Banner.jpg` (2048×853) arrived in the same drop with no instruction. It
