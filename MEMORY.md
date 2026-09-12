@@ -332,7 +332,9 @@ Audited https://rjfabella.github.io/calatrava-lgu/ and fixed everything found.
 - **Two names differed between the org chart and the photo captions; RJ
   ruled the photos are correct** and both `officials.json` and
   `organization.json` were updated to match (2026-09-12):
-  1. *Emil Ralph **M.** Fajel* → **Emil Ralph F. Fajel**
+  1. *Emil Ralph M. Fajel* — **the org chart was right after all.** RJ first
+     said to follow the photo caption ("F."), then corrected himself: the
+     middle initial is **M.** The photo's caption is the one with the typo.
   2. *Norvelkimwell F. Falcutila* → **Norvel Kimwell Falcutila** (two words,
      and no middle initial — the caption carries none, so none was kept)
   The org chart PPTX in `assets/contents/` still has the old spellings; it is
