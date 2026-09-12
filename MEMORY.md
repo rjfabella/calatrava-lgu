@@ -307,6 +307,34 @@ Audited https://rjfabella.github.io/calatrava-lgu/ and fixed everything found.
 - Re-audited all 8 pages at 375px: no overflow, no text under 12.5px, no
   contrast failures, no tap targets under 24px, no images missing alt.
 
+**Officials' portraits — all 12 remaining added 2026-09-12.**
+- The LGU dropped 14 files into `assets/images/` named by initials
+  (`Portrait_VM-EFF.jpg`, `Portrait_SB-HFF.jpg`, …). **Every mapping was
+  confirmed against the name printed on the photo itself**, not just the
+  filename — the studio portraits carry a "HON. NAME / ROLE" caption band.
+  `SB-EMM` didn't match Emil Ralph M. Fajel's initials, but its caption reads
+  "HON. EMIL RALPH F. FAJEL", which settled it.
+- Two officials came with a second file: `SB-VCM2` / `SB-RFR2` are the studio
+  portraits matching the set, `SB-VCM` / `SB-RFR` are candids (a selfie and an
+  event photo). The "2" versions are used; the candids are committed but
+  unreferenced.
+- **The files were cropped and downscaled in place** (originals are with the
+  LGU). The studio photos are 2:3 with the caption band in the bottom ~11%;
+  the grid frame is 3:4. Removing the band by cropping to `width × 4/3` from
+  the top yields exactly 3:4 — the template was clearly built as a 3:4 photo
+  plus a band — so no side crop and no `object-position` hacks. `SB-NFF`'s
+  caption sat higher than the others and needed a tighter crop. All are now
+  900×1200 JPEG, roughly half their original weight. **If a new portrait
+  arrives, crop it the same way** or its caption will show through the frame.
+- **Two name discrepancies between official LGU sources**, left as-is in the
+  JSON (which follows the org chart) and flagged to RJ:
+  1. Org chart: *Emil Ralph **M.** Fajel* — photo caption: *Emil Ralph **F.**
+     Fajel*. Different middle initial.
+  2. Org chart: *Norvelkimwell F. Falcutila* — photo caption: *Norvel Kimwell
+     Falcutila* (two words). The org chart also spells it as one word.
+- `Banner.jpg` (2048×853) arrived in the same drop with no instruction. It
+  is committed but not wired in — presumably a future hero slide.
+
 **Mayor's portrait — RESOLVED 2026-09-11.** The LGU supplied two portraits
 (`assets/images/Portrait_Mayor1.jpg`, `Portrait_Mayor2.jpg`, both 1536×2047)
 and asked for **#2** on the homepage welcome and the Government page. It is
@@ -369,8 +397,9 @@ frame — the face is nowhere near it. `Portrait_Mayor1.jpg` and
   any `data/*.json` that another session may have just produced.
 
 **Still placeholder — pending real data:**
-- Official photos for the remaining 12 officials (the Mayor's is in; the
-  others still render initials monograms, which degrades cleanly)
+- ~~Official photos~~ **DONE 2026-09-12** — all 13 elected officials now have
+  portraits. See "Officials' portraits" below for how the files were prepared
+  and two name discrepancies the photos surfaced.
 - Barangay captains for all 7 barangays (shown as "To be announced")
 - ~~Emergency hotlines~~ **DONE 2026-09-10** — the site-wide emergency band
   now carries a second line with Police, Fire, Health and Coastguard beneath

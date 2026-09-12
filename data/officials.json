@@ -29,33 +29,150 @@
     "[Describe the town's growth, notable events, and cultural heritage. This placeholder text is rendered from data/officials.json and can be edited freely.]"
   ],
   "elected": [
-    { "name": "Engr. Robert M. Fabella", "role": "Municipal Mayor", "term": "2025–2028", "photo": "assets/images/Portrait_Mayor2.jpg" },
-    { "name": "Hon. Elizer F. Fiedacan", "role": "Municipal Vice Mayor", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Herbert F. Falcutila", "role": "SB Member", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Dilbert S. Motin", "role": "SB Member", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Carlo C. Fetalvero", "role": "SB Member", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Roberto M. Fesalbon", "role": "SB Member", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Ramon F. Magbata, Jr.", "role": "SB Member", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Merlito M. Sixon", "role": "SB Member", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Vonn Christian M. Fruelda", "role": "SB Member", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Alan M. Famini", "role": "SB Member", "term": "2025–2028", "photo": "" },
-    { "name": "Hon. Norvelkimwell F. Falcutila", "role": "Liga ng mga Barangay President", "term": "Ex officio", "photo": "" },
-    { "name": "Hon. Emil Ralph M. Fajel", "role": "SK Municipal Federation President", "term": "Ex officio", "photo": "" },
-    { "name": "Hon. Ramon F. Reandelar", "role": "Indigenous Peoples Mandatory Representative", "term": "Ex officio", "photo": "" }
+    {
+      "name": "Engr. Robert M. Fabella",
+      "role": "Municipal Mayor",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_Mayor2.jpg"
+    },
+    {
+      "name": "Hon. Elizer F. Fiedacan",
+      "role": "Municipal Vice Mayor",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_VM-EFF.jpg"
+    },
+    {
+      "name": "Hon. Herbert F. Falcutila",
+      "role": "SB Member",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_SB-HFF.jpg"
+    },
+    {
+      "name": "Hon. Dilbert S. Motin",
+      "role": "SB Member",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_SB-DSM.jpg"
+    },
+    {
+      "name": "Hon. Carlo C. Fetalvero",
+      "role": "SB Member",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_SB-CCF.jpg"
+    },
+    {
+      "name": "Hon. Roberto M. Fesalbon",
+      "role": "SB Member",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_SB-RMF.jpg"
+    },
+    {
+      "name": "Hon. Ramon F. Magbata, Jr.",
+      "role": "SB Member",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_SB-RFM.jpg"
+    },
+    {
+      "name": "Hon. Merlito M. Sixon",
+      "role": "SB Member",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_SB-MMS.jpg"
+    },
+    {
+      "name": "Hon. Vonn Christian M. Fruelda",
+      "role": "SB Member",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_SB-VCM2.jpg"
+    },
+    {
+      "name": "Hon. Alan M. Famini",
+      "role": "SB Member",
+      "term": "2025–2028",
+      "photo": "assets/images/Portrait_SB-AMF.jpg"
+    },
+    {
+      "name": "Hon. Norvelkimwell F. Falcutila",
+      "role": "Liga ng mga Barangay President",
+      "term": "Ex officio",
+      "photo": "assets/images/Portrait_SB-NFF.jpg"
+    },
+    {
+      "name": "Hon. Emil Ralph M. Fajel",
+      "role": "SK Municipal Federation President",
+      "term": "Ex officio",
+      "photo": "assets/images/Portrait_SB-EMM.jpg"
+    },
+    {
+      "name": "Hon. Ramon F. Reandelar",
+      "role": "Indigenous Peoples Mandatory Representative",
+      "term": "Ex officio",
+      "photo": "assets/images/Portrait_SB-RFR2.jpg"
+    }
   ],
   "departments": [
-    { "name": "Office of the Municipal Mayor", "head": "Engr. Robert M. Fabella", "headTitle": "Municipal Mayor" },
-    { "name": "Office of the Municipal Vice Mayor", "head": "Hon. Elizer F. Fiedacan", "headTitle": "Municipal Vice Mayor" },
-    { "name": "Office of the Municipal Treasurer", "head": "Charlemagne F. Fortu", "headTitle": "Municipal Treasurer" },
-    { "name": "Municipal Planning & Development Office", "head": "Engr. Berlito F. Fajel, Jr.", "headTitle": "Municipal Planning and Development Coordinator" },
-    { "name": "Office of the Municipal Budget Officer", "head": "Jeanlyn F. Fallaria", "headTitle": "Municipal Budget Officer" },
-    { "name": "Office of the Municipal Assessor", "head": "Engr. Vincent D. De Cardo", "headTitle": "Municipal Assessor" },
-    { "name": "Office of the Municipal Accountant", "head": "Ariel F. Famadulan", "headTitle": "Municipal Accountant" },
-    { "name": "Office of the Municipal Civil Registrar", "head": "Belcezar F. Fajutagana", "headTitle": "Municipal Civil Registrar" },
-    { "name": "Office of the Municipal Engineer", "head": "Engr. Laureano F. Falcutila, III", "headTitle": "Municipal Engineer / Building Official" },
-    { "name": "Office of the Municipal Health Officer", "head": "Dr. Jennie F. Matta", "headTitle": "Municipal Health Officer" },
-    { "name": "Office of the Municipal Agriculturist", "head": "Erwin M. Mortel", "headTitle": "Municipal Agriculturist" },
-    { "name": "Office of the Municipal Social Welfare and Development Officer", "head": "Levie F. Fajilan", "headTitle": "Municipal Social Welfare and Development Officer" },
-    { "name": "Municipal Disaster Risk Reduction and Management Office", "head": "John Arvill F. Rabino", "headTitle": "MDRRM Officer II" }
+    {
+      "name": "Office of the Municipal Mayor",
+      "head": "Engr. Robert M. Fabella",
+      "headTitle": "Municipal Mayor"
+    },
+    {
+      "name": "Office of the Municipal Vice Mayor",
+      "head": "Hon. Elizer F. Fiedacan",
+      "headTitle": "Municipal Vice Mayor"
+    },
+    {
+      "name": "Office of the Municipal Treasurer",
+      "head": "Charlemagne F. Fortu",
+      "headTitle": "Municipal Treasurer"
+    },
+    {
+      "name": "Municipal Planning & Development Office",
+      "head": "Engr. Berlito F. Fajel, Jr.",
+      "headTitle": "Municipal Planning and Development Coordinator"
+    },
+    {
+      "name": "Office of the Municipal Budget Officer",
+      "head": "Jeanlyn F. Fallaria",
+      "headTitle": "Municipal Budget Officer"
+    },
+    {
+      "name": "Office of the Municipal Assessor",
+      "head": "Engr. Vincent D. De Cardo",
+      "headTitle": "Municipal Assessor"
+    },
+    {
+      "name": "Office of the Municipal Accountant",
+      "head": "Ariel F. Famadulan",
+      "headTitle": "Municipal Accountant"
+    },
+    {
+      "name": "Office of the Municipal Civil Registrar",
+      "head": "Belcezar F. Fajutagana",
+      "headTitle": "Municipal Civil Registrar"
+    },
+    {
+      "name": "Office of the Municipal Engineer",
+      "head": "Engr. Laureano F. Falcutila, III",
+      "headTitle": "Municipal Engineer / Building Official"
+    },
+    {
+      "name": "Office of the Municipal Health Officer",
+      "head": "Dr. Jennie F. Matta",
+      "headTitle": "Municipal Health Officer"
+    },
+    {
+      "name": "Office of the Municipal Agriculturist",
+      "head": "Erwin M. Mortel",
+      "headTitle": "Municipal Agriculturist"
+    },
+    {
+      "name": "Office of the Municipal Social Welfare and Development Officer",
+      "head": "Levie F. Fajilan",
+      "headTitle": "Municipal Social Welfare and Development Officer"
+    },
+    {
+      "name": "Municipal Disaster Risk Reduction and Management Office",
+      "head": "John Arvill F. Rabino",
+      "headTitle": "MDRRM Officer II"
+    }
   ]
 }
