@@ -164,6 +164,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .svc-group-head h2{font-family:var(--fd);font-size:1.55rem;font-weight:700;color:var(--deep)}
 .svc-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .svc-item{background:var(--white);padding:1.5rem 1.7rem}
+.svc-item--lead{grid-column:1 / -1;background:var(--cream);border-left:4px solid var(--gold)}
 .svc-item h3{font-size:18px;font-weight:700;color:var(--deep);margin-bottom:.4rem;line-height:1.35}
 .svc-item p{font-size:16px;color:var(--muted);line-height:1.6;margin-bottom:.6rem}
 .svc-item .svc-meta{font-size:15px;color:var(--text);line-height:1.6}

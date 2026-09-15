@@ -118,8 +118,10 @@ function renderOfficial(o, i){
 
   document.getElementById('officials').innerHTML = (d.elected || []).map(renderOfficial).join('');
 
-  document.getElementById('departments').innerHTML = (d.departments || []).map(dep =>
-    `<div class="svc-item">
+  // The Mayor's office spans the full first row: it leads the list, and with
+  // 13 offices it also leaves the two-column grid with no empty cell.
+  document.getElementById('departments').innerHTML = (d.departments || []).map((dep, i) =>
+    `<div class="svc-item${i === 0 ? ' svc-item--lead' : ''}">
       <h3>${dep.name}</h3>
       <div class="svc-meta">Head: <b>${dep.head || 'TBA'}</b>${dep.headTitle ? ` &middot; ${dep.headTitle}` : ''}</div>
     </div>`).join('');
