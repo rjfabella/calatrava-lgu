@@ -307,7 +307,22 @@ Audited https://rjfabella.github.io/calatrava-lgu/ and fixed everything found.
 - Re-audited all 8 pages at 375px: no overflow, no text under 12.5px, no
   contrast failures, no tap targets under 24px, no images missing alt.
 
-**Officials' portraits — all 12 remaining added 2026-09-12.**
+**Portraits replaced with a matched set (2026-09-16).** The LGU re-shot all
+13 as one composite series — same municipal-hall green backdrop with flag,
+same seal, **no caption bands**, all 1536×2047 (3:4) — and dropped them in
+under the same filenames, so `officials.json` needed only one change: the
+Mayor's file is now `Portrait_Mayor.jpg` (the old `Portrait_Mayor1/2.jpg`
+and `MBF Portrait.png` went into `assets/images/Archive/`, which is now
+gitignored — they survive in git history). Faces were cross-checked against
+the previously verified set; the mapping is unchanged.
+**Lesson: don't re-encode the LGU's exports.** They arrive already compressed
+harder than a q86 re-save, so downscaling 1536→960 *grew* the files by ~23%
+(2.0 MB → 2.4 MB total). The 960×1280 versions are what's committed — fine
+visually and correctly sized for every render — but the next drop should be
+used as-is. If bytes ever matter, ask RJ for the originals rather than
+re-encoding a second generation.
+
+**Officials' portraits — all 12 first added 2026-09-12.**
 - The LGU dropped 14 files into `assets/images/` named by initials
   (`Portrait_VM-EFF.jpg`, `Portrait_SB-HFF.jpg`, …). **Every mapping was
   confirmed against the name printed on the photo itself**, not just the

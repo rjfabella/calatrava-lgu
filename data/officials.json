@@ -2,7 +2,7 @@
   "welcome": {
     "name": "Engr. Robert M. Fabella",
     "role": "Municipal Mayor",
-    "photo": "assets/images/Portrait_Mayor2.jpg",
+    "photo": "assets/images/Portrait_Mayor.jpg",
     "message": [
       "Welcome to the official website of the Municipality of Calatrava. This portal is part of our commitment to open, accessible, and accountable governance.",
       "Here you can transact with our offices, follow the programs and projects of your local government, and reach us directly. Our doors — and our records — are open to you."
@@ -33,7 +33,7 @@
       "name": "Engr. Robert M. Fabella",
       "role": "Municipal Mayor",
       "term": "2025–2028",
-      "photo": "assets/images/Portrait_Mayor2.jpg"
+      "photo": "assets/images/Portrait_Mayor.jpg"
     },
     {
       "name": "Hon. Elizer F. Fiedacan",

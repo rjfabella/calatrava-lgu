@@ -15,3 +15,6 @@ assets/Calatrava.zip
 # Python bytecode from local runs of scripts/
 __pycache__/
 *.pyc
+
+# Superseded originals the LGU keeps locally; already in git history if ever needed
+assets/images/Archive/
