@@ -3,39 +3,60 @@
   "barangays": [
     {
       "name": "Balogo",
-      "captain": "",
+      "seal": "assets/images/barangays/balogo.png",
+      "captain": "Hon. Juliet M. Sixon",
+      "phone": "0920 488 1632",
+      "email": "julietsixon870@gmail.com",
       "population": "2,052"
     },
     {
       "name": "Linao",
-      "captain": "",
+      "seal": "assets/images/barangays/linao.png",
+      "captain": "Hon. Radie F. Fampulme",
+      "phone": "0919 748 8408",
+      "email": "radiefalsiafampulme26@gmail.com",
       "population": "1,624"
     },
     {
       "name": "Pagsangahan",
-      "captain": "",
+      "seal": "assets/images/barangays/pagsangahan.png",
+      "captain": "Hon. Alexander F. Andrade",
+      "phone": "0930 068 3268",
+      "email": "rednaxelandrade.aa@gmail.com",
       "population": "880"
     },
     {
       "name": "Pangulo",
-      "captain": "",
+      "seal": "assets/images/barangays/pangulo.png",
+      "captain": "Hon. John Erwin F. Paz",
+      "phone": "0946 288 3943",
+      "email": "pazjohnerwin410@gmail.com",
       "population": "1,750"
     },
     {
       "name": "Poblacion",
-      "captain": "",
+      "seal": "assets/images/barangays/poblacion.png",
+      "captain": "Hon. Charito F. Rabino",
+      "phone": "0909 184 1447",
+      "email": "charitfrabino04@gmail.com",
       "population": "1,764"
     },
     {
       "name": "San Roque",
-      "captain": "",
+      "seal": "assets/images/barangays/san-roque.png",
+      "captain": "Hon. NorvelKimwell F. Falcutila",
+      "phone": "0920 705 4926",
+      "email": "norvelkimwellfalcutila@gmail.com",
       "population": "1,927"
     },
     {
       "name": "Talisay",
-      "captain": "",
+      "seal": "assets/images/barangays/talisay.png",
+      "captain": "Hon. Merlito M. Mantes",
+      "phone": "0930 855 0187",
+      "email": "merlitomantes9@gmail.com",
       "population": "1,345"
     }
   ],
-  "_captainsNote": "Punong Barangay names are not yet collected (MLGOO / DILG Calatrava field office). Left empty on purpose: barangays.html shows 'To be announced' rather than a bracketed placeholder. Fill in the real names when they arrive."
+  "_sources": "Captain names and mobile numbers: LGU printed directory (photo, 2026-09-21). Emails: LGU Google Contacts 'Barangay's' label (screenshot, 2026-09-21) — the Linao, Pagsangahan and San Roque addresses were truncated in the screenshot and completed as @gmail.com; confirm with the LGU. Falcutila's spelling follows the org chart (see MEMORY.md). Seals: embedded images in 'MNAO_Office Profile and Weight for Age CY2026.docx'."
 }

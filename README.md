@@ -54,7 +54,7 @@ The site cross-links to the separate [tourism portal](https://rjfabella.github.i
 
 - [x] Names of the Mayor, Vice Mayor, SB members and department heads — real, from `Organizational Chart 2026.pptx` (`officials.json`, `organization.json`)
 - [ ] Official photos — drop into `assets/` and set the `photo` paths
-- [ ] Barangay captains for the 7 barangays (`barangays.json`)
+- [x] Barangay captains, mobile numbers, emails and seals for the 7 barangays (`barangays.json`, `assets/images/barangays/`) — 3 emails were truncated in the source screenshot; confirm with the LGU
 - [ ] Emergency hotline numbers (currently `0000-000-0000` in `services.json`)
 - [x] Per-office phone numbers and email addresses (`contact.json`) — real, from the LGU's official office directory sheet (2026-09-06); the invented `@calatrava.gov.ph` addresses were removed
 - [x] Service requirements, classification, who-may-avail — real, from `Citizen's Charter 2023.pdf` (`citizens-charter.json`)
@@ -68,8 +68,8 @@ The site cross-links to the separate [tourism portal](https://rjfabella.github.i
 > andagaotour@gmail.com · FB "Calatrava Romblon") are real, as are the
 > population (11,342, 2020 PSA), the 7 barangay names/figures, all elected
 > officials and department heads, and the full Citizen's Charter service
-> directory. Photos, barangay captains, hotlines, and founding year are
-> still placeholders to fill in.
+> directory, and (since 2026-09-22) the 7 Punong Barangays with their
+> contact details and official seals. Founding year is still a placeholder.
 
 ## Run locally
 

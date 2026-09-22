@@ -427,7 +427,14 @@ frame — the face is nowhere near it. `Portrait_Mayor1.jpg` and
 - ~~Official photos~~ **DONE 2026-09-12** — all 13 elected officials now have
   portraits. See "Officials' portraits" below for how the files were prepared
   and two name discrepancies the photos surfaced.
-- Barangay captains for all 7 barangays (shown as "To be announced")
+- ~~Barangay captains for all 7 barangays~~ **DONE 2026-09-22** — names +
+  mobile numbers from the LGU's printed directory (photo), emails from the
+  LGU's Google Contacts "Barangay's" label (screenshot), official seals
+  pulled from the MNAO office-profile .docx into `assets/images/barangays/`.
+  Three emails (Linao, Pagsangahan, San Roque) were cut off after "@gm…" in
+  the screenshot and were completed as @gmail.com — confirm with the LGU.
+  Falcutila's spelling follows the earlier org-chart decision
+  ("NorvelKimwell"); the printed directory writes it "NORVEL KIMWELL".
 - ~~Emergency hotlines~~ **DONE 2026-09-10** — the site-wide emergency band
   now carries a second line with Police, Fire, Health and Coastguard beneath
   the Emergency Command Center number. Those four are read from

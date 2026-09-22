@@ -16,7 +16,7 @@
 <section class="page-hero">
   <div class="page-hero-inner">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Barangays</span></nav>
-    <h1>Our <em>barangays</em></h1>
+    <h1>Our <em>Barangays</em></h1>
     <p id="intro"></p>
   </div>
 </section>
@@ -31,19 +31,30 @@
 <script>
 const FALLBACK = {
   intro: "The Municipality of Calatrava is composed of 7 barangays on the northern tip of Tablas Island.",
-  barangays: [{ name: "Poblacion", captain: "", population: "1,764" }]
+  barangays: [{ name: "Poblacion", seal: "assets/images/barangays/poblacion.png", captain: "", phone: "", email: "", population: "1,764" }]
 };
 
 (async function(){
   initChrome('barangays');
   const d = await loadJSON('data/barangays.json', FALLBACK);
   document.getElementById('intro').textContent = d.intro || '';
-  document.getElementById('barangays').innerHTML = (d.barangays || []).map(b =>
-    `<div class="brgy-item">
-      <h3>${b.name}</h3>
-      <div class="brgy-cap">Brgy. Captain: ${b.captain ? b.captain : '<em>To be announced</em>'}</div>
-      <div class="brgy-meta">Population: <b>${b.population || '—'}</b></div>
-    </div>`).join('');
+  document.getElementById('barangays').innerHTML = (d.barangays || []).map(b => {
+    const seal = b.seal
+      ? `<img class="brgy-seal" src="${b.seal}" alt="Official seal of Barangay ${b.name}" width="96" height="96" loading="lazy">`
+      : `<div class="brgy-seal brgy-seal-empty" aria-hidden="true">${b.name.charAt(0)}</div>`;
+    const tel = b.phone ? `<a href="tel:+63${b.phone.replace(/\D/g,'').replace(/^0/,'')}">${b.phone}</a>` : '';
+    const mail = b.email ? `<a href="mailto:${b.email}">${b.email}</a>` : '';
+    const contact = [tel, mail].filter(Boolean).join('');
+    return `<div class="brgy-item">
+      ${seal}
+      <div class="brgy-body">
+        <h3>${b.name}</h3>
+        <div class="brgy-cap">Punong Barangay: ${b.captain ? `<b>${b.captain}</b>` : '<em>To be announced</em>'}</div>
+        ${contact ? `<div class="brgy-contact">${contact}</div>` : ''}
+        <div class="brgy-meta">Population: <b>${b.population || '—'}</b></div>
+      </div>
+    </div>`;
+  }).join('');
   observeReveal();
 })();
 </script>

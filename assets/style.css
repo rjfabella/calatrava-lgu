@@ -392,9 +392,16 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
 
 /* ── BARANGAYS ── */
 .brgy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-.brgy-item{background:var(--white);padding:1.4rem 1.6rem}
+.brgy-item{background:var(--white);padding:1.4rem 1.6rem;display:flex;gap:1.1rem;align-items:flex-start}
+.brgy-seal{flex:0 0 96px;width:96px;height:96px;border-radius:50%;object-fit:contain;background:var(--white);border:1px solid var(--border)}
+.brgy-seal-empty{display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--deep);background:var(--cream)}
+.brgy-body{min-width:0}
 .brgy-item h3{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--deep);margin-bottom:.35rem}
 .brgy-item .brgy-cap{font-size:15.5px;color:var(--muted)}
+.brgy-item .brgy-cap b{color:var(--text);font-weight:600}
+.brgy-item .brgy-contact{font-size:14.5px;margin-top:.3rem;overflow-wrap:anywhere}
+.brgy-item .brgy-contact a{color:var(--ocean);display:block;white-space:nowrap}
+.brgy-item .brgy-contact a[href^="mailto"]{white-space:normal}
 .brgy-item .brgy-meta{font-size:15px;color:var(--text);margin-top:.5rem}
 .brgy-item .brgy-meta b{color:var(--ocean);font-weight:700}
 
