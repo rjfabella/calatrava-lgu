@@ -38,22 +38,24 @@ const FALLBACK = {
   initChrome('barangays');
   const d = await loadJSON('data/barangays.json', FALLBACK);
   document.getElementById('intro').textContent = d.intro || '';
+  const esc = v => String(v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   document.getElementById('barangays').innerHTML = (d.barangays || []).map(b => {
     const seal = b.seal
-      ? `<img class="brgy-seal" src="${b.seal}" alt="Official seal of Barangay ${b.name}" width="96" height="96" loading="lazy">`
-      : `<div class="brgy-seal brgy-seal-empty" aria-hidden="true">${b.name.charAt(0)}</div>`;
-    const tel = b.phone ? `<a href="tel:+63${b.phone.replace(/\D/g,'').replace(/^0/,'')}">${b.phone}</a>` : '';
-    const mail = b.email ? `<a href="mailto:${b.email}">${b.email}</a>` : '';
-    const contact = [tel, mail].filter(Boolean).join('');
-    return `<div class="brgy-item">
-      ${seal}
-      <div class="brgy-body">
-        <h3>${b.name}</h3>
-        <div class="brgy-cap">Punong Barangay: ${b.captain ? `<b>${b.captain}</b>` : '<em>To be announced</em>'}</div>
-        ${contact ? `<div class="brgy-contact">${contact}</div>` : ''}
-        <div class="brgy-meta">Population: <b>${b.population || '—'}</b></div>
-      </div>
-    </div>`;
+      ? `<img class="brgy-seal" src="${esc(b.seal)}" alt="Official seal of Barangay ${esc(b.name)}" width="72" height="72" loading="lazy">`
+      : `<div class="brgy-seal brgy-seal-empty" aria-hidden="true">${esc(b.name.charAt(0))}</div>`;
+    const tel = b.phone ? `<div class="brgy-row"><dt>Mobile</dt><dd><a href="tel:+63${b.phone.replace(/\D/g,'').replace(/^0/,'')}">${esc(b.phone)}</a></dd></div>` : '';
+    const mail = b.email ? `<div class="brgy-row"><dt>Email</dt><dd class="brgy-email"><a href="mailto:${esc(b.email)}">${esc(b.email)}</a></dd></div>` : '';
+    return `<article class="brgy-item">
+      <header class="brgy-head">
+        ${seal}
+        <h3>${esc(b.name)}</h3>
+      </header>
+      <dl class="brgy-dl">
+        <div class="brgy-row"><dt>Punong Barangay</dt><dd class="brgy-name">${b.captain ? esc(b.captain) : '<em>To be announced</em>'}</dd></div>
+        ${tel}${mail}
+        <div class="brgy-row brgy-pop"><dt>Population <span>(2020 PSA)</span></dt><dd>${esc(b.population || '—')}</dd></div>
+      </dl>
+    </article>`;
   }).join('');
   observeReveal();
 })();
