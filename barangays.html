@@ -23,7 +23,7 @@
 
 <section class="section">
   <div class="container">
-    <div class="brgy-grid" id="barangays"><!-- rendered from data/barangays.json --></div>
+    <div class="brgy-wrap"><table class="brgy-table" id="barangays"><!-- rendered from data/barangays.json --></table></div>
   </div>
 </section>
 
@@ -39,24 +39,24 @@ const FALLBACK = {
   const d = await loadJSON('data/barangays.json', FALLBACK);
   document.getElementById('intro').textContent = d.intro || '';
   const esc = v => String(v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  document.getElementById('barangays').innerHTML = (d.barangays || []).map(b => {
+  const rows = (d.barangays || []).map(b => {
     const seal = b.seal
-      ? `<img class="brgy-seal" src="${esc(b.seal)}" alt="Official seal of Barangay ${esc(b.name)}" width="72" height="72" loading="lazy">`
-      : `<div class="brgy-seal brgy-seal-empty" aria-hidden="true">${esc(b.name.charAt(0))}</div>`;
-    const tel = b.phone ? `<div class="brgy-row"><dt>Mobile</dt><dd><a href="tel:+63${b.phone.replace(/\D/g,'').replace(/^0/,'')}">${esc(b.phone)}</a></dd></div>` : '';
-    const mail = b.email ? `<div class="brgy-row"><dt>Email</dt><dd class="brgy-email"><a href="mailto:${esc(b.email)}">${esc(b.email)}</a></dd></div>` : '';
-    return `<article class="brgy-item">
-      <header class="brgy-head">
-        ${seal}
-        <h3>${esc(b.name)}</h3>
-      </header>
-      <dl class="brgy-dl">
-        <div class="brgy-row"><dt>Punong Barangay</dt><dd class="brgy-name">${b.captain ? esc(b.captain) : '<em>To be announced</em>'}</dd></div>
-        ${tel}${mail}
-        <div class="brgy-row brgy-pop"><dt>Population <span>(2020 PSA)</span></dt><dd>${esc(b.population || '—')}</dd></div>
-      </dl>
-    </article>`;
+      ? `<img class="brgy-seal" src="${esc(b.seal)}" alt="Official seal of Barangay ${esc(b.name)}" width="56" height="56" loading="lazy">`
+      : `<span class="brgy-seal brgy-seal-empty" aria-hidden="true">${esc(b.name.charAt(0))}</span>`;
+    const tel = b.phone ? `<a href="tel:+63${b.phone.replace(/\D/g,'').replace(/^0/,'')}">${esc(b.phone)}</a>` : '';
+    const mail = b.email ? `<a href="mailto:${esc(b.email)}">${esc(b.email)}</a>` : '';
+    const contact = [tel, mail].filter(Boolean).join('<br>') || '<span class="brgy-muted">—</span>';
+    return `<tr>
+      <th scope="row"><span class="brgy-id">${seal}<span class="brgy-nm">${esc(b.name)}</span></span></th>
+      <td data-label="Punong Barangay"><span class="brgy-val">${b.captain ? esc(b.captain) : '<em class="brgy-muted">To be announced</em>'}</span></td>
+      <td data-label="Contact" class="brgy-contact"><span class="brgy-val">${contact}</span></td>
+      <td data-label="Population (2020 PSA)" class="brgy-pop"><span class="brgy-val">${esc(b.population || '—')}</span></td>
+    </tr>`;
   }).join('');
+  document.getElementById('barangays').innerHTML = `
+    <caption class="sr-only">The 7 barangays of Calatrava with their Punong Barangay, contact details and 2020 population</caption>
+    <thead><tr><th scope="col">Barangay</th><th scope="col">Punong Barangay</th><th scope="col">Contact</th><th scope="col" class="brgy-pop">Population <span>(2020 PSA)</span></th></tr></thead>
+    <tbody>${rows}</tbody>`;
   observeReveal();
 })();
 </script>
