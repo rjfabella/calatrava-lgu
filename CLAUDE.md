@@ -102,6 +102,11 @@ of the above before changing site structure.
   into the relevant `data/*.json` (that's the pattern for the Citizen's
   Charter and Org Chart); the originals also stay linked from
   `transparency.json` for FDP/legal completeness.
+  `assets/reference docs/` is the **staging area** for the Sept 2026 batch
+  of office submissions — audited, renamed `Dept_DocName`, and indexed in
+  its `README.md`; nothing there is on the site yet. The tracking sheet is
+  `Calatrava LGU Website Development.xlsx` in that folder (columns H–I map
+  each checklist item to its source doc and gaps).
 
 ## Working conventions
 

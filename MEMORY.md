@@ -486,9 +486,22 @@ frame — the face is nowhere near it. `Portrait_Mayor1.jpg` and
    them as authoritative.
 3. Chase the Mayor's secretary for the remaining checklist items: photos,
    barangay captains, hotlines, FDP budget/procurement documents, term
-   dates.
-4. Decide the Municipal Administrator and salary-grade-visibility questions
+   dates. **2026-09-22 update:** a first batch of 30 office documents
+   arrived and was audited into `assets/reference docs/` (see its
+   `README.md`). Still nothing for: Cicha (item 1, unclear), Pledge, Brief
+   History, CLUP, LDIP, MPDO, the Annual Budget ordinance itself (only
+   the four 2025 supplementals came), Punong Barangay contacts. Three files
+   are duplicates of content already parsed (Citizen's Charter pp. 21–26
+   and 64–67; a generic NBC B-02 form).
+4. Parse the reference-docs batch into JSON — office profiles (mandate/
+   vision/mission/services for BPLO, MASSO, MBO, MEO, MSWDO, MNAO, OMAG,
+   KALAHI), the 4 emergency hotlines (replace the pending rows), the 7
+   barangay seals from the MNAO doc, permit forms as downloads, and the FDP
+   documents (GAD AR 2025, GAD PB 2027, LDRRMF Jan–Jul 2026, Supplemental
+   Budgets 1–4 CY2025) into `transparency.json`. Not started — RJ wants
+   structure agreed first.
+5. Decide the Municipal Administrator and salary-grade-visibility questions
    above.
-5. Run a WCAG 2.0 AA pass once real content (esp. photos, PDFs) is in place.
-6. Decide on hosting (GitHub Pages vs GovCloud) with the Mayor's office
+6. Run a WCAG 2.0 AA pass once real content (esp. photos, PDFs) is in place.
+7. Decide on hosting (GitHub Pages vs GovCloud) with the Mayor's office
    before final launch, given GWTD's hosting guidance.

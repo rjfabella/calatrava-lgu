@@ -18,3 +18,9 @@ __pycache__/
 
 # Superseded originals the LGU keeps locally; already in git history if ever needed
 assets/images/Archive/
+
+# Raw office submissions (Sept 2026 batch, ~30 MB of scans/DOCX). Kept locally
+# only; the audit index and the tracking checklist stay in git.
+assets/reference\ docs/*
+!assets/reference\ docs/README.md
+!assets/reference\ docs/Calatrava\ LGU\ Website\ Development.xlsx
