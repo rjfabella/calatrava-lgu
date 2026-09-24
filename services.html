@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services — Municipality of Calatrava, Romblon</title>
-<meta name="description" content="Public services of the Municipality of Calatrava: civil registry, business permits, treasury, health and social welfare, online services, and emergency hotlines.">
+<meta name="description" content="Public Services of the Municipality of Calatrava: the Citizen's Charter, the full service directory with requirements, fees and processing times, and emergency hotlines.">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,35 +16,96 @@
 <section class="page-hero">
   <div class="page-hero-inner">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Services</span></nav>
-    <h1>Public <em>services</em></h1>
-    <p>Requirements, fees, and processing times for transactions with the Municipality of Calatrava. Tap any office to learn more.</p>
+    <h1>Public <em>Services</em></h1>
+    <p>Requirements, fees, and processing times for every transaction with the Municipality of Calatrava.</p>
   </div>
 </section>
 
-<!-- ONLINE SERVICES -->
-<section class="section tight" id="online">
+<!-- SEARCH + TABS -->
+<section class="section tight">
   <div class="container">
-    <div class="section-head"><span class="s-label">Skip the line</span><h2 class="s-title">Online <em>services</em></h2></div>
-    <div class="cards" id="onlineServices"><!-- rendered from data/services.json --></div>
-  </div>
-</section>
-
-<!-- SERVICE GROUPS -->
-<section class="section sand">
-  <div class="container" id="serviceGroups"><!-- rendered from data/services.json --></div>
-</section>
-
-<!-- FULL CITIZEN'S CHARTER DIRECTORY -->
-<section class="section" id="charter">
-  <div class="container">
-    <div class="section-head">
-      <span class="s-label">Full detail, per RA 11032</span>
-      <h2 class="s-title">Citizen's <em>Charter</em> directory</h2>
-      <p class="charter-intro">Every frontline service by office — classification, who may avail, requirements and where to secure them, fees, and processing time, from the Citizen's Charter 2023 (Edition II). <a href="assets/contents/Citizen's Charter 2023.pdf" target="_blank" rel="noopener">View the full PDF<span class="sr-only"> (opens in a new tab)</span> &rarr;</a></p>
+    <div id="serviceSearch" class="svc-search-wrap"><!-- rendered by renderSearchBox --></div>
+    <p class="svc-search-hint" id="searchHint">Search across the Citizen's Charter and the service directory &mdash; try &ldquo;birth certificate&rdquo;, &ldquo;business permit&rdquo; or &ldquo;burial&rdquo;.</p>
+    <div class="tabs" role="tablist" aria-label="Public Services" id="serviceTabs">
+      <button class="tab" role="tab" id="tab-charter"   aria-controls="panel-charter"   aria-selected="true"  data-panel="charter">Citizen's Charter</button>
+      <button class="tab" role="tab" id="tab-directory" aria-controls="panel-directory" aria-selected="false" data-panel="directory" tabindex="-1">Citizen's Charter Directory</button>
+      <button class="tab" role="tab" id="tab-services"  aria-controls="panel-services"  aria-selected="false" data-panel="services" tabindex="-1">View Services</button>
     </div>
-    <div id="charterOffices"><!-- rendered from data/citizens-charter.json --></div>
   </div>
 </section>
+
+<!-- SEARCH RESULTS — replaces the tab panels while a query is active -->
+<div class="tab-panel" id="panel-search" tabindex="-1" hidden>
+  <section class="section tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="s-label" id="searchCount"></span>
+        <h2 class="s-title">Search <em>results</em></h2>
+      </div>
+      <div id="searchResults"></div>
+    </div>
+  </section>
+</div>
+
+<!-- PANEL 1 — WHAT THE CITIZEN'S CHARTER IS -->
+<div class="tab-panel" id="panel-charter" role="tabpanel" aria-labelledby="tab-charter" tabindex="0">
+  <section class="section tight" id="charter">
+    <div class="container">
+      <div class="charter-hero">
+        <div class="charter-hero-text">
+          <span class="s-label">Republic Act No. 11032</span>
+          <h2 class="s-title">What is the <em>Citizen's Charter</em>?</h2>
+          <p class="charter-intro" id="charterLede"></p>
+        </div>
+        <figure class="charter-figure" id="charterFigure" aria-hidden="true"><!-- inline SVG --></figure>
+      </div>
+
+      <ul class="charter-what" id="charterWhat"><!-- rendered from data/citizens-charter.json --></ul>
+
+      <div class="charter-meta">
+        <div class="charter-meta-main">
+          <h3>This edition</h3>
+          <dl class="charter-facts" id="charterFacts"><!-- rendered --></dl>
+          <div class="charter-dl" id="charterDownload"><!-- rendered --></div>
+        </div>
+        <div class="charter-meta-side">
+          <h3>What's inside</h3>
+          <ul class="vm-points" id="charterInside"><!-- rendered --></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PANEL 2 — THE FULL DIRECTORY -->
+<div class="tab-panel" id="panel-directory" role="tabpanel" aria-labelledby="tab-directory" tabindex="0" hidden>
+  <section class="section tight" id="directory">
+    <div class="container">
+      <div class="section-head">
+        <span class="s-label">Full detail, per RA 11032</span>
+        <h2 class="s-title">Citizen's Charter <em>directory</em></h2>
+        <p class="charter-intro">Every frontline service by office — classification, who may avail, requirements and where to secure them, fees, and processing time. Tap a service to open it.</p>
+      </div>
+      <div id="charterOffices"><!-- rendered from data/citizens-charter.json --></div>
+    </div>
+  </section>
+</div>
+
+<!-- PANEL 3 — SERVICES BY CATEGORY -->
+<div class="tab-panel" id="panel-services" role="tabpanel" aria-labelledby="tab-services" tabindex="0" hidden>
+  <section class="section tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="s-label">Quick reference</span>
+        <h2 class="s-title">Services by <em>category</em></h2>
+      </div>
+      <div class="cards" id="featuredServices"><!-- rendered from data/services.json --></div>
+    </div>
+  </section>
+  <section class="section sand tight">
+    <div class="container" id="serviceGroups"><!-- rendered from data/services.json --></div>
+  </section>
+</div>
 
 <!-- EMERGENCY HOTLINES -->
 <section class="section dark" id="hotline">
@@ -57,36 +118,116 @@
 <script src="assets/app.js"></script>
 <script>
 const FALLBACK = {
-  online: [{ name: "Feedback & Complaints", desc: "Submit a report or suggestion.", href: "contact.html", status: "Available" }],
+  featured: [],
   groups: [{
     id: "civil", icon: "doc", title: "Civil Registry",
     services: [{ name: "Birth Certificate", desc: "Certified true copy.", fee: "₱100", time: "1–3 days", office: "Local Civil Registry" }]
   }],
   hotlines: [{ name: "Emergency Command Center", number: "0930 326 4161" }]
 };
+const CHARTER_FALLBACK = { offices: [], about: null };
 
-const CHARTER_FALLBACK = { offices: [] };
+const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-function renderOnline(list){
-  document.getElementById('onlineServices').innerHTML = list.map(o =>
-    `<article class="card reveal"><div class="card-body">
-      <div class="card-tag">${o.status || ''}</div>
-      <h3 class="card-title">${o.name}</h3>
-      <p class="card-text">${o.desc || ''}</p>
-      <a href="${o.href || '#'}" class="card-link">${o.status === 'Available' ? 'Open' : 'Notify me'}</a>
-    </div></article>`).join('');
+/* ── TABS ──
+   setupTabs (assets/app.js) carries the WAI-ARIA behaviour; this page only
+   has to remember which tab to return to when a search is cleared. */
+const TABS = ['charter', 'directory', 'services'];
+let tabs;
+const selectTab = (name, focus) => tabs.select(name, focus);
+
+/* ── CITIZEN'S CHARTER EXPLAINER ── */
+
+// A document with a checked list and a clock: the Charter's two promises —
+// what you must bring, and how long it will take. Drawn inline so it inherits
+// the palette and needs no extra request.
+const CHARTER_SVG = `
+<svg viewBox="0 0 320 210" role="img" aria-label="Illustration of the Citizen's Charter: a document listing requirements, fees and processing time">
+  <rect x="34" y="16" width="168" height="178" rx="6" fill="var(--white)" stroke="var(--border)" stroke-width="2"/>
+  <rect x="34" y="16" width="168" height="34" rx="6" fill="var(--deep)"/>
+  <rect x="34" y="44" width="168" height="6" fill="var(--deep)"/>
+  <circle cx="52" cy="33" r="9" fill="var(--gl)"/>
+  <rect x="68" y="27" width="86" height="6" rx="3" fill="rgba(255,255,255,.92)"/>
+  <rect x="68" y="38" width="54" height="5" rx="2.5" fill="rgba(255,255,255,.55)"/>
+  ${[0,1,2,3].map((n) => `
+    <circle cx="57" cy="${74 + n*28}" r="8" fill="none" stroke="var(--ocean)" stroke-width="2"/>
+    <polyline points="53,${74 + n*28} 56,${77.5 + n*28} 61.5,${70 + n*28}" fill="none" stroke="var(--ocean)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="74" y="${69 + n*28}" width="${104 - n*16}" height="6" rx="3" fill="var(--sand)"/>
+    <rect x="74" y="${79 + n*28}" width="${72 - n*10}" height="5" rx="2.5" fill="var(--border)"/>`).join('')}
+  <circle cx="240" cy="78" r="44" fill="var(--sand)"/>
+  <circle cx="240" cy="78" r="44" fill="none" stroke="var(--ocean)" stroke-width="2.5"/>
+  <line x1="240" y1="78" x2="240" y2="52" stroke="var(--deep)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="240" y1="78" x2="259" y2="88" stroke="var(--ocean)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="240" cy="78" r="4" fill="var(--deep)"/>
+  <rect x="196" y="140" width="88" height="54" rx="6" fill="var(--white)" stroke="var(--border)" stroke-width="2"/>
+  <text x="240" y="170" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-size="21" font-weight="700" fill="var(--ocean)">₱</text>
+  <rect x="210" y="178" width="60" height="5" rx="2.5" fill="var(--sand)"/>
+</svg>`;
+
+function renderCharterAbout(a){
+  if (!a) return;
+  document.getElementById('charterLede').textContent =
+    `It is the Municipality's written promise to you: a published list of every service ${
+      a.issuedBy ? 'the ' + a.issuedBy.replace(/^Municipal Government of /, 'Municipal Government of ') : 'the LGU'
+    } offers, and exactly what each one requires, costs and takes.`;
+  document.getElementById('charterFigure').innerHTML = CHARTER_SVG;
+
+  document.getElementById('charterWhat').innerHTML = (a.what || []).map(w =>
+    `<li class="charter-what-item reveal">
+      <span class="charter-what-ico">${svgIcon(w.icon)}</span>
+      <div><h3>${esc(w.title)}</h3><p>${esc(w.text)}</p></div>
+    </li>`).join('');
+
+  const facts = [
+    ['Edition', a.edition],
+    ['Issued by', a.issuedBy],
+    ['Legal basis', a.legalBasis],
+    ['Coverage', (a.serviceCount && a.officeCount) ? `${a.serviceCount} frontline services across ${a.officeCount} offices` : ''],
+    ['Document', (a.pages ? `${a.pages}-page PDF` : '') + (a.documentDate ? `, dated ${a.documentDate}` : '')],
+  ].filter(([, v]) => v);
+  document.getElementById('charterFacts').innerHTML = facts.map(([k, v]) =>
+    `<div class="charter-fact"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
+
+  document.getElementById('charterInside').innerHTML = (a.inside || []).map(i => `<li>${esc(i)}</li>`).join('');
+
+  if (a.pdf) {
+    document.getElementById('charterDownload').innerHTML =
+      `<a class="btn-download" href="${esc(a.pdf)}" target="_blank" rel="noopener">
+        ${svgIcon('doc')}
+        <span><b>Download the ${esc(a.title || "Citizen's Charter")}</b><small>PDF${a.pages ? ` · ${a.pages} pages` : ''}<span class="sr-only"> (opens in a new tab)</span></small></span>
+      </a>
+      <button class="btn-ghost-link" type="button" onclick="selectTab('directory');history.replaceState(null,'','#directory');window.scrollTo({top:0})">Or browse it online &rarr;</button>`;
+  }
+}
+
+/* ── SERVICES ── */
+
+function renderFeatured(list){
+  document.getElementById('featuredServices').innerHTML = (list || []).map(o => {
+    const live = o.href && o.status !== 'In development';
+    const action = live
+      ? `<a href="${esc(o.href)}" class="card-link">${esc(o.cta || 'Open')}</a>`
+      : `<span class="card-link is-pending">Not yet available</span>`;
+    return `<article class="card reveal"><div class="card-body">
+      <span class="card-ico">${svgIcon(o.icon)}</span>
+      <div class="card-tag${live ? '' : ' is-pending'}">${esc(o.status || '')}</div>
+      <h3 class="card-title">${esc(o.name)}</h3>
+      <p class="card-text">${esc(o.desc || '')}</p>
+      ${action}
+    </div></article>`;
+  }).join('');
 }
 
 function renderGroups(groups){
   document.getElementById('serviceGroups').innerHTML = groups.map(g =>
-    `<div class="svc-group" id="${g.id}">
-      <div class="svc-group-head">${svgIcon(g.icon)}<h2>${g.title}</h2></div>
+    `<div class="svc-group" id="${esc(g.id)}">
+      <div class="svc-group-head">${svgIcon(g.icon)}<h2>${esc(g.title)}</h2></div>
       <div class="svc-list">
         ${(g.services || []).map(s =>
           `<div class="svc-item">
-            <h3>${s.name}</h3>
-            <p>${s.desc || ''}</p>
-            <div class="svc-meta">Fee: <b>${s.fee || 'N/A'}</b> &nbsp;&middot;&nbsp; ${s.time || ''} &nbsp;&middot;&nbsp; ${s.office || ''}</div>
+            <h3>${esc(s.name)}</h3>
+            <p>${esc(s.desc || '')}</p>
+            <div class="svc-meta">Fee: <b>${esc(s.fee || 'N/A')}</b> &nbsp;&middot;&nbsp; ${esc(s.time || '')} &nbsp;&middot;&nbsp; ${esc(s.office || '')}</div>
           </div>`).join('')}
       </div>
     </div>`).join('');
@@ -95,28 +236,28 @@ function renderGroups(groups){
 function renderCharter(offices){
   document.getElementById('charterOffices').innerHTML = (offices || []).map(o =>
     `<div class="charter-office">
-      <h3>${o.office}</h3>
+      <h3>${esc(o.office)}</h3>
       <div class="charter-list">
         ${(o.services || []).map(s => `
           <details class="charter-item">
             <summary>
-              <span class="charter-name">${s.name}</span>
-              <span class="charter-tags">${[s.classification, s.transactionType].filter(Boolean).map(t => `<span class="tag">${t}</span>`).join('')}</span>
+              <span class="charter-name">${esc(s.name)}</span>
+              <span class="charter-tags">${[s.classification, s.transactionType].filter(Boolean).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</span>
             </summary>
             <div class="charter-body">
-              ${s.whoMayAvail ? `<p><b>Who may avail:</b> ${s.whoMayAvail}</p>` : ''}
+              ${s.whoMayAvail ? `<p><b>Who may avail:</b> ${esc(s.whoMayAvail)}</p>` : ''}
               ${(s.requirements && s.requirements.length) ? `
                 <div class="charter-req-wrap">
                   <table class="charter-req-table">
                     <thead><tr><th>Requirement</th><th>Where to secure</th></tr></thead>
-                    <tbody>${s.requirements.map(r => `<tr><td>${r.item}</td><td>${r.whereToSecure || '—'}</td></tr>`).join('')}</tbody>
+                    <tbody>${s.requirements.map(r => `<tr><td>${esc(r.item)}</td><td>${esc(r.whereToSecure || '—')}</td></tr>`).join('')}</tbody>
                   </table>
                 </div>` : `<p><i>No prior requirements listed — walk in.</i></p>`}
               <div class="svc-meta" style="margin-top:.8rem">
-                Fee: <b>${(s.fees && s.fees.length) ? s.fees.join('; ') : 'See PDF'}</b>
-                &nbsp;&middot;&nbsp; Processing time: <b>${(s.processingTime && s.processingTime.length) ? s.processingTime.join('; ') : 'See PDF'}</b>
+                Fee: <b>${(s.fees && s.fees.length) ? esc(s.fees.join('; ')) : 'See PDF'}</b>
+                &nbsp;&middot;&nbsp; Processing time: <b>${(s.processingTime && s.processingTime.length) ? esc(s.processingTime.join('; ')) : 'See PDF'}</b>
               </div>
-              <p class="charter-source">Source: Citizen's Charter 2023, p. ${s.sourcePages}. Fees and processing time are auto-extracted from the PDF table — confirm against the source before quoting to a client.</p>
+              <p class="charter-source">Source: Citizen's Charter 2023, p. ${esc(s.sourcePages)}. Fees and processing time are auto-extracted from the PDF table — confirm against the source before quoting to a client.</p>
             </div>
           </details>`).join('')}
       </div>
@@ -132,30 +273,148 @@ function renderHotlines(list){
     const real = digits.length >= 7 && !/^0+$/.test(digits);
     if (real) {
       return `<a class="doc-row" href="tel:${digits}">
-        ${svgIcon('help')}
-        <span><span class="doc-title">${h.name}</span><br><span class="doc-sub">${h.number}</span></span>
+        <span class="doc-ico">${svgIcon(h.icon || 'help')}</span>
+        <span><span class="doc-title">${esc(h.name)}</span><br><span class="doc-sub">${esc(h.number)}</span></span>
         <span class="doc-go">Call &rarr;</span>
       </a>`;
     }
     return `<div class="doc-row is-pending">
-      ${svgIcon('help')}
-      <span><span class="doc-title">${h.name}</span><br><span class="doc-sub">Number not yet confirmed &mdash; call the municipal emergency hotline above</span></span>
+      <span class="doc-ico">${svgIcon(h.icon || 'help')}</span>
+      <span><span class="doc-title">${esc(h.name)}</span><br><span class="doc-sub">Number not yet confirmed &mdash; call the municipal emergency hotline above</span></span>
       <span class="doc-go">Pending</span>
     </div>`;
   }).join('');
 }
 
+/* ── SEARCH ──
+   Searches both sources at once (buildSearchIndex/searchServices live in
+   app.js so the homepage box can hand off to exactly this behaviour). While a
+   query is active the tab panels give way to a results list; clearing the box
+   puts the tabs back where they were. */
+let SEARCH_INDEX = [];
+let lastTab = TABS[0];
+
+function resultRow(r){
+  if (r.kind === 'charter') {
+    return `<button class="res-row" type="button" data-kind="charter" data-name="${esc(r.name)}">
+      <span class="res-badge res-badge--charter">Citizen's Charter</span>
+      <span class="res-main">
+        <span class="res-name">${esc(r.name)}</span>
+        <span class="res-sub">${esc(r.office)}${r.page ? ` &middot; p.&nbsp;${esc(r.page)}` : ''}</span>
+        ${r.meta ? `<span class="res-meta">${esc(r.meta)}</span>` : ''}
+      </span>
+      <span class="res-go">Open &rarr;</span>
+    </button>`;
+  }
+  return `<button class="res-row" type="button" data-kind="group" data-group="${esc(r.groupId || '')}">
+    <span class="res-badge">Service directory</span>
+    <span class="res-main">
+      <span class="res-name">${esc(r.name)}</span>
+      <span class="res-sub">${esc(r.office)}</span>
+      ${r.desc ? `<span class="res-desc">${esc(r.desc)}</span>` : ''}
+      ${r.meta ? `<span class="res-meta">${esc(r.meta)}</span>` : ''}
+    </span>
+    <span class="res-go">Open &rarr;</span>
+  </button>`;
+}
+
+function showTabs(){
+  document.getElementById('panel-search').hidden = true;
+  document.getElementById('serviceTabs').hidden = false;
+  document.getElementById('searchHint').hidden = false;
+  selectTab(lastTab);
+}
+
+function runSearch(query){
+  const q = (query || '').trim();
+  const panel = document.getElementById('panel-search');
+  if (q.length < 2) { showTabs(); return; }
+
+  // Park the tabs while results are showing.
+  document.getElementById('serviceTabs').hidden = true;
+  document.getElementById('searchHint').hidden = true;
+  TABS.forEach(t => { document.getElementById('panel-' + t).hidden = true; });
+  panel.hidden = false;
+
+  const hits = searchServices(SEARCH_INDEX, q);
+  const count = document.getElementById('searchCount');
+  const out = document.getElementById('searchResults');
+
+  if (!hits.length) {
+    count.textContent = `No match for “${q}”`;
+    out.innerHTML = `<div class="res-empty">
+      <p>Nothing in the Citizen's Charter or the service directory matches <b>${esc(q)}</b>.</p>
+      <p>Try a shorter or more general word &mdash; &ldquo;permit&rdquo; rather than &ldquo;permitting&rdquo;, or the name of the office you need. You can also
+      <button class="btn-ghost-link" type="button" id="resetSearch">browse all services</button>.</p>
+    </div>`;
+    const reset = document.getElementById('resetSearch');
+    if (reset) reset.addEventListener('click', () => {
+      document.getElementById('svcSearchInput').value = '';
+      runSearch('');
+    });
+    return;
+  }
+
+  count.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`;
+  out.innerHTML = `<div class="res-list">${hits.map(resultRow).join('')}</div>`;
+
+  // Each result jumps to the real entry in the tab it came from.
+  out.querySelectorAll('.res-row').forEach(btn => btn.addEventListener('click', () => {
+    document.getElementById('svcSearchInput').value = '';
+    if (btn.dataset.kind === 'charter') {
+      lastTab = 'directory';
+      showTabs();
+      const wanted = btn.dataset.name;
+      const item = [...document.querySelectorAll('#charterOffices .charter-item')]
+        .find(d => d.querySelector('.charter-name')?.textContent.trim() === wanted);
+      if (item) { item.open = true; item.scrollIntoView({ block: 'center' }); }
+    } else {
+      lastTab = 'services';
+      showTabs();
+      const g = btn.dataset.group && document.getElementById(btn.dataset.group);
+      if (g) g.scrollIntoView({ block: 'start' });
+    }
+  }));
+}
+
 (async function(){
   initChrome('services');
+  tabs = setupTabs(TABS, { onSelect: name => { lastTab = name; } });
+
   const d = await loadJSON('data/services.json', FALLBACK);
-  renderOnline(d.online || []);
+  renderFeatured(d.featured || []);
   renderGroups(d.groups || []);
   renderHotlines(d.hotlines || []);
+
   const charter = await loadJSON('data/citizens-charter.json', CHARTER_FALLBACK);
+  renderCharterAbout(charter.about);
   renderCharter(charter.offices || []);
+
   observeReveal();
-  // jump to in-page anchor after async render
-  if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+
+  // Search is available as soon as both files are in.
+  SEARCH_INDEX = buildSearchIndex(charter, d);
+  const initialQuery = new URLSearchParams(location.search).get('q') || '';
+  const input = renderSearchBox(document.getElementById('serviceSearch'), {
+    label: 'Search public services',
+    placeholder: 'Search a service, document or office…',
+    value: initialQuery,
+    onInput: runSearch,
+    onSubmit: runSearch,
+  });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { input.value = ''; runSearch(''); }
+  });
+
+  // A hash may name a tab, or an anchor inside one (e.g. #hotline, #admin).
+  applyTabHash(tabs, true);
+  window.addEventListener('hashchange', () => applyTabHash(tabs, true));
+
+  // ?q= arrives from the homepage box; run it once everything is indexed.
+  if (initialQuery.trim().length >= 2) {
+    runSearch(initialQuery);
+    document.getElementById('serviceSearch').scrollIntoView({ block: 'center' });
+  }
 })();
 </script>
 </body>

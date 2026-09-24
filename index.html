@@ -43,6 +43,11 @@
       <a href="services.html" class="see-all">All services &rarr;</a>
     </div>
     <div class="qs-grid" id="quickServices"><!-- rendered from data/site.json --></div>
+
+    <div class="home-search is-centered">
+      <p class="home-search-lede">Looking for something else? Search every service in the Citizen&rsquo;s Charter and the service directory.</p>
+      <div id="homeSearch"><!-- rendered by renderSearchBox --></div>
+    </div>
   </div>
 </section>
 
@@ -50,10 +55,10 @@
 <div class="elgu">
   <div class="elgu-inner">
     <div class="elgu-text">
-      <h2 id="elguTitle">Online Services are here</h2>
+      <h2 id="elguTitle">Know before you go</h2>
       <p id="elguText"></p>
     </div>
-    <a class="btn btn-primary" id="elguCta" href="services.html#online">Go to Online Services</a>
+    <a class="btn btn-primary" id="elguCta" href="services.html#charter">Open Public Services</a>
   </div>
 </div>
 
@@ -76,7 +81,7 @@
         <p id="homeMission"></p>
       </article>
     </div>
-    <p class="vm-home-more"><a href="about.html#mandate">Read our mandate &amp; service pledge &rarr;</a></p>
+    <p class="vm-home-more"><a href="services.html#charter">Read our mandate &amp; service pledge &rarr;</a></p>
   </div>
 </section>
 
@@ -150,7 +155,7 @@ const FALLBACK_SITE = {
   heroTitle: "A municipality that <em>works for you</em>",
   heroSub: "Access public services, stay informed, and connect with your local government — all in one place.",
   heroSlides: [],
-  elgu: { title: "Online Services are here", text: "Transact with the municipal government online.", cta: "Go to Online Services", href: "services.html#online" },
+  elgu: { title: "Know before you go", text: "The Citizen's Charter lists every service the Municipality offers.", cta: "Open Public Services", href: "services.html#charter" },
   stats: [
     { num: "7", label: "Barangays" },
     { num: "11,342", label: "Population · 2020" },
@@ -215,7 +220,7 @@ function renderSite(s){
   document.getElementById('elguText').textContent = e.text || '';
   const cta = document.getElementById('elguCta');
   cta.textContent = e.cta || 'Go to Online Services';
-  cta.href = e.href || 'services.html#online';
+  cta.href = e.href || 'services.html#charter';
 
   document.getElementById('quickServices').innerHTML = (s.quickServices || []).map(q =>
     `<a class="qs-card" href="${q.href}">
@@ -304,8 +309,23 @@ function renderLatestNews(n){
   }).join('');
 }
 
+function initHomeSearch(){
+  const mount = document.getElementById('homeSearch');
+  if (!mount || typeof renderSearchBox !== 'function') return;
+  const go = q => {
+    const query = (q || '').trim();
+    location.href = query ? `services.html?q=${encodeURIComponent(query)}` : 'services.html';
+  };
+  renderSearchBox(mount, {
+    label: 'Search public services',
+    placeholder: 'Search a service, document or office…',
+    onSubmit: go,     // no onInput: the homepage hands off rather than searching in place
+  });
+}
+
 (async function(){
   initChrome('home');
+  initHomeSearch();
   const [site, officials, news] = await Promise.all([
     loadJSON('data/site.json', FALLBACK_SITE),
     loadJSON('data/officials.json', { welcome: { name: 'Engr. Robert M. Fabella', role: 'Municipal Mayor', message: ['Welcome to the official website of the Municipality of Calatrava.'] } }),

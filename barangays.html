@@ -4,61 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Barangays — Municipality of Calatrava, Romblon</title>
-<meta name="description" content="The 7 barangays of the Municipality of Calatrava, Romblon, with their barangay officials and population.">
+<meta name="description" content="The 7 barangays of the Municipality of Calatrava, Romblon — now part of the About Us page.">
+<link rel="canonical" href="about-us.html">
+<!-- The Barangays page moved into About Us as a tab. This stub keeps old
+     links, bookmarks and search-engine results working. -->
+<meta http-equiv="refresh" content="0; url=about-us.html#barangays">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<script>location.replace('about-us.html#barangays');</script>
 </head>
 <body>
 
 <section class="page-hero">
   <div class="page-hero-inner">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Barangays</span></nav>
-    <h1>Our <em>Barangays</em></h1>
-    <p id="intro"></p>
+    <h1>This page has <em>moved</em></h1>
+    <p>The barangay directory is now part of About Us. If you are not redirected automatically,
+      <a href="about-us.html#barangays" style="color:var(--gl)">open it here</a>.</p>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="brgy-grid" id="barangays"><!-- rendered from data/barangays.json --></div>
-  </div>
-</section>
-
-<script src="assets/app.js"></script>
-<script>
-const FALLBACK = {
-  intro: "The Municipality of Calatrava is composed of 7 barangays on the northern tip of Tablas Island.",
-  barangays: [{ name: "Poblacion", seal: "assets/images/barangays/poblacion.png", captain: "", phone: "", email: "", population: "1,764" }]
-};
-
-(async function(){
-  initChrome('barangays');
-  const d = await loadJSON('data/barangays.json', FALLBACK);
-  document.getElementById('intro').textContent = d.intro || '';
-  const esc = v => String(v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  document.getElementById('barangays').innerHTML = (d.barangays || []).map(b => {
-    const seal = b.seal
-      ? `<img class="brgy-seal" src="${esc(b.seal)}" alt="Official seal of Barangay ${esc(b.name)}" width="72" height="72" loading="lazy">`
-      : `<div class="brgy-seal brgy-seal-empty" aria-hidden="true">${esc(b.name.charAt(0))}</div>`;
-    const tel = b.phone ? `<div class="brgy-row"><dt>Mobile</dt><dd><a href="tel:+63${b.phone.replace(/\D/g,'').replace(/^0/,'')}">${esc(b.phone)}</a></dd></div>` : '';
-    const mail = b.email ? `<div class="brgy-row"><dt>Email</dt><dd class="brgy-email"><a href="mailto:${esc(b.email)}">${esc(b.email)}</a></dd></div>` : '';
-    return `<article class="brgy-item">
-      <header class="brgy-head">
-        ${seal}
-        <h3>${esc(b.name)}</h3>
-      </header>
-      <dl class="brgy-dl">
-        <div class="brgy-row"><dt>Punong Barangay</dt><dd class="brgy-name">${b.captain ? esc(b.captain) : '<em>To be announced</em>'}</dd></div>
-        ${tel}${mail}
-        <div class="brgy-row brgy-pop"><dt>Population <span>(2020 PSA)</span></dt><dd>${esc(b.population || '—')}</dd></div>
-      </dl>
-    </article>`;
-  }).join('');
-  observeReveal();
-})();
-</script>
 </body>
 </html>

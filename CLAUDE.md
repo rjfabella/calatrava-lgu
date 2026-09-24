@@ -66,8 +66,11 @@ of the above before changing site structure.
     plantilla position with title and salary grade, parsed from
     `assets/contents/Organizational Chart 2026.pptx`
   - `data/services.json` — 8 hand-curated service-group summary cards,
-    online services, emergency hotlines (homepage/services quick reference —
-    NOT auto-generated from the charter; reconcile by hand)
+    `featured` (Calatravanhon Card + Feedback & Complaints), emergency
+    hotlines (homepage/services quick reference — NOT auto-generated from the
+    charter; reconcile by hand). The old `online` block is gone: the LGU has
+    no transactional online services yet, so advertising them was a
+    placeholder that read as real.
   - `data/citizens-charter.json` — all 45 frontline services from the
     Citizen's Charter 2023, grouped by office: classification, who may
     avail, requirements + where to secure, fees, processing time. Rendered
@@ -75,7 +78,8 @@ of the above before changing site structure.
     are auto-extracted from the PDF's tables and best-effort — verify
     against the cited `sourcePages` before treating a figure as final;
     `requirements`/`classification`/`whoMayAvail` came from bordered table
-    cells and are reliable.
+    cells and are reliable. An `about` block carries the edition, legal basis
+    and coverage figures rendered on the Citizen's Charter tab.
   - `data/barangays.json` — the 7 barangays, captains, population
   - `data/news.json` — news items, added by hand, auto-sorted by date. This is
     the only source. **Don't propose syncing from Facebook**: the municipal
@@ -88,8 +92,36 @@ of the above before changing site structure.
 - **Styling**: single `assets/style.css` design system (Cormorant Garamond +
   Jost fonts, green/gold palette) driven by `:root` CSS variables. Re-theme
   there, not with inline styles or per-page stylesheets.
-- **Pages**: `index.html`, `about.html`, `services.html`, `barangays.html`,
-  `transparency.html`, `news.html`, `contact.html`, `privacy.html`.
+- **Pages**: `index.html`, `about.html` (Government — elected officials +
+  offices/departments), `about-us.html` (three tabs: History / Barangays /
+  Map),
+  `services.html` (Public Services, three tabs: Citizen's Charter explainer /
+  Charter directory / services by category), `barangays.html`,
+  `transparency.html`, `news.html`, `contact.html` (office directory only),
+  `privacy.html`. `barangays.html` is a redirect stub to
+  `about-us.html#barangays` — keep it so old links and bookmarks survive.
+- **Tabs**: `setupTabs(names, opts)` + `applyTabHash(group)` in `assets/app.js`
+  carry the WAI-ARIA tab behaviour (roving tabindex, arrow keys, hash sync).
+  Both `services.html` and `about-us.html` use it; don't reimplement per page.
+  Markup contract: `#tab-<name>` buttons and a `#panel-<name>` for each.
+  `.tabs[hidden]` is declared explicitly because `display:flex` would
+  otherwise beat the `hidden` attribute.
+- **Search**: `buildSearchIndex`/`searchServices`/`renderSearchBox` in
+  `assets/app.js`. The index is built from `citizens-charter.json` +
+  `services.json` at runtime, so it can never drift from what renders. The
+  homepage box hands off to `services.html?q=…`; the Services page does the
+  searching.
+- **Page transitions**: cross-document View Transitions via
+  `@view-transition{navigation:auto}` in the CSS, with `.site-head` given a
+  `view-transition-name` so the frozen header doesn't cross-fade. Browsers
+  without the API get a one-off fade-up of `main` from
+  `initPageTransition()`. Both are disabled under `prefers-reduced-motion`.
+- **Sticky chrome**: `.site-head` (top bar + nav + a compact page-title strip)
+  is `position:sticky`. The strip is built in `buildPageBar()` from each
+  page's own `<h1>`/breadcrumb and reveals itself once the page hero scrolls
+  past; the homepage has no hero and so gets no strip. The injected chrome
+  wrapper is `display:contents` — give it a containing block and sticky
+  silently stops working.
 - **Never publish invented data.** This is a live government portal, so a
   placeholder that *looks* real is worse than a visible gap: fake hotlines
   were dialable, fabricated news items read as official announcements, and an

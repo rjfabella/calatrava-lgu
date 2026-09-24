@@ -4,7 +4,8 @@
   "email": "andagaoutour@gmail.com",
   "phone": "0966 439 3711",
   "facebook": "https://www.facebook.com/calatrava.romblon.217551/",
-  "mapEmbed": "https://www.google.com/maps?q=Calatrava,Romblon&output=embed",
+  "mapEmbed": "https://www.google.com/maps?q=Calatrava+Municipal+Hall,+Calatrava,+Romblon&ll=12.6182304,122.0707587&z=17&output=embed",
+  "_mapNote": "Was a plain 'Calatrava,Romblon' area search with no marker. The query now names the Municipal Hall so Google drops a labelled pin on the building, with ll/z centring it in case the name ever stops resolving. Verified 2026-09-24 against Google Maps, which lists 'Calatrava Municipal Hall' (city government office) at 12.6182304, 122.0707587 -- plus code J39C+78R, Municipal Hall Dr, Calatrava, Romblon. Coordinates are Google's, not measured by the LGU; if the Mayor's office gives an official location, use theirs.",
   "_dpoNote": "RA 10173 requires a designated Data Protection Officer with real, reachable contact details. Nobody has been named yet, so this is left empty on purpose and privacy.html shows an interim notice instead — do NOT invent an address here. Fill in name/title/email/phone once the Mayor's office designates one, and it appears automatically on privacy.html.",
   "dpo": { "name": "", "title": "", "email": "", "phone": "" },
   "directory": [

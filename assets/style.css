@@ -36,6 +36,35 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   padding:.85rem 1.5rem;font-size:16px;font-weight:600;text-decoration:none}
 .skip-link:focus{left:0}
 
+/* ── PAGE TRANSITIONS ──
+   Where cross-document view transitions are supported the browser does the
+   work; the sticky head is named so it stays put instead of cross-fading with
+   the rest of the page. Elsewhere initPageTransition() fades `main` up once on
+   arrival. Both are off under prefers-reduced-motion. */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.26s}
+.site-head{view-transition-name:site-head}
+
+.page-enter{opacity:0;transform:translateY(8px)}
+.page-enter-in{opacity:1;transform:none;transition:opacity .34s ease,transform .34s ease}
+
+@media(prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .page-enter,.page-enter-in{opacity:1;transform:none;transition:none}
+}
+
+/* ── STICKY SITE HEAD ──
+   Top bar + nav + the compact page-title strip travel as one block, so the
+   active tab and the page you are on stay on screen while you scroll. The
+   strip only appears once the page hero has gone by (see buildPageBar), so
+   the frozen band stays shallow. */
+.chrome-wrap{display:contents}
+.site-head{position:sticky;top:0;z-index:100}
+html{scroll-behavior:smooth}
+/* Anchor targets must clear the frozen band. */
+[id]{scroll-margin-top:150px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
 /* ── TOP BAR (Republic strip) ── */
 .topbar{background:var(--deep);color:rgba(255,255,255,.88);font-size:13px;letter-spacing:.04em}
 .topbar-inner{max-width:1200px;margin:0 auto;padding:.4rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
@@ -43,8 +72,23 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .topbar a:hover{color:var(--gl)}
 .topbar-right{display:flex;gap:1.25rem}
 
+/* ── COMPACT PAGE TITLE STRIP ──
+   Collapses to zero height until `is-on`, so it slides in rather than
+   jumping the layout. Not rendered at all on the homepage. */
+.page-bar{background:var(--deep);color:var(--white);max-height:0;overflow:hidden;
+  transition:max-height .28s ease;box-shadow:0 1px 0 rgba(255,255,255,.12)}
+.page-bar.is-on{max-height:64px}
+.page-bar-inner{max-width:1200px;margin:0 auto;padding:.7rem 2.5rem;display:flex;align-items:center;
+  justify-content:space-between;gap:1rem}
+.page-bar-title{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--white);line-height:1.2}
+.page-bar-top{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gl);
+  text-decoration:none;white-space:nowrap;padding:.3rem 0}
+.page-bar-top:hover{color:var(--white)}
+.page-bar-sentinel{height:1px;margin-top:-1px}
+@media(prefers-reduced-motion:reduce){.page-bar{transition:none}}
+
 /* ── NAV ── */
-.nav{position:sticky;top:0;z-index:100;padding:.8rem 2.5rem;background:rgba(248,250,244,.98);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border);display:flex;align-items:center;justify-content:space-between}
+.nav{padding:.8rem 2.5rem;background:rgba(248,250,244,.98);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border);display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .nav-seal{width:50px;height:50px;border-radius:50%;overflow:hidden;border:1px solid var(--border);flex-shrink:0}
 .nav-seal img{width:100%;height:100%;object-fit:cover}
@@ -227,6 +271,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .doc-row{background:var(--white);padding:1.4rem 1.7rem;display:flex;align-items:center;gap:1rem;text-decoration:none;color:var(--text);transition:background .3s}
 .doc-row:hover{background:var(--cream)}
 .doc-row svg{width:28px;height:28px;color:var(--ocean);flex-shrink:0;stroke-width:1.6}
+/* Emergency-service pictogram in a tinted disc, so each hotline is
+   recognisable at a glance before the label is read. */
+.doc-ico{flex-shrink:0;width:54px;height:54px;border-radius:50%;background:var(--sand);
+  display:flex;align-items:center;justify-content:center}
+.doc-ico svg{width:29px;height:29px;color:var(--ocean);stroke-width:1.8}
+.doc-row.is-pending .doc-ico{background:var(--cream)}
+.doc-row.is-pending .doc-ico svg{color:var(--muted)}
 .doc-row .doc-title{font-weight:700;color:var(--deep);font-size:17px;line-height:1.4}
 .doc-row .doc-sub{font-size:14.5px;color:var(--muted);line-height:1.5}
 .doc-row .doc-go{margin-left:auto;font-size:13.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
@@ -391,25 +442,37 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
 .partner-chip{font-size:14px;letter-spacing:.02em;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.3);border-radius:30px;padding:.45rem 1.1rem}
 
 /* ── BARANGAYS ── */
-.brgy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.brgy-item{background:var(--white);border:1px solid var(--border);border-top:4px solid var(--ocean);border-radius:4px;padding:1.5rem 1.6rem 1.25rem;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
-.brgy-item:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.brgy-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem}
-.brgy-seal{flex:0 0 72px;width:72px;height:72px;border-radius:50%;object-fit:contain;background:var(--white);border:1px solid var(--border)}
-.brgy-seal-empty{display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:1.6rem;font-weight:700;color:var(--deep);background:var(--cream)}
-.brgy-head h3{font-family:var(--fd);font-size:1.45rem;font-weight:700;color:var(--deep);line-height:1.2}
-.brgy-dl{margin:0;display:flex;flex-direction:column;gap:.8rem}
-.brgy-row dt{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.15rem}
-.brgy-row dt span{font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted)}
-.brgy-row dd{margin:0;font-size:16.5px;line-height:1.45;color:var(--text)}
-.brgy-row dd a{color:var(--ocean);text-decoration:none;border-bottom:1px solid rgba(30,116,15,.35)}
-.brgy-row dd a:hover{border-bottom-color:var(--ocean)}
-.brgy-name{font-weight:700;white-space:nowrap}
-.brgy-name em{font-weight:400;color:var(--muted)}
-.brgy-email{overflow-wrap:anywhere}
-.brgy-pop{margin-top:.4rem;padding-top:.9rem;border-top:1px solid var(--border);display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
-.brgy-pop dt{margin-bottom:0}
-.brgy-pop dd{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--ocean)}
+.brgy-wrap{background:var(--white);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.brgy-table{width:100%;border-collapse:collapse;font-size:16.5px}
+.brgy-table thead th{text-align:left;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--deep);background:var(--sand);padding:.85rem 1.25rem;border-bottom:1px solid var(--border)}
+.brgy-table thead th span{font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted)}
+.brgy-table tbody th,.brgy-table tbody td{padding:1rem 1.25rem;border-top:1px solid var(--border);vertical-align:middle;text-align:left}
+.brgy-table tbody tr:first-child th,.brgy-table tbody tr:first-child td{border-top:0}
+.brgy-table tbody tr:hover{background:var(--cream)}
+.brgy-id{display:inline-flex;align-items:center;gap:.9rem}
+.brgy-seal{flex:0 0 56px;width:56px;height:56px;border-radius:50%;object-fit:contain;background:var(--white);border:1px solid var(--border)}
+.brgy-seal-empty{display:inline-flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--deep);background:var(--cream)}
+.brgy-nm{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--deep);white-space:nowrap}
+.brgy-table td{color:var(--text);white-space:nowrap}
+.brgy-table td a{color:var(--ocean);text-decoration:none;border-bottom:1px solid rgba(30,116,15,.35)}
+.brgy-table td a:hover{border-bottom-color:var(--ocean)}
+.brgy-contact{line-height:1.6}
+.brgy-muted{color:var(--muted)}
+.brgy-table .brgy-pop{text-align:right;font-weight:700;color:var(--ocean);font-variant-numeric:tabular-nums}
+@media (max-width:760px){
+  .brgy-table thead{position:absolute;left:-9999px}
+  .brgy-table,.brgy-table tbody,.brgy-table tr,.brgy-table th,.brgy-table td{display:block}
+  .brgy-table tbody tr{padding:1.1rem 1.1rem 1.2rem;border-top:1px solid var(--border)}
+  .brgy-table tbody tr:first-child{border-top:0}
+  .brgy-table tbody th,.brgy-table tbody td{padding:0;border:0;white-space:normal}
+  .brgy-table tbody th{margin-bottom:.9rem}
+  .brgy-table tbody td{padding:.45rem 0 0}
+  .brgy-table tbody td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.1rem}
+  .brgy-table tbody td.brgy-pop{text-align:left;color:var(--text);font-weight:400}
+  .brgy-table tbody td.brgy-pop .brgy-val{font-weight:700;color:var(--ocean)}
+  .brgy-contact{overflow-wrap:anywhere}
+}
+}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
@@ -448,6 +511,127 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
   text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .charter-intro a:hover{color:var(--gold)}
 
+/* ── OFFICES & DEPARTMENTS ──
+   A card per office: head's portrait, the office name with the Citizen's
+   Charter acronym, and who runs it. */
+.dept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.dept-card{background:var(--white);border:1px solid var(--border);border-top:4px solid var(--ocean);
+  border-radius:4px;overflow:hidden;display:flex;gap:1.1rem;padding:1.3rem 1.4rem;align-items:flex-start;
+  transition:transform .3s,box-shadow .3s}
+.dept-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.dept-photo{flex:0 0 84px;width:84px;height:112px;border-radius:4px;overflow:hidden;background:var(--sand)}
+.dept-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.dept-photo .monogram{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--deep);background:var(--sand)}
+.dept-body{min-width:0}
+.dept-body h3{font-size:16.5px;font-weight:700;color:var(--deep);line-height:1.38;margin-bottom:.55rem}
+.dept-acr{display:inline-block;font-family:var(--fb);font-size:12px;font-weight:700;letter-spacing:.08em;
+  color:var(--ocean);background:var(--sand);border-radius:3px;padding:.15rem .45rem;vertical-align:2px;
+  white-space:nowrap}
+.dept-head-name{font-size:16px;font-weight:700;color:var(--text);line-height:1.4}
+.dept-head-title{font-size:14.5px;color:var(--muted);line-height:1.45;margin-top:.15rem}
+
+/* ── TABS (Public Services) ── */
+/* `display:flex` would otherwise beat the hidden attribute's UA rule, and the
+   tab bar would stay on screen behind the search results. */
+.tabs[hidden]{display:none}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;border-bottom:2px solid var(--border)}
+.tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;
+  font-family:var(--fb);font-size:15px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--muted);padding:.95rem 1.3rem;cursor:pointer;transition:color .25s,border-color .25s,background .25s;
+  border-radius:4px 4px 0 0}
+.tab:hover{color:var(--deep);background:var(--sand)}
+.tab[aria-selected="true"]{color:var(--deep);border-bottom-color:var(--ocean)}
+.tab-panel:focus{outline:none}
+.tab-panel[hidden]{display:none}
+
+/* ── CITIZEN'S CHARTER EXPLAINER ── */
+.charter-hero{display:grid;grid-template-columns:1fr 340px;gap:2.5rem;align-items:center;margin-bottom:2.5rem}
+.charter-hero .charter-intro{max-width:52ch}
+.charter-figure{margin:0}
+.charter-figure svg{width:100%;height:auto;display:block}
+.charter-what{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border)}
+.charter-what-item{background:var(--white);padding:1.5rem 1.6rem;display:flex;gap:1.1rem;align-items:flex-start}
+.charter-what-ico{flex:0 0 44px;width:44px;height:44px;border-radius:50%;background:var(--sand);
+  display:flex;align-items:center;justify-content:center}
+.charter-what-ico svg{width:22px;height:22px;color:var(--ocean);stroke-width:1.7}
+.charter-what-item h3{font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--deep);margin-bottom:.4rem;line-height:1.3}
+.charter-what-item p{font-size:16px;color:var(--text);line-height:1.65}
+.charter-meta{display:grid;grid-template-columns:1.35fr 1fr;gap:1.5rem;margin-top:1.5rem}
+.charter-meta > div{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:4px;padding:1.8rem}
+.charter-meta h3{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--deep);margin-bottom:1rem}
+.charter-facts{margin:0 0 1.4rem}
+.charter-fact{display:grid;grid-template-columns:8.5rem 1fr;gap:1rem;padding:.55rem 0;border-top:1px solid var(--border)}
+.charter-fact:first-child{border-top:0;padding-top:0}
+.charter-fact dt{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);padding-top:.2rem}
+.charter-fact dd{margin:0;font-size:16px;color:var(--text);line-height:1.55}
+.charter-dl{display:flex;flex-direction:column;gap:.7rem;align-items:flex-start}
+.btn-download{display:inline-flex;align-items:center;gap:.9rem;background:var(--ocean);color:var(--white);
+  text-decoration:none;padding:.9rem 1.4rem;border-radius:4px;border-bottom:3px solid var(--gold);
+  box-shadow:0 4px 14px rgba(30,116,15,.28);transition:background .3s,box-shadow .3s,transform .2s}
+.btn-download:hover{background:var(--deep);box-shadow:0 7px 20px rgba(18,63,30,.36);transform:translateY(-1px)}
+.btn-download svg{width:24px;height:24px;flex-shrink:0;stroke-width:1.6}
+.btn-download b{display:block;font-size:16px;font-weight:700;line-height:1.3}
+.btn-download small{display:block;font-size:13.5px;color:rgba(255,255,255,.82);margin-top:.1rem}
+.btn-ghost-link{appearance:none;background:none;border:0;padding:.4rem 0;cursor:pointer;font-family:var(--fb);
+  font-size:15px;font-weight:600;color:var(--ocean);text-decoration:underline;text-underline-offset:3px}
+.btn-ghost-link:hover{color:var(--gold)}
+
+/* Featured service cards (Calatravanhon Card, Feedback) */
+.card-ico{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;
+  background:var(--sand);margin-bottom:1rem}
+.card-ico svg{width:24px;height:24px;color:var(--ocean);stroke-width:1.7}
+.card-tag.is-pending{color:var(--muted)}
+.card-link.is-pending{color:var(--muted);border-bottom-color:var(--border);cursor:default}
+
+/* ── SERVICE SEARCH ── */
+.svc-search-wrap{margin-bottom:.9rem}
+.svc-search{display:flex;align-items:center;gap:.6rem;background:var(--white);border:1px solid var(--border);
+  border-radius:4px;padding:.4rem .5rem .4rem 1rem;transition:border-color .2s,box-shadow .2s}
+.svc-search:focus-within{border-color:var(--ocean);box-shadow:0 0 0 3px rgba(30,116,15,.14)}
+.svc-search-ico{display:flex;flex-shrink:0}
+.svc-search-ico svg{width:20px;height:20px;color:var(--muted)}
+.svc-search:focus-within .svc-search-ico svg{color:var(--ocean)}
+.svc-search-input{flex:1;min-width:0;border:0;background:none;font-family:var(--fb);font-size:17px;
+  color:var(--text);padding:.7rem 0}
+.svc-search-input:focus{outline:none}
+.svc-search-input::placeholder{color:var(--muted)}
+.svc-search-btn{flex-shrink:0;appearance:none;border:0;cursor:pointer;background:var(--ocean);color:var(--white);
+  font-family:var(--fb);font-size:14px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:.75rem 1.4rem;border-radius:3px;transition:background .25s}
+.svc-search-btn:hover{background:var(--deep)}
+.svc-search-hint{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:1.6rem;max-width:70ch}
+
+/* Result rows — one row per hit, badged with the source it came from. */
+.res-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
+.res-row{appearance:none;border:0;width:100%;text-align:left;cursor:pointer;background:var(--white);
+  padding:1.1rem 1.4rem;display:flex;align-items:flex-start;gap:1.1rem;font-family:var(--fb);
+  transition:background .2s}
+.res-row:hover{background:var(--cream)}
+.res-badge{flex:0 0 auto;font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);background:var(--sand);border-radius:3px;padding:.3rem .6rem;margin-top:.15rem;
+  white-space:nowrap}
+.res-badge--charter{color:var(--ocean)}
+.res-main{flex:1;min-width:0}
+.res-name{display:block;font-size:17px;font-weight:700;color:var(--deep);line-height:1.4}
+.res-sub{display:block;font-size:14.5px;color:var(--muted);margin-top:.15rem;line-height:1.45}
+.res-desc{display:block;font-size:15.5px;color:var(--text);margin-top:.35rem;line-height:1.55}
+.res-meta{display:block;font-size:14.5px;color:var(--ocean);font-weight:600;margin-top:.35rem;line-height:1.5}
+.res-go{flex:0 0 auto;align-self:center;font-size:13px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.res-empty{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:4px;padding:1.8rem;max-width:70ch}
+.res-empty p{font-size:17px;line-height:1.7;color:var(--text)}
+.res-empty p + p{margin-top:.7rem}
+
+/* Homepage hand-off box */
+.home-search{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);max-width:760px}
+.home-search.is-centered{margin-left:auto;margin-right:auto;text-align:center}
+.home-search.is-centered .svc-search{text-align:left}
+.home-search-lede{font-size:16.5px;color:var(--muted);line-height:1.65;margin-bottom:.9rem}
+
 /* ── RESPONSIVE ── */
 @media(max-width:980px){
   .qs-grid{grid-template-columns:repeat(2,1fr)}
@@ -457,7 +641,11 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
   .stats{grid-template-columns:repeat(2,1fr)}
   .welcome{grid-template-columns:1fr;gap:2rem}
   .vm-grid,.svc-list,.doc-list,.dir-grid{grid-template-columns:1fr}
-  .prog-grid,.brgy-grid{grid-template-columns:repeat(2,1fr)}
+  .prog-grid{grid-template-columns:repeat(2,1fr)}
+  .dept-grid{grid-template-columns:repeat(2,1fr)}
+  .charter-hero{grid-template-columns:1fr;gap:1.5rem}
+  .charter-figure{max-width:340px}
+  .charter-what,.charter-meta{grid-template-columns:1fr}
   .elgu-inner{flex-direction:column;align-items:flex-start}
   .footer-grid{grid-template-columns:1fr 1fr}
   .certs{grid-template-columns:repeat(2,1fr)}
@@ -465,11 +653,29 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
   .vm-home-card + .vm-home-card{border-left:0;border-top:1px solid var(--border)}
   .vm-section::before{display:none}
 }
+@media(max-width:860px){
+  .dept-grid{grid-template-columns:1fr}
+  /* The head is frozen, so every row in it costs viewport. Drop the Republic
+     line (it is repeated in the footer) and keep the topbar to one row of
+     links rather than two wrapped ones. */
+  .site-head .topbar-inner > span{display:none}
+  .site-head .topbar-inner{justify-content:flex-start}
+  .page-bar-inner{padding:.55rem 1.25rem}
+  .page-bar.is-on{max-height:52px}
+}
 @media(max-width:600px){
   body{font-size:18px}
+  .svc-search{flex-wrap:wrap;padding:.5rem .6rem}
+  .svc-search-input{flex:1 1 60%}
+  .svc-search-btn{width:100%;margin-top:.2rem}
+  .res-row{flex-wrap:wrap;gap:.5rem 1rem}
+  .res-go{align-self:flex-start;margin-left:auto}
   .topbar-inner,.nav,.hero-inner,.section,.page-hero{padding-left:1.25rem;padding-right:1.25rem}
   .section{padding-top:3.5rem;padding-bottom:3.5rem}
-  .qs-grid,.cards,.officials-grid,.prog-grid,.brgy-grid{grid-template-columns:1fr}
+  .qs-grid,.cards,.officials-grid,.prog-grid{grid-template-columns:1fr}
+  .tab{flex:1 1 auto;padding:.8rem .7rem;font-size:13px;letter-spacing:.03em}
+  .charter-fact{grid-template-columns:1fr;gap:.15rem}
+  [id]{scroll-margin-top:120px}
   .lead-official{grid-column:span 1;grid-template-columns:1fr;text-align:center}
   .stats{grid-template-columns:1fr 1fr}
   .news-row{grid-template-columns:1fr;gap:.5rem}

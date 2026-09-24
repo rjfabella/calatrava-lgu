@@ -24,3 +24,11 @@ assets/images/Archive/
 assets/reference\ docs/*
 !assets/reference\ docs/README.md
 !assets/reference\ docs/Calatrava\ LGU\ Website\ Development.xlsx
+
+# Raw studio portraits from the LGU (~120 MB). Web-sized copies live in
+# assets/images/dept-heads/ and those are what the site uses.
+assets/images/Dept Heads/
+
+# Raw high-res barangay seals from the LGU (~10 MB). Web-sized copies sit
+# beside them as <slug>.png and those are what the site uses.
+assets/images/barangays/Brgy. * Seal.png

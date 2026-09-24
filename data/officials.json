@@ -25,8 +25,11 @@
   "mandate": "To keep with the policy of the State, Republic Act No. 11032, known as the \"Ease of Doing Business and Efficient Government Service Delivery Act of 2018,\" has been adopted by the Local Government Unit to establish its own Citizen's Charter containing the procedures, fees, processing time, and requirements for our services.",
   "servicePledge": "We, the officials and employees of the Municipality of Calatrava, Romblon, pledge and commit to deliver the quality public services as promised in this Citizen's Charter. Specifically, we will serve with integrity; be prompt and timely; display procedures, fees and charges; provide adequate and correct information; be consistent in applying the rules; provide a feedback mechanism; be polite and courteous; demonstrate sensitivity, appropriate behaviour and professionalism; wear proper uniform and identification; be available during office hours; respond to complaints; provide a comfortable waiting area; and treat everyone equally.",
   "history": [
-    "Calatrava is a municipality on the northern tip of Tablas Island in the Province of Romblon. [Add the founding story, etymology of the name, and key historical milestones here.]",
-    "[Describe the town's growth, notable events, and cultural heritage. This placeholder text is rendered from data/officials.json and can be edited freely.]"
+    "Long before it carried its present name, the settlement on the northern coastal plain of Tablas Island was known as <strong>Andagao</strong>, after a medicinal plant that grew in abundance along its shores. The name survives today in the LGU's own email address and in local usage.",
+    "Around 1810, the first settlers reached Andagao — Simaranhons, Sibalenhons and Bantoanons crossing from Banton, Simara and Romblon island in search of land better suited to farming, later joined by Asi-speaking migrants from Odiongan. By about 1838 the settlement had been organised as a community attached to Odiongan, and in 1839 Padre Jose Aznar oversaw the building of its first Roman Catholic church.",
+    "Andagao was first proclaimed a municipality in 1853, when the District of Romblon was created. The status did not hold: in 1868 it was reduced to a <em>visita</em> and annexed to Badajoz — the town known today as San Agustin. On 14 June 1881, during the term of the Spanish military governor Don Jose Fernandez de Terran, Andagao was renamed <strong>Calatrava</strong> after the medieval Military Order of Calatrava.",
+    "A second proclamation came on 4 June 1943 under the wartime revolutionary government, with Benito Famini, Sr. serving as the town's first mayor. Full and lasting independence followed a generation later: on 15 June 1968, Republic Act No. 5317 — sponsored by Congressman Jose D. Moreno — separated Calatrava from San Agustin and established it as an independent municipality.",
+    "Today Calatrava covers some 8,670 hectares, about 6.39% of the province's territory, and is made up of seven barangays: Balogo, Linao, Pagsangahan, Pangulo, Poblacion, San Roque and Talisay. It is bounded on the north by the Tablas Strait, on the east by San Agustin, and on the south and west by San Andres."
   ],
   "elected": [
     {
@@ -110,69 +113,91 @@
   ],
   "departments": [
     {
-      "name": "Office of the Municipal Mayor",
-      "head": "Engr. Robert M. Fabella",
-      "headTitle": "Municipal Mayor"
+      "name": "Office of the Sangguniang Bayan",
+      "acronym": "SB",
+      "head": "Joseph M. Fedelicio",
+      "headTitle": "Secretary to the Sangguniang Bayan",
+      "photo": "assets/images/dept-heads/sec.jpg"
     },
     {
-      "name": "Office of the Municipal Vice Mayor",
-      "head": "Hon. Elizer F. Fiedacan",
-      "headTitle": "Municipal Vice Mayor"
-    },
-    {
-      "name": "Office of the Municipal Treasurer",
-      "head": "Charlemagne F. Fortu",
-      "headTitle": "Municipal Treasurer"
-    },
-    {
-      "name": "Municipal Planning & Development Office",
+      "name": "Office of the Municipal Planning and Development",
+      "acronym": "MPDO",
       "head": "Engr. Berlito F. Fajel, Jr.",
-      "headTitle": "Municipal Planning and Development Coordinator"
-    },
-    {
-      "name": "Office of the Municipal Budget Officer",
-      "head": "Jeanlyn F. Fallaria",
-      "headTitle": "Municipal Budget Officer"
-    },
-    {
-      "name": "Office of the Municipal Assessor",
-      "head": "Engr. Vincent D. De Cardo",
-      "headTitle": "Municipal Assessor"
-    },
-    {
-      "name": "Office of the Municipal Accountant",
-      "head": "Ariel F. Famadulan",
-      "headTitle": "Municipal Accountant"
+      "headTitle": "Municipal Planning and Development Coordinator",
+      "photo": "assets/images/dept-heads/mpdo.jpg"
     },
     {
       "name": "Office of the Municipal Civil Registrar",
+      "acronym": "MCR",
       "head": "Belcezar F. Fajutagana",
-      "headTitle": "Municipal Civil Registrar"
+      "headTitle": "Municipal Civil Registrar",
+      "photo": "assets/images/dept-heads/mro.jpg"
     },
     {
-      "name": "Office of the Municipal Engineer",
-      "head": "Engr. Laureano F. Falcutila, III",
-      "headTitle": "Municipal Engineer / Building Official"
+      "name": "Office of the Municipal Social Welfare and Development",
+      "acronym": "MSWDO",
+      "head": "Levie F. Fajilan",
+      "headTitle": "Municipal Social Welfare and Development Officer",
+      "photo": "assets/images/dept-heads/mswdo.jpg"
     },
     {
-      "name": "Office of the Municipal Health Officer",
-      "head": "Dr. Jennie F. Matta",
-      "headTitle": "Municipal Health Officer"
+      "name": "Office of the Municipal Assessor",
+      "acronym": "MASSO",
+      "head": "Engr. Vincent D. De Cardo",
+      "headTitle": "Municipal Assessor",
+      "photo": "assets/images/dept-heads/mass.jpg"
     },
     {
       "name": "Office of the Municipal Agriculturist",
+      "acronym": "MAO",
       "head": "Erwin M. Mortel",
-      "headTitle": "Municipal Agriculturist"
+      "headTitle": "Municipal Agriculturist",
+      "photo": "assets/images/dept-heads/ma.jpg"
     },
     {
-      "name": "Office of the Municipal Social Welfare and Development Officer",
-      "head": "Levie F. Fajilan",
-      "headTitle": "Municipal Social Welfare and Development Officer"
+      "name": "Office of the Municipal Treasurer",
+      "acronym": "MTO",
+      "head": "Charlemagne F. Fortu",
+      "headTitle": "Municipal Treasurer",
+      "photo": "assets/images/dept-heads/mt.jpg"
     },
     {
-      "name": "Municipal Disaster Risk Reduction and Management Office",
+      "name": "Office of the Municipal Budget Officer",
+      "acronym": "MBO",
+      "head": "Jeanlyn F. Fallaria",
+      "headTitle": "Municipal Budget Officer",
+      "photo": "assets/images/dept-heads/mbo.jpg"
+    },
+    {
+      "name": "Office of the Municipal Engineer / Office of the Building Official",
+      "acronym": "MEO / OBO",
+      "head": "Engr. Laureano F. Falcutila, III",
+      "headTitle": "Municipal Engineer / Building Official",
+      "photo": "assets/images/dept-heads/me.jpg"
+    },
+    {
+      "name": "Office of the Municipal Accountant",
+      "acronym": "",
+      "head": "Ariel F. Famadulan",
+      "headTitle": "Municipal Accountant",
+      "photo": "assets/images/dept-heads/macc.jpg"
+    },
+    {
+      "name": "Office of the Municipal Health Officer",
+      "acronym": "MHO",
+      "head": "Dr. Jennie F. Matta",
+      "headTitle": "Municipal Health Officer",
+      "photo": "assets/images/dept-heads/mho.jpg"
+    },
+    {
+      "name": "Office of the Municipal Disaster Risk Reduction and Management",
+      "acronym": "MDRRMO",
       "head": "John Arvill F. Rabino",
-      "headTitle": "MDRRM Officer II"
+      "headTitle": "MDRRM Officer II",
+      "photo": "assets/images/dept-heads/mdrmo.jpg"
     }
-  ]
+  ],
+  "_historyNote": "DRAFT — compiled 2026-09-24 from the Wikipedia article 'Calatrava, Romblon' (https://en.wikipedia.org/wiki/Calatrava,_Romblon), which cites the municipal profile. NOT YET VERIFIED by the LGU. Dates differ between sources (some give 1855 rather than 1853 for the first proclamation). Have the Mayor's office / MPDO confirm names, dates and RA number before this is treated as official, and replace this note with the LGU's own source when they do.",
+  "historySource": "Compiled from public sources and pending verification by the Municipal Government of Calatrava. Corrections are welcome — please write to the Office of the Municipal Mayor.",
+  "_departmentsNote": "Office names follow the Citizen's Charter 2023. Acronyms are the ones the Charter itself uses ('SB' for the Sangguniang Bayan); the Accountant's office is left blank because the Charter spells it out in full -- do not invent one. The Mayor's and Vice Mayor's offices are intentionally absent: both lead the Elected Officials grid above. Head portraits are the LGU's studio set, resized from 'assets/images/Dept Heads/' (raw originals are gitignored). One portrait from that set is unused: mlgoo.jpg (MLGOO Aleza F. Refe -- a DILG-assigned officer, not an LGU department). Joseph M. Fedelicio's title and SG 24 come from the Organizational Chart 2026, where the SB Secretary sits under the Vice Mayor's office; he is listed here as his own office because that is how the Charter presents him."
 }

@@ -1,5 +1,26 @@
 {
   "_note": "Fee and processing time on these summary cards are reconciled against data/citizens-charter.json and the source PDF (Citizen's Charter 2023, Edition II). 'Per Local Revenue Code' means the Charter states the amount is set by the local revenue code rather than fixing it. The full per-service procedure lives on services.html#charter.",
+  "featured": [
+    {
+      "id": "calatravanhon-card",
+      "icon": "id",
+      "name": "Calatravanhon Card",
+      "desc": "A single municipal ID for residents, to be used when transacting with LGU offices and availing of local programs. The application process, requirements and fees are still being finalised by the Municipal Government.",
+      "status": "In development",
+      "href": "",
+      "cta": ""
+    },
+    {
+      "id": "feedback",
+      "icon": "help",
+      "name": "Feedback & Complaints",
+      "desc": "Tell us how we served you, or report a concern about a municipal office or employee. Under the Citizen's Charter, feedback is collected from the drop box at the information help desk and opened every Friday by the Public Relations Officer; offices must answer within three (3) days. You may also write to us by email.",
+      "status": "Available",
+      "href": "mailto:feedbackcalatravaLGU@gmail.com",
+      "cta": "Email the LGU"
+    }
+  ],
+  "_featuredNote": "Replaces the old 'online' block. 'Calatravanhon Card' is a placeholder announced by the LGU -- it has no application form, requirements or fee schedule yet, so it renders as a non-clickable 'In development' card rather than a dead link. The feedback address feedbackcalatravaLGU@gmail.com was supplied by the LGU on 2026-09-24; the Citizen's Charter 2023 (p.86) still lists andagaotour@gmail.com and leaves the CCB/SMS and follow-up numbers blank.",
   "groups": [
     {
       "id": "admin",
@@ -99,18 +120,14 @@
       ]
     }
   ],
-  "online": [
-    { "name": "Online Appointment", "desc": "Book a slot at a municipal office.", "href": "#", "status": "Coming soon" },
-    { "name": "Document Request", "desc": "Request certificates for pickup or delivery.", "href": "#", "status": "Coming soon" },
-    { "name": "Feedback & Complaints", "desc": "Submit a report or suggestion to the LGU.", "href": "contact.html", "status": "Available" }
-  ],
   "_hotlinesNote": "All six are real, from the LGU's official 'Calatrava Hotlines' infographic (supplied 2026-09-10). Office names follow that infographic so they match the printed/posted version residents see. Ordered by urgency rather than the poster's layout. Anything without a real number must be left blank — services.html renders a blank as a non-clickable pending row instead of a dead tel: link.",
+  "_hotlineIconsNote": "Hotline 'icon' names resolve against the ICONS map in assets/app.js. They are generic pictograms drawn inline, NOT the agencies' official seals -- the PNP, BFP and Philippine Coast Guard seals are government marks and should not be reproduced here without written authorisation from those agencies. If the LGU obtains that authorisation, swap in the real marks and keep the alt text.",
   "hotlines": [
-    { "name": "Emergency Command Center", "number": "0930 326 4161" },
-    { "name": "Police Department", "number": "0998 598 5883" },
-    { "name": "Fire Department", "number": "0999 433 3661" },
-    { "name": "Health Department", "number": "0907 237 1460" },
-    { "name": "Coastguard", "number": "0995 660 2401" },
-    { "name": "Sanitation Department", "number": "0929 436 2082" }
+    { "name": "Emergency Command Center", "number": "0930 326 4161", "icon": "siren" },
+    { "name": "Police Department", "number": "0998 598 5883", "icon": "police" },
+    { "name": "Fire Department", "number": "0999 433 3661", "icon": "fire" },
+    { "name": "Health Department", "number": "0907 237 1460", "icon": "health" },
+    { "name": "Coastguard", "number": "0995 660 2401", "icon": "coast" },
+    { "name": "Sanitation Department", "number": "0929 436 2082", "icon": "waste" }
   ]
 }
