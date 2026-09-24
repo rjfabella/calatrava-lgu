@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us — Municipality of Calatrava, Romblon</title>
-<meta name="description" content="The history of Calatrava, Romblon, its seven barangays and their Punong Barangays, and how to find the Municipal Hall.">
+<meta name="description" content="The history of Calatrava, Romblon, its seven barangays and their Punong Barangays, and where to find the Municipality on the map.">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,9 +61,9 @@
 <div class="tab-panel" id="panel-map" role="tabpanel" aria-labelledby="tab-map" tabindex="0" hidden>
   <section class="section tight" id="map-section">
     <div class="container">
-      <div class="section-head"><span class="s-label">Find us</span><h2 class="s-title">Municipal <em>hall</em></h2></div>
+      <div class="section-head"><span class="s-label">Find us</span><h2 class="s-title">Municipality of <em>Calatrava</em></h2></div>
       <p class="charter-intro" id="hallAddress"></p>
-      <div class="map-wrap"><iframe id="map" title="Map to Calatrava Municipal Hall" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe></div>
+      <div class="map-wrap"><iframe id="map" title="Map of the Municipality of Calatrava, centred on the Municipal Hall" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe></div>
       <p class="mandate-note"><a href="contact.html">Looking for a particular office? See the full contact directory &rarr;</a></p>
     </div>
   </section>
@@ -76,7 +76,7 @@ const FALLBACK_BARANGAYS = { intro: "", barangays: [] };
 const FALLBACK_CONTACT = {
   address: "Municipal Hall, Poblacion, Calatrava, Romblon, Philippines",
   hours: "Monday–Friday, 8:00 AM – 5:00 PM",
-  mapEmbed: "https://www.google.com/maps?q=Calatrava,Romblon&output=embed"
+  mapEmbed: "https://www.google.com/maps?q=Calatrava+Municipal+Hall,+Calatrava,+Romblon&ll=12.6182304,122.0707587&z=17&output=embed"
 };
 
 const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));

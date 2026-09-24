@@ -307,7 +307,7 @@ function buildFooter(){
         <li><a href="news.html">News &amp; Bulletins</a></li>
         <li><a href="contact.html">Contact Directory</a></li>
         <li><a href="about-us.html#barangays">The 7 Barangays</a></li>
-        <li><a href="about-us.html#map">Find the Municipal Hall</a></li>
+        <li><a href="about-us.html#map">Find us on the map</a></li>
         <li><a href="services.html#hotline">Emergency Hotlines</a></li>
         <li><a href="https://rjfabella.github.io/calatrava-tourism-portal/">Tourism Portal</a></li>
       </ul>
@@ -532,6 +532,19 @@ function renderSearchBox(mount, { label, placeholder, value, onInput, onSubmit }
  * arrival — enough to soften the jump without delaying anything the reader
  * needs. Both are disabled under prefers-reduced-motion.
  */
+// A cross-document view transition that gets skipped (rapid navigation, a slow
+// paint, a back/forward restore) rejects its `finished` promise. Nothing awaits
+// it, so the browser reports an unhandled AbortError. `pagereveal` fires before
+// body scripts run, so a listener registered here would miss its own document's
+// event — hence swallowing the rejection itself. Scoped to exactly that error:
+// every other rejection is left alone so real bugs still surface.
+window.addEventListener('unhandledrejection', e => {
+  const r = e.reason;
+  if (r && r.name === 'AbortError' && /transition was skipped/i.test(r.message || '')) {
+    e.preventDefault();
+  }
+});
+
 function initPageTransition(){
   const main = document.getElementById('main');
   if (!main) return;

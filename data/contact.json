@@ -4,22 +4,93 @@
   "email": "andagaoutour@gmail.com",
   "phone": "0966 439 3711",
   "facebook": "https://www.facebook.com/calatrava.romblon.217551/",
-  "mapEmbed": "https://www.google.com/maps?q=Calatrava,Romblon&output=embed",
+  "mapEmbed": "https://www.google.com/maps?q=Calatrava+Municipal+Hall,+Calatrava,+Romblon&ll=12.6182304,122.0707587&z=17&output=embed",
+  "_mapNote": "Was a plain 'Calatrava,Romblon' area search with no marker. The query now names the Municipal Hall so Google drops a labelled pin on the building, with ll/z centring it in case the name ever stops resolving. Verified 2026-09-24 against Google Maps, which lists 'Calatrava Municipal Hall' (city government office) at 12.6182304, 122.0707587 -- plus code J39C+78R, Municipal Hall Dr, Calatrava, Romblon. Coordinates are Google's, not measured by the LGU; if the Mayor's office gives an official location, use theirs.",
   "_dpoNote": "RA 10173 requires a designated Data Protection Officer with real, reachable contact details. Nobody has been named yet, so this is left empty on purpose and privacy.html shows an interim notice instead — do NOT invent an address here. Fill in name/title/email/phone once the Mayor's office designates one, and it appears automatically on privacy.html.",
-  "dpo": { "name": "", "title": "", "email": "", "phone": "" },
+  "dpo": {
+    "name": "",
+    "title": "",
+    "email": "",
+    "phone": ""
+  },
   "directory": [
-    { "office": "Office of the Municipal Mayor", "head": "Engr. Robert M. Fabella", "phone": "0966 439 3711", "email": "andagaoutour@gmail.com" },
-    { "office": "Office of the Municipal Vice Mayor / Sangguniang Bayan", "head": "Hon. Elizer F. Fiedacan", "phone": "0918 948 4364", "email": "servanezdishan0@gmail.com" },
-    { "office": "Office of the Municipal Treasurer", "head": "Charlemagne F. Fortu", "phone": "0908 235 1803", "email": "charlesfortu@gmail.com" },
-    { "office": "Office of the Municipal Civil Registrar", "head": "Belcezar F. Fajutagana", "phone": "0920 508 0166", "email": "cezarfajutagana@yahoo.com" },
-    { "office": "Office of the Municipal Health Officer", "head": "Dr. Jennie F. Matta", "phone": "0999 434 4808", "email": "calatravarhu_romblon@yahoo.com" },
-    { "office": "Office of the Municipal Social Welfare and Development Officer", "head": "Levie F. Fajilan", "phone": "0905 324 5537", "email": "fajilanlevie@gmail.com" },
-    { "office": "Office of the Municipal Assessor", "head": "Engr. Vincent D. De Cardo", "phone": "0931 108 3626", "email": "omalgucalatravaromblon@gmail.com" },
-    { "office": "Office of the Municipal Engineer", "head": "Engr. Laureano F. Falcutila, III", "phone": "0928 413 8255", "email": "uhlic_1964@yahoo.com" },
-    { "office": "Municipal Planning & Development Office", "head": "Engr. Berlito F. Fajel, Jr.", "phone": "0999 997 3430", "email": "vmronfajel@gmail.com" },
-    { "office": "Office of the Municipal Budget Officer", "head": "Jeanlyn F. Fallaria", "phone": "0919 895 9954", "email": "fallariajeanlyn@gmail.com" },
-    { "office": "Office of the Municipal Accountant", "head": "Ariel F. Famadulan", "phone": "0928 392 8676", "email": "arielfamadulan@yahoo.com" },
-    { "office": "Office of the Municipal Agriculturist", "head": "Erwin M. Mortel", "phone": "0939 414 9769", "email": "falcutilanoel@gmail.com" },
-    { "office": "Municipal Disaster Risk Reduction and Management Office (MDRRMO)", "head": "John Arvill F. Rabino", "phone": "0928 740 3458", "email": "johnarvillrabino@gmail.com" }
+    {
+      "office": "Office of the Municipal Mayor",
+      "head": "Engr. Robert M. Fabella",
+      "phone": "0966 439 3711",
+      "email": "andagaoutour@gmail.com"
+    },
+    {
+      "office": "Office of the Municipal Vice Mayor / Sangguniang Bayan",
+      "head": "Hon. Elizer F. Fiedacan",
+      "phone": "0918 948 4364",
+      "email": "servanezdishan0@gmail.com"
+    },
+    {
+      "office": "Office of the Municipal Treasurer",
+      "head": "Charlemagne F. Fortu",
+      "phone": "0908 235 1803",
+      "email": "charlesfortu@gmail.com"
+    },
+    {
+      "office": "Office of the Municipal Civil Registrar",
+      "head": "Belcezar F. Fajutagana",
+      "phone": "0920 508 0166",
+      "email": "cezarfajutagana@yahoo.com"
+    },
+    {
+      "office": "Office of the Municipal Health Officer",
+      "head": "Dr. Jennie F. Matta",
+      "phone": "0999 434 4808",
+      "email": "calatravarhu_romblon@yahoo.com"
+    },
+    {
+      "office": "Office of the Municipal Social Welfare and Development Officer",
+      "head": "Levie F. Fajilan",
+      "phone": "0905 324 5537",
+      "email": "fajilanlevie@gmail.com"
+    },
+    {
+      "office": "Office of the Municipal Assessor",
+      "head": "Engr. Vincent D. De Cardo",
+      "phone": "0931 108 3626",
+      "email": "omalgucalatravaromblon@gmail.com"
+    },
+    {
+      "office": "Office of the Municipal Engineer",
+      "head": "Engr. Laureano F. Falcutila, III",
+      "phone": "0928 413 8255",
+      "email": "uhlic_1964@yahoo.com"
+    },
+    {
+      "office": "Municipal Planning & Development Office",
+      "head": "Engr. Berlito F. Fajel, Jr.",
+      "phone": "0999 997 3430",
+      "email": "vmronfajel@gmail.com"
+    },
+    {
+      "office": "Office of the Municipal Budget Officer",
+      "head": "Jeanlyn F. Fallaria",
+      "phone": "0919 895 9954",
+      "email": "fallariajeanlyn@gmail.com"
+    },
+    {
+      "office": "Office of the Municipal Accountant",
+      "head": "Ariel F. Famadulan",
+      "phone": "0928 392 8676",
+      "email": "arielfamadulan@yahoo.com"
+    },
+    {
+      "office": "Office of the Municipal Agriculturist",
+      "head": "Erwin M. Mortel",
+      "phone": "0939 414 9769",
+      "email": "falcutilanoel@gmail.com"
+    },
+    {
+      "office": "Municipal Disaster Risk Reduction and Management Office (MDRRMO)",
+      "head": "John Arvill F. Rabino",
+      "phone": "0928 740 3458",
+      "email": "johnarvillrabino@gmail.com"
+    }
   ]
 }
