@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Municipality of Calatrava, Romblon</title>
+<meta name="description" content="The history of Calatrava, Romblon — from the settlement of Andagao to the municipality of today — and how to find the Municipal Hall.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>About Us</span></nav>
+    <h1>About <em>Calatrava</em></h1>
+    <p>Where the town came from, and where to find us.</p>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="section" id="history">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Our story</span><h2 class="s-title">History of <em>Calatrava</em></h2></div>
+    <div class="prose" id="historyProse"></div>
+    <p class="mandate-note" id="historySource"></p>
+  </div>
+</section>
+
+<!-- FIND US -->
+<section class="section sand tight" id="find-us">
+  <div class="container">
+    <div class="section-head"><span class="s-label">Find us</span><h2 class="s-title">Municipal <em>hall</em></h2></div>
+    <p class="charter-intro" id="hallAddress"></p>
+    <div class="map-wrap"><iframe id="map" title="Map to Calatrava Municipal Hall" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe></div>
+    <p class="mandate-note"><a href="contact.html">Looking for a particular office? See the full contact directory &rarr;</a></p>
+  </div>
+</section>
+
+<script src="assets/app.js"></script>
+<script>
+const FALLBACK_OFFICIALS = { history: [], historySource: "" };
+const FALLBACK_CONTACT = {
+  address: "Municipal Hall, Poblacion, Calatrava, Romblon, Philippines",
+  hours: "Monday–Friday, 8:00 AM – 5:00 PM",
+  mapEmbed: "https://www.google.com/maps?q=Calatrava,Romblon&output=embed"
+};
+
+(async function(){
+  initChrome('about-us');
+
+  const o = await loadJSON('data/officials.json', FALLBACK_OFFICIALS);
+  document.getElementById('historyProse').innerHTML = (o.history || []).map(p => `<p>${p}</p>`).join('');
+  const src = document.getElementById('historySource');
+  if (o.historySource) src.textContent = o.historySource; else src.remove();
+
+  const c = await loadJSON('data/contact.json', FALLBACK_CONTACT);
+  document.getElementById('hallAddress').textContent =
+    [c.address, c.hours].filter(Boolean).join(' · ');
+  if (c.mapEmbed) document.getElementById('map').src = c.mapEmbed;
+
+  observeReveal();
+  if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+})();
+</script>
+</body>
+</html>

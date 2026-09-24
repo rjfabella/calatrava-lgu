@@ -1,6 +1,46 @@
 {
   "_source": "Citizen's Charter 2023, Edition II (assets/contents/Citizen's Charter 2023.pdf)",
   "_note": "Auto-extracted from the PDF's service tables. Verify fees/processingTime/personResponsible against the source PDF before publishing -- these are page-scraped and may merge wrapped text imperfectly. requirements, classification, and whoMayAvail are extracted from bordered tables and are reliable.",
+  "about": {
+    "title": "Citizen's Charter 2023",
+    "edition": "Edition II",
+    "issuedBy": "Municipal Government of Calatrava, Romblon",
+    "legalBasis": "Republic Act No. 11032 — Ease of Doing Business and Efficient Government Services Delivery Act of 2018",
+    "pdf": "assets/contents/Citizen's Charter 2023.pdf",
+    "pages": 91,
+    "officeCount": 12,
+    "serviceCount": 45,
+    "documentDate": "7 February 2024",
+    "what": [
+      {
+        "icon": "doc",
+        "title": "A public promise, in writing",
+        "text": "The Citizen's Charter is the Municipality's official published list of every frontline service it offers. Once a service is in the Charter, the LGU has committed to delivering it exactly as written."
+      },
+      {
+        "icon": "list",
+        "title": "No surprises at the counter",
+        "text": "Each service states its requirements and where to secure them, the fees, the processing time, the steps on both sides of the counter, and the officer responsible — so you know what to bring and what to expect before you travel to the municipal hall."
+      },
+      {
+        "icon": "clock",
+        "title": "Required by law",
+        "text": "RA 11032 (the Ease of Doing Business Act) obliges every government office to publish and honour a Citizen's Charter, and to re-issue it whenever services change. This is Calatrava's second edition."
+      },
+      {
+        "icon": "help",
+        "title": "It works both ways",
+        "text": "The Charter also sets out how to give feedback or file a complaint, and how quickly the LGU must respond — feedback is collected at the information help desk and answered within three working days."
+      }
+    ],
+    "inside": [
+      "Vision, Mission and the Service Pledge of the Municipality",
+      "45 frontline services across 12 offices, each with a full client-step table",
+      "Feedback and Complaints Mechanisms, with the offices' contact directory",
+      "Customer Feedback Form and Complaint Form, ready to print"
+    ],
+    "_note": "Figures counted from the parsed PDF. 'documentDate' is the PDF's own creation date -- the LGU has not supplied a formal approval/effectivity date or a named drafting committee, so none is published here."
+  },
   "offices": [
     {
       "office": "Office of the Municipal Mayor",

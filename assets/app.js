@@ -48,6 +48,10 @@ const ICONS = {
   help:   '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
   coins:  '<circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="M16.71 13.88l.7.71-2.82 2.82"/>',
   online: '<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+  id:     '<rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8.5" cy="11" r="2.5"/><path d="M4.5 17a4.2 4.2 0 0 1 8 0"/><line x1="15" y1="10" x2="19" y2="10"/><line x1="15" y1="14" x2="19" y2="14"/>',
+  list:   '<line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4.5" cy="6" r="1.4"/><circle cx="4.5" cy="12" r="1.4"/><circle cx="4.5" cy="18" r="1.4"/>',
+  clock:  '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>',
+  scale:  '<line x1="12" y1="4" x2="12" y2="21"/><line x1="7" y1="21" x2="17" y2="21"/><path d="M12 6 5 9l-2.2 4.6a3.6 3.6 0 0 0 6.4 0L7 9"/><path d="m12 6 7 3 2.2 4.6a3.6 3.6 0 0 1-6.4 0L17 9"/>',
   leaf:   '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>',
   tools:  '<path d="M14.7 6.3a4 4 0 0 0-5.6 5.6l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.6-5.6l-2.1 2.1-2.8-2.8z"/>',
   book:   '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
@@ -81,11 +85,12 @@ function svgIcon(name, cls){
 const NAV_ITEMS = [
   { id: 'home',         label: 'Home',          href: 'index.html' },
   { id: 'about',        label: 'Government',    href: 'about.html' },
-  // 'Services' was removed from the nav as redundant with the Online Services
-  // button; services.html is reached through that button and the footer.
+  // Services keeps its CTA treatment in the bar rather than a plain link, so
+  // it stays the one obvious call to action; services.html is the landing page.
   { id: 'barangays',    label: 'Barangays',     href: 'barangays.html' },
   { id: 'transparency', label: 'Transparency',  href: 'transparency.html' },
   { id: 'news',         label: 'News',          href: 'news.html' },
+  { id: 'about-us',     label: 'About Us',      href: 'about-us.html' },
   { id: 'contact',      label: 'Contact',       href: 'contact.html' },
 ];
 
@@ -161,8 +166,13 @@ function buildHeader(active){
     `<a href="${n.href}" onclick="closeMobNav()">${n.label}</a>`).join('');
 
   const header = document.createElement('div');
+  // `display:contents` — the wrapper must not become a containing block, or it
+  // would clip .site-head's `position:sticky` to its own (header-height) box
+  // and nothing would actually stick.
+  header.className = 'chrome-wrap';
   header.innerHTML = `
   <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="site-head" id="siteHead">
   <div class="topbar">
     <div class="topbar-inner">
       <span>Republic of the Philippines &middot; Province of Romblon</span>
@@ -180,16 +190,62 @@ function buildHeader(active){
     </a>
     <ul class="nav-links">
       ${links}
-      <li><a href="services.html#online" class="nav-cta">Online Services</a></li>
+      <li><a href="services.html" class="nav-cta${active === 'services' ? ' active' : ''}">Services</a></li>
     </ul>
     <button class="hamburger" aria-label="Open menu" onclick="openMobNav()"><span></span><span></span><span></span></button>
   </nav>
+  </div>
   <nav class="mob-nav" id="mobNav" aria-label="Mobile navigation">
     <button class="mob-close" aria-label="Close menu" onclick="closeMobNav()">&times;</button>
     ${mobLinks}
-    <a href="services.html#online" class="mob-cta" onclick="closeMobNav()">Online Services</a>
+    <a href="services.html" class="mob-cta" onclick="closeMobNav()">Services</a>
   </nav>`;
   document.body.insertAdjacentElement('afterbegin', header);
+}
+
+/**
+ * Compact sticky title strip, built from the page's own <h1> so no page has to
+ * declare it twice. It sits inside the sticky shell under the nav and only
+ * reveals itself once the full page hero has scrolled past, so the viewport
+ * isn't permanently eaten by a heading the reader can already see.
+ *
+ * The homepage has no .page-hero and gets no strip — there only the nav
+ * freezes, as intended.
+ */
+function buildPageBar(){
+  const hero = document.querySelector('.page-hero');
+  const head = document.getElementById('siteHead');
+  if (!hero || !head) return;
+
+  const h1 = hero.querySelector('h1');
+  const crumb = hero.querySelector('.breadcrumb');
+  if (!h1) return;
+
+  // Last crumb is the page's own name; fall back to the h1's plain text.
+  const spans = crumb ? [...crumb.querySelectorAll('span')] : [];
+  const label = (spans.length ? spans[spans.length - 1].textContent : h1.textContent).trim();
+
+  const bar = document.createElement('div');
+  bar.className = 'page-bar';
+  bar.id = 'pageBar';
+  bar.setAttribute('aria-hidden', 'true');
+  bar.innerHTML = `<div class="page-bar-inner">
+    <span class="page-bar-title">${label}</span>
+    <a class="page-bar-top" href="#main">Back to top</a>
+  </div>`;
+  head.appendChild(bar);
+
+  // Reveal the strip exactly when the hero's heading leaves the sticky shell.
+  const sentinel = document.createElement('div');
+  sentinel.className = 'page-bar-sentinel';
+  hero.insertAdjacentElement('afterend', sentinel);
+
+  if (!('IntersectionObserver' in window)) { return; }
+  new IntersectionObserver(([e]) => {
+    const on = !e.isIntersecting && e.boundingClientRect.top < 0;
+    bar.classList.toggle('is-on', on);
+    bar.setAttribute('aria-hidden', String(!on));
+  }, { threshold: 0 }).observe(sentinel);
 }
 
 // National agencies shown in the footer's "In partnership with" row. `short` is
@@ -224,8 +280,8 @@ function buildFooter(){
       <h4>Government</h4>
       <ul>
         <li><a href="about.html">Officials</a></li>
-        <li><a href="about.html#vision">Vision &amp; Mission</a></li>
-        <li><a href="about.html#history">History</a></li>
+        <li><a href="about.html#departments-section">Offices &amp; Departments</a></li>
+        <li><a href="about-us.html#history">History</a></li>
         <li><a href="transparency.html">Transparency</a></li>
       </ul>
     </div>
@@ -235,7 +291,7 @@ function buildFooter(){
         <li><a href="services.html#admin">Civil Registry</a></li>
         <li><a href="services.html#business">Business Permits</a></li>
         <li><a href="services.html#health">Health Services</a></li>
-        <li><a href="services.html#online">Online Services</a></li>
+        <li><a href="services.html#charter">Citizen's Charter</a></li>
       </ul>
     </div>
     <div class="f-col">
@@ -243,6 +299,7 @@ function buildFooter(){
       <ul>
         <li><a href="news.html">News &amp; Bulletins</a></li>
         <li><a href="contact.html">Contact Directory</a></li>
+        <li><a href="about-us.html#find-us">Find the Municipal Hall</a></li>
         <li><a href="services.html#hotline">Emergency Hotlines</a></li>
         <li><a href="https://rjfabella.github.io/calatrava-tourism-portal/">Tourism Portal</a></li>
       </ul>
@@ -286,6 +343,7 @@ function wrapMain(){
 function initChrome(active){
   wrapMain();
   buildHeader(active);
+  buildPageBar();
   buildEmergencyBand();
   buildFooter();
   observeReveal();

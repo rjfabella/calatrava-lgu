@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Municipality of Calatrava, Romblon</title>
-<meta name="description" content="Contact the Municipality of Calatrava: office directory, address, hours, and location map.">
+<meta name="description" content="Contact the Municipality of Calatrava: office directory, address, hours, and how to reach each office.">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,11 +29,10 @@
   </div>
 </section>
 
-<!-- MAP -->
+<!-- FIND US moved to about-us.html#find-us; the directory is what this page is for. -->
 <section class="section sand tight">
   <div class="container">
-    <div class="section-head"><span class="s-label">Find us</span><h2 class="s-title">Municipal <em>hall</em></h2></div>
-    <div class="map-wrap"><iframe id="map" title="Map to Calatrava Municipal Hall" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe></div>
+    <p class="mandate-note" style="margin-top:0"><a href="about-us.html#find-us">Find the Municipal Hall on the map &rarr;</a></p>
   </div>
 </section>
 
@@ -69,7 +68,6 @@ function renderDirectory(d){
   document.getElementById('addressLine').innerHTML =
     `${d.address || ''}<br>${d.hours || ''} &middot; <a href="tel:${(d.phone||'').replace(/[^0-9+]/g,'')}" style="color:var(--gl)">${d.phone || ''}</a> &middot; <a href="mailto:${d.email}" style="color:var(--gl)">${d.email || ''}</a>`;
   renderDirectory(d);
-  if (d.mapEmbed) document.getElementById('map').src = d.mapEmbed;
   observeReveal();
 })();
 </script>

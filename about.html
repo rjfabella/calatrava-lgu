@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Government — Municipality of Calatrava, Romblon</title>
-<meta name="description" content="Elected officials, vision and mission, history, and departments of the Municipality of Calatrava, Romblon.">
+<meta name="description" content="Elected officials and the offices and departments of the Municipality of Calatrava, Romblon, with the head of each office.">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,118 +17,77 @@
   <div class="page-hero-inner">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Government</span></nav>
     <h1>The <em>Government</em></h1>
-    <p>The men and women who serve the Municipality of Calatrava, and the vision that guides our work.</p>
-  </div>
-</section>
-
-<!-- VISION & MISSION -->
-<section class="section" id="vision">
-  <div class="container">
-    <div class="section-head"><span class="s-label">Our direction</span><h2 class="s-title">Vision &amp; <em>Mission</em></h2></div>
-    <div class="vm-grid">
-      <div class="vm-card reveal"><h3>Vision</h3><p id="visionText"></p></div>
-      <div class="vm-card reveal"><h3>Mission</h3><div id="missionText"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- MANDATE & SERVICE PLEDGE -->
-<section class="section sand" id="mandate">
-  <div class="container">
-    <div class="section-head"><span class="s-label">Republic Act No. 11032</span><h2 class="s-title">Mandate &amp; service <em>pledge</em></h2></div>
-    <div class="vm-grid">
-      <div class="vm-card reveal"><h3>Mandate</h3><p id="mandateText"></p></div>
-      <div class="vm-card reveal"><h3>Service Pledge</h3><p id="pledgeText"></p></div>
-    </div>
-    <p class="mandate-note">Source: <a href="assets/contents/Citizen's%20Charter%202023.pdf" target="_blank" rel="noopener">LGU Calatrava Citizen's Charter 2023 (Edition II)</a></p>
+    <p>The men and women who serve the Municipality of Calatrava — the officials you elected, and the offices that deliver your day-to-day public services.</p>
   </div>
 </section>
 
 <!-- ELECTED OFFICIALS -->
-<section class="section">
+<section class="section" id="officials-section">
   <div class="container">
     <div class="section-head"><span class="s-label">Serving 2025–2028</span><h2 class="s-title">Elected <em>officials</em></h2></div>
     <div class="officials-grid" id="officials"><!-- rendered from data/officials.json --></div>
   </div>
 </section>
 
-<!-- DEPARTMENTS -->
+<!-- OFFICES & DEPARTMENTS -->
 <section class="section sand" id="departments-section">
   <div class="container">
-    <div class="section-head"><span class="s-label">Offices &amp; departments</span><h2 class="s-title">Who does <em>what</em></h2></div>
-    <div class="svc-list" id="departments"><!-- rendered from data/officials.json --></div>
+    <div class="section-head">
+      <span class="s-label">Offices &amp; departments</span>
+      <h2 class="s-title">Who does <em>what</em></h2>
+      <p class="charter-intro">Each office below delivers the frontline services listed in the Citizen's Charter. Acronyms are the ones used in the Charter itself. <a href="services.html#charter">See what each office can do for you &rarr;</a></p>
+    </div>
+    <div class="dept-grid" id="departments"><!-- rendered from data/officials.json --></div>
     <p class="mandate-note"><a href="assets/contents/Organizational%20Chart%202026.pptx">Download the full Organizational Chart 2026</a></p>
-  </div>
-</section>
-
-<!-- HISTORY -->
-<section class="section" id="history">
-  <div class="container">
-    <div class="section-head"><span class="s-label">Our story</span><h2 class="s-title">History of <em>Calatrava</em></h2></div>
-    <div class="prose" id="historyProse"></div>
   </div>
 </section>
 
 <script src="assets/app.js"></script>
 <script>
 const FALLBACK = {
-  vision: "A progressive, resilient municipality with empowered citizens under transparent and responsive governance.",
-  mission: "To deliver efficient public services and uphold the welfare of every Calatravanhon.",
-  mandate: "",
-  servicePledge: "",
-  history: ["[Add the history of Calatrava here — this content is rendered from data/officials.json.]"],
-  elected: [{ name: "Engr. Robert M. Fabella", role: "Municipal Mayor", term: "2025–2028", photo: "" }],
-  departments: [{ name: "Office of the Municipal Mayor", head: "Engr. Robert M. Fabella" }]
+  elected: [{ name: "Engr. Robert M. Fabella", role: "Municipal Mayor", term: "2025–2028", photo: "assets/images/Portrait_Mayor.jpg" }],
+  departments: [{ name: "Office of the Municipal Vice Mayor", acronym: "", head: "Hon. Elizer F. Fiedacan", headTitle: "Municipal Vice Mayor", photo: "" }]
 };
 
-function renderOfficial(o, i){
-  // Fall back to initials when no official photo has been supplied, so the
-  // grid reads as pending rather than broken.
+const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// Every official is rendered at the same size — the Mayor and Vice Mayor are
+// identified by their role label, not by a bigger tile.
+function renderOfficial(o){
   const photo = o.photo
-    ? `<img src="${o.photo}" alt="${o.name}" onerror="this.parentElement.innerHTML=monogram('${(o.name||'').replace(/'/g,'')}')">`
+    ? `<img src="${esc(o.photo)}" alt="${esc(o.name)}" loading="lazy" onerror="this.parentElement.innerHTML=monogram('${(o.name||'').replace(/'/g,'')}')">`
     : monogram(o.name || '');
-  const lead = i < 2 ? ' lead-official' : '';
-  return `<div class="official${lead} reveal">
+  return `<div class="official reveal">
     <div class="official-photo">${photo}</div>
     <div>
-      <h3>${o.name}</h3>
-      <div class="role">${o.role}</div>
-      <div class="term">${o.term || ''}</div>
+      <h3>${esc(o.name)}</h3>
+      <div class="role">${esc(o.role)}</div>
+      <div class="term">${esc(o.term || '')}</div>
     </div>
   </div>`;
+}
+
+function renderDept(dep){
+  const photo = dep.photo
+    ? `<img src="${esc(dep.photo)}" alt="${esc(dep.head)}" loading="lazy" onerror="this.parentElement.innerHTML=monogram('${(dep.head||'').replace(/'/g,'')}')">`
+    : monogram(dep.head || '');
+  return `<article class="dept-card reveal">
+    <div class="dept-photo">${photo}</div>
+    <div class="dept-body">
+      <h3>${esc(dep.name)}${dep.acronym ? ` <span class="dept-acr">${esc(dep.acronym)}</span>` : ''}</h3>
+      <div class="dept-head-name">${esc(dep.head || 'To be announced')}</div>
+      ${dep.headTitle ? `<div class="dept-head-title">${esc(dep.headTitle)}</div>` : ''}
+    </div>
+  </article>`;
 }
 
 (async function(){
   initChrome('about');
   const d = await loadJSON('data/officials.json', FALLBACK);
-
-  document.getElementById('visionText').textContent = d.vision || '';
-
-  // Same treatment as the homepage: the mission is eight separate commitments,
-  // so render them as a list rather than one long paragraph.
-  const mission = document.getElementById('missionText');
-  if ((d.missionPoints || []).length) {
-    mission.innerHTML = `<p class="vm-lead">${d.missionLead || ''}</p>
-      <ul class="vm-points">${d.missionPoints.map(p => `<li>${p}</li>`).join('')}</ul>`;
-  } else {
-    mission.innerHTML = `<p>${d.mission || ''}</p>`;
-  }
-  document.getElementById('mandateText').textContent = d.mandate || '';
-  document.getElementById('pledgeText').textContent = d.servicePledge || '';
-
   document.getElementById('officials').innerHTML = (d.elected || []).map(renderOfficial).join('');
-
-  // The Mayor's office spans the full first row: it leads the list, and with
-  // 13 offices it also leaves the two-column grid with no empty cell.
-  document.getElementById('departments').innerHTML = (d.departments || []).map((dep, i) =>
-    `<div class="svc-item${i === 0 ? ' svc-item--lead' : ''}">
-      <h3>${dep.name}</h3>
-      <div class="svc-meta">Head: <b>${dep.head || 'TBA'}</b>${dep.headTitle ? ` &middot; ${dep.headTitle}` : ''}</div>
-    </div>`).join('');
-
-  document.getElementById('historyProse').innerHTML = (d.history || []).map(p => `<p>${p}</p>`).join('');
-
+  document.getElementById('departments').innerHTML = (d.departments || []).map(renderDept).join('');
   observeReveal();
+  if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
 })();
 </script>
 </body>

@@ -493,7 +493,16 @@ frame — the face is nowhere near it. `Portrait_Mayor1.jpg` and
    the four 2025 supplementals came), Punong Barangay contacts. Three files
    are duplicates of content already parsed (Citizen's Charter pp. 21–26
    and 64–67; a generic NBC B-02 form).
-4. Parse the reference-docs batch into JSON — office profiles (mandate/
+4. **2026-09-24 IA change.** Government lost Vision/Mission and Mandate
+   (still in `officials.json`, still rendered on the homepage); History moved
+   to a new **About Us** tab along with the Find-us map from Contact. Header
+   CTA is now plain "Services". The history text is DRAFT, compiled from
+   Wikipedia and **not yet verified by the LGU** — see `_historyNote` in
+   `officials.json`. Department acronyms come from the Citizen's Charter; the
+   Accountant's and Vice Mayor's offices have none there, so their chips are
+   deliberately blank rather than invented. Two dept-head portraits are unused
+   (MLGOO, SB Secretary) — no matching office row.
+5. Parse the reference-docs batch into JSON — office profiles (mandate/
    vision/mission/services for BPLO, MASSO, MBO, MEO, MSWDO, MNAO, OMAG,
    KALAHI), the 4 emergency hotlines (replace the pending rows), the 7
    barangay seals from the MNAO doc, permit forms as downloads, and the FDP
