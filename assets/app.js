@@ -51,6 +51,12 @@ const ICONS = {
   id:     '<rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8.5" cy="11" r="2.5"/><path d="M4.5 17a4.2 4.2 0 0 1 8 0"/><line x1="15" y1="10" x2="19" y2="10"/><line x1="15" y1="14" x2="19" y2="14"/>',
   list:   '<line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4.5" cy="6" r="1.4"/><circle cx="4.5" cy="12" r="1.4"/><circle cx="4.5" cy="18" r="1.4"/>',
   clock:  '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>',
+  siren:  '<path d="M6 18v-4a6 6 0 0 1 12 0v4"/><rect x="3.5" y="18" width="17" height="3.2" rx="1.2"/><line x1="12" y1="3" x2="12" y2="5"/><line x1="4.6" y1="6.2" x2="6.1" y2="7.6"/><line x1="19.4" y1="6.2" x2="17.9" y2="7.6"/>',
+  police: '<path d="M12 2.6 4.8 5.4v6c0 4.3 3 8.3 7.2 9.9 4.2-1.6 7.2-5.6 7.2-9.9v-6z"/><path d="m12 8 1.25 2.6 2.75.4-2 2 .5 2.8L12 14.5 9.5 15.8l.5-2.8-2-2 2.75-.4z"/>',
+  fire:   '<path d="M12 2.5c.4 2.9-1.1 4.3-2.6 5.7C7.7 9.8 6 11.4 6 14.3a6 6 0 0 0 12 0c0-3.6-2.3-5.6-3.8-7.4-1-1.2-1.6-2.4-1.5-4.4z"/><path d="M12 21a3.2 3.2 0 0 1-3.2-3.2c0-1.9 1.6-2.8 2.3-4.3.9 1.1 2.2 2.2 2.2 4a3 3 0 0 1-1.3 3.5z"/>',
+  health: '<path d="M20.4 5.6a5 5 0 0 0-7.1 0L12 6.9l-1.3-1.3a5 5 0 0 0-7.1 7.1l8.4 8.4 8.4-8.4a5 5 0 0 0 0-7.1z"/><line x1="12" y1="10.3" x2="12" y2="15.1"/><line x1="9.6" y1="12.7" x2="14.4" y2="12.7"/>',
+  coast:  '<circle cx="12" cy="4.6" r="2"/><line x1="12" y1="6.6" x2="12" y2="21.4"/><line x1="7.8" y1="9.4" x2="16.2" y2="9.4"/><path d="M4.4 13.6a7.6 7.6 0 0 0 15.2 0"/><line x1="4.4" y1="13.6" x2="6.9" y2="13.6"/><line x1="19.6" y1="13.6" x2="17.1" y2="13.6"/>',
+  waste:  '<path d="M4.6 7.2h14.8l-1.1 12.4a2 2 0 0 1-2 1.8H7.7a2 2 0 0 1-2-1.8z"/><line x1="3" y1="7.2" x2="21" y2="7.2"/><path d="M9.4 7.2V4.6a1.4 1.4 0 0 1 1.4-1.4h2.4a1.4 1.4 0 0 1 1.4 1.4v2.6"/><line x1="10" y1="11" x2="10" y2="17.4"/><line x1="14" y1="11" x2="14" y2="17.4"/>',
   scale:  '<line x1="12" y1="4" x2="12" y2="21"/><line x1="7" y1="21" x2="17" y2="21"/><path d="M12 6 5 9l-2.2 4.6a3.6 3.6 0 0 0 6.4 0L7 9"/><path d="m12 6 7 3 2.2 4.6a3.6 3.6 0 0 1-6.4 0L17 9"/>',
   leaf:   '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>',
   tools:  '<path d="M14.7 6.3a4 4 0 0 0-5.6 5.6l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.6-5.6l-2.1 2.1-2.8-2.8z"/>',
@@ -87,7 +93,8 @@ const NAV_ITEMS = [
   { id: 'about',        label: 'Government',    href: 'about.html' },
   // Services keeps its CTA treatment in the bar rather than a plain link, so
   // it stays the one obvious call to action; services.html is the landing page.
-  { id: 'barangays',    label: 'Barangays',     href: 'barangays.html' },
+  // Barangays now lives inside About Us as a tab; barangays.html stays as a
+  // redirect so old links and bookmarks keep working.
   { id: 'transparency', label: 'Transparency',  href: 'transparency.html' },
   { id: 'news',         label: 'News',          href: 'news.html' },
   { id: 'about-us',     label: 'About Us',      href: 'about-us.html' },
@@ -299,7 +306,8 @@ function buildFooter(){
       <ul>
         <li><a href="news.html">News &amp; Bulletins</a></li>
         <li><a href="contact.html">Contact Directory</a></li>
-        <li><a href="about-us.html#find-us">Find the Municipal Hall</a></li>
+        <li><a href="about-us.html#barangays">The 7 Barangays</a></li>
+        <li><a href="about-us.html#map">Find the Municipal Hall</a></li>
         <li><a href="services.html#hotline">Emergency Hotlines</a></li>
         <li><a href="https://rjfabella.github.io/calatrava-tourism-portal/">Tourism Portal</a></li>
       </ul>
@@ -337,6 +345,68 @@ function wrapMain(){
   main.setAttribute('tabindex', '-1');
   document.body.insertBefore(main, content[0]);
   content.forEach(el => main.appendChild(el));
+}
+
+// ── TAB GROUPS ──
+// WAI-ARIA tabs: roving tabindex, arrow/Home/End keys, and the selected tab
+// mirrored into the URL hash so a tab can be linked to and survives a reload.
+// Markup contract: a container holding `#tab-<name>` buttons, and a
+// `#panel-<name>` for each. Returns { select, current, names }.
+function setupTabs(names, opts){
+  const o = opts || {};
+  let current = names[0];
+
+  function select(name, focus){
+    if (!names.includes(name)) name = names[0];
+    current = name;
+    names.forEach(t => {
+      const btn = document.getElementById('tab-' + t);
+      const panel = document.getElementById('panel-' + t);
+      if (!btn || !panel) return;
+      const on = t === name;
+      btn.setAttribute('aria-selected', String(on));
+      btn.tabIndex = on ? 0 : -1;
+      panel.hidden = !on;
+    });
+    if (focus) { const b = document.getElementById('tab-' + name); if (b) b.focus(); }
+    if (o.onSelect) o.onSelect(name);
+  }
+
+  const btns = names.map(t => document.getElementById('tab-' + t)).filter(Boolean);
+  btns.forEach(b => b.addEventListener('click', () => {
+    const name = b.id.replace('tab-', '');
+    select(name);
+    if (o.hash !== false) history.replaceState(null, '', '#' + name);
+  }));
+  btns.forEach((b, i) => b.addEventListener('keydown', e => {
+    const d = e.key === 'ArrowRight' ? 1
+            : e.key === 'ArrowLeft' ? -1
+            : e.key === 'Home' ? -i
+            : e.key === 'End' ? btns.length - 1 - i : 0;
+    if (!d) return;
+    e.preventDefault();
+    const next = (i + d + btns.length) % btns.length;
+    const name = btns[next].id.replace('tab-', '');
+    select(name, true);
+    if (o.hash !== false) history.replaceState(null, '', '#' + name);
+  }));
+
+  return { select, names, get current(){ return current; } };
+}
+
+/**
+ * Resolve a URL hash against a tab group: the hash may name a tab, or an
+ * anchor that lives inside one. Call on load and on hashchange.
+ */
+function applyTabHash(group, scroll){
+  const hash = (location.hash || '').slice(1);
+  if (!hash) return false;
+  if (group.names.includes(hash)) { group.select(hash); return true; }
+  const target = document.getElementById(hash);
+  const panel = target && target.closest('.tab-panel');
+  if (panel) group.select(panel.id.replace('panel-', ''));
+  if (target && scroll) target.scrollIntoView();
+  return !!panel;
 }
 
 // ── SERVICE SEARCH ──
@@ -456,6 +526,21 @@ function renderSearchBox(mount, { label, placeholder, value, onInput, onSubmit }
   return input;
 }
 
+/**
+ * Cross-document navigations get a fade via the View Transitions API where it
+ * is supported (declared in CSS). Everywhere else, `main` fades up once on
+ * arrival — enough to soften the jump without delaying anything the reader
+ * needs. Both are disabled under prefers-reduced-motion.
+ */
+function initPageTransition(){
+  const main = document.getElementById('main');
+  if (!main) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (document.startViewTransition) return;   // CSS handles it
+  main.classList.add('page-enter');
+  requestAnimationFrame(() => requestAnimationFrame(() => main.classList.add('page-enter-in')));
+}
+
 /** Call once per page: builds header + footer and starts the reveal observer. */
 function initChrome(active){
   wrapMain();
@@ -463,6 +548,7 @@ function initChrome(active){
   buildPageBar();
   buildEmergencyBand();
   buildFooter();
+  initPageTransition();
   observeReveal();
 }
 

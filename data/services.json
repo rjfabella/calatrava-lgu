@@ -367,30 +367,37 @@
     }
   ],
   "_hotlinesNote": "All six are real, from the LGU's official 'Calatrava Hotlines' infographic (supplied 2026-09-10). Office names follow that infographic so they match the printed/posted version residents see. Ordered by urgency rather than the poster's layout. Anything without a real number must be left blank — services.html renders a blank as a non-clickable pending row instead of a dead tel: link.",
+  "_hotlineIconsNote": "Hotline 'icon' names resolve against the ICONS map in assets/app.js. They are generic pictograms drawn inline, NOT the agencies' official seals -- the PNP, BFP and Philippine Coast Guard seals are government marks and should not be reproduced here without written authorisation from those agencies. If the LGU obtains that authorisation, swap in the real marks and keep the alt text.",
   "hotlines": [
     {
       "name": "Emergency Command Center",
-      "number": "0930 326 4161"
+      "number": "0930 326 4161",
+      "icon": "siren"
     },
     {
       "name": "Police Department",
-      "number": "0998 598 5883"
+      "number": "0998 598 5883",
+      "icon": "police"
     },
     {
       "name": "Fire Department",
-      "number": "0999 433 3661"
+      "number": "0999 433 3661",
+      "icon": "fire"
     },
     {
       "name": "Health Department",
-      "number": "0907 237 1460"
+      "number": "0907 237 1460",
+      "icon": "health"
     },
     {
       "name": "Coastguard",
-      "number": "0995 660 2401"
+      "number": "0995 660 2401",
+      "icon": "coast"
     },
     {
       "name": "Sanitation Department",
-      "number": "0929 436 2082"
+      "number": "0929 436 2082",
+      "icon": "waste"
     }
   ]
 }

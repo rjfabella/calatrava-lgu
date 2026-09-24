@@ -130,41 +130,11 @@ const CHARTER_FALLBACK = { offices: [], about: null };
 const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* ── TABS ──
-   Roving tabindex + arrow keys, per the WAI-ARIA tabs pattern. The selected
-   tab is mirrored into the URL hash so a tab can be linked to and survives a
-   reload; ?#charter is the default. */
+   setupTabs (assets/app.js) carries the WAI-ARIA behaviour; this page only
+   has to remember which tab to return to when a search is cleared. */
 const TABS = ['charter', 'directory', 'services'];
-
-function selectTab(name, focus){
-  if (!TABS.includes(name)) name = TABS[0];
-  TABS.forEach(t => {
-    const btn = document.getElementById('tab-' + t);
-    const panel = document.getElementById('panel-' + t);
-    const on = t === name;
-    btn.setAttribute('aria-selected', String(on));
-    btn.tabIndex = on ? 0 : -1;
-    panel.hidden = !on;
-  });
-  if (focus) document.getElementById('tab-' + name).focus();
-}
-
-function initTabs(){
-  const btns = TABS.map(t => document.getElementById('tab-' + t));
-  btns.forEach(b => b.addEventListener('click', () => {
-    lastTab = b.dataset.panel;
-    selectTab(b.dataset.panel);
-    history.replaceState(null, '', '#' + b.dataset.panel);
-  }));
-  btns.forEach((b, i) => b.addEventListener('keydown', e => {
-    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : e.key === 'Home' ? -i : e.key === 'End' ? btns.length - 1 - i : 0;
-    if (!d) return;
-    e.preventDefault();
-    const next = (i + d + btns.length) % btns.length;
-    lastTab = TABS[next];
-    selectTab(TABS[next], true);
-    history.replaceState(null, '', '#' + TABS[next]);
-  }));
-}
+let tabs;
+const selectTab = (name, focus) => tabs.select(name, focus);
 
 /* ── CITIZEN'S CHARTER EXPLAINER ── */
 
@@ -303,13 +273,13 @@ function renderHotlines(list){
     const real = digits.length >= 7 && !/^0+$/.test(digits);
     if (real) {
       return `<a class="doc-row" href="tel:${digits}">
-        ${svgIcon('help')}
+        <span class="doc-ico">${svgIcon(h.icon || 'help')}</span>
         <span><span class="doc-title">${esc(h.name)}</span><br><span class="doc-sub">${esc(h.number)}</span></span>
         <span class="doc-go">Call &rarr;</span>
       </a>`;
     }
     return `<div class="doc-row is-pending">
-      ${svgIcon('help')}
+      <span class="doc-ico">${svgIcon(h.icon || 'help')}</span>
       <span><span class="doc-title">${esc(h.name)}</span><br><span class="doc-sub">Number not yet confirmed &mdash; call the municipal emergency hotline above</span></span>
       <span class="doc-go">Pending</span>
     </div>`;
@@ -409,7 +379,7 @@ function runSearch(query){
 
 (async function(){
   initChrome('services');
-  initTabs();
+  tabs = setupTabs(TABS, { onSelect: name => { lastTab = name; } });
 
   const d = await loadJSON('data/services.json', FALLBACK);
   renderFeatured(d.featured || []);
@@ -437,19 +407,8 @@ function runSearch(query){
   });
 
   // A hash may name a tab, or an anchor inside one (e.g. #hotline, #admin).
-  // Also runs on hashchange, so a link followed from elsewhere on the page —
-  // or a hash applied after load — still opens the right tab.
-  function applyHash(scroll){
-    const hash = (location.hash || '').slice(1);
-    if (!hash) return;
-    if (TABS.includes(hash)) { lastTab = hash; selectTab(hash); return; }
-    const target = document.getElementById(hash);
-    const panel = target && target.closest('.tab-panel');
-    if (panel) { lastTab = panel.id.replace('panel-', ''); selectTab(lastTab); }
-    if (target && scroll) target.scrollIntoView();
-  }
-  applyHash(true);
-  window.addEventListener('hashchange', () => applyHash(true));
+  applyTabHash(tabs, true);
+  window.addEventListener('hashchange', () => applyTabHash(tabs, true));
 
   // ?q= arrives from the homepage box; run it once everything is indexed.
   if (initialQuery.trim().length >= 2) {

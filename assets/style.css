@@ -36,6 +36,23 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   padding:.85rem 1.5rem;font-size:16px;font-weight:600;text-decoration:none}
 .skip-link:focus{left:0}
 
+/* ── PAGE TRANSITIONS ──
+   Where cross-document view transitions are supported the browser does the
+   work; the sticky head is named so it stays put instead of cross-fading with
+   the rest of the page. Elsewhere initPageTransition() fades `main` up once on
+   arrival. Both are off under prefers-reduced-motion. */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.26s}
+.site-head{view-transition-name:site-head}
+
+.page-enter{opacity:0;transform:translateY(8px)}
+.page-enter-in{opacity:1;transform:none;transition:opacity .34s ease,transform .34s ease}
+
+@media(prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .page-enter,.page-enter-in{opacity:1;transform:none;transition:none}
+}
+
 /* ── STICKY SITE HEAD ──
    Top bar + nav + the compact page-title strip travel as one block, so the
    active tab and the page you are on stay on screen while you scroll. The
@@ -254,6 +271,13 @@ html{scroll-behavior:smooth}
 .doc-row{background:var(--white);padding:1.4rem 1.7rem;display:flex;align-items:center;gap:1rem;text-decoration:none;color:var(--text);transition:background .3s}
 .doc-row:hover{background:var(--cream)}
 .doc-row svg{width:28px;height:28px;color:var(--ocean);flex-shrink:0;stroke-width:1.6}
+/* Emergency-service pictogram in a tinted disc, so each hotline is
+   recognisable at a glance before the label is read. */
+.doc-ico{flex-shrink:0;width:54px;height:54px;border-radius:50%;background:var(--sand);
+  display:flex;align-items:center;justify-content:center}
+.doc-ico svg{width:29px;height:29px;color:var(--ocean);stroke-width:1.8}
+.doc-row.is-pending .doc-ico{background:var(--cream)}
+.doc-row.is-pending .doc-ico svg{color:var(--muted)}
 .doc-row .doc-title{font-weight:700;color:var(--deep);font-size:17px;line-height:1.4}
 .doc-row .doc-sub{font-size:14.5px;color:var(--muted);line-height:1.5}
 .doc-row .doc-go{margin-left:auto;font-size:13.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
@@ -604,6 +628,8 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
 
 /* Homepage hand-off box */
 .home-search{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);max-width:760px}
+.home-search.is-centered{margin-left:auto;margin-right:auto;text-align:center}
+.home-search.is-centered .svc-search{text-align:left}
 .home-search-lede{font-size:16.5px;color:var(--muted);line-height:1.65;margin-bottom:.9rem}
 
 /* ── RESPONSIVE ── */

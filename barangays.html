@@ -4,61 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Barangays — Municipality of Calatrava, Romblon</title>
-<meta name="description" content="The 7 barangays of the Municipality of Calatrava, Romblon, with their barangay officials and population.">
+<meta name="description" content="The 7 barangays of the Municipality of Calatrava, Romblon — now part of the About Us page.">
+<link rel="canonical" href="about-us.html">
+<!-- The Barangays page moved into About Us as a tab. This stub keeps old
+     links, bookmarks and search-engine results working. -->
+<meta http-equiv="refresh" content="0; url=about-us.html#barangays">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<script>location.replace('about-us.html#barangays');</script>
 </head>
 <body>
 
 <section class="page-hero">
   <div class="page-hero-inner">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Barangays</span></nav>
-    <h1>Our <em>Barangays</em></h1>
-    <p id="intro"></p>
+    <h1>This page has <em>moved</em></h1>
+    <p>The barangay directory is now part of About Us. If you are not redirected automatically,
+      <a href="about-us.html#barangays" style="color:var(--gl)">open it here</a>.</p>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="brgy-wrap"><table class="brgy-table" id="barangays"><!-- rendered from data/barangays.json --></table></div>
-  </div>
-</section>
-
-<script src="assets/app.js"></script>
-<script>
-const FALLBACK = {
-  intro: "The Municipality of Calatrava is composed of 7 barangays on the northern tip of Tablas Island.",
-  barangays: [{ name: "Poblacion", seal: "assets/images/barangays/poblacion.png", captain: "", phone: "", email: "", population: "1,764" }]
-};
-
-(async function(){
-  initChrome('barangays');
-  const d = await loadJSON('data/barangays.json', FALLBACK);
-  document.getElementById('intro').textContent = d.intro || '';
-  const esc = v => String(v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const rows = (d.barangays || []).map(b => {
-    const seal = b.seal
-      ? `<img class="brgy-seal" src="${esc(b.seal)}" alt="Official seal of Barangay ${esc(b.name)}" width="56" height="56" loading="lazy">`
-      : `<span class="brgy-seal brgy-seal-empty" aria-hidden="true">${esc(b.name.charAt(0))}</span>`;
-    const tel = b.phone ? `<a href="tel:+63${b.phone.replace(/\D/g,'').replace(/^0/,'')}">${esc(b.phone)}</a>` : '';
-    const mail = b.email ? `<a href="mailto:${esc(b.email)}">${esc(b.email)}</a>` : '';
-    const contact = [tel, mail].filter(Boolean).join('<br>') || '<span class="brgy-muted">—</span>';
-    return `<tr>
-      <th scope="row"><span class="brgy-id">${seal}<span class="brgy-nm">${esc(b.name)}</span></span></th>
-      <td data-label="Punong Barangay"><span class="brgy-val">${b.captain ? esc(b.captain) : '<em class="brgy-muted">To be announced</em>'}</span></td>
-      <td data-label="Contact" class="brgy-contact"><span class="brgy-val">${contact}</span></td>
-      <td data-label="Population (2020 PSA)" class="brgy-pop"><span class="brgy-val">${esc(b.population || '—')}</span></td>
-    </tr>`;
-  }).join('');
-  document.getElementById('barangays').innerHTML = `
-    <caption class="sr-only">The 7 barangays of Calatrava with their Punong Barangay, contact details and 2020 population</caption>
-    <thead><tr><th scope="col">Barangay</th><th scope="col">Punong Barangay</th><th scope="col">Contact</th><th scope="col" class="brgy-pop">Population <span>(2020 PSA)</span></th></tr></thead>
-    <tbody>${rows}</tbody>`;
-  observeReveal();
-})();
-</script>
 </body>
 </html>

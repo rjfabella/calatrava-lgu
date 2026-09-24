@@ -504,7 +504,13 @@ frame — the face is nowhere near it. `Portrait_Mayor1.jpg` and
    (MLGOO — a DILG-assigned officer, not an LGU office). The Mayor's and
    Vice Mayor's offices are deliberately absent from the departments grid;
    both lead the Elected Officials grid above it.
-5. Parse the reference-docs batch into JSON — office profiles (mandate/
+5. **2026-09-24, later.** Barangays left the main menu and is now a tab in
+   About Us (History / Barangays / Map); `barangays.html` is a redirect stub.
+   Emergency hotline tiles carry generic inline pictograms, deliberately NOT
+   the PNP/BFP/PCG official seals — those are government marks and need the
+   agencies' written authorisation before a municipal site reproduces them.
+   See `_hotlineIconsNote` in `services.json`.
+6. Parse the reference-docs batch into JSON — office profiles (mandate/
    vision/mission/services for BPLO, MASSO, MBO, MEO, MSWDO, MNAO, OMAG,
    KALAHI), the 4 emergency hotlines (replace the pending rows), the 7
    barangay seals from the MNAO doc, permit forms as downloads, and the FDP

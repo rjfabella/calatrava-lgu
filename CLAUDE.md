@@ -93,11 +93,29 @@ of the above before changing site structure.
   Jost fonts, green/gold palette) driven by `:root` CSS variables. Re-theme
   there, not with inline styles or per-page stylesheets.
 - **Pages**: `index.html`, `about.html` (Government — elected officials +
-  offices/departments), `about-us.html` (history + Find us map),
+  offices/departments), `about-us.html` (three tabs: History / Barangays /
+  Map),
   `services.html` (Public Services, three tabs: Citizen's Charter explainer /
   Charter directory / services by category), `barangays.html`,
   `transparency.html`, `news.html`, `contact.html` (office directory only),
-  `privacy.html`.
+  `privacy.html`. `barangays.html` is a redirect stub to
+  `about-us.html#barangays` — keep it so old links and bookmarks survive.
+- **Tabs**: `setupTabs(names, opts)` + `applyTabHash(group)` in `assets/app.js`
+  carry the WAI-ARIA tab behaviour (roving tabindex, arrow keys, hash sync).
+  Both `services.html` and `about-us.html` use it; don't reimplement per page.
+  Markup contract: `#tab-<name>` buttons and a `#panel-<name>` for each.
+  `.tabs[hidden]` is declared explicitly because `display:flex` would
+  otherwise beat the `hidden` attribute.
+- **Search**: `buildSearchIndex`/`searchServices`/`renderSearchBox` in
+  `assets/app.js`. The index is built from `citizens-charter.json` +
+  `services.json` at runtime, so it can never drift from what renders. The
+  homepage box hands off to `services.html?q=…`; the Services page does the
+  searching.
+- **Page transitions**: cross-document View Transitions via
+  `@view-transition{navigation:auto}` in the CSS, with `.site-head` given a
+  `view-transition-name` so the frozen header doesn't cross-fade. Browsers
+  without the API get a one-off fade-up of `main` from
+  `initPageTransition()`. Both are disabled under `prefers-reduced-motion`.
 - **Sticky chrome**: `.site-head` (top bar + nav + a compact page-title strip)
   is `position:sticky`. The strip is built in `buildPageBar()` from each
   page's own `<h1>`/breadcrumb and reveals itself once the page hero scrolls
