@@ -21,16 +21,31 @@
   </div>
 </section>
 
-<!-- TABS -->
+<!-- SEARCH + TABS -->
 <section class="section tight">
   <div class="container">
-    <div class="tabs" role="tablist" aria-label="Public Services">
+    <div id="serviceSearch" class="svc-search-wrap"><!-- rendered by renderSearchBox --></div>
+    <p class="svc-search-hint" id="searchHint">Search across the Citizen's Charter and the service directory &mdash; try &ldquo;birth certificate&rdquo;, &ldquo;business permit&rdquo; or &ldquo;burial&rdquo;.</p>
+    <div class="tabs" role="tablist" aria-label="Public Services" id="serviceTabs">
       <button class="tab" role="tab" id="tab-charter"   aria-controls="panel-charter"   aria-selected="true"  data-panel="charter">Citizen's Charter</button>
       <button class="tab" role="tab" id="tab-directory" aria-controls="panel-directory" aria-selected="false" data-panel="directory" tabindex="-1">Citizen's Charter Directory</button>
       <button class="tab" role="tab" id="tab-services"  aria-controls="panel-services"  aria-selected="false" data-panel="services" tabindex="-1">View Services</button>
     </div>
   </div>
 </section>
+
+<!-- SEARCH RESULTS — replaces the tab panels while a query is active -->
+<div class="tab-panel" id="panel-search" tabindex="-1" hidden>
+  <section class="section tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="s-label" id="searchCount"></span>
+        <h2 class="s-title">Search <em>results</em></h2>
+      </div>
+      <div id="searchResults"></div>
+    </div>
+  </section>
+</div>
 
 <!-- PANEL 1 — WHAT THE CITIZEN'S CHARTER IS -->
 <div class="tab-panel" id="panel-charter" role="tabpanel" aria-labelledby="tab-charter" tabindex="0">
@@ -136,6 +151,7 @@ function selectTab(name, focus){
 function initTabs(){
   const btns = TABS.map(t => document.getElementById('tab-' + t));
   btns.forEach(b => b.addEventListener('click', () => {
+    lastTab = b.dataset.panel;
     selectTab(b.dataset.panel);
     history.replaceState(null, '', '#' + b.dataset.panel);
   }));
@@ -144,6 +160,7 @@ function initTabs(){
     if (!d) return;
     e.preventDefault();
     const next = (i + d + btns.length) % btns.length;
+    lastTab = TABS[next];
     selectTab(TABS[next], true);
     history.replaceState(null, '', '#' + TABS[next]);
   }));
@@ -299,6 +316,97 @@ function renderHotlines(list){
   }).join('');
 }
 
+/* ── SEARCH ──
+   Searches both sources at once (buildSearchIndex/searchServices live in
+   app.js so the homepage box can hand off to exactly this behaviour). While a
+   query is active the tab panels give way to a results list; clearing the box
+   puts the tabs back where they were. */
+let SEARCH_INDEX = [];
+let lastTab = TABS[0];
+
+function resultRow(r){
+  if (r.kind === 'charter') {
+    return `<button class="res-row" type="button" data-kind="charter" data-name="${esc(r.name)}">
+      <span class="res-badge res-badge--charter">Citizen's Charter</span>
+      <span class="res-main">
+        <span class="res-name">${esc(r.name)}</span>
+        <span class="res-sub">${esc(r.office)}${r.page ? ` &middot; p.&nbsp;${esc(r.page)}` : ''}</span>
+        ${r.meta ? `<span class="res-meta">${esc(r.meta)}</span>` : ''}
+      </span>
+      <span class="res-go">Open &rarr;</span>
+    </button>`;
+  }
+  return `<button class="res-row" type="button" data-kind="group" data-group="${esc(r.groupId || '')}">
+    <span class="res-badge">Service directory</span>
+    <span class="res-main">
+      <span class="res-name">${esc(r.name)}</span>
+      <span class="res-sub">${esc(r.office)}</span>
+      ${r.desc ? `<span class="res-desc">${esc(r.desc)}</span>` : ''}
+      ${r.meta ? `<span class="res-meta">${esc(r.meta)}</span>` : ''}
+    </span>
+    <span class="res-go">Open &rarr;</span>
+  </button>`;
+}
+
+function showTabs(){
+  document.getElementById('panel-search').hidden = true;
+  document.getElementById('serviceTabs').hidden = false;
+  document.getElementById('searchHint').hidden = false;
+  selectTab(lastTab);
+}
+
+function runSearch(query){
+  const q = (query || '').trim();
+  const panel = document.getElementById('panel-search');
+  if (q.length < 2) { showTabs(); return; }
+
+  // Park the tabs while results are showing.
+  document.getElementById('serviceTabs').hidden = true;
+  document.getElementById('searchHint').hidden = true;
+  TABS.forEach(t => { document.getElementById('panel-' + t).hidden = true; });
+  panel.hidden = false;
+
+  const hits = searchServices(SEARCH_INDEX, q);
+  const count = document.getElementById('searchCount');
+  const out = document.getElementById('searchResults');
+
+  if (!hits.length) {
+    count.textContent = `No match for “${q}”`;
+    out.innerHTML = `<div class="res-empty">
+      <p>Nothing in the Citizen's Charter or the service directory matches <b>${esc(q)}</b>.</p>
+      <p>Try a shorter or more general word &mdash; &ldquo;permit&rdquo; rather than &ldquo;permitting&rdquo;, or the name of the office you need. You can also
+      <button class="btn-ghost-link" type="button" id="resetSearch">browse all services</button>.</p>
+    </div>`;
+    const reset = document.getElementById('resetSearch');
+    if (reset) reset.addEventListener('click', () => {
+      document.getElementById('svcSearchInput').value = '';
+      runSearch('');
+    });
+    return;
+  }
+
+  count.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`;
+  out.innerHTML = `<div class="res-list">${hits.map(resultRow).join('')}</div>`;
+
+  // Each result jumps to the real entry in the tab it came from.
+  out.querySelectorAll('.res-row').forEach(btn => btn.addEventListener('click', () => {
+    document.getElementById('svcSearchInput').value = '';
+    if (btn.dataset.kind === 'charter') {
+      lastTab = 'directory';
+      showTabs();
+      const wanted = btn.dataset.name;
+      const item = [...document.querySelectorAll('#charterOffices .charter-item')]
+        .find(d => d.querySelector('.charter-name')?.textContent.trim() === wanted);
+      if (item) { item.open = true; item.scrollIntoView({ block: 'center' }); }
+    } else {
+      lastTab = 'services';
+      showTabs();
+      const g = btn.dataset.group && document.getElementById(btn.dataset.group);
+      if (g) g.scrollIntoView({ block: 'start' });
+    }
+  }));
+}
+
 (async function(){
   initChrome('services');
   initTabs();
@@ -314,20 +422,40 @@ function renderHotlines(list){
 
   observeReveal();
 
+  // Search is available as soon as both files are in.
+  SEARCH_INDEX = buildSearchIndex(charter, d);
+  const initialQuery = new URLSearchParams(location.search).get('q') || '';
+  const input = renderSearchBox(document.getElementById('serviceSearch'), {
+    label: 'Search public services',
+    placeholder: 'Search a service, document or office…',
+    value: initialQuery,
+    onInput: runSearch,
+    onSubmit: runSearch,
+  });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { input.value = ''; runSearch(''); }
+  });
+
   // A hash may name a tab, or an anchor inside one (e.g. #hotline, #admin).
   // Also runs on hashchange, so a link followed from elsewhere on the page —
   // or a hash applied after load — still opens the right tab.
   function applyHash(scroll){
     const hash = (location.hash || '').slice(1);
     if (!hash) return;
-    if (TABS.includes(hash)) { selectTab(hash); return; }
+    if (TABS.includes(hash)) { lastTab = hash; selectTab(hash); return; }
     const target = document.getElementById(hash);
     const panel = target && target.closest('.tab-panel');
-    if (panel) selectTab(panel.id.replace('panel-', ''));
+    if (panel) { lastTab = panel.id.replace('panel-', ''); selectTab(lastTab); }
     if (target && scroll) target.scrollIntoView();
   }
   applyHash(true);
   window.addEventListener('hashchange', () => applyHash(true));
+
+  // ?q= arrives from the homepage box; run it once everything is indexed.
+  if (initialQuery.trim().length >= 2) {
+    runSearch(initialQuery);
+    document.getElementById('serviceSearch').scrollIntoView({ block: 'center' });
+  }
 })();
 </script>
 </body>

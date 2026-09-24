@@ -43,6 +43,11 @@
       <a href="services.html" class="see-all">All services &rarr;</a>
     </div>
     <div class="qs-grid" id="quickServices"><!-- rendered from data/site.json --></div>
+
+    <div class="home-search">
+      <p class="home-search-lede">Looking for something else? Search every service in the Citizen&rsquo;s Charter and the service directory.</p>
+      <div id="homeSearch"><!-- rendered by renderSearchBox --></div>
+    </div>
   </div>
 </section>
 
@@ -304,8 +309,23 @@ function renderLatestNews(n){
   }).join('');
 }
 
+function initHomeSearch(){
+  const mount = document.getElementById('homeSearch');
+  if (!mount || typeof renderSearchBox !== 'function') return;
+  const go = q => {
+    const query = (q || '').trim();
+    location.href = query ? `services.html?q=${encodeURIComponent(query)}` : 'services.html';
+  };
+  renderSearchBox(mount, {
+    label: 'Search public services',
+    placeholder: 'Search a service, document or office…',
+    onSubmit: go,     // no onInput: the homepage hands off rather than searching in place
+  });
+}
+
 (async function(){
   initChrome('home');
+  initHomeSearch();
   const [site, officials, news] = await Promise.all([
     loadJSON('data/site.json', FALLBACK_SITE),
     loadJSON('data/officials.json', { welcome: { name: 'Engr. Robert M. Fabella', role: 'Municipal Mayor', message: ['Welcome to the official website of the Municipality of Calatrava.'] } }),

@@ -508,6 +508,9 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
 .dept-head-title{font-size:14.5px;color:var(--muted);line-height:1.45;margin-top:.15rem}
 
 /* ── TABS (Public Services) ── */
+/* `display:flex` would otherwise beat the hidden attribute's UA rule, and the
+   tab bar would stay on screen behind the search results. */
+.tabs[hidden]{display:none}
 .tabs{display:flex;gap:.4rem;flex-wrap:wrap;border-bottom:2px solid var(--border)}
 .tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;
   font-family:var(--fb);font-size:15px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
@@ -559,6 +562,50 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
 .card-tag.is-pending{color:var(--muted)}
 .card-link.is-pending{color:var(--muted);border-bottom-color:var(--border);cursor:default}
 
+/* ── SERVICE SEARCH ── */
+.svc-search-wrap{margin-bottom:.9rem}
+.svc-search{display:flex;align-items:center;gap:.6rem;background:var(--white);border:1px solid var(--border);
+  border-radius:4px;padding:.4rem .5rem .4rem 1rem;transition:border-color .2s,box-shadow .2s}
+.svc-search:focus-within{border-color:var(--ocean);box-shadow:0 0 0 3px rgba(30,116,15,.14)}
+.svc-search-ico{display:flex;flex-shrink:0}
+.svc-search-ico svg{width:20px;height:20px;color:var(--muted)}
+.svc-search:focus-within .svc-search-ico svg{color:var(--ocean)}
+.svc-search-input{flex:1;min-width:0;border:0;background:none;font-family:var(--fb);font-size:17px;
+  color:var(--text);padding:.7rem 0}
+.svc-search-input:focus{outline:none}
+.svc-search-input::placeholder{color:var(--muted)}
+.svc-search-btn{flex-shrink:0;appearance:none;border:0;cursor:pointer;background:var(--ocean);color:var(--white);
+  font-family:var(--fb);font-size:14px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:.75rem 1.4rem;border-radius:3px;transition:background .25s}
+.svc-search-btn:hover{background:var(--deep)}
+.svc-search-hint{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:1.6rem;max-width:70ch}
+
+/* Result rows — one row per hit, badged with the source it came from. */
+.res-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
+.res-row{appearance:none;border:0;width:100%;text-align:left;cursor:pointer;background:var(--white);
+  padding:1.1rem 1.4rem;display:flex;align-items:flex-start;gap:1.1rem;font-family:var(--fb);
+  transition:background .2s}
+.res-row:hover{background:var(--cream)}
+.res-badge{flex:0 0 auto;font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);background:var(--sand);border-radius:3px;padding:.3rem .6rem;margin-top:.15rem;
+  white-space:nowrap}
+.res-badge--charter{color:var(--ocean)}
+.res-main{flex:1;min-width:0}
+.res-name{display:block;font-size:17px;font-weight:700;color:var(--deep);line-height:1.4}
+.res-sub{display:block;font-size:14.5px;color:var(--muted);margin-top:.15rem;line-height:1.45}
+.res-desc{display:block;font-size:15.5px;color:var(--text);margin-top:.35rem;line-height:1.55}
+.res-meta{display:block;font-size:14.5px;color:var(--ocean);font-weight:600;margin-top:.35rem;line-height:1.5}
+.res-go{flex:0 0 auto;align-self:center;font-size:13px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.res-empty{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:4px;padding:1.8rem;max-width:70ch}
+.res-empty p{font-size:17px;line-height:1.7;color:var(--text)}
+.res-empty p + p{margin-top:.7rem}
+
+/* Homepage hand-off box */
+.home-search{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);max-width:760px}
+.home-search-lede{font-size:16.5px;color:var(--muted);line-height:1.65;margin-bottom:.9rem}
+
 /* ── RESPONSIVE ── */
 @media(max-width:980px){
   .qs-grid{grid-template-columns:repeat(2,1fr)}
@@ -592,6 +639,11 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
 }
 @media(max-width:600px){
   body{font-size:18px}
+  .svc-search{flex-wrap:wrap;padding:.5rem .6rem}
+  .svc-search-input{flex:1 1 60%}
+  .svc-search-btn{width:100%;margin-top:.2rem}
+  .res-row{flex-wrap:wrap;gap:.5rem 1rem}
+  .res-go{align-self:flex-start;margin-left:auto}
   .topbar-inner,.nav,.hero-inner,.section,.page-hero{padding-left:1.25rem;padding-right:1.25rem}
   .section{padding-top:3.5rem;padding-bottom:3.5rem}
   .qs-grid,.cards,.officials-grid,.prog-grid{grid-template-columns:1fr}

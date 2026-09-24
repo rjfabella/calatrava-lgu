@@ -339,6 +339,123 @@ function wrapMain(){
   content.forEach(el => main.appendChild(el));
 }
 
+// ── SERVICE SEARCH ──
+// One implementation shared by the homepage box (which hands off) and the
+// Services page (which does the searching). The index is built from the same
+// two JSON files the page already renders, so results can never drift from
+// what is on screen.
+
+const SEARCH_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>';
+
+/** Fold case and strip punctuation/diacritics so "Mayor's" matches "mayors". */
+function normalize(v){
+  return String(v == null ? '' : v)
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Build the searchable record set.
+ *   charter -> data/citizens-charter.json, one record per frontline service
+ *   group   -> data/services.json, one record per quick-reference service
+ * `name` and `office` are weighted above the rest of the text so a title hit
+ * outranks a passing mention in a requirements list.
+ */
+function buildSearchIndex(charter, services){
+  const out = [];
+
+  (charter.offices || []).forEach(o => (o.services || []).forEach(sv => {
+    const body = [
+      sv.whoMayAvail, sv.classification, sv.transactionType,
+      ...(sv.requirements || []).map(r => `${r.item} ${r.whereToSecure || ''}`),
+    ].filter(Boolean).join(' ');
+    out.push({
+      kind: 'charter',
+      name: sv.name,
+      office: o.office,
+      meta: [
+        (sv.fees && sv.fees.length) ? `Fee: ${sv.fees.join('; ')}` : '',
+        (sv.processingTime && sv.processingTime.length) ? sv.processingTime.join('; ') : '',
+      ].filter(Boolean).join(' · '),
+      page: sv.sourcePages,
+      nName: normalize(sv.name),
+      nOffice: normalize(o.office),
+      nBody: normalize(body),
+    });
+  }));
+
+  (services.groups || []).forEach(g => (g.services || []).forEach(sv => {
+    out.push({
+      kind: 'group',
+      name: sv.name,
+      office: sv.office || g.title,
+      group: g.title,
+      groupId: g.id,
+      meta: [sv.fee ? `Fee: ${sv.fee}` : '', sv.time || ''].filter(Boolean).join(' · '),
+      desc: sv.desc || '',
+      nName: normalize(sv.name),
+      nOffice: normalize(`${sv.office || ''} ${g.title}`),
+      nBody: normalize(sv.desc || ''),
+    });
+  }));
+
+  return out;
+}
+
+/** Score a record against the query's terms. 0 means "no match, drop it". */
+function scoreRecord(rec, terms){
+  let score = 0;
+  for (const t of terms) {
+    let best = 0;
+    if (rec.nName.startsWith(t)) best = 12;
+    else if (rec.nName.includes(t)) best = 9;
+    else if (rec.nOffice.includes(t)) best = 4;
+    else if (rec.nBody.includes(t)) best = 2;
+    if (!best) return 0;          // every term must appear somewhere
+    score += best;
+  }
+  return score;
+}
+
+function searchServices(index, query){
+  const terms = normalize(query).split(' ').filter(Boolean);
+  if (!terms.length) return [];
+  return index
+    .map(rec => ({ rec, score: scoreRecord(rec, terms) }))
+    .filter(r => r.score > 0)
+    .sort((a, b) => b.score - a.score || a.rec.name.localeCompare(b.rec.name))
+    .map(r => r.rec);
+}
+
+/**
+ * Render the search box. `onSubmit(query)` runs on Enter or button press;
+ * `onInput(query)` runs as the user types (omit it for a hand-off box that
+ * should not search in place, like the homepage's).
+ */
+function renderSearchBox(mount, { label, placeholder, value, onInput, onSubmit }){
+  mount.innerHTML = `
+    <form class="svc-search" role="search" novalidate>
+      <label class="sr-only" for="svcSearchInput">${label}</label>
+      <span class="svc-search-ico">${SEARCH_ICON}</span>
+      <input id="svcSearchInput" class="svc-search-input" type="search" autocomplete="off"
+             placeholder="${placeholder}" value="${(value || '').replace(/"/g, '&quot;')}">
+      <button class="svc-search-btn" type="submit">Search</button>
+    </form>`;
+  const form = mount.querySelector('form');
+  const input = mount.querySelector('input');
+  form.addEventListener('submit', e => { e.preventDefault(); onSubmit(input.value); });
+  if (onInput) {
+    let t;
+    input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => onInput(input.value), 180); });
+    // `type=search` clear button fires `search` in WebKit, not always `input`.
+    input.addEventListener('search', () => onInput(input.value));
+  }
+  return input;
+}
+
 /** Call once per page: builds header + footer and starts the reveal observer. */
 function initChrome(active){
   wrapMain();
