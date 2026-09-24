@@ -46,13 +46,14 @@
 <script>
 const FALLBACK = {
   elected: [{ name: "Engr. Robert M. Fabella", role: "Municipal Mayor", term: "2025–2028", photo: "assets/images/Portrait_Mayor.jpg" }],
-  departments: [{ name: "Office of the Municipal Vice Mayor", acronym: "", head: "Hon. Elizer F. Fiedacan", headTitle: "Municipal Vice Mayor", photo: "" }]
+  departments: [{ name: "Office of the Secretary to the Sangguniang Bayan", acronym: "SB", head: "Joseph M. Fedelicio", headTitle: "Secretary to the Sangguniang Bayan", photo: "assets/images/dept-heads/sec.jpg" }]
 };
 
 const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 // Every official is rendered at the same size — the Mayor and Vice Mayor are
-// identified by their role label, not by a bigger tile.
+// identified by their role label, not by a bigger tile. Both are absent from
+// the Offices & Departments grid below for the same reason: they lead here.
 function renderOfficial(o){
   const photo = o.photo
     ? `<img src="${esc(o.photo)}" alt="${esc(o.name)}" loading="lazy" onerror="this.parentElement.innerHTML=monogram('${(o.name||'').replace(/'/g,'')}')">`

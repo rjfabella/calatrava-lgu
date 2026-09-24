@@ -500,8 +500,10 @@ frame — the face is nowhere near it. `Portrait_Mayor1.jpg` and
    Wikipedia and **not yet verified by the LGU** — see `_historyNote` in
    `officials.json`. Department acronyms come from the Citizen's Charter; the
    Accountant's and Vice Mayor's offices have none there, so their chips are
-   deliberately blank rather than invented. Two dept-head portraits are unused
-   (MLGOO, SB Secretary) — no matching office row.
+   deliberately blank rather than invented. One dept-head portrait is unused
+   (MLGOO — a DILG-assigned officer, not an LGU office). The Mayor's and
+   Vice Mayor's offices are deliberately absent from the departments grid;
+   both lead the Elected Officials grid above it.
 5. Parse the reference-docs batch into JSON — office profiles (mandate/
    vision/mission/services for BPLO, MASSO, MBO, MEO, MSWDO, MNAO, OMAG,
    KALAHI), the 4 emergency hotlines (replace the pending rows), the 7
