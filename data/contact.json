@@ -1,0 +1,39 @@
+{
+  "envFee": "₱20",
+  "envFeeMessage": "A minimal ₱20 per visitor helps preserve our natural areas for future generations.",
+  "contacts": [
+    {
+      "id": "tourism-council",
+      "label": "Calatrava Tourism Council",
+      "value": "0919 335 0314",
+      "href": "tel:09193350314",
+      "sub": "Tap to call",
+      "type": "phone"
+    },
+    {
+      "id": "sinagtala-tours",
+      "label": "Sinagtala Tours",
+      "value": "0939 915 4193",
+      "href": "tel:09399154193",
+      "sub": "Island hopping & tours",
+      "type": "phone"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "value": "Calatrava Tourism",
+      "href": "https://www.facebook.com/calatravatourismcouncil",
+      "sub": "facebook.com/calatravatourismcouncil",
+      "type": "social"
+    }
+  ],
+  "mapMode": "pins",
+  "mapIframeUrl": "https://storage.googleapis.com/maps-solutions-6kvpxep2a7/neighborhood-discovery/vqpx/neighborhood-discovery.html",
+  "mapCenter": {
+    "lat": 12.619,
+    "lng": 122.071,
+    "zoom": 12
+  },
+  "mapsApiKey": "AIzaSyCV6vFCuzYIagF35FkznY6u8OzqW9t9LFw",
+  "mapId": ""
+}

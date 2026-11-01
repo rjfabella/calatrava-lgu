@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calatrava, Romblon — Official Tourism Portal</title>
+<meta name="description" content="Official tourism portal of Calatrava — Romblon's best-kept secret. Hidden saltwater lakes, white-sand beaches, waterfalls, island hopping, and where to stay. Step off the grid.">
+<!-- Social sharing (Open Graph) — update og:url/og:image if the site moves to a custom domain -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Calatrava Tourism">
+<meta property="og:title" content="Calatrava, Romblon — Official Tourism Portal">
+<meta property="og:description" content="Skip the crowded postcards — discover Romblon's best-kept secret. Hidden saltwater lakes, white-sand beaches, waterfalls, and island hopping in Calatrava.">
+<meta property="og:url" content="https://rjfabella.github.io/calatrava-tourism-portal/">
+<meta property="og:image" content="https://rjfabella.github.io/calatrava-tourism-portal/assets/destinations/Destinations_TinagongDagat1_web.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<!-- PWA: installable app support -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0a1f3d">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Calatrava">
+<!-- Google Fonts: loads when online, falls back to system fonts offline -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/emergency.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#0C2233;--ocean:#1A5C7A;--teal:#1E8B72;
+  --sand:#F0E9DD;--cream:#FAF7F2;--gold:#B88A45;--gl:#D4A86A;
+  --white:#fff;--text:#1C1C1C;--muted:#717B7B;--border:rgba(12,34,51,.1);
+  --fd:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --fb:'Jost','Segoe UI',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:hidden;font-size:16.8px;line-height:1.6}
+
+/* ── VISITOR GATE ── */
+/* Shown by default so first-time visitors never see content first; an early
+   script hides it instantly when the gate is disabled or already chosen. */
+.gate-open{overflow:hidden}
+.gate-open > *:not(.gate):not(script){filter:blur(8px);pointer-events:none;user-select:none}
+.gate{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:1.5rem;background:rgba(12,34,51,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.gate-open .gate{display:flex}
+.gate-card{background:var(--cream);max-width:480px;width:100%;border-radius:6px;padding:2.75rem 2.25rem;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.4);animation:fadeUp .5s ease both}
+.gate-seals{display:flex;align-items:center;justify-content:center;gap:1rem;margin:0 auto 1.25rem}
+.gate-seal{width:72px;height:72px;border-radius:50%;object-fit:cover;display:block;flex-shrink:0}
+.gate-seal-side{width:44px;height:44px;object-fit:contain;display:block;flex-shrink:0;opacity:.85}
+.gate-eyebrow{font-size:11.2px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem}
+.gate-title{font-family:var(--fd);font-size:clamp(1.9rem,5vw,2.6rem);font-weight:300;line-height:1.1;color:var(--deep);margin-bottom:.75rem}
+.gate-sub{font-size:14.6px;color:var(--muted);line-height:1.6;margin-bottom:2rem}
+.gate-actions{display:flex;flex-direction:column;gap:.85rem}
+.gate-btn{font-size:12.9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:15px 28px;border-radius:2px;cursor:pointer;border:1px solid transparent;transition:background .25s,color .25s,border-color .25s}
+.gate-btn-tourist{background:var(--deep);color:var(--white)}
+.gate-btn-tourist:hover{background:var(--gold)}
+.gate-btn-local{background:transparent;color:var(--deep);border-color:var(--border)}
+.gate-btn-local:hover{border-color:var(--deep);background:rgba(12,34,51,.04)}
+.gate-btn small{display:block;font-size:10.5px;font-weight:300;letter-spacing:.06em;text-transform:none;opacity:.7;margin-top:4px}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 2.5rem;display:flex;align-items:center;justify-content:space-between;transition:background .4s,padding .4s,box-shadow .4s}
+.nav.scrolled{background:rgba(250,247,242,.96);backdrop-filter:blur(12px);padding:1rem 2.5rem;box-shadow:0 1px 0 var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-seal{width:40px;height:40px;border-radius:50%;overflow:hidden;border:1px solid rgba(255,255,255,.3);transition:border-color .4s;flex-shrink:0}
+.nav.scrolled .nav-seal{border-color:var(--border)}
+.nav-seal img{width:100%;height:100%;object-fit:cover}
+.nav-name{font-family:var(--fd);font-size:19px;font-weight:500;color:var(--white);letter-spacing:.03em;line-height:1.15;transition:color .4s}
+.nav-name small{display:block;font-size:11.2px;font-family:var(--fb);font-weight:300;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+.nav.scrolled .nav-name{color:var(--deep)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{font-size:12.9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.9);transition:color .3s}
+.nav.scrolled .nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--gold)!important}
+.nav-cta{color:var(--deep)!important;background:var(--white);padding:8px 20px;border-radius:2px;transition:background .3s,color .3s!important}
+.nav.scrolled .nav-cta{background:var(--deep);color:var(--white)!important}
+.nav-cta:hover{background:var(--gold)!important;color:var(--white)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:background .4s}
+.nav.scrolled .hamburger span{background:var(--deep)}
+/* Collapse the (now six-item) nav to the hamburger before it gets cramped */
+@media(max-width:1100px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* ── MOBILE NAV ── */
+.mob-nav{position:fixed;inset:0;background:var(--deep);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;display:none}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:var(--fd);font-size:clamp(1.8rem,6vw,2.8rem);font-weight:300;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
+.mob-nav a:hover{color:var(--gl)}
+.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.75);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
+.mob-close:hover{color:var(--white)}
+
+/* ── HERO ── */
+.hero{position:relative;height:100vh;min-height:620px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--deep)}
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media video,.hero-media img.hero-fallback{width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,34,51,.38) 0%,rgba(12,34,51,.28) 45%,rgba(12,34,51,.72) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;text-align:center;color:var(--white);padding:0 2rem;max-width:900px}
+.hero-logo{width:clamp(120px,18vw,200px);height:auto;margin:0 auto 1.5rem;display:block;filter:drop-shadow(0 6px 24px rgba(0,0,0,.45));animation:fadeUp 1s ease both}
+.hero-eyebrow{font-size:12.3px;letter-spacing:.3em;text-transform:uppercase;opacity:.72;margin-bottom:1.25rem;animation:fadeUp 1s ease .1s both}
+.hero-title{font-family:var(--fd);font-size:clamp(5rem,14vw,11rem);font-weight:300;letter-spacing:-.02em;line-height:.9;margin-bottom:.75rem;animation:fadeUp 1s ease .15s both}
+.hero-sub{font-family:var(--fd);font-size:clamp(1rem,2.5vw,1.6rem);font-weight:300;font-style:italic;opacity:.82;margin-bottom:.5rem;animation:fadeUp 1s ease .25s both}
+.hero-tagline{font-size:12.9px;letter-spacing:.22em;text-transform:uppercase;opacity:.58;margin-bottom:2.5rem;animation:fadeUp 1s ease .35s both}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s ease .45s both}
+.btn-primary{font-size:12.3px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:var(--deep);background:var(--white);padding:14px 34px;border-radius:2px;transition:background .3s,color .3s}
+.btn-primary:hover{background:var(--gold);color:var(--white)}
+.btn-ghost{font-size:12.3px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:var(--white);padding:14px 34px;border-radius:2px;border:1px solid rgba(255,255,255,.4);transition:border-color .3s,background .3s}
+.btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,.1)}
+.scroll-hint{position:absolute;bottom:2rem;left:0;right:0;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.75);font-size:11.2px;letter-spacing:.22em;text-transform:uppercase;animation:fadeUp 1s ease .65s both}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);animation:linePulse 2.2s ease-in-out infinite}
+
+/* ── ENV NOTICE ── */
+.env-notice{background:var(--ocean);padding:1rem 2.5rem;text-align:center}
+.env-notice p{color:rgba(255,255,255,.92);font-size:14.6px;letter-spacing:.04em}
+.env-notice strong{color:var(--white)}
+
+/* ── LAYOUT ── */
+.section{padding:6rem 2.5rem}
+.container{max-width:1200px;margin:0 auto}
+.s-label{font-size:11.2px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:block}
+.s-title{font-family:var(--fd);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:300;line-height:1.1;color:var(--deep)}
+.s-title em{font-style:italic;color:var(--ocean)}
+
+/* ── ABOUT / STATS ── */
+.intro{background:var(--deep);padding:5.5rem 2.5rem}
+.intro-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.intro-text .s-title{color:var(--white)}
+.intro-text .s-title em{color:var(--gl)}
+.intro-text p{font-size:16.8px;line-height:1.85;color:rgba(255,255,255,.78);margin:1.5rem 0 2rem}
+.intro-link{font-size:12.3px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gl);text-decoration:none;border-bottom:1px solid rgba(212,168,106,.4);padding-bottom:2px;transition:color .3s,border-color .3s}
+.intro-link:hover{color:var(--white);border-color:var(--white)}
+/* ── ABOUT TABS ── */
+.intro-tabs{display:flex;flex-direction:column;min-height:260px}
+.tab-nav{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:1.5rem}
+.tab-btn{font-size:11.2px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.7);background:none;border:none;border-bottom:2px solid transparent;padding:.55rem 1.1rem .55rem 0;cursor:pointer;margin-bottom:-1px;transition:color .2s,border-color .2s;white-space:nowrap}
+.tab-btn:hover{color:rgba(255,255,255,.75)}
+.tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:tabIn .22s ease}
+.tab-panel p{font-size:15.1px;line-height:1.85;color:rgba(255,255,255,.78);margin-bottom:.85rem}
+.tab-panel p:last-child{margin-bottom:0}
+@keyframes tabIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+/* ── STATS STRIP ── */
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.06);max-width:1200px;margin:3.5rem auto 0}
+.stat{background:rgba(255,255,255,.04);padding:2rem 1.75rem}
+.stat-num{font-family:var(--fd);font-size:3rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:.45rem}
+.stat-num sup{font-size:1.2rem;color:var(--gl)}
+.stat-lbl{font-size:11.2px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+
+/* ── DESTINATIONS ── */
+.dest-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;gap:2rem;flex-wrap:wrap}
+.see-all{font-size:12.3px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ocean);text-decoration:none;border-bottom:1px solid var(--ocean);padding-bottom:2px;white-space:nowrap;transition:color .3s,border-color .3s}
+.see-all:hover{color:var(--gold);border-color:var(--gold)}
+.dest-grid{display:grid;grid-template-columns:1.45fr 1fr;grid-template-rows:auto auto;gap:2px;background:rgba(12,34,51,.08)}
+.dest-card{position:relative;overflow:hidden;cursor:pointer;background:var(--deep)}
+.dest-card:first-child{grid-row:1/3}
+.dest-img{width:100%;height:100%;min-height:300px;object-fit:cover;display:block;transition:transform .7s ease}
+.dest-card:first-child .dest-img{min-height:560px}
+.dest-card:hover .dest-img{transform:scale(1.04)}
+.dest-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,34,51,.88) 0%,transparent 55%)}
+.dest-info{position:absolute;bottom:0;left:0;right:0;padding:1.75rem}
+.dest-type{font-size:10.1px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-bottom:.4rem}
+.dest-name{font-family:var(--fd);font-size:clamp(1.3rem,2.5vw,2rem);font-weight:400;color:var(--white);line-height:1.2}
+.dest-loc{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:.35rem}
+
+/* ── CARD IMAGE NAV (subtle arrow overlays) ── */
+.card-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:36px;height:36px;padding:0;border:none;border-radius:50%;background:rgba(12,34,51,.4);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease,background .2s ease;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.card-nav:hover{background:rgba(12,34,51,.7)}
+.card-nav:focus-visible{opacity:1;outline:2px solid var(--white);outline-offset:2px}
+.card-nav.prev{left:.6rem}
+.card-nav.next{right:.6rem}
+.card-nav svg{width:17px;height:17px;display:block}
+.dest-card:hover .card-nav,.accom-card:hover .card-nav,.dest-card:focus-within .card-nav,.accom-card:focus-within .card-nav{opacity:1}
+@media (hover:none){.card-nav{opacity:.9}}
+
+/* ── ACTIVITIES ── */
+.acts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem}
+.act-card{position:relative;overflow:hidden;min-height:480px;display:flex;flex-direction:column;justify-content:flex-end}
+.act-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-color:var(--deep);transition:transform .7s ease}
+.act-card:hover .act-bg{transform:scale(1.06)}
+.act-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,20,34,.96) 0%,rgba(12,34,51,.65) 52%,rgba(12,34,51,.18) 100%);transition:opacity .4s}
+.act-card:hover .act-overlay{opacity:.88}
+.act-content{position:relative;z-index:2;padding:2rem 1.75rem}
+.act-num{font-size:.72rem;font-weight:500;letter-spacing:.2em;color:var(--gl);margin-bottom:.6rem;font-family:var(--fs)}
+.act-title{font-family:var(--fd);font-size:1.65rem;font-weight:400;color:var(--white);line-height:1.2;margin-bottom:.7rem}
+.act-desc{font-size:15.1px;line-height:1.75;color:rgba(255,255,255,.78);margin-bottom:1rem}
+.act-rate{font-size:11.2px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gl);border-top:1px solid rgba(212,168,106,.3);padding-top:.7rem}
+.act-credit{position:absolute;top:.85rem;right:1rem;z-index:2;font-size:10.1px;letter-spacing:.08em;color:rgba(255,255,255,.7);font-style:italic;pointer-events:none}
+
+/* ── ACTIVITY MODAL ── */
+.act-modal-bg{position:fixed;inset:0;background:rgba(5,14,25,.85);backdrop-filter:blur(5px);z-index:900;display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.act-modal-bg.open{opacity:1;pointer-events:all}
+.act-modal{background:var(--deep);max-width:620px;width:100%;max-height:88vh;overflow-y:auto;position:relative;border:1px solid rgba(255,255,255,.07);box-shadow:0 32px 80px rgba(0,0,0,.6);display:flex;flex-direction:column}
+.act-modal-hero{position:relative;height:220px;flex-shrink:0;overflow:hidden}
+.act-modal-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
+.act-modal:hover .act-modal-hero-bg{transform:scale(1.03)}
+.act-modal-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,20,34,1) 0%,rgba(12,34,51,.35) 100%)}
+.act-modal-hero-text{position:absolute;bottom:0;left:0;right:0;padding:1.25rem 1.75rem}
+.act-modal-hero-num{font-size:.68rem;font-weight:500;letter-spacing:.2em;color:var(--gl);margin-bottom:.35rem}
+.act-modal-hero-title{font-family:var(--fd);font-size:1.9rem;font-weight:400;color:var(--white);line-height:1.1}
+.act-modal-close{position:absolute;top:.85rem;right:.85rem;background:rgba(12,34,51,.7);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);width:34px;height:34px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s,color .2s;line-height:1}
+.act-modal-close:hover{background:rgba(255,255,255,.12);color:#fff}
+.act-modal-body{padding:1.75rem;overflow-y:auto}
+.act-modal-desc{font-size:15.7px;line-height:1.85;color:rgba(255,255,255,.78);padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:1.5rem}
+.act-modal-section{margin-bottom:1.5rem}
+.act-modal-section:last-child{margin-bottom:0}
+.act-modal-section-label{font-size:10.1px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gl);margin-bottom:.75rem}
+.act-modal-tags{display:flex;flex-wrap:wrap;gap:6px}
+.act-modal-tag{font-size:13.4px;color:rgba(255,255,255,.75);background:rgba(255,255,255,.06);padding:.3rem .7rem;border:1px solid rgba(255,255,255,.07)}
+.act-modal-meta{display:flex;gap:8px;flex-wrap:wrap}
+.act-modal-meta-item{font-size:13.4px;color:rgba(255,255,255,.75);background:rgba(184,138,69,.1);border:1px solid rgba(212,168,106,.2);padding:.3rem .8rem}
+.act-contact-list{display:flex;flex-direction:column;gap:6px}
+.act-contact{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);padding:.9rem 1.1rem;text-decoration:none;border:1px solid rgba(255,255,255,.06);transition:background .2s,border-color .2s;gap:1rem}
+.act-contact:hover{background:rgba(255,255,255,.08);border-color:rgba(212,168,106,.3)}
+.act-contact-name{font-size:14.6px;font-weight:500;color:var(--white);margin-bottom:.18rem}
+.act-contact-role{font-size:12.3px;color:rgba(255,255,255,.7);letter-spacing:.02em}
+.act-contact-phone{font-size:14.6px;color:var(--gl);font-weight:500;white-space:nowrap;flex-shrink:0}
+.act-card{cursor:pointer}
+@media(max-width:580px){
+  .act-modal{max-height:95vh}
+  .act-modal-hero{height:180px}
+  .act-modal-body{padding:1.25rem}
+}
+
+/* ── MAP ── */
+.map-wrap{display:grid;grid-template-columns:400px 1fr;min-height:500px;overflow:hidden}
+.map-info{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;background:var(--deep)}
+.map-info .s-title{color:var(--white);font-size:clamp(1.8rem,3vw,2.8rem)}
+.map-info .s-title em{color:var(--gl)}
+.map-info p{font-size:15.7px;line-height:1.82;color:rgba(255,255,255,.78);margin:1.25rem 0 1.75rem}
+.map-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
+.map-tag{font-size:11.2px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:2px;cursor:pointer;background:transparent;transition:color .2s,border-color .2s,background .2s}
+.map-tag:hover{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.7)}
+.map-tag.active{color:#fff;border-color:var(--gold);background:rgba(184,138,69,.18)}
+.map-legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:2rem}
+.map-legend-item{display:flex;align-items:center;gap:6px;font-size:11.2px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.map-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.map-no-data{display:none;font-size:14.6px;color:rgba(255,255,255,.7);font-style:italic;margin-bottom:1.5rem}
+.map-btn{display:inline-block;font-size:12.3px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:var(--deep);background:var(--gold);padding:14px 32px;border-radius:2px;transition:background .3s}
+.map-btn:hover{background:var(--gl)}
+/* map container — Google Maps replaces the SVG when online */
+#map-container{min-height:500px;position:relative;overflow:hidden}
+#gMap{width:100%;height:100%;min-height:500px;display:none}
+.map-offline{position:absolute;inset:0;background:linear-gradient(160deg,#1A5C7A 0%,#1E8B72 55%,#0C2233 100%);display:flex;align-items:center;justify-content:center}
+.map-offline svg{width:100%;height:100%}
+
+/* ── ACCOMMODATION ── */
+.accom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem;background:rgba(12,34,51,.06)}
+.accom-card{background:var(--white);overflow:hidden}
+.accom-img-wrap{position:relative;overflow:hidden;height:230px}
+.accom-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s}
+.accom-card:hover .accom-img{transform:scale(1.05)}
+.accom-ph{width:100%;height:230px;display:block}
+.accom-body{padding:1.5rem}
+.accom-type{font-size:10.1px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.accom-name{font-family:var(--fd);font-size:1.45rem;font-weight:400;color:var(--deep);margin-bottom:.35rem}
+.accom-loc{font-size:13.4px;color:var(--muted);margin-bottom:1rem;line-height:1.5}
+.accom-link{font-size:12.3px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ocean);border-bottom:1px solid var(--ocean);padding-bottom:1px;transition:color .3s,border-color .3s}
+.accom-link:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ── CONTACT STRIP ── */
+.contact-strip{background:var(--sand);padding:4rem 2.5rem}
+.contact-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+.contact-text h2{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--deep);margin-bottom:.5rem}
+.contact-text h2 em{font-style:italic;color:var(--ocean)}
+.contact-text p{font-size:15.7px;color:var(--muted);line-height:1.7}
+
+/* ── LOCAL LIFE GUIDE STRIP (inverted palette — bright band before the footer) ── */
+.life-strip{background:linear-gradient(120deg,var(--gl),var(--gold));padding:4.5rem 2.5rem;position:relative;overflow:hidden}
+.life-strip::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% -20%,rgba(255,255,255,.35),transparent 55%);pointer-events:none}
+.life-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;position:relative;z-index:1}
+.life-text{max-width:640px}
+.life-text .s-label{color:var(--deep);opacity:.72}
+.life-text h2{font-family:var(--fd);font-size:clamp(2rem,3.4vw,3rem);font-weight:300;color:var(--deep);line-height:1.15;margin:.35rem 0 .65rem}
+.life-text h2 em{font-style:italic;color:var(--white)}
+.life-text p{font-size:16.2px;color:rgba(12,34,51,.8);line-height:1.75;max-width:560px}
+.life-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;background:var(--deep);color:var(--white);font-family:var(--fb);font-size:14.6px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:1rem 2rem;border-radius:2px;transition:background .3s,transform .3s;box-shadow:0 12px 30px rgba(12,34,51,.28)}
+.life-btn:hover{background:var(--ocean);transform:translateY(-2px)}
+.life-btn span{font-size:1.15em;line-height:1}
+.contact-cards{display:flex;gap:1rem;flex-wrap:wrap}
+.contact-card{background:var(--white);border:0.5px solid var(--border);border-radius:3px;padding:1.25rem 1.5rem;text-decoration:none;transition:box-shadow .3s,border-color .3s;min-width:200px}
+.contact-card:hover{box-shadow:0 4px 20px rgba(12,34,51,.1);border-color:rgba(12,34,51,.2)}
+.cc-label{font-size:10.1px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.cc-value{font-size:16.8px;font-weight:500;color:var(--deep)}
+.cc-sub{font-size:12.3px;color:var(--muted);margin-top:.25rem}
+
+/* ── FOOTER ── */
+footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem}
+.f-brand h3{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);margin-bottom:.5rem}
+.f-brand p{font-size:14px;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:1.5rem}
+.f-social{display:flex;gap:10px}
+.f-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);text-decoration:none;transition:border-color .3s,color .3s}
+.f-social a:hover{border-color:var(--gold);color:var(--gold)}
+.f-col h4{font-size:11.2px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:1.25rem}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.f-col ul a{font-size:14.6px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .3s}
+.f-col ul a:hover{color:var(--white)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:12.3px;color:rgba(255,255,255,.28)}
+.f-logos{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.f-logos img{width:36px;height:36px;object-fit:contain;opacity:.7;border-radius:50%}
+
+/* ── MOBILE QUICK BAR ── */
+.quick-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:var(--deep);box-shadow:0 -1px 0 rgba(255,255,255,.08)}
+.quick-bar-inner{display:grid;grid-template-columns:1fr 1fr}
+.quick-bar a{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;text-decoration:none;font-size:13.4px;font-weight:500;letter-spacing:.04em;color:var(--white);transition:background .2s}
+.quick-bar a:first-child{background:var(--ocean);border-right:1px solid rgba(255,255,255,.1)}
+.quick-bar a:first-child:hover{background:var(--teal)}
+.quick-bar a:last-child:hover{background:rgba(255,255,255,.07)}
+.q-ico{width:15px;height:15px;flex-shrink:0}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes linePulse{0%,100%{opacity:.6;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.85)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .f-brand{grid-column:1/-1}
+  .map-wrap{grid-template-columns:1fr}
+  #map-container{min-height:320px}
+  #gMap{min-height:320px}
+  .contact-inner{grid-template-columns:1fr}
+  .life-strip{padding:3.25rem 1.5rem}
+  .life-btn{width:100%;justify-content:center}
+}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .quick-bar{display:block}
+  body{padding-bottom:54px}
+  .intro-inner{grid-template-columns:1fr;gap:3rem}
+  .dest-grid{grid-template-columns:1fr}
+  .dest-card:first-child{grid-row:auto}
+  .acts-grid{grid-template-columns:1fr}
+  .accom-grid{grid-template-columns:1fr}
+  .section{padding:4rem 1.5rem}
+  .intro{padding:4rem 1.5rem}
+  .map-wrap{grid-template-columns:1fr}
+  .map-info{padding:3rem 2rem}
+}
+@media(max-width:580px){
+  .stats-strip{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column;align-items:center}
+  .contact-cards{flex-direction:column}
+}
+/* ── ACCESSIBILITY ── */
+.skip-link{position:absolute;left:-9999px;z-index:300}
+.skip-link:focus{left:1rem;top:1rem;background:var(--deep);color:var(--white);padding:.7rem 1.2rem;border-radius:4px;font-size:14.6px;letter-spacing:.05em;text-decoration:none;outline:2px solid var(--gold);outline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ── VIDEOS (click-to-play YouTube facades) ── */
+.videos-section{background:var(--deep);padding:6rem 2.5rem}
+.videos-inner{max-width:1280px;margin:0 auto}
+.videos-section .s-title{color:var(--white)}
+.videos-section .s-title em{color:var(--gl)}
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2.75rem}
+.video-tile{position:relative}
+.video-frame{position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#000;cursor:pointer}
+.video-frame img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;transition:opacity .3s,transform .5s}
+.video-frame:hover img{opacity:1;transform:scale(1.04)}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;border:0;background:rgba(12,34,51,.75);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,transform .3s;pointer-events:none}
+.video-frame:hover .video-play{background:var(--gold);transform:translate(-50%,-50%) scale(1.08)}
+.video-play::after{content:'';display:block;border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff;margin-left:4px}
+.video-meta{margin-top:.9rem}
+.video-title{font-family:var(--fd);font-size:1.15rem;color:var(--white);line-height:1.3}
+.video-caption{font-size:12.9px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:.25rem}
+.videos-cta{margin-top:2.5rem;text-align:center}
+.videos-cta a{display:inline-block;font-size:12.9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gl);text-decoration:none;border:1px solid rgba(212,168,106,.4);padding:.8rem 1.8rem;border-radius:3px;transition:background .3s,color .3s}
+.videos-cta a:hover{background:var(--gold);color:var(--white)}
+@media(max-width:768px){.videos-section{padding:4rem 1.5rem}}
+
+/* ── PHOTO GALLERY CAROUSEL ── */
+.gallery-section{background:var(--white);padding:6rem 0 5rem}
+.gallery-section .gallery-head{padding:0 2.5rem;max-width:1280px;margin:0 auto 2.75rem}
+.gallery-strip{overflow:hidden;position:relative}
+.gallery-strip::before,.gallery-strip::after{content:'';position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}
+.gallery-strip::before{left:0;background:linear-gradient(90deg,var(--white),transparent)}
+.gallery-strip::after{right:0;background:linear-gradient(270deg,var(--white),transparent)}
+.gallery-track{display:flex;width:max-content;will-change:transform;animation:galleryScroll var(--gallery-dur,120s) linear infinite}
+.gallery-strip:hover .gallery-track{animation-play-state:paused}
+.gallery-item{position:relative;width:300px;height:210px;flex-shrink:0;margin-right:14px;border-radius:6px;overflow:hidden;background:var(--sand)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item span{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .85rem .6rem;font-family:var(--fd);font-size:.95rem;letter-spacing:.02em;color:var(--white);background:linear-gradient(transparent,rgba(12,34,51,.78))}
+@keyframes galleryScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){
+  .gallery-track{animation:none}
+  .gallery-strip{overflow-x:auto}
+}
+@media(max-width:768px){
+  .gallery-section{padding:4rem 0 3.5rem}
+  .gallery-section .gallery-head{padding:0 1.5rem}
+  .gallery-item{width:230px;height:165px}
+}
+</style>
+</head>
+<body>
+<!-- VISITOR GATE — blurs the page on load until the visitor picks Tourist/Local.
+     Toggle & local redirect URL come from data/settings.json (admin-editable). -->
+<div class="gate" id="visitorGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gate-card">
+    <div class="gate-seals">
+      <img class="gate-seal-side" src="assets/logos/Ph_seal_romblon_web.png" alt="Romblon Provincial Seal" onerror="this.style.display='none'">
+      <img class="gate-seal" src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal" onerror="this.style.display='none'">
+      <img class="gate-seal-side" src="assets/logos/Bagong_Pilipinas_Logo.png" alt="Bagong Pilipinas Logo" onerror="this.style.display='none'">
+    </div>
+    <div class="gate-eyebrow">Calatrava, Romblon</div>
+    <h2 class="gate-title" id="gateTitle">Welcome</h2>
+    <p class="gate-sub">Are you visiting as a tourist, or are you a local resident?<br>Choose below to continue.</p>
+    <div class="gate-actions">
+      <button type="button" class="gate-btn gate-btn-tourist" id="gateTourist">I'm a Tourist<small>Explore the tourism portal</small></button>
+      <button type="button" class="gate-btn gate-btn-local" id="gateLocal">I'm a Local<small>Go to the municipal site</small></button>
+    </div>
+  </div>
+</div>
+<script>
+// Blur synchronously (before the rest of the page paints) unless this session
+// already chose Tourist. The controller below confirms the admin toggle and
+// wires the buttons once settings load.
+(function(){
+  try { if (sessionStorage.getItem('visitorChoice') === 'tourist') return; } catch(e){}
+  document.body.classList.add('gate-open');
+})();
+</script>
+<a class="skip-link" href="#about">Skip to content</a>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-seal">
+      <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal" onerror="this.style.display='none'">
+    </div>
+    <div class="nav-name">
+      Calatrava
+      <small>Romblon, Philippines</small>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#accommodation">Stay</a></li>
+    <li><a href="establishments.html">Local Life</a></li>
+    <li><a href="getting-here.html">Getting Here</a></li>
+    <li><a href="#map">Map</a></li>
+    <li><a href="tel:09193350314" class="nav-cta">Talk to a Local Guide</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobNav').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav" id="mobNav" aria-label="Mobile navigation">
+  <button class="mob-close" aria-label="Close menu" onclick="document.getElementById('mobNav').classList.remove('open')">&times;</button>
+  <a href="#destinations" onclick="document.getElementById('mobNav').classList.remove('open')">Destinations</a>
+  <a href="#activities" onclick="document.getElementById('mobNav').classList.remove('open')">Activities</a>
+  <a href="#accommodation" onclick="document.getElementById('mobNav').classList.remove('open')">Stay</a>
+  <a href="establishments.html" onclick="document.getElementById('mobNav').classList.remove('open')">Local Life</a>
+  <a href="getting-here.html" onclick="document.getElementById('mobNav').classList.remove('open')">Getting Here</a>
+  <a href="#map" onclick="document.getElementById('mobNav').classList.remove('open')">Map</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <!-- Sources are attached by JS for all screens (incl. phones) unless the
+         visitor prefers reduced motion or is on Data Saver / a slow connection,
+         in which case the poster image stays. -->
+    <video autoplay muted loop playsinline
+           poster="assets/video/hero_poster.jpg"
+           id="heroVid"
+           preload="metadata"
+           data-mp4="assets/video/festival_hero.mp4">
+    </video>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="assets/logos/CalatravaTourismLogo.png" alt="Experience Calatrava — Tourism Logo" class="hero-logo" onerror="this.style.display='none'">
+    <p class="hero-eyebrow">Skip the crowded postcards</p>
+    <h1 class="hero-title">Calatrava</h1>
+    <p class="hero-sub">Romblon&rsquo;s best-kept secret</p>
+    <p class="hero-tagline">Where the trails are quiet and the waters are wild &mdash; step off the grid</p>
+    <div class="hero-actions">
+      <a href="#destinations" class="btn-primary">Escape the Ordinary</a>
+      <a href="#map" class="btn-ghost">Map My Adventure</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ENV NOTICE -->
+<div id="env-notice" class="env-notice">
+  <p><strong>Environmental Conservation Fee:</strong> A minimal ₱20 per visitor helps preserve our natural areas for future generations.</p>
+</div>
+
+<!-- ABOUT -->
+<section class="intro" id="about">
+  <div class="intro-inner">
+    <div id="intro-text" class="intro-text reveal">
+      <span class="s-label">About Calatrava</span>
+      <h2 class="s-title">A hidden gem on the <em>northern tip</em> of Tablas Island</h2>
+      <p>Nestled on the northernmost coast of Tablas — the largest island in Romblon — Calatrava is a municipality of unspoiled beaches, dramatic waterfalls, and warm island hospitality. Budget-friendly and uncrowded, it offers what few destinations still can: genuine island life.</p>
+      <a href="getting-here.html" class="intro-link">Plan your visit</a>
+    </div>
+    <div id="intro-tabs" class="intro-tabs reveal">
+      <div class="tab-nav" id="tab-nav">
+        <button class="tab-btn active" data-tab="geography">Geography</button>
+        <button class="tab-btn" data-tab="history">History</button>
+        <button class="tab-btn" data-tab="culture">Culture &amp; Language</button>
+        <button class="tab-btn" data-tab="trivia">Did You Know?</button>
+      </div>
+      <div id="tab-panels">
+        <div class="tab-panel active" id="tab-geography"><p>Loading…</p></div>
+        <div class="tab-panel" id="tab-history"></div>
+        <div class="tab-panel" id="tab-culture"></div>
+        <div class="tab-panel" id="tab-trivia"></div>
+      </div>
+    </div>
+  </div>
+  <div id="stats-strip" class="stats-strip">
+    <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Waterfalls</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">Beaches &amp; Islands</div></div>
+    <div class="stat"><div class="stat-num">₱20</div><div class="stat-lbl">Env. Fee</div></div>
+    <div class="stat"><div class="stat-num">2<sup>hrs</sup></div><div class="stat-lbl">from Tablas Airport</div></div>
+  </div>
+</section>
+
+<!-- FEATURED DESTINATIONS -->
+<section class="section" style="background:var(--cream)" id="destinations">
+  <div class="container">
+    <div class="dest-header reveal">
+      <div>
+        <span class="s-label">Top Destinations</span>
+        <h2 class="s-title">Places worth <em>the journey</em></h2>
+      </div>
+      <a href="destinations.html" class="see-all">View all destinations</a>
+    </div>
+    <div id="dest-grid" class="dest-grid reveal">
+      <div class="dest-card">
+        <img src="assets/destinations/Destinations_TinagongDagat1_web.jpg" alt="Tinagong Dagat — Saltwater Lake, Brgy. Talisay" class="dest-img">
+        <div class="dest-overlay"></div>
+        <div class="dest-info">
+          <div class="dest-type">The Lake That Breathes with the Sea</div>
+          <div class="dest-name">Tinagong Dagat</div>
+          <div class="dest-loc">Brgy. Talisay &mdash; ₱25 entrance</div>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="assets/destinations/Destinations_LapusLapus1_web.jpg" alt="Lapus-Lapus Beach, Brgy. Talisay" class="dest-img">
+        <div class="dest-overlay"></div>
+        <div class="dest-info">
+          <div class="dest-type">Nature&rsquo;s Giant Sculptures</div>
+          <div class="dest-name">Lapus-Lapus Beach</div>
+          <div class="dest-loc">Brgy. Talisay &mdash; ₱25 entrance</div>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="assets/destinations/Destination_TagoFalls1_web.jpg" alt="Tago Falls — Highest in Calatrava, Brgy. Pagsangahan" class="dest-img">
+        <div class="dest-overlay"></div>
+        <div class="dest-info">
+          <div class="dest-type">Hidden for a Reason</div>
+          <div class="dest-name">Tago Falls</div>
+          <div class="dest-loc">Brgy. Pagsangahan &mdash; Guide fee applies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="section" style="background:var(--sand)" id="activities">
+  <div class="container">
+    <div class="reveal">
+      <span class="s-label">Experiences</span>
+      <h2 class="s-title">Things to do in <em>Calatrava</em></h2>
+    </div>
+    <div id="acts-grid" class="acts-grid">
+      <div class="act-card reveal">
+        <div class="act-bg" style="background-image:url('assets/activities/act-island-hopping.jpg')"></div>
+        <div class="act-overlay"></div>
+        <div class="act-credit">Photo: RJ Fabella</div>
+        <div class="act-content">
+          <div class="act-num">01 / Island Hopping</div>
+          <div class="act-title">Chart Unmapped Coves</div>
+          <p class="act-desc">Sail between dramatic karst formations and anchor in hidden pockets of white sand where your footprints may be the only ones there. Book through our accredited operators at the Calatrava Port Terminal.</p>
+          <div class="act-rate">From ₱3,000 for 10 persons</div>
+        </div>
+      </div>
+      <div class="act-card reveal">
+        <div class="act-bg" style="background-image:url('assets/activities/act-waterfall-trekking.jpg')"></div>
+        <div class="act-overlay"></div>
+        <div class="act-credit">Photo: Calatrava Tourism Council</div>
+        <div class="act-content">
+          <div class="act-num">02 / Waterfall Trekking</div>
+          <div class="act-title">Chase the Hidden Falls</div>
+          <p class="act-desc">Trade the beach for the hills. Jungle trails lead to six waterfalls across four barangays — from the dramatic El Telon Falls, the highest in Calatrava, to the secluded Secret Lagoon Falls deep in Pagsangahan.</p>
+          <div class="act-rate">Guide fees apply</div>
+        </div>
+      </div>
+      <div class="act-card reveal">
+        <div class="act-bg" style="background-image:url('assets/activities/act-snorkeling-diving.jpg')"></div>
+        <div class="act-overlay"></div>
+        <div class="act-credit">Photo: Sisira PH</div>
+        <div class="act-content">
+          <div class="act-num">03 / Snorkeling &amp; Diving</div>
+          <div class="act-title">Peer Into the Deep Blue</div>
+          <p class="act-desc">Calatrava's marine sanctuaries thrive just off the shoreline. Put on a mask with an LGU-accredited dive group and discover vibrant coral gardens teeming with life in protected coastal waters.</p>
+          <div class="act-rate">Rates vary by operator</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map">
+  <div class="map-wrap">
+    <div class="map-info reveal">
+      <span class="s-label">Interactive Map</span>
+      <h2 class="s-title">&ldquo;X&rdquo; marks <em>the spot</em></h2>
+      <p>We're actively charting the municipality's hidden viewpoints, local eateries, and secret dive spots — alongside every beach, waterfall, place to stay, and service point. Start plotting your own route through Calatrava.</p>
+      <div class="map-tags" id="map-tags" style="display:none">
+        <button class="map-tag active" data-filter="all">All</button>
+        <button class="map-tag" data-filter="destinations">Destinations</button>
+        <button class="map-tag" data-filter="accommodation">Accommodation</button>
+        <button class="map-tag" data-filter="establishments">Establishments</button>
+      </div>
+      <div class="map-legend" id="map-legend" style="display:none">
+        <div class="map-legend-item"><span class="map-legend-dot" style="background:#B88A45"></span>Destinations</div>
+        <div class="map-legend-item"><span class="map-legend-dot" style="background:#2A7FA8"></span>Accommodation</div>
+        <div class="map-legend-item"><span class="map-legend-dot" style="background:#5E8B6E"></span>Establishments</div>
+      </div>
+      <p class="map-no-data" id="map-no-data">No pins available for this category yet.</p>
+      <a href="https://www.google.com/maps/place/Calatrava,+Romblon/@12.619,122.071,12z" target="_blank" rel="noopener" class="map-btn">Open in Google Maps</a>
+    </div>
+    <div id="map-container">
+      <iframe id="mapIframe"
+        src="https://storage.googleapis.com/maps-solutions-6kvpxep2a7/neighborhood-discovery/vqpx/neighborhood-discovery.html"
+        width="100%" height="100%"
+        style="border:0;"
+        loading="lazy"
+        title="Calatrava neighborhood map"></iframe>
+      <div id="gMap" style="display:none"></div>
+      <!-- Offline SVG fallback — hidden by default, restore by removing the iframe above -->
+      <div class="map-offline" id="mapOffline" style="display:none">
+        <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" aria-label="Stylized map of Calatrava, Romblon">
+          <!-- Water background -->
+          <rect width="600" height="500" fill="#1A5C7A"/>
+          <!-- Grid lines -->
+          <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
+            <line x1="0" y1="100" x2="600" y2="100"/><line x1="0" y1="200" x2="600" y2="200"/>
+            <line x1="0" y1="300" x2="600" y2="300"/><line x1="0" y1="400" x2="600" y2="400"/>
+            <line x1="100" y1="0" x2="100" y2="500"/><line x1="200" y1="0" x2="200" y2="500"/>
+            <line x1="300" y1="0" x2="300" y2="500"/><line x1="400" y1="0" x2="400" y2="500"/>
+            <line x1="500" y1="0" x2="500" y2="500"/>
+          </g>
+          <!-- Island landmass (simplified Tablas northern tip) -->
+          <path d="M 80 500 L 60 380 L 90 290 L 130 230 L 170 180 L 220 150 L 280 130 L 340 140 L 380 160 L 400 200 L 390 260 L 370 320 L 360 400 L 380 500 Z" fill="#1E8B72" opacity="0.85"/>
+          <!-- Mountain range -->
+          <path d="M 140 260 L 165 210 L 190 260 Z" fill="#0C2233" opacity="0.4"/>
+          <path d="M 200 240 L 230 185 L 260 240 Z" fill="#0C2233" opacity="0.4"/>
+          <path d="M 265 250 L 290 200 L 315 250 Z" fill="#0C2233" opacity="0.35"/>
+          <!-- Coastline detail -->
+          <path d="M 170 180 Q 200 170 230 165 Q 260 155 290 155" stroke="#F0E9DD" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <!-- Roads -->
+          <path d="M 200 500 L 210 400 L 240 320 L 270 260 L 290 200" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="none" stroke-dasharray="6,4"/>
+          <!-- Location pins -->
+          <!-- Talisay (Tinagong Dagat, Lapus-Lapus, Guindawahan) -->
+          <circle cx="310" cy="165" r="10" fill="#B88A45" opacity="0.95"/>
+          <circle cx="310" cy="165" r="18" fill="#B88A45" opacity="0.2"/>
+          <text x="330" y="162" font-family="Georgia,serif" font-size="10" fill="white" opacity="0.9">Talisay</text>
+          <text x="330" y="174" font-family="Georgia,serif" font-size="9" fill="rgba(255,255,255,0.6)">Tinagong Dagat · Lapus-Lapus</text>
+          <!-- Linao (Cove Aurelio, Turtle Cove, Ngak-Ngak) -->
+          <circle cx="270" cy="210" r="8" fill="#1E8B72" opacity="0.95"/>
+          <circle cx="270" cy="210" r="15" fill="#1E8B72" opacity="0.2"/>
+          <text x="290" y="207" font-family="Georgia,serif" font-size="10" fill="white" opacity="0.9">Linao</text>
+          <text x="290" y="219" font-family="Georgia,serif" font-size="9" fill="rgba(255,255,255,0.6)">Cove Aurelio · Turtle Cove</text>
+          <!-- Balogo (Balai Azinan, Caw-i Falls, Oray Falls) -->
+          <circle cx="220" cy="275" r="8" fill="#1E8B72" opacity="0.95"/>
+          <circle cx="220" cy="275" r="15" fill="#1E8B72" opacity="0.2"/>
+          <text x="240" y="272" font-family="Georgia,serif" font-size="10" fill="white" opacity="0.9">Balogo</text>
+          <text x="240" y="284" font-family="Georgia,serif" font-size="9" fill="rgba(255,255,255,0.6)">Balai Azinan · Caw-i Falls</text>
+          <!-- Pagsangahan (Tago Falls, Hidden Falls, Cawa-Cawa) -->
+          <circle cx="175" cy="350" r="8" fill="#D4A86A" opacity="0.95"/>
+          <circle cx="175" cy="350" r="15" fill="#D4A86A" opacity="0.2"/>
+          <text x="195" y="347" font-family="Georgia,serif" font-size="10" fill="white" opacity="0.9">Pagsangahan</text>
+          <text x="195" y="359" font-family="Georgia,serif" font-size="9" fill="rgba(255,255,255,0.6)">Tago Falls · Hidden Falls</text>
+          <!-- Pangulo Falls -->
+          <circle cx="145" cy="420" r="6" fill="#D4A86A" opacity="0.85"/>
+          <text x="160" y="425" font-family="Georgia,serif" font-size="9" fill="rgba(255,255,255,0.75)">Pangulo Falls</text>
+          <!-- Legend -->
+          <rect x="16" y="16" width="150" height="80" rx="3" fill="rgba(12,34,51,0.7)"/>
+          <circle cx="32" cy="36" r="5" fill="#B88A45"/><text x="44" y="40" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.85)">Beach &amp; Water</text>
+          <circle cx="32" cy="56" r="5" fill="#1E8B72"/><text x="44" y="60" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.85)">Resort</text>
+          <circle cx="32" cy="76" r="5" fill="#D4A86A"/><text x="44" y="80" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.85)">Waterfall</text>
+          <!-- Online indicator -->
+          <rect x="420" y="460" width="165" height="28" rx="3" fill="rgba(12,34,51,0.65)"/>
+          <text x="430" y="479" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.5)" id="mapStatus">Connects to Google Maps online</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOMMODATION -->
+<section class="section" style="background:var(--cream)" id="accommodation">
+  <div class="container">
+    <div class="dest-header reveal">
+      <div>
+        <span class="s-label">Where to Stay</span>
+        <h2 class="s-title">Rest well, <em>wake up to the sea</em></h2>
+      </div>
+      <a href="accommodation.html" class="see-all">All accommodation</a>
+    </div>
+    <div id="accom-grid" class="accom-grid">
+      <div class="accom-card reveal">
+        <div class="accom-img-wrap">
+          <img src="assets/destinations/Destinations_CoveAurelio1_web.jpg" alt="Cove Aurelio Resort" class="accom-img">
+        </div>
+        <div class="accom-body">
+          <div class="accom-type">Beach Resort</div>
+          <div class="accom-name">Cove Aurelio</div>
+          <div class="accom-loc">Brgy. Talisay &mdash; Rock formations, cottages, paluto service</div>
+          <a href="accommodation.html#cove-aurelio" class="accom-link">View details</a>
+        </div>
+      </div>
+      <div class="accom-card reveal">
+        <div class="accom-img-wrap">
+          <div class="accom-ph" style="background:linear-gradient(160deg,#1E8B72,#0C2233)"></div>
+        </div>
+        <div class="accom-body">
+          <div class="accom-type">Beach Resort — Largest in Calatrava</div>
+          <div class="accom-name">Balai Azinan</div>
+          <div class="accom-loc">Brgy. Balogo &mdash; Pools, function rooms, cottages, accommodations</div>
+          <a href="accommodation.html#balai-azinan" class="accom-link">View details</a>
+        </div>
+      </div>
+      <div class="accom-card reveal">
+        <div class="accom-img-wrap">
+          <div class="accom-ph" style="background:linear-gradient(160deg,#2A8B7A,#1A5C7A)"></div>
+        </div>
+        <div class="accom-body">
+          <div class="accom-type">Farm Resort</div>
+          <div class="accom-name">Bulawan Farm Resort</div>
+          <div class="accom-loc">Brgy. Pagsangahan</div>
+          <a href="accommodation.html" class="accom-link">View details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<section class="contact-strip" id="contact">
+  <div class="contact-inner">
+    <div class="contact-text reveal">
+      <h2>Ready to step off the grid? <em>Talk to a local guide.</em></h2>
+      <p>Reach our Tourism Council directly for bookings, guide arrangements, and local information.</p>
+    </div>
+    <div id="contact-cards" class="contact-cards reveal">
+      <a href="tel:09193350314" class="contact-card">
+        <div class="cc-label">Calatrava Tourism Council</div>
+        <div class="cc-value">0919 335 0314</div>
+        <div class="cc-sub">Tap to call</div>
+      </a>
+      <a href="tel:09399154193" class="contact-card">
+        <div class="cc-label">Sinagtala Tours</div>
+        <div class="cc-value">0939 915 4193</div>
+        <div class="cc-sub">Island hopping &amp; tours</div>
+      </a>
+      <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-label">Facebook</div>
+        <div class="cc-value">Calatrava Tourism</div>
+        <div class="cc-sub">facebook.com/calatravatourismcouncil</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="videos-section" id="videos">
+  <div class="videos-inner">
+    <div class="reveal">
+      <span class="s-label">Watch</span>
+      <h2 class="s-title">Calatrava <em>in motion</em></h2>
+    </div>
+    <div class="videos-grid" id="videos-grid"></div>
+    <div class="videos-cta reveal">
+      <a href="https://www.youtube.com/channel/UCq09aABwKTJjwrxD7D1SMtg" target="_blank" rel="noopener">More on our YouTube channel ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-head reveal">
+    <span class="s-label">Photo Gallery</span>
+    <h2 class="s-title">Moments from <em>around Calatrava</em></h2>
+  </div>
+  <div class="gallery-strip">
+    <div class="gallery-track" id="gallery-track"></div>
+  </div>
+</section>
+
+<!-- LOCAL LIFE GUIDE STRIP -->
+<section class="life-strip">
+  <div class="life-inner reveal">
+    <div class="life-text">
+      <span class="s-label">Live Like a Local</span>
+      <h2>Ready to <em>work from paradise?</em></h2>
+      <p>Beyond the beaches — discover the cafés, dining spots, shops, pharmacies, clinics, gyms, and churches that make Calatrava an easy place to settle in and stay a while.</p>
+    </div>
+    <a href="establishments.html" class="life-btn">See our local life guide <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<!-- EMERGENCY HOTLINE -->
+<aside class="emergency" aria-label="Emergency hotlines">
+  <div class="emergency-inner">
+    <div class="emergency-lead">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span class="emergency-label">Emergency?</span>
+    </div>
+    <div class="emergency-nums">
+      <a class="emergency-num" href="tel:09303264161">
+        <span class="en-name">Call Calatrava Emergency Hotline</span>
+        <span class="en-digits">0930 326 4161</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <div class="f-logos">
+        <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal">
+        <img src="assets/logos/Ph_seal_romblon_web.png" alt="Romblon Seal">
+        <img src="assets/logos/DOT_PH_web.svg" alt="Philippines Department of Tourism">
+        <img src="assets/logos/Bagong_Pilipinas_Logo.png" alt="Bagong Pilipinas Logo" onerror="this.style.display='none'">
+      </div>
+      <h3>Calatrava, Romblon</h3>
+      <p>Official tourism portal of the Municipality of Calatrava, Province of Romblon, Philippines. Managed by the Calatrava Tourism Council.</p>
+      <div class="f-social">
+        <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener" aria-label="Facebook page">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/calatravatourismcouncil/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.youtube.com/watch?v=e5YURlx8uoM" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19.1 5 12 5 12 5s-7.1 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.8.4 8.9.4 8.9.4s7.1 0 8.9-.4a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.5 12 31 31 0 0 0 23 7.5zM9.75 15.5v-7l6 3.5z"/></svg>
+        </a>
+        <a href="mailto:calatravatourismcouncil@gmail.com" aria-label="Email Calatrava Tourism">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="https://rjfabella.github.io/calatrava-lgu/" target="_blank" rel="noopener" aria-label="Calatrava LGU Website">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="f-col">
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="#destinations">Beaches &amp; Islands</a></li>
+        <li><a href="#destinations">Waterfalls</a></li>
+        <li><a href="#activities">Island Hopping</a></li>
+        <li><a href="#destinations">View All</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Plan Your Visit</h4>
+      <ul>
+        <li><a href="getting-here.html">Getting Here</a></li>
+        <li><a href="accommodation.html">Accommodation</a></li>
+        <li><a href="#map">Services Map</a></li>
+        <li><a href="#activities">Tour Operators</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:09193350314">0919 335 0314</a></li>
+        <li><a href="tel:09399154193">0939 915 4193</a></li>
+        <li><a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">Tourism Council FB</a></li>
+        <li><a href="mailto:calatravatourismcouncil@gmail.com">calatravatourismcouncil@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Municipality of Calatrava, Romblon. All rights reserved.</p>
+    <p>Republic of the Philippines</p>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="color:rgba(255,255,255,.12);font-size:11.2px;letter-spacing:.08em;">Developed by <a href="https://rjfabella.github.io/rj-portfolio/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='inherit'">RJ Fabella</a></span>
+      <span style="color:rgba(255,255,255,.12);font-size:11.2px;">|</span>
+      <a href="admin.html" style="color:rgba(255,255,255,.12);font-size:11.2px;letter-spacing:.08em;text-decoration:none;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.12)'">Staff Portal</a>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE QUICK BAR -->
+<div class="quick-bar" aria-label="Quick contact">
+  <div class="quick-bar-inner">
+    <a href="tel:09193350314">
+      <svg class="q-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Talk to a Local Guide
+    </a>
+    <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">
+      <svg class="q-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook Page
+    </a>
+  </div>
+</div>
+
+<script>
+// ── NAV SCROLL ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), {passive:true});
+
+// ── REVEAL OBSERVER ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 90);
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold: .12});
+function observeReveal() {
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+}
+observeReveal();
+
+// ── MAP MODE SWITCH ──
+// "iframe" → embed contact.mapIframeUrl (Neighborhood Discovery, My Maps, etc.)
+// "pins"   → JS Google Maps with markers from destinations.json + accommodation.json
+const MAP_COLORS = {
+  destinations:   '#B88A45',
+  accommodation:  '#2A7FA8',
+  establishments: '#5E8B6E',
+};
+
+let mapData       = { destinations: [], accommodation: [] };
+let markerGroups  = { destinations: [], accommodation: [], establishments: [] };
+let mapInstance   = null;
+let mapInfoWindow = null;
+let currentFilter = 'all';
+let mapsReady     = false;
+let pendingPins   = false;
+
+function applyMapMode(contact) {
+  const mode = contact?.mapMode === 'pins' ? 'pins' : 'iframe';
+  const iframe = document.getElementById('mapIframe');
+  const gMap   = document.getElementById('gMap');
+  const tags   = document.getElementById('map-tags');
+  const legend = document.getElementById('map-legend');
+
+  if (mode === 'iframe') {
+    if (iframe && contact?.mapIframeUrl) iframe.src = contact.mapIframeUrl;
+    if (iframe) iframe.style.display = 'block';
+    if (gMap)   gMap.style.display   = 'none';
+    if (tags)   tags.style.display   = 'none';
+    if (legend) legend.style.display = 'none';
+    return;
+  }
+
+  // pins mode
+  if (iframe) { iframe.src = 'about:blank'; iframe.style.display = 'none'; }
+  if (gMap)   gMap.style.display   = 'block';
+  if (tags)   tags.style.display   = 'flex';
+  if (legend) legend.style.display = 'flex';
+
+  if (contact?.mapCenter) window._mapCenter = contact.mapCenter;
+  if (contact?.mapId)     window._mapId     = contact.mapId;
+
+  if (mapsReady) {
+    if (mapData.destinations.length) buildMap();
+    else pendingPins = true;
+  } else if (contact?.mapsApiKey) {
+    loadMaps(contact.mapsApiKey);
+  } else {
+    console.warn('Pins mode selected but no Google Maps API key configured.');
+    showMapFallback();
+  }
+}
+
+function initMap() {
+  mapsReady = true;
+  if (mapData.destinations.length) buildMap();
+  else pendingPins = true;
+}
+
+function buildMap() {
+  const gMapEl = document.getElementById('gMap');
+  if (!gMapEl) return;
+
+  const mapConfig = {
+    center: {lat: window._mapCenter?.lat || 12.619, lng: window._mapCenter?.lng || 122.071},
+    zoom:   window._mapCenter?.zoom || 12,
+    mapTypeControl:    false,
+    streetViewControl: false,
+    fullscreenControl: true,
+  };
+
+  if (window._mapId) {
+    mapConfig.mapId = window._mapId;
+  } else {
+    mapConfig.styles = [
+      {featureType:'water',    elementType:'geometry',stylers:[{color:'#1A5C7A'}]},
+      {featureType:'landscape',elementType:'geometry',stylers:[{color:'#F0E9DD'}]},
+      {featureType:'road',     elementType:'geometry',stylers:[{color:'#FFFFFF'}]},
+      {featureType:'poi.park', elementType:'geometry',stylers:[{color:'#C8E6C9'}]},
+      {featureType:'all',      elementType:'labels.text.fill',stylers:[{color:'#0C2233'}]}
+    ];
+  }
+
+  // Reset marker groups in case buildMap runs twice (mode toggled at runtime)
+  markerGroups = { destinations: [], accommodation: [], establishments: [] };
+  mapInstance   = new google.maps.Map(gMapEl, mapConfig);
+  mapInfoWindow = new google.maps.InfoWindow();
+
+  const useAdvanced = !!(window._mapId && google.maps.marker?.AdvancedMarkerElement);
+
+  function placeMarker(d, filterKey) {
+    if (!d.lat || !d.lng) return;
+    const color   = MAP_COLORS[filterKey] || MAP_COLORS.destinations;
+    const mapsUrl = `https://www.google.com/maps?q=${d.lat},${d.lng}`;
+
+    const onInfoClick = (anchor) => {
+      mapInfoWindow.setContent(`
+        <div style="font-family:'Jost',sans-serif;padding:4px 2px;min-width:170px">
+          <div style="font-size:11.2px;letter-spacing:.12em;text-transform:uppercase;color:${color};margin-bottom:3px">${d.type || d.category || filterKey}</div>
+          <div style="font-size:16.8px;font-weight:500;color:#0C2233;margin-bottom:4px">${d.name}</div>
+          <div style="font-size:13.4px;color:#717B7B;margin-bottom:8px">${d.barangay ? `Brgy. ${d.barangay} &nbsp;·&nbsp; ` : ''}${d.fee || d.priceRange || ''}</div>
+          <a href="${mapsUrl}" target="_blank" style="font-size:12.3px;color:#1A5C7A;text-decoration:none;font-weight:500">Open in Google Maps →</a>
+        </div>`);
+      mapInfoWindow.open({anchor, map: mapInstance});
+    };
+
+    let marker;
+    if (useAdvanced) {
+      const pin = new google.maps.marker.PinElement({
+        background:  color,
+        borderColor: '#FFFFFF',
+        glyphColor:  '#FFFFFF',
+        scale: 1.1
+      });
+      marker = new google.maps.marker.AdvancedMarkerElement({
+        position: {lat: +d.lat, lng: +d.lng},
+        map: mapInstance,
+        title: d.name,
+        content: pin.element
+      });
+      marker.addListener('click', () => onInfoClick(marker));
+    } else {
+      marker = new google.maps.Marker({
+        position: {lat: +d.lat, lng: +d.lng},
+        map: mapInstance,
+        title: d.name,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 9,
+          fillColor: color, fillOpacity: 1,
+          strokeColor: '#FFFFFF', strokeWeight: 2
+        }
+      });
+      marker.addListener('click', () => onInfoClick(marker));
+    }
+    markerGroups[filterKey].push(marker);
+  }
+
+  mapData.destinations.forEach(d => placeMarker(d, 'destinations'));
+  mapData.accommodation.forEach(d => placeMarker(d, 'accommodation'));
+
+  document.querySelectorAll('#map-tags .map-tag[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#map-tags .map-tag[data-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  applyFilter(currentFilter);
+}
+
+function applyFilter(filter) {
+  currentFilter = filter;
+  const notice  = document.getElementById('map-no-data');
+
+  Object.entries(markerGroups).forEach(([cat, markers]) => {
+    const visible = filter === 'all' || filter === cat;
+    markers.forEach(m => {
+      if (typeof m.setMap === 'function') m.setMap(visible ? mapInstance : null);
+      else m.map = visible ? mapInstance : null;
+    });
+  });
+
+  if (notice) {
+    const isEmpty = filter !== 'all' && !markerGroups[filter]?.length;
+    notice.style.display = isEmpty ? 'block' : 'none';
+  }
+}
+
+function loadMaps(apiKey) {
+  if (!apiKey) { showMapFallback(); return; }
+  if (document.getElementById('gmaps-script')) return;
+  const s = document.createElement('script');
+  s.id    = 'gmaps-script';
+  s.src   = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async&v=weekly&libraries=marker`;
+  s.async = true;
+  s.defer = true;
+  s.onerror = () => { console.warn('Google Maps failed to load — check API key and billing.'); showMapFallback(); };
+  document.head.appendChild(s);
+}
+
+// Swap in the illustrated SVG map when Google Maps can't load (offline, bad
+// key, referer not allowed). Visitors still get orientation + the
+// "Open in Google Maps" link instead of Google's raw error tile.
+function showMapFallback() {
+  const hide = id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; };
+  hide('mapIframe'); hide('gMap'); hide('map-tags'); hide('map-legend');
+  const off = document.getElementById('mapOffline');
+  if (off) off.style.display = 'flex';
+  const st = document.getElementById('mapStatus');
+  if (st) st.textContent = 'Offline view — use "Open in Google Maps" for live directions';
+}
+// Google Maps calls this global on auth/referer errors.
+window.gm_authFailure = showMapFallback;
+
+// ── RENDERERS ──
+function renderEnvNotice(contact) {
+  const el = document.getElementById('env-notice');
+  if (!el || !contact.envFee) return;
+  el.innerHTML = `<p><strong>Environmental Conservation Fee:</strong> ${contact.envFeeMessage || `A minimal ${contact.envFee} per visitor helps preserve our natural areas for future generations.`}</p>`;
+}
+
+function renderAbout(about) {
+  const intro = about.intro || {};
+  const stats = about.stats || [];
+  const tabs  = about.tabs  || [];
+
+  const itEl = document.getElementById('intro-text');
+  if (itEl) itEl.innerHTML = `
+    <span class="s-label">${intro.label || 'About Calatrava'}</span>
+    <h2 class="s-title">${(intro.title||'').replace(intro.titleEmphasis||'__', `<em>${intro.titleEmphasis||''}</em>`)}</h2>
+    <p>${intro.body || ''}</p>
+    <a href="${intro.ctaUrl || 'getting-here.html'}" class="intro-link">${intro.ctaLabel || 'Plan your visit'}</a>`;
+
+  if (tabs.length) {
+    const navEl    = document.getElementById('tab-nav');
+    const panelsEl = document.getElementById('tab-panels');
+    if (navEl && panelsEl) {
+      navEl.innerHTML = tabs.map((t, i) =>
+        `<button class="tab-btn${i===0?' active':''}" data-tab="${t.id}">${t.label}</button>`
+      ).join('');
+      panelsEl.innerHTML = tabs.map((t, i) =>
+        `<div class="tab-panel${i===0?' active':''}" id="tab-${t.id}">${
+          (t.content || []).map(p => `<p>${p}</p>`).join('')
+        }</div>`
+      ).join('');
+      navEl.addEventListener('click', e => {
+        const btn = e.target.closest('.tab-btn');
+        if (!btn) return;
+        navEl.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        panelsEl.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const panel = document.getElementById('tab-' + btn.dataset.tab);
+        if (panel) panel.classList.add('active');
+      });
+    }
+  }
+
+  const ssEl = document.getElementById('stats-strip');
+  if (ssEl && stats.length) ssEl.innerHTML = stats.map(s =>
+    `<div class="stat">
+      <div class="stat-num">${s.value}${s.suffix ? `<sup>${s.suffix}</sup>` : ''}</div>
+      <div class="stat-lbl">${s.label}</div>
+    </div>`).join('');
+}
+
+// Heal image paths typed into the admin: backslashes from Windows copy-paste
+// and missing file extensions (all site photos are .jpg).
+function fixAssetPath(s) {
+  s = (s || '').trim().replace(/\\/g, '/');
+  if (s && !/\.[a-z0-9]{2,5}$/i.test(s)) s += '.jpg';
+  return s;
+}
+
+// Card-sized images don't need the ~1MB full photos; swap in the thumbnail
+// when one exists (falls back to the original via onerror if it doesn't).
+function thumbify(src) {
+  return fixAssetPath(src).replace(/^assets\/destinations\/(.+)_web\.jpg$/, 'assets/thumbnails/$1_thumb.jpg');
+}
+
+// ── CARD IMAGE GALLERY (arrow overlays) ──
+// Embed the full image list on the card; arrows cycle through it in place.
+const attrJson = o => JSON.stringify(o).replace(/'/g, '&#39;');
+const CARD_ARROWS =
+  `<button class="card-nav prev" aria-label="Previous image" onclick="event.stopPropagation();navCardImg(this,-1)" onkeydown="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>` +
+  `<button class="card-nav next" aria-label="Next image" onclick="event.stopPropagation();navCardImg(this,1)" onkeydown="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>`;
+
+function navCardImg(btn, dir) {
+  const box = btn.closest('[data-images]');
+  const list = JSON.parse(box.dataset.images || '[]');
+  if (list.length < 2) return;
+  const idx = (parseInt(box.dataset.idx || '0', 10) + dir + list.length) % list.length;
+  box.dataset.idx = idx;
+  const img = box.querySelector('img');
+  img.dataset.full = list[idx];
+  // Cards flagged data-nothumb show the configured image as-is (see
+  // renderFeaturedDests); others keep the thumbnail optimization.
+  img.src = box.dataset.nothumb ? list[idx] : thumbify(list[idx]);
+}
+
+function renderFeaturedDests(destinations) {
+  const featured = destinations
+    .filter(d => d.featured)
+    .sort((a, b) => (a.featuredOrder || 99) - (b.featuredOrder || 99));
+  const el = document.getElementById('dest-grid');
+  if (!el) return;
+  el.innerHTML = featured.map((d, i) => {
+    const imgs = (d.images || []).map(fixAssetPath).filter(Boolean);
+    // Render the configured image directly (not a guessed _thumb path): the
+    // admin only manages assets/destinations/, never the thumbnails folder, so
+    // a derived thumbnail can go stale and stop reflecting the config.
+    const img = imgs.length
+      ? `<img src="${imgs[0]}" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
+      : `<div class="dest-img" style="background:linear-gradient(160deg,#1A5C7A,#0C2233);min-height:300px"></div>`;
+    return `<div class="dest-card" role="link" tabindex="0" aria-label="${d.name} — view details"
+      data-images='${attrJson(imgs)}' data-idx="0" data-nothumb="1"
+      onclick="location.href='destinations.html#${d.id}'"
+      onkeydown="if(event.key==='Enter'&&event.target===this)location.href='destinations.html#${d.id}'">
+      ${img}
+      <div class="dest-overlay"></div>
+      ${imgs.length > 1 ? CARD_ARROWS : ''}
+      <div class="dest-info">
+        <div class="dest-type">${d.tagline || d.type}</div>
+        <div class="dest-name">${d.name}</div>
+        <div class="dest-loc">Brgy. ${d.barangay} &mdash; ${d.fee}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderAccommodation(accommodation) {
+  const el = document.getElementById('accom-grid');
+  if (!el) return;
+  const placeholderGrads = ['linear-gradient(160deg,#1E8B72,#0C2233)','linear-gradient(160deg,#1A5C7A,#0C2233)','linear-gradient(160deg,#2A8B7A,#1A5C7A)'];
+  el.innerHTML = accommodation.map((a, i) => {
+    const imgs = ((a.images?.length ? a.images : (a.image ? [a.image] : [])) || []).map(fixAssetPath).filter(Boolean);
+    const imgHtml = imgs.length
+      ? `<img src="${thumbify(imgs[0])}" data-full="${imgs[0]}" onerror="if(this.src.includes('_thumb'))this.src=this.dataset.full" alt="${a.name}" class="accom-img" loading="lazy">`
+      : `<div class="accom-ph" style="background:${placeholderGrads[i % 3]}"></div>`;
+    return `<div class="accom-card reveal">
+      <div class="accom-img-wrap" data-images='${attrJson(imgs)}' data-idx="0">${imgHtml}${imgs.length > 1 ? CARD_ARROWS : ''}</div>
+      <div class="accom-body">
+        <div class="accom-type">${a.type}</div>
+        <div class="accom-name">${a.name}</div>
+        <div class="accom-loc">Brgy. ${a.barangay}${a.description ? ` &mdash; ${a.description}` : ''}</div>
+        <a href="${a.detailsUrl || 'accommodation.html'}" class="accom-link">View details</a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderVideos(videos) {
+  const grid = document.getElementById('videos-grid');
+  if (!grid || !videos?.length) {
+    document.getElementById('videos')?.remove();
+    return;
+  }
+  grid.innerHTML = videos.map(v => `
+    <div class="video-tile reveal">
+      <div class="video-frame" onclick="playVideo(this, '${v.id}')" role="button" tabindex="0"
+           onkeydown="if(event.key==='Enter')playVideo(this,'${v.id}')" aria-label="Play: ${v.title}">
+        <img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}" loading="lazy">
+        <span class="video-play" aria-hidden="true"></span>
+      </div>
+      <div class="video-meta">
+        <div class="video-title">${v.title}</div>
+        ${v.caption ? `<div class="video-caption">${v.caption}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+// Facade pattern: the YouTube iframe (and its ~1MB of JS) loads only on play.
+function playVideo(frame, id) {
+  frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0"
+    title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>`;
+}
+
+function renderGallery(photos) {
+  const track = document.getElementById('gallery-track');
+  if (!track || !photos?.length) {
+    document.getElementById('gallery')?.remove();
+    return;
+  }
+  // Shuffle (Fisher–Yates) so every visit shows a different order
+  const list = [...photos];
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  const item = p => `<div class="gallery-item">
+    <img src="${p.src}" alt="${p.label || 'Calatrava, Romblon'}" loading="lazy">
+    ${p.label ? `<span>${p.label}</span>` : ''}
+  </div>`;
+  // Track is rendered twice; the animation slides exactly one copy's width
+  // (-50%), so the loop wraps seamlessly.
+  const half = list.map(item).join('');
+  track.innerHTML = half + half;
+  track.style.setProperty('--gallery-dur', (list.length * 4) + 's');
+}
+
+function renderContactCards(contact) {
+  const el = document.getElementById('contact-cards');
+  if (!el) return;
+  el.innerHTML = (contact.contacts || []).map(c =>
+    `<a href="${c.href}" class="contact-card"${c.type === 'social' ? ' target="_blank" rel="noopener"' : ''}>
+      <div class="cc-label">${c.label}</div>
+      <div class="cc-value">${c.value}</div>
+      <div class="cc-sub">${c.sub || ''}</div>
+    </a>`).join('');
+}
+
+// ── HERO VIDEO (mobile + desktop; respects reduced motion & Data Saver) ──
+(function () {
+  const v = document.getElementById('heroVid');
+  if (!v) return;
+  // Skip the heavy download for users who asked to conserve data or are on a
+  // slow/metered connection; everyone else (incl. phones) gets the video.
+  const conn = navigator.connection || {};
+  const stingy = conn.saveData === true || /^(slow-2g|2g)$/.test(conn.effectiveType || '');
+  const wantVideo = !matchMedia('(prefers-reduced-motion: reduce)').matches && !stingy;
+  if (!wantVideo) return; // poster image stays as the hero background
+  [['video/webm', v.dataset.webm], ['video/mp4', v.dataset.mp4]].forEach(([type, src]) => {
+    if (!src) return;
+    const s = document.createElement('source');
+    s.type = type; s.src = src;
+    v.appendChild(s);
+  });
+  v.load();
+  v.play().catch(() => {});
+  // Battery-saver modes can reject even muted autoplay; retry once the
+  // visitor interacts so they aren't stuck on the poster frame.
+  const retry = () => { if (v.paused) v.play().catch(() => {}); };
+  ['pointerdown', 'keydown', 'scroll'].forEach(ev =>
+    addEventListener(ev, retry, { once: true, passive: true }));
+})();
+
+// ── VISITOR GATE ──
+// Confirms the admin toggle from data/settings.json, then wires the buttons.
+// Falls back to enabled + the municipal site if settings can't be loaded.
+(async function visitorGate() {
+  const FALLBACK_LOCAL_URL = 'https://rjfabella.github.io/calatrava-lgu/';
+  let chosen = false;
+  try { chosen = sessionStorage.getItem('visitorChoice') === 'tourist'; } catch(e){}
+
+  const closeGate = () => document.body.classList.remove('gate-open');
+
+  let gate = { enabled: true, localUrl: FALLBACK_LOCAL_URL };
+  try {
+    const s = await fetch('data/settings.json', {cache:'no-store'}).then(r => r.json());
+    if (s && s.visitorGate) gate = { enabled: s.visitorGate.enabled !== false, localUrl: s.visitorGate.localUrl || FALLBACK_LOCAL_URL };
+  } catch(e) { /* keep fallback */ }
+
+  // Disabled by admin, or already chosen this session → never block the page.
+  if (!gate.enabled || chosen) { closeGate(); return; }
+
+  const tourist = document.getElementById('gateTourist');
+  const local   = document.getElementById('gateLocal');
+  if (tourist) tourist.addEventListener('click', () => {
+    try { sessionStorage.setItem('visitorChoice', 'tourist'); } catch(e){}
+    closeGate();
+  });
+  if (local) local.addEventListener('click', () => { window.location.href = gate.localUrl; });
+})();
+
+// ── INIT ──
+(async function init() {
+  const safe = url => fetch(url, {cache:'no-store'}).then(r => r.json()).catch(() => null);
+
+  const [about, destinations, activities, accommodation, contact, gallery, videos] = await Promise.all([
+    safe('data/about.json'),
+    safe('data/destinations.json'),
+    safe('data/activities.json'),
+    safe('data/accommodation.json'),
+    safe('data/contact.json'),
+    safe('data/gallery.json'),
+    safe('data/videos.json')
+  ]);
+
+  if (destinations)  mapData.destinations  = destinations;
+  if (accommodation) mapData.accommodation = accommodation;
+  if (pendingPins && mapData.destinations.length) { buildMap(); pendingPins = false; }
+
+  if (contact)      renderEnvNotice(contact);
+  if (about)        renderAbout(about);
+  if (destinations) renderFeaturedDests(destinations);
+  if (activities)   renderActivities(activities);
+  if (accommodation) renderAccommodation(accommodation);
+  if (contact)      renderContactCards(contact);
+  renderVideos(videos);
+  renderGallery(gallery);
+  applyMapMode(contact || {});
+
+  observeReveal();
+})();
+
+// ── ACTIVITY MODAL ──
+let _activitiesData = [];
+
+function renderActivities(activities) {
+  _activitiesData = activities;
+  const el = document.getElementById('acts-grid');
+  if (!el) return;
+  el.innerHTML = activities.map(a =>
+    `<div class="act-card reveal" role="button" tabindex="0" aria-label="${a.title} — open details"
+      onclick="openActivityModal('${a.id}')"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openActivityModal('${a.id}')}">
+      <div class="act-bg"${a.image ? ` style="background-image:url('${a.image}')"` : ''}></div>
+      <div class="act-overlay"></div>
+      ${a.credit ? `<div class="act-credit">Photo: ${a.credit}</div>` : ''}
+      <div class="act-content">
+        <div class="act-num">${a.number}${a.tagline ? ` / ${a.title}` : ''}</div>
+        <div class="act-title">${a.tagline || a.title}</div>
+        <p class="act-desc">${a.description}</p>
+        <div class="act-rate">${a.rate}</div>
+      </div>
+    </div>`).join('');
+}
+
+function openActivityModal(id) {
+  const a = _activitiesData.find(x => x.id === id);
+  if (!a) return;
+  const d = a.details || {};
+
+  document.getElementById('act-modal-hero-bg').style.backgroundImage = `url('${a.image || ''}')`;
+  document.getElementById('act-modal-num').textContent = a.tagline ? `${a.number} / ${a.title}` : a.number;
+  document.getElementById('act-modal-title').textContent = a.tagline || a.title;
+
+  let html = `<p class="act-modal-desc">${a.description}</p>`;
+
+  if (d.highlights?.length) {
+    html += `<div class="act-modal-section">
+      <div class="act-modal-section-label">Highlights</div>
+      <div class="act-modal-tags">${d.highlights.map(h => `<span class="act-modal-tag">${h}</span>`).join('')}</div>
+    </div>`;
+  }
+
+  if (d.whatToBring?.length) {
+    html += `<div class="act-modal-section">
+      <div class="act-modal-section-label">What to Bring</div>
+      <div class="act-modal-tags">${d.whatToBring.map(h => `<span class="act-modal-tag">${h}</span>`).join('')}</div>
+    </div>`;
+  }
+
+  if (d.bestTime || d.duration) {
+    html += `<div class="act-modal-section">
+      <div class="act-modal-section-label">Good to Know</div>
+      <div class="act-modal-meta">
+        ${d.bestTime ? `<span class="act-modal-meta-item">Best time: ${d.bestTime}</span>` : ''}
+        ${d.duration ? `<span class="act-modal-meta-item">Duration: ${d.duration}</span>` : ''}
+      </div>
+    </div>`;
+  }
+
+  const contactItems = [...(d.contacts || [])];
+  // Up to 2 contact numbers and 3 booking links (admin-managed). Falls back to
+  // the legacy single contactPhone / contactUrl fields for older data.
+  const phones = a.contactPhones?.length ? a.contactPhones : (a.contactPhone ? [{ number: a.contactPhone }] : []);
+  phones.forEach(p => {
+    const num = (p.number || '').trim();
+    if (!num) return;
+    contactItems.push({
+      name: p.label || 'Contact number', role: 'Call or text to book',
+      phone: num, href: 'tel:' + num.replace(/\s/g, '')
+    });
+  });
+  const urls = a.contactUrls?.length ? a.contactUrls : (a.contactUrl ? [{ url: a.contactUrl }] : []);
+  urls.forEach(u => {
+    const url = (u.url || '').trim();
+    if (!url) return;
+    contactItems.push({
+      name: u.label || 'Booking page', role: url.replace(/^https?:\/\//, '').replace(/\/$/, ''),
+      phone: '↗', href: url, external: true
+    });
+  });
+  if (contactItems.length) {
+    html += `<div class="act-modal-section">
+      <div class="act-modal-section-label">Book / Enquire</div>
+      <div class="act-contact-list">${contactItems.map(c =>
+        `<a class="act-contact" href="${c.href || '#'}"${c.external ? ' target="_blank" rel="noopener"' : ''}>
+          <div>
+            <div class="act-contact-name">${c.name}</div>
+            <div class="act-contact-role">${c.role}</div>
+          </div>
+          <div class="act-contact-phone">${c.phone}</div>
+        </a>`).join('')}</div>
+    </div>`;
+  }
+
+  document.getElementById('act-modal-body').innerHTML = html;
+  document.getElementById('act-modal-bg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeActivityModal() {
+  document.getElementById('act-modal-bg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeActivityModal(); });
+</script>
+
+<!-- ACTIVITY MODAL -->
+<div class="act-modal-bg" id="act-modal-bg">
+  <div class="act-modal" role="dialog" aria-modal="true">
+    <button class="act-modal-close" id="act-modal-close" aria-label="Close">✕</button>
+    <div class="act-modal-hero">
+      <div class="act-modal-hero-bg" id="act-modal-hero-bg"></div>
+      <div class="act-modal-hero-overlay"></div>
+      <div class="act-modal-hero-text">
+        <div class="act-modal-hero-num" id="act-modal-num"></div>
+        <div class="act-modal-hero-title" id="act-modal-title"></div>
+      </div>
+    </div>
+    <div class="act-modal-body" id="act-modal-body"></div>
+  </div>
+</div>
+<script>
+document.getElementById('act-modal-close').addEventListener('click', closeActivityModal);
+document.getElementById('act-modal-bg').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeActivityModal();
+});
+</script>
+<script src="assets/i18n.js" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch((err) => {
+      console.warn('Service worker registration failed:', err);
+    });
+  });
+}
+</script>
+<!-- Visit Counter -->
+<img src="https://hits.sh/rjfabella.github.io/calatrava-tourism-portal.svg" style="display:none;" alt="Visits" aria-hidden="true">
+</body>
+</html>

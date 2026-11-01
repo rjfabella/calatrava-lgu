@@ -1,7 +1,7 @@
 {
-  "name": "calatrava-lgu",
+  "name": "calatrava-portal",
   "private": true,
-  "description": "Official government portal of the Municipality of Calatrava, Romblon — static site (HTML/CSS/JS) hosted on GitHub Pages.",
+  "description": "calatravaromblon.gov.ph — the Municipality of Calatrava's tourism portal (site root) and its official LGU government portal (/lgu/), deployed together as one static GitHub Pages site. No build step; the tourism admin editor publishes to this repo via the GitHub API.",
   "scripts": {
     "dev": "npx --yes http-server . -p 5173 -c-1"
   }

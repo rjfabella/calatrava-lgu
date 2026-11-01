@@ -1,0 +1,130 @@
+[
+  {
+    "id": "island-hopping",
+    "number": "01",
+    "title": "Island Hopping",
+    "tagline": "Chart Unmapped Coves",
+    "description": "Sail between dramatic karst formations and anchor in hidden pockets of white sand where your footprints may be the only ones there. Book through our accredited operators at the Calatrava Port Terminal.",
+    "rate": "From ₱3,000 for 10 persons",
+    "image": "assets/activities/act-island-hopping.jpg",
+    "credit": "RJ Fabella",
+    "details": {
+      "highlights": [
+        "Tinagong Dagat (Hidden Sea)",
+        "Guindawahan Island",
+        "Limestone sea caves",
+        "Crystal-clear lagoons",
+        "Snorkeling stops"
+      ],
+      "whatToBring": [
+        "Sunscreen",
+        "1L+ water",
+        "Change of clothes",
+        "Waterproof bag",
+        "Cash for fees"
+      ],
+      "bestTime": "November to May",
+      "duration": "4–8 hours",
+      "contacts": [
+        {
+          "name": "Calatrava Tourism Council",
+          "role": "Municipal Tourism Office",
+          "phone": "0919 335 0314",
+          "href": "tel:09193350314"
+        },
+        {
+          "name": "Sinagtala Tours",
+          "role": "Island hopping & tour packages",
+          "phone": "0939 915 4193",
+          "href": "tel:09399154193"
+        }
+      ]
+    }
+  },
+  {
+    "id": "waterfall-trekking",
+    "number": "02",
+    "title": "Waterfall Trekking",
+    "tagline": "Chase the Hidden Falls",
+    "description": "Trade the beach for the hills. Jungle trails lead to six waterfalls across four barangays — from the dramatic Tago Falls, the highest in Calatrava, to the secluded Hidden Falls deep in Pagsangahan.",
+    "rate": "Guide fees apply",
+    "image": "assets/activities/act-waterfall-trekking.jpg",
+    "credit": "Calatrava Tourism Council",
+    "details": {
+      "highlights": [
+        "Tago Falls (7–9 m)",
+        "Hidden Falls",
+        "Cawa-Cawa Falls",
+        "Oray Falls",
+        "Natural pool swimming"
+      ],
+      "whatToBring": [
+        "Trekking shoes",
+        "2L+ water",
+        "Light snacks",
+        "Insect repellent",
+        "Dry bag"
+      ],
+      "bestTime": "Year-round (drier Nov–May)",
+      "duration": "2–6 hours per trail",
+      "contacts": [
+        {
+          "name": "Calatrava Tourism Council",
+          "role": "Municipal Tourism Office",
+          "phone": "0919 335 0314",
+          "href": "tel:09193350314"
+        }
+      ]
+    }
+  },
+  {
+    "id": "snorkeling-&-diving",
+    "number": "03",
+    "title": "Snorkeling & Diving",
+    "tagline": "Peer Into the Deep Blue",
+    "description": "Calatrava's marine sanctuaries thrive just off the shoreline. Put on a mask with an LGU-accredited dive group and discover vibrant coral gardens teeming with life in protected coastal waters.",
+    "rate": "Rates vary by operator",
+    "image": "assets/activities/act-snorkeling-diving.jpg",
+    "credit": "Sisira PH",
+    "details": {
+      "highlights": [
+        "Coral reef ecosystems",
+        "Sea turtles",
+        "Tropical fish schools",
+        "High water visibility",
+        "Protected marine areas"
+      ],
+      "whatToBring": [
+        "Rash guard",
+        "Waterproof camera",
+        "Reef-safe sunscreen",
+        "Snorkel gear (or rent on-site)"
+      ],
+      "bestTime": "November to May",
+      "duration": "2–4 hours",
+      "contacts": [
+        {
+          "name": "Calatrava Tourism Council",
+          "role": "Municipal Tourism Office",
+          "phone": "0919 335 0314",
+          "href": "tel:09193350314"
+        }
+      ]
+    },
+    "contactPhones": [],
+    "contactUrls": [
+      {
+        "label": "Kantilado Freedivers",
+        "url": "https://www.facebook.com/kantiladofreedivers"
+      },
+      {
+        "label": "Sisira",
+        "url": "https://www.facebook.com/sisiraph"
+      },
+      {
+        "label": "Tablas Kampay",
+        "url": "https://www.facebook.com/profile.php?id=61564159931082"
+      }
+    ]
+  }
+]
