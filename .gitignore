@@ -9,26 +9,26 @@ node_modules/
 .claude/settings.local.json
 .claude/tmp-*/
 
-# Source archive of the brand assets already extracted into assets/logos/
-assets/Calatrava.zip
+# Source archive of the brand assets already extracted into lgu/assets/logos/
+lgu/assets/Calatrava.zip
 
 # Python bytecode from local runs of scripts/
 __pycache__/
 *.pyc
 
 # Superseded originals the LGU keeps locally; already in git history if ever needed
-assets/images/Archive/
+lgu/assets/images/Archive/
 
 # Raw office submissions (Sept 2026 batch, ~30 MB of scans/DOCX). Kept locally
 # only; the audit index and the tracking checklist stay in git.
-assets/reference\ docs/*
-!assets/reference\ docs/README.md
-!assets/reference\ docs/Calatrava\ LGU\ Website\ Development.xlsx
+lgu/assets/reference\ docs/*
+!lgu/assets/reference\ docs/README.md
+!lgu/assets/reference\ docs/Calatrava\ LGU\ Website\ Development.xlsx
 
 # Raw studio portraits from the LGU (~120 MB). Web-sized copies live in
-# assets/images/dept-heads/ and those are what the site uses.
-assets/images/Dept Heads/
+# lgu/assets/images/dept-heads/ and those are what the site uses.
+lgu/assets/images/Dept Heads/
 
 # Raw high-res barangay seals from the LGU (~10 MB). Web-sized copies sit
 # beside them as <slug>.png and those are what the site uses.
-assets/images/barangays/Brgy. * Seal.png
+lgu/assets/images/barangays/Brgy. * Seal.png

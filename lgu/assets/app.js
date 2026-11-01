@@ -184,7 +184,7 @@ function buildHeader(active){
     <div class="topbar-inner">
       <span>Republic of the Philippines &middot; Province of Romblon</span>
       <div class="topbar-right">
-        <a href="https://rjfabella.github.io/calatrava-tourism-portal/">Tourism</a>
+        <a href="../index.html">Tourism</a>
         <a href="services.html#hotline">Emergency Hotlines</a>
         <a href="contact.html">Citizen Help Desk</a>
       </div>
@@ -309,7 +309,7 @@ function buildFooter(){
         <li><a href="about-us.html#barangays">The 7 Barangays</a></li>
         <li><a href="about-us.html#map">Find us on the map</a></li>
         <li><a href="services.html#hotline">Emergency Hotlines</a></li>
-        <li><a href="https://rjfabella.github.io/calatrava-tourism-portal/">Tourism Portal</a></li>
+        <li><a href="../index.html">Tourism Portal</a></li>
       </ul>
     </div>
   </div>

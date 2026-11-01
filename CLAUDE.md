@@ -1,4 +1,4 @@
-# CLAUDE.md — Calatrava LGU Website
+# CLAUDE.md — Calatrava municipal web portal
 
 This file is read automatically at the start of every Claude Code session in
 this repo. It orients any Claude instance working here — read it before
@@ -6,19 +6,27 @@ touching code.
 
 ## What this is
 
-The official government portal of the **Municipality of Calatrava, Romblon,
-Philippines** (`calatravaromblon.gov.ph`). Static **HTML / CSS / JS, no build
-step** — every page renders from a `data/*.json` file with a hardcoded
-fallback so it still works if JSON fetch fails (e.g. opened as a local file).
+Everything served at `calatravaromblon.gov.ph` for the **Municipality of
+Calatrava, Romblon, Philippines** — two static sites in one repo, deployed
+together as one GitHub Pages site:
 
-This repo is the **government/LGU site**. A separate, already-built
-**tourism portal** lives at the same domain gateway
-(https://rjfabella.github.io/calatrava-tourism-portal/). That portal shows a
-**Tourist vs. Local popup** on load; choosing "Local" redirects here. So this
-site can be entered mid-navigation via redirect, not only as a standalone
-homepage — keep IA and branding consistent with the tourism portal (same
-green + gold identity, same header/footer language) rather than designing in
-isolation.
+- **`/` — the tourism portal.** Built first, because tourism is the current
+  mayor's priority. Its homepage shows a **Tourist vs. Local pop-up** on load;
+  choosing "Local" goes to `/lgu/`.
+- **`/lgu/` — the official government portal.** The LGU site proper, and the
+  one the governing standards below apply to.
+
+Both halves are **HTML / CSS / JS with no build step** — every page renders
+from a `data/*.json` file with a hardcoded fallback so it still works if the
+JSON fetch fails (e.g. opened as a local file).
+
+The two were separate repos until 2026-11-01, when the tourism portal was
+merged into this one; `MEMORY.md` has the reasoning. Practical consequences:
+the LGU site can be entered mid-navigation through the gate rather than only
+as a standalone homepage, so keep IA and branding consistent across the two
+(same green + gold identity, same header/footer language) rather than
+designing either in isolation — and when a change touches the domain root, the
+service worker or the 404, remember it affects **both** halves.
 
 ## Governing standards (must inform every page/feature)
 
@@ -31,12 +39,12 @@ isolation.
   DPO must be named somewhere on the site.
 - **DILG Full Disclosure Policy (FDP)**, MC 2010-083 as amended — budget,
   procurement, and financial documents posted and updated quarterly. This is
-  what `transparency.html` / `transparency.json` exist to satisfy.
+  what `lgu/transparency.html` / `lgu/data/transparency.json` exist to satisfy.
 - **Citizen's Charter (RA 11032 / ARTA)** — every frontline service listed
   needs procedure, requirements, fees, processing time, responsible officer,
-  feedback mechanism. Source document: `assets/contents/Citizen's Charter
-  2023.pdf`, now parsed into `data/citizens-charter.json` (all 45 services)
-  and rendered on `services.html#charter`.
+  feedback mechanism. Source document: `lgu/assets/contents/Citizen's Charter
+  2023.pdf`, now parsed into `lgu/data/citizens-charter.json` (all 45 services)
+  and rendered on `lgu/services.html#charter`.
 - **FOI (EO 2, s. 2016)** — optional but good practice; no dedicated page yet.
 - **SGLG (RA 11292) / Transparency Seal** — an active, transparent, compliant
   site is itself an assessed governance indicator.
@@ -49,6 +57,52 @@ office live in the attached Claude Project's doc
 of the above before changing site structure.
 
 ## Architecture
+
+```
+/        tourism portal — index.html (gate), destinations, accommodation,
+         establishments, getting-here, admin.html, 404.html, manifest.json,
+         sw.js, icons/, CNAME, and its own assets/ + data/
+lgu/     government portal — nine pages plus its own assets/ + data/
+```
+
+Each half owns its own `assets/` and `data/`; neither reads the other's.
+
+### Domain-wide (owned by the tourism half, affects both)
+
+- **`sw.js`** registers at the root with scope `/`, so the service worker
+  fronts the LGU pages too. Its precache list carries the LGU shell
+  (`/lgu/`, its `index.html`, `style.css`, `app.js`); `/lgu/data/` gets the
+  same network-first treatment as `/data/`; CSS and JS are
+  stale-while-revalidate, *not* cache-first — cache-first would pin
+  `lgu/assets/app.js`, which renders the whole LGU chrome, to whatever a
+  visitor first downloaded. Bump `CACHE_VERSION` when the shell changes.
+- **`404.html`** is the only 404 GitHub Pages serves for the domain, so it
+  does double duty: a head script forwards the LGU's eight pre-merge root URLs
+  (`/about.html`, `/services.html`, …) to `/lgu/<page>.html`, and for any miss
+  under `/lgu/` it swaps its tourism copy for government copy and links.
+- **`manifest.json`** is scoped `/`, so the installed PWA covers both halves.
+- **`CNAME`** binds `calatravaromblon.gov.ph`. See the README for the
+  two-step Pages swap that moves a custom domain between repos.
+
+### The tourism half (`/`)
+
+- **Self-contained pages**: unlike the LGU half there is no shared chrome
+  module — each page inlines its own `<style>` and nav/footer markup, with
+  only `assets/emergency.css` and `assets/i18n.js` shared. Changing the
+  tourism nav means editing every page; don't assume `initChrome` exists here.
+- **Fonts**: Cormorant Garamond + Jost (the LGU half uses a different pair —
+  see below).
+- **`admin.html`** is the staff content editor: it commits `data/*.json`
+  straight to this repo through the GitHub Contents API (`GH_REPO`,
+  `GH_BRANCH` at the top of its script) with a fine-grained PAT, and uploads
+  photos into `assets/destinations|accommodations|establishments`. It is the
+  pattern to follow if an editor is ever built for the LGU half.
+- **`data/settings.json`** → `visitorGate` toggles the Tourist/Local pop-up
+  and sets where "Local" goes (`/lgu/`). Editable from the admin editor.
+
+### The government half (`lgu/`)
+
+Paths in this subsection are relative to `lgu/`.
 
 - **Shared chrome**: `assets/app.js` defines `NAV_ITEMS` once and injects the
   top bar, nav, mobile nav, and footer into every page. Every page calls
@@ -89,9 +143,11 @@ of the above before changing site structure.
   - `data/transparency.json` — Full Disclosure document links, including
     the actual Citizen's Charter PDF and Org Chart PPTX
   - `data/contact.json` — office directory, address, map embed
-- **Styling**: single `assets/style.css` design system (Cormorant Garamond +
-  Jost fonts, green/gold palette) driven by `:root` CSS variables. Re-theme
-  there, not with inline styles or per-page stylesheets.
+- **Styling**: single `assets/style.css` design system (Merriweather + Source
+  Sans 3 fonts, green/gold palette) driven by `:root` CSS variables. Re-theme
+  there, not with inline styles or per-page stylesheets. Type is deliberately
+  large (18.5px base, 12.5px floor) because most of this half's users are
+  older residents.
 - **Pages**: `index.html`, `about.html` (Government — elected officials +
   offices/departments), `about-us.html` (three tabs: History / Barangays /
   Map),
@@ -100,6 +156,9 @@ of the above before changing site structure.
   `transparency.html`, `news.html`, `contact.html` (office directory only),
   `privacy.html`. `barangays.html` is a redirect stub to
   `about-us.html#barangays` — keep it so old links and bookmarks survive.
+  The nav's "Tourism" item and the footer's "Tourism Portal" point at
+  `../index.html`: every path in this half is relative, which is what let it
+  move under `lgu/` untouched, so keep it that way.
 - **Tabs**: `setupTabs(names, opts)` + `applyTabHash(group)` in `assets/app.js`
   carry the WAI-ARIA tab behaviour (roving tabindex, arrow keys, hash sync).
   Both `services.html` and `about-us.html` use it; don't reimplement per page.
@@ -149,16 +208,18 @@ of the above before changing site structure.
   both were removed with it, and the repo is back to zero tooling.)
 - Pages must be served over HTTP for `fetch()` of the JSON to work; don't
   "fix" the inline fallback data out of the HTML — it's intentional
-  degradation, not dead code.
+  degradation, not dead code. Serve from the **repo root**, never from `lgu/`:
+  the tourism pages, `sw.js` and the 404 forwarding all use absolute paths
+  that assume the domain root.
 - No backend, no secrets. Deployment target is **GitHub Pages** serving
-  `main` from the repo root as-is.
-- There is no admin/CMS editor yet. If one gets built, follow the pattern of
-  the tourism portal's `admin.html` (GitHub-API publishing) rather than
-  inventing a new approach.
+  `main` from the repo root as-is, at the apex domain.
+- The LGU half has no admin/CMS editor. If one gets built, follow
+  `admin.html`'s pattern (GitHub-API publishing) pointed at `lgu/data/*.json`,
+  rather than inventing a new approach.
 - A lot of current content is **verified placeholder data** — see
   `MEMORY.md` and the README's fill-in checklist for exactly what's real vs.
   placeholder. Don't assume names, numbers, or hotlines in the JSON are
-  final; cross-check against `assets/contents/` source docs or ask before
+  final; cross-check against `lgu/assets/contents/` source docs or ask before
   publishing.
 
 ## User working style (RJ)

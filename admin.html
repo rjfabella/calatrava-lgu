@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Calatrava Tourism Portal</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#0C2233;--ocean:#1A5C7A;--teal:#1E8B72;
+  --gold:#B88A45;--cream:#FAF7F2;--sand:#F0E9DD;
+  --white:#fff;--muted:#6B7280;--border:#E5E7EB;
+  --danger:#DC2626;--success:#16A34A;--warn:#D97706;
+  --bg:#F3F4F6;--surface:#fff;
+  --fd:'Georgia',serif;--fb:'system-ui',sans-serif;
+}
+body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:15.7px;min-height:100vh}
+
+/* ── AUTH SCREEN ── */
+#authScreen{position:fixed;inset:0;background:var(--deep);display:flex;align-items:center;justify-content:center;z-index:999}
+.auth-box{background:var(--white);padding:2.5rem;border-radius:8px;width:340px}
+.auth-box h1{font-family:var(--fd);font-size:1.6rem;color:var(--deep);margin-bottom:.25rem}
+.auth-box p{font-size:13.4px;color:var(--muted);margin-bottom:1.75rem}
+.auth-box input{width:100%;border:1px solid var(--border);padding:.6rem .85rem;border-radius:4px;font-size:15.7px;margin-bottom:1rem;outline:none;transition:border-color .2s}
+.auth-box input:focus{border-color:var(--ocean)}
+.auth-box button{width:100%;background:var(--deep);color:#fff;border:none;padding:.7rem;border-radius:4px;font-size:14.6px;font-weight:500;letter-spacing:.05em;cursor:pointer;transition:background .2s}
+.auth-box button:hover{background:var(--ocean)}
+.auth-error{font-size:13.4px;color:var(--danger);margin-top:.5rem;display:none}
+
+/* ── LAYOUT ── */
+#app{display:none;min-height:100vh}
+.topbar{background:var(--deep);padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:90}
+.topbar-brand{display:flex;align-items:center;gap:.75rem}
+.topbar-brand span{font-family:var(--fd);font-size:1.1rem;color:var(--white)}
+.topbar-brand small{font-size:11.2px;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;display:block}
+.topbar-actions{display:flex;align-items:center;gap:.75rem}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:4px;font-size:13.4px;font-weight:500;border:none;cursor:pointer;transition:all .2s;letter-spacing:.03em;text-decoration:none}
+.btn-sm{padding:.3rem .65rem;font-size:12.3px}
+.btn-ghost{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.btn-ghost:hover{background:rgba(255,255,255,.2)}
+.btn-primary{background:var(--gold);color:var(--white)}
+.btn-primary:hover{background:#a07a3a}
+.btn-danger{background:var(--danger);color:var(--white)}
+.btn-danger:hover{background:#b91c1c}
+.btn-success{background:var(--success);color:var(--white)}
+.btn-success:hover{background:#15803d}
+.btn-outline{background:transparent;color:var(--deep);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--deep)}
+
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 52px)}
+
+/* ── SIDEBAR ── */
+.sidebar{background:var(--white);border-right:1px solid var(--border);padding:1.25rem 0}
+.sidebar-section{font-size:11.2px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.6rem 1.25rem .4rem;margin-top:.5rem}
+.nav-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1.25rem;font-size:14.6px;color:#374151;cursor:pointer;transition:background .15s;border-left:3px solid transparent}
+.nav-item:hover{background:var(--bg)}
+.nav-item.active{background:#EFF6FF;color:var(--ocean);border-left-color:var(--ocean);font-weight:500}
+.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.6}
+.nav-item.active svg{opacity:1}
+.nav-badge{margin-left:auto;font-size:11.2px;background:var(--sand);color:var(--muted);padding:1px 7px;border-radius:10px;font-weight:400}
+.nav-item.active .nav-badge{background:var(--ocean);color:var(--white)}
+
+/* ── MAIN CONTENT ── */
+.main{padding:1.75rem;overflow-y:auto}
+.page{display:none}
+.page.active{display:block}
+
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
+.page-header h2{font-size:1.25rem;font-weight:600;color:var(--deep)}
+.page-header p{font-size:14.6px;color:var(--muted);margin-top:.2rem}
+.page-header-actions{display:flex;gap:.5rem;flex-shrink:0}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--deep);color:#fff;padding:.65rem 1.1rem;border-radius:6px;font-size:14.6px;z-index:999;display:none;gap:.5rem;align-items:center}
+#toast.show{display:flex}
+#toast.error{background:var(--danger)}
+#toast.success{background:var(--success)}
+
+/* ── CARDS / TABLE ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.card-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.card-header h3{font-size:.9rem;font-weight:600;color:var(--deep)}
+.card-body{padding:1.25rem}
+
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{font-size:12.3px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:.6rem .85rem;text-align:left;background:#F9FAFB;border-bottom:1px solid var(--border)}
+.data-table td{padding:.7rem .85rem;border-bottom:1px solid var(--border);font-size:14.6px;vertical-align:middle}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:#FAFAFA}
+.td-img{width:44px;height:36px;object-fit:cover;border-radius:3px;background:var(--sand)}
+.td-img-ph{width:44px;height:36px;background:linear-gradient(135deg,var(--sand),#ddd);border-radius:3px;flex-shrink:0;display:inline-block}
+.badge{display:inline-block;font-size:11.2px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.badge-beach{background:#DBEAFE;color:#1E40AF}
+.badge-falls{background:#D1FAE5;color:#065F46}
+.badge-resort{background:#FEF3C7;color:#92400E}
+.badge-yes{background:#D1FAE5;color:#065F46}
+.badge-no{background:#F3F4F6;color:var(--muted)}
+
+/* ── MODAL ── */
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+#modal.open{display:flex}
+.modal-box{background:var(--white);border-radius:8px;width:100%;max-width:640px;max-height:90vh;display:flex;flex-direction:column;margin:auto}
+.modal-head{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-head h3{font-size:1rem;font-weight:600;color:var(--deep)}
+.modal-close{background:none;border:none;font-size:1.4rem;color:var(--muted);cursor:pointer;line-height:1;padding:.1rem .3rem}
+.modal-body{padding:1.5rem;overflow-y:auto}
+.modal-foot{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.5rem;flex-shrink:0}
+
+/* ── IMAGE PICKER ── */
+#imgPicker{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+#imgPicker.open{display:flex}
+#imgPicker .modal-box{max-width:760px}
+.ip-pick-btn{align-self:flex-start;margin-bottom:.15rem}
+.ip-drop{border:2px dashed var(--border);border-radius:6px;padding:1.1rem;text-align:center;font-size:14px;color:var(--muted);cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:1rem}
+.ip-drop:hover,.ip-drop.drag{border-color:var(--ocean);background:#F0F7FB}
+.ip-drop strong{color:var(--deep)}
+.ip-status{font-size:13.4px;color:var(--muted);margin-bottom:.75rem;min-height:1em}
+.ip-status.err{color:var(--danger)}
+.ip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.6rem}
+.ip-tile{position:relative;border:2px solid var(--border);border-radius:5px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:var(--sand)}
+.ip-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.ip-tile.sel{border-color:var(--ocean)}
+.ip-badge{position:absolute;top:4px;left:4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--ocean);color:#fff;font-size:12.3px;font-weight:600;display:none;align-items:center;justify-content:center}
+.ip-tile.sel .ip-badge{display:flex}
+.ip-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;font-size:10.1px;padding:2px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ip-empty{grid-column:1/-1;font-size:14.6px;color:var(--muted);padding:2rem;text-align:center}
+
+/* ── FORM ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-grid.single{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:.3rem}
+.form-group.full{grid-column:1/-1}
+label{font-size:13.4px;font-weight:500;color:#374151}
+input,select,textarea{font-family:var(--fb);font-size:14.6px;border:1px solid var(--border);border-radius:4px;padding:.5rem .75rem;width:100%;outline:none;transition:border-color .2s;background:var(--white)}
+input:focus,select:focus,textarea:focus{border-color:var(--ocean)}
+textarea{resize:vertical;min-height:80px}
+.hint{font-size:12.3px;color:var(--muted)}
+.form-check{display:flex;align-items:center;gap:.5rem}
+.form-check input{width:auto}
+.img-preview{width:80px;height:60px;object-fit:cover;border-radius:3px;border:1px solid var(--border);margin-top:.5rem;display:none}
+.tag-list{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.tag-item{font-size:12.3px;background:var(--sand);padding:2px 8px;border-radius:3px;display:flex;align-items:center;gap:.3rem}
+.tag-item button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:13.4px;line-height:1;padding:0}
+
+/* ── IMPORT / EXPORT SECTION ── */
+.io-strip{background:var(--deep);border-radius:6px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.io-strip p{font-size:14px;color:rgba(255,255,255,.7)}
+.io-strip strong{color:var(--white)}
+.io-strip-actions{display:flex;gap:.5rem}
+
+/* ── STATS PAGE ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.25rem}
+.stat-card-num{font-family:var(--fd);font-size:2rem;color:var(--deep);margin-bottom:.2rem}
+.stat-card-label{font-size:12.3px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stat-card-input{margin-top:.75rem}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="authScreen">
+  <div class="auth-box" style="text-align:center">
+    <img src="assets/logos/CalatravaTourismLogo.png" alt="Experience Calatrava — Tourism Logo" style="width:110px;height:auto;margin:0 auto 1.25rem;display:block" onerror="this.style.display='none'">
+    <h1>Admin Portal</h1>
+    <p>Calatrava Tourism Council<br>Municipality of Calatrava<br>Province of Romblon</p>
+    <input type="password" id="pwInput" placeholder="Admin password or GitHub token" autocomplete="current-password">
+    <button onclick="doLogin()">Sign In</button>
+    <p class="auth-error" id="authErr">Incorrect password. Try again.</p>
+    <p style="font-size:12.3px;color:rgba(255,255,255,.45);margin-top:1rem;line-height:1.6">On GitHub Pages hosting: paste a fine-grained GitHub token (Contents read &amp; write) the first time — it's remembered on this device, then the admin password works as usual.</p>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,0.1);display:flex;justify-content:center;">
+      <img src="https://hits.sh/rjfabella.github.io/calatrava-tourism-portal.svg?label=Site%20Visits&color=1A5C7A" alt="Site Visits">
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- APP -->
+<div id="app">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      <div>
+        <span>Calatrava Admin</span>
+        <small>Content Management</small>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-primary" onclick="exportAll()" title="Download every JSON file at once">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export All
+      </button>
+      <a href="index.html" target="_blank" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Site
+      </a>
+      <button class="btn btn-ghost" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">Content</div>
+      <div class="nav-item active" onclick="showPage('destinations')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        Destinations
+        <span class="nav-badge" id="badge-destinations">13</span>
+      </div>
+      <div class="nav-item" onclick="showPage('activities')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Activities
+        <span class="nav-badge" id="badge-activities">3</span>
+      </div>
+      <div class="nav-item" onclick="showPage('accommodation')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Accommodation
+        <span class="nav-badge" id="badge-accommodation">3</span>
+      </div>
+      <div class="nav-item" onclick="showPage('establishments')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M9 21v-6h6v6"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/></svg>
+        Local Life
+        <span class="nav-badge" id="badge-establishments">0</span>
+      </div>
+      <div class="nav-item" onclick="showPage('videos')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        Videos
+        <span class="nav-badge" id="badge-videos">0</span>
+      </div>
+      <div class="nav-item" onclick="showPage('getting-here')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2C4.3 5.1 3.9 5.4 3.7 5.9L2.3 7.3c-.4.4-.2 1 .3 1.3L10 12l-2 3H5l-1 1 3 2 2 3 1-1v-3l3-2 3.5 7.3c.3.5.9.7 1.3.3l1.4-1.4c.5-.3.8-.7.6-1.2z"/></svg>
+        Getting Here
+      </div>
+      <div class="nav-item" onclick="showPage('about')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        About & Stats
+      </div>
+      <div class="nav-item" onclick="showPage('contact')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Contact Info
+      </div>
+      <div class="nav-item" onclick="showPage('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Site Settings
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- ══ DESTINATIONS ══ -->
+      <div class="page active" id="page-destinations">
+        <div class="page-header">
+          <div>
+            <h2>Destinations</h2>
+            <p>Manage all destinations across Calatrava's barangays.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('destinations')">↑ Import JSON</button>
+            <button class="btn btn-outline btn-sm" onclick="exportJSON('destinations')">↓ Export JSON</button>
+            <button class="btn btn-primary" onclick="openDestModal(null)">+ Add Destination</button>
+          </div>
+        </div>
+        <div class="io-strip">
+          <p><strong>How it works:</strong> On GitHub Pages, Save commits to the repo and is live in about a minute (sign in with a GitHub token once). Without a token, edits stay as browser drafts — Export JSON and replace <code>data/destinations.json</code> to publish.</p>
+          <div class="io-strip-actions">
+            <button class="btn btn-success btn-sm" onclick="exportJSON('destinations')">↓ Download destinations.json</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>All Destinations</h3>
+            <div style="display:flex;gap:.5rem;align-items:center">
+              <select id="destFilter" onchange="renderDestTable()" style="width:auto;padding:.3rem .65rem;font-size:13.4px">
+                <option value="all">All categories</option>
+                <option value="beach">Beach / Island</option>
+                <option value="falls">Waterfalls</option>
+              </select>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table" id="destTable">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Barangay</th>
+                  <th>Fee</th>
+                  <th>Pin</th>
+                  <th>Featured</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="destBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ ACTIVITIES ══ -->
+      <div class="page" id="page-activities">
+        <div class="page-header">
+          <div>
+            <h2>Activities</h2>
+            <p>The three experience cards shown on the homepage.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('activities')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('activities')">↓ Download activities.json</button>
+            <button class="btn btn-primary" onclick="openActivityModal(null)">+ Add Activity</button>
+          </div>
+        </div>
+        <div id="activitiesList"></div>
+      </div>
+
+      <!-- ══ ACCOMMODATION ══ -->
+      <div class="page" id="page-accommodation">
+        <div class="page-header">
+          <div>
+            <h2>Accommodation</h2>
+            <p>Featured resorts and stays shown on the homepage.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('accommodation')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('accommodation')">↓ Download accommodation.json</button>
+            <button class="btn btn-primary" onclick="openAccomModal(null)">+ Add Resort</button>
+          </div>
+        </div>
+        <div id="accommodationList"></div>
+      </div>
+
+      <!-- ══ ESTABLISHMENTS (LOCAL LIFE GUIDE) ══ -->
+      <div class="page" id="page-establishments">
+        <div class="page-header">
+          <div>
+            <h2>Local Life Guide</h2>
+            <p>Establishments shown on the Local Life Guide page — dining, cafés, shops, and everyday services.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('establishments')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('establishments')">↓ Download establishments.json</button>
+            <button class="btn btn-primary" onclick="openEstabModal(null)">+ Add Establishment</button>
+          </div>
+        </div>
+        <div class="io-strip">
+          <p><strong>Photos:</strong> upload images to <code>assets/establishments/</code> and reference them by path (e.g. <code>assets/establishments/lolas-carinderia.jpg</code>). Establishments without a photo show a category icon automatically.</p>
+          <div class="io-strip-actions">
+            <button class="btn btn-success btn-sm" onclick="exportJSON('establishments')">↓ Download establishments.json</button>
+          </div>
+        </div>
+        <div id="establishmentsList"></div>
+      </div>
+
+      <!-- ══ VIDEOS ══ -->
+      <div class="page" id="page-videos">
+        <div class="page-header">
+          <div>
+            <h2>Videos</h2>
+            <p>YouTube videos shown in the "Calatrava in motion" section on the homepage.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('videos')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('videos')">↓ Download videos.json</button>
+            <button class="btn btn-primary" onclick="openVideoModal(null)">+ Add Video</button>
+          </div>
+        </div>
+        <div id="videosList"></div>
+      </div>
+
+      <!-- ══ GETTING HERE ══ -->
+      <div class="page" id="page-getting-here">
+        <div class="page-header">
+          <div>
+            <h2>Getting Here</h2>
+            <p>Transport routes, info boxes, and travel tips for the Getting Here page.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('getting-here')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('getting-here')">↓ Download getting-here.json</button>
+          </div>
+        </div>
+        <div id="gettingHereContent"></div>
+      </div>
+
+      <!-- ══ ABOUT ══ -->
+      <div class="page" id="page-about">
+        <div class="page-header">
+          <div>
+            <h2>About & Stats</h2>
+            <p>Homepage hero text, intro paragraph, and stat numbers.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('about')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('about')">↓ Download about.json</button>
+          </div>
+        </div>
+        <div id="aboutContent"></div>
+      </div>
+
+      <!-- ══ CONTACT ══ -->
+      <div class="page" id="page-contact">
+        <div class="page-header">
+          <div>
+            <h2>Contact Info</h2>
+            <p>Phone numbers, social links, and the environmental fee notice.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('contact')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('contact')">↓ Download contact.json</button>
+          </div>
+        </div>
+        <div id="contactContent"></div>
+      </div>
+
+      <!-- ══ SITE SETTINGS ══ -->
+      <div class="page" id="page-settings">
+        <div class="page-header">
+          <div>
+            <h2>Site Settings</h2>
+            <p>Visitor experience options for the public site.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('settings')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('settings')">↓ Download settings.json</button>
+          </div>
+        </div>
+        <div id="settingsContent"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle">Edit</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="modalSaveBtn" onclick="saveModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE PICKER / UPLOADER -->
+<div id="imgPicker">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="ipTitle">Photos</h3>
+      <button class="modal-close" onclick="closeImgPicker()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="file" id="ipFileInput" accept="image/*" multiple style="display:none" onchange="ipUpload(this.files); this.value=''">
+      <div class="ip-drop" id="ipDrop" onclick="document.getElementById('ipFileInput').click()">
+        <strong>Click to upload</strong> or drag &amp; drop photos here — saved to <code id="ipFolder"></code>
+      </div>
+      <div class="ip-status" id="ipStatus"></div>
+      <div class="ip-grid" id="ipGrid"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeImgPicker()">Cancel</button>
+      <button class="btn btn-primary" id="ipDone" onclick="ipApply()">Use selected</button>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN FILE INPUT -->
+<input type="file" id="importFileInput" accept=".json" style="display:none" onchange="handleImportFile(event)">
+
+<script>
+// ══ STATE ══
+// Fallback password for static hosting / offline. On GitHub Pages the real
+// credential is the GitHub token — this password only unlocks a token already
+// saved on the device.
+const FALLBACK_PW = 'calatrava2026';
+// GitHub publishing (GitHub Pages hosting): commits straight to the repo,
+// which is what the site serves. Needs a fine-grained PAT with Contents
+// read & write on this repo, pasted once into the login box. The portal and
+// the LGU site now share one repo; this editor only writes the portal's own
+// data/ and assets/, which are still at the repo root.
+const GH_REPO   = 'rjfabella/calatrava-lgu';
+const GH_BRANCH = 'main';
+let data = {};
+let draftSections = new Set();
+let adminPw = null;          // kept in memory after login
+let ghToken = null;          // GitHub token for direct-commit publishing
+// 'github' = direct commits via GitHub API; 'static' = browser drafts +
+// export only.
+let publishMode = 'static';
+let currentModalType = null;
+let currentModalIdx = null;
+let importTarget = null;
+
+// ══ AUTH ══
+const looksLikeGhToken = s => /^(github_pat_|ghp_)/.test(s);
+
+async function validateGhToken(token) {
+  try {
+    const res = await fetch('https://api.github.com/repos/' + GH_REPO, {
+      headers: { authorization: 'Bearer ' + token, accept: 'application/vnd.github+json' }
+    });
+    if (!res.ok) return false;
+    const repo = await res.json();
+    return !!repo.permissions?.push;
+  } catch (e) { return false; }
+}
+
+async function doLogin() {
+  const pw = document.getElementById('pwInput').value;
+  let ok = false;
+  // A pasted GitHub token is the real credential; the fallback password
+  // unlocks a token previously saved on this device.
+  if (looksLikeGhToken(pw)) {
+    if (await validateGhToken(pw)) {
+      ok = true; ghToken = pw; publishMode = 'github';
+      try { localStorage.setItem('admin_gh_token', pw); } catch(e) {}
+    }
+  } else if (pw === FALLBACK_PW) {
+    ok = true;
+    const stored = localStorage.getItem('admin_gh_token');
+    if (stored && await validateGhToken(stored)) {
+      ghToken = stored; publishMode = 'github';
+    } else {
+      publishMode = 'static';
+      if (stored) toast('Saved GitHub token no longer works — paste a new one to publish', 'error');
+    }
+  }
+
+  if (ok) {
+    adminPw = pw;
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    document.getElementById('authErr').style.display = 'block';
+    document.getElementById('pwInput').value = '';
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+function doLogout() {
+  if (localStorage.getItem('admin_gh_token')
+      && confirm('Also forget the saved GitHub token on this device?\n\nChoose OK on shared computers. You will need to paste the token again to publish.')) {
+    localStorage.removeItem('admin_gh_token');
+  }
+  adminPw = null; ghToken = null; publishMode = 'static';
+  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+}
+
+// ══ INIT ══
+async function initApp() {
+  const files = ['destinations','activities','accommodation','establishments','contact','about','getting-here','videos','settings'];
+  const isArrayFile = f => ['destinations','activities','accommodation','establishments','videos'].includes(f);
+  const failed = [];
+  draftSections = new Set();
+
+  for (const f of files) {
+    let disk = null;
+    // GitHub mode reads through the API: the GitHub Pages CDN caches
+    // data/*.json for up to ~10 minutes, so a just-published edit could
+    // otherwise reload stale and get overwritten on the next save.
+    if (publishMode === 'github') disk = await ghReadFile(f);
+    if (disk === null) {
+      try {
+        const res = await fetch('data/' + f + '.json', {cache: 'no-store'});
+        if (res.ok) disk = await res.json();
+      } catch(e) { /* fetch unavailable (e.g. file:// protocol) */ }
+    }
+
+    let local = null;
+    try {
+      const stored = localStorage.getItem('admin_' + f);
+      if (stored) local = JSON.parse(stored);
+    } catch(e) { /* corrupt localStorage entry */ }
+
+    if (disk !== null) {
+      // Unpublished local edits win over disk so saves survive a reload;
+      // drafts identical to disk are ignored so freshly-pulled content shows.
+      if (local !== null && JSON.stringify(local) !== JSON.stringify(disk)) {
+        data[f] = local;
+        draftSections.add(f);
+      } else {
+        data[f] = disk;
+      }
+    }
+    else if (local !== null) data[f] = local;
+    else { data[f] = isArrayFile(f) ? [] : {}; failed.push(f); }
+  }
+
+  if (failed.length) showLoadError(failed);
+  refreshDraftBanner();
+  renderAll();
+}
+
+function refreshDraftBanner() {
+  let banner = document.getElementById('draftBanner');
+  if (!draftSections.size) { banner?.remove(); return; }
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'draftBanner';
+    banner.style.cssText = 'background:#EFF6FF;border-bottom:1px solid #BFDBFE;color:#1E40AF;padding:.75rem 1.25rem;font-size:14.6px;line-height:1.5;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap';
+    document.querySelector('.topbar')?.after(banner);
+  }
+  banner.innerHTML = `<span><strong>Unpublished drafts</strong> (saved in this browser only): ${[...draftSections].join(', ')}.</span>
+    ${publishMode !== 'static' ? `<button class="btn btn-success btn-sm" onclick="publishAllDrafts()">⤴ Publish drafts to site</button>` : ''}
+    <button class="btn btn-primary btn-sm" onclick="exportAll()">${publishMode !== 'static' ? '↓ Export All (backup)' : '↓ Export All to publish'}</button>
+    <button class="btn btn-outline btn-sm" onclick="discardDrafts()">Discard drafts</button>`;
+}
+
+async function publishAllDrafts() {
+  for (const k of [...draftSections]) await publish(k);
+}
+
+function discardDrafts() {
+  if (!confirm('Discard all local drafts and reload content from the server?')) return;
+  for (const f of draftSections) localStorage.removeItem('admin_' + f);
+  draftSections = new Set();
+  refreshDraftBanner();
+  initApp();
+  toast('Drafts discarded — reloaded from server');
+}
+
+function showLoadError(failed) {
+  const isFile = location.protocol === 'file:';
+  const msg = isFile
+    ? `Couldn't load ${failed.join(', ')}.json — browsers block fetch() on file:// URLs. Serve this folder over HTTP (e.g. <code>python -m http.server</code> or <code>npx serve</code>) and open via http://localhost.`
+    : `Couldn't load ${failed.join(', ')}.json from the server. Check that the files exist under <code>data/</code>.`;
+  const banner = document.createElement('div');
+  banner.style.cssText = 'background:#FEF3C7;border-bottom:1px solid #FCD34D;color:#92400E;padding:.75rem 1.25rem;font-size:14.6px;line-height:1.5';
+  banner.innerHTML = `<strong>Data not loaded.</strong> ${msg}`;
+  document.querySelector('.topbar')?.after(banner);
+}
+
+function renderAll() {
+  renderDestTable();
+  renderActivities();
+  renderAccommodation();
+  renderEstablishments();
+  renderVideos();
+  renderGettingHere();
+  renderAbout();
+  renderContact();
+  renderSettings();
+  updateBadges();
+}
+
+function updateBadges() {
+  const d = data.destinations || [];
+  const a = data.activities || [];
+  const ac = data.accommodation || [];
+  document.getElementById('badge-destinations').textContent = d.length;
+  document.getElementById('badge-activities').textContent = a.length;
+  document.getElementById('badge-accommodation').textContent = ac.length;
+  document.getElementById('badge-establishments').textContent = (data.establishments || []).length;
+  document.getElementById('badge-videos').textContent = (data.videos || []).length;
+}
+
+// ══ NAVIGATION ══
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id)?.classList.add('active');
+  document.querySelector(`.nav-item[onclick*="'${id}'"]`)?.classList.add('active');
+}
+
+// ══ TOAST ══
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  setTimeout(() => t.className = '', 2500);
+}
+
+// ══ GITHUB CONTENTS API (publishMode 'github') ══
+const ghApi = f => `https://api.github.com/repos/${GH_REPO}/contents/data/${f}.json`;
+const ghHeaders = () => ({ authorization: 'Bearer ' + ghToken, accept: 'application/vnd.github+json' });
+
+// UTF-8-safe base64 (atob/btoa alone mangle ₱, —, etc.)
+function b64DecodeUtf8(b64) {
+  const bin = atob(b64.replace(/\n/g, ''));
+  const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+function b64EncodeUtf8(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  bytes.forEach(b => bin += String.fromCharCode(b));
+  return btoa(bin);
+}
+
+async function ghReadFile(f) {
+  try {
+    const res = await fetch(ghApi(f) + '?ref=' + GH_BRANCH, { headers: ghHeaders() });
+    if (!res.ok) return null;
+    const j = await res.json();
+    return JSON.parse(b64DecodeUtf8(j.content));
+  } catch (e) { return null; }
+}
+
+async function ghPublish(key) {
+  // Fetch the current sha right before writing so concurrent edits from
+  // another device fail loudly (409) instead of being silently overwritten.
+  let sha;
+  const cur = await fetch(ghApi(key) + '?ref=' + GH_BRANCH, { headers: ghHeaders() });
+  if (cur.ok) sha = (await cur.json()).sha;
+  else if (cur.status !== 404) throw new Error('read failed (' + cur.status + ')');
+
+  const res = await fetch(ghApi(key), {
+    method: 'PUT',
+    headers: { ...ghHeaders(), 'content-type': 'application/json' },
+    body: JSON.stringify({
+      message: `Admin publish: update data/${key}.json`,
+      content: b64EncodeUtf8(JSON.stringify(data[key], null, 2) + '\n'),
+      sha, branch: GH_BRANCH
+    })
+  });
+  if (res.status === 401 || res.status === 403) throw new Error('token rejected');
+  if (res.status === 409) throw new Error('edit conflict — reload and try again');
+  if (!res.ok) throw new Error('write failed (' + res.status + ')');
+}
+
+// ══ PERSIST ══
+// Always keep a localStorage draft (offline safety net), then try to publish
+// to the repo via GitHub commits. On success the draft is cleared — the repo
+// is the source of truth.
+function persist(key) {
+  localStorage.setItem('admin_' + key, JSON.stringify(data[key]));
+  draftSections.add(key);
+  refreshDraftBanner();
+  publish(key);
+}
+
+async function publish(key) {
+  if (publishMode === 'github') {
+    try {
+      await ghPublish(key);
+      localStorage.removeItem('admin_' + key);
+      draftSections.delete(key);
+      refreshDraftBanner();
+      toast(key + ' published — live on the site in about a minute');
+    } catch(e) {
+      toast('Publish failed (' + e.message + ') — kept as local draft', 'error');
+    }
+    return;
+  }
+  // static-only mode: drafts + export, nothing to publish to
+}
+
+// ══ IMAGE PICKER / UPLOADER (publishMode 'github' only) ══
+// Browse, select, and upload photos straight into an assets/ folder via the
+// GitHub Contents API — no hand-typing of paths. Chosen paths are written back
+// into the edit form's image field; the user still hits Save to publish.
+let ipState = { folder:'', field:'', multi:true, selected:[], extra:[] };
+
+async function openImgPicker(folder, field, multi) {
+  if (publishMode !== 'github') { toast('Sign in with a GitHub token to browse & upload photos', 'error'); return; }
+  ipState = { folder, field, multi, selected:[], extra:[] };
+
+  // Pre-select whatever the field already holds; keep any out-of-folder lines aside.
+  const el = document.getElementById(field);
+  const existing = (el.value || '').split('\n').map(s => s.trim().replace(/^\/+/, '')).filter(Boolean);
+  existing.forEach(p => { (p.startsWith(folder + '/') ? ipState.selected : ipState.extra).push(p); });
+  if (!multi) ipState.selected = ipState.selected.slice(0, 1);
+
+  document.getElementById('ipTitle').textContent = multi ? 'Photos — select or upload' : 'Photo — select or upload';
+  document.getElementById('ipFolder').textContent = folder + '/';
+  document.getElementById('ipDone').textContent = multi ? 'Use selected' : 'Use photo';
+  document.getElementById('imgPicker').classList.add('open');
+  document.getElementById('ipGrid').innerHTML = '';
+  ipSetStatus('Loading photos…');
+  try {
+    const files = await ghListFolder(folder);
+    ipRender(files);
+    ipSetStatus(files.length ? `${files.length} photo${files.length !== 1 ? 's' : ''} in this folder` : '');
+  } catch (e) {
+    ipSetStatus('Could not load folder (' + e.message + ')', true);
+  }
+}
+
+function closeImgPicker() { document.getElementById('imgPicker').classList.remove('open'); }
+
+function ipSetStatus(msg, isErr) {
+  const s = document.getElementById('ipStatus');
+  s.textContent = msg || '';
+  s.classList.toggle('err', !!isErr);
+}
+
+async function ghListFolder(folder) {
+  const url = `https://api.github.com/repos/${GH_REPO}/contents/${folder}?ref=${GH_BRANCH}&t=${Date.now()}`;
+  const res = await fetch(url, { headers: ghHeaders(), cache: 'no-store' });
+  if (res.status === 404) return [];               // folder not created yet
+  if (!res.ok) throw new Error(res.status);
+  const arr = await res.json();
+  return arr
+    .filter(x => x.type === 'file' && /\.(jpe?g|png|webp|gif|svg)$/i.test(x.name))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function ipRender(files) {
+  const grid = document.getElementById('ipGrid');
+  if (!files.length && !ipState.selected.length) {
+    grid.innerHTML = '<div class="ip-empty">No photos here yet — drop some above to upload.</div>';
+    return;
+  }
+  const seen = new Set();
+  const tiles = [];
+  const add = (path, displayUrl, name) => {
+    if (seen.has(path)) return; seen.add(path);
+    const order = ipState.selected.indexOf(path);
+    const sel = order !== -1;
+    tiles.push(`<div class="ip-tile${sel ? ' sel' : ''}" data-path="${path}" onclick="ipToggle('${path}')">
+      <img src="${displayUrl}" alt="" loading="lazy" onerror="this.style.opacity=.25">
+      <span class="ip-badge">${ipState.multi ? (sel ? order + 1 : '') : '✓'}</span>
+      <span class="ip-name">${name}</span>
+    </div>`);
+  };
+  files.forEach(f => add(f.path, f.download_url || f.path, f.name));
+  // Pre-selected items missing from the listing (e.g. stale CDN) still show.
+  ipState.selected.forEach(p => add(p, p, p.split('/').pop()));
+  grid.innerHTML = tiles.join('');
+}
+
+function ipToggle(path) {
+  if (ipState.multi) {
+    const i = ipState.selected.indexOf(path);
+    if (i === -1) ipState.selected.push(path); else ipState.selected.splice(i, 1);
+  } else {
+    ipState.selected = ipState.selected[0] === path ? [] : [path];
+  }
+  document.querySelectorAll('#ipGrid .ip-tile').forEach(t => {
+    const order = ipState.selected.indexOf(t.dataset.path);
+    t.classList.toggle('sel', order !== -1);
+    t.querySelector('.ip-badge').textContent = ipState.multi ? (order !== -1 ? order + 1 : '') : '✓';
+  });
+}
+
+function ipApply() {
+  const el = document.getElementById(ipState.field);
+  if (ipState.multi) el.value = [...ipState.selected, ...ipState.extra].join('\n');
+  else el.value = ipState.selected[0] || '';
+  closeImgPicker();
+}
+
+// Upload dropped/selected files into the folder, then re-list and auto-select.
+async function ipUpload(fileList) {
+  const files = [...(fileList || [])].filter(f => /^image\//.test(f.type));
+  if (!files.length) return;
+  const taken = new Set([...document.querySelectorAll('#ipGrid .ip-tile')].map(t => t.dataset.path.split('/').pop().toLowerCase()));
+  let done = 0;
+  for (const file of files) {
+    const name = ipUniqueName(file.name, taken);
+    taken.add(name.toLowerCase());
+    const path = ipState.folder + '/' + name;
+    ipSetStatus(`Uploading ${name} (${++done}/${files.length})…`);
+    try {
+      const b64 = await fileToBase64(file);
+      await ghUploadFile(path, b64);
+      if (ipState.multi) { if (!ipState.selected.includes(path)) ipState.selected.push(path); }
+      else ipState.selected = [path];
+    } catch (e) {
+      ipSetStatus(`Upload of ${name} failed (${e.message})`, true);
+      return;
+    }
+  }
+  ipSetStatus('Refreshing…');
+  try {
+    ipRender(await ghListFolder(ipState.folder));
+    ipSetStatus(`Uploaded ${files.length} photo${files.length !== 1 ? 's' : ''} — now selected`);
+  } catch (e) {
+    ipRender([]);            // selected ones still show via fallback
+    ipSetStatus('Uploaded, but listing refresh failed — selections kept', true);
+  }
+}
+
+function ipUniqueName(raw, taken) {
+  let s = (raw || 'photo').trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9._-]/g, '');
+  if (!/\.[a-z0-9]{2,5}$/.test(s)) s += '.jpg';
+  if (!taken.has(s)) return s;
+  const dot = s.lastIndexOf('.'), stem = s.slice(0, dot), ext = s.slice(dot);
+  let n = 2; while (taken.has(`${stem}-${n}${ext}`)) n++;
+  return `${stem}-${n}${ext}`;
+}
+
+function fileToBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1]);
+    r.onerror = () => rej(new Error('read error'));
+    r.readAsDataURL(file);
+  });
+}
+
+async function ghUploadFile(path, contentB64) {
+  let sha;
+  const cur = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, { headers: ghHeaders() });
+  if (cur.ok) sha = (await cur.json()).sha;        // overwrite if it already exists
+  else if (cur.status !== 404) throw new Error('check ' + cur.status);
+  const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { ...ghHeaders(), 'content-type': 'application/json' },
+    body: JSON.stringify({ message: `Admin upload: ${path}`, content: contentB64, sha, branch: GH_BRANCH })
+  });
+  if (res.status === 401 || res.status === 403) throw new Error('token rejected');
+  if (!res.ok) throw new Error(res.status);
+}
+
+// Drag & drop onto the picker's drop zone.
+(function () {
+  const drop = document.getElementById('ipDrop');
+  if (!drop) return;
+  ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('drag'); }));
+  drop.addEventListener('drop', e => ipUpload(e.dataTransfer.files));
+})();
+
+// ══ OPEN LOCATION CODE (Plus Codes) ══
+// Minimal decoder so staff can paste a Plus Code from Google Maps instead of
+// raw coordinates. Short codes (e.g. "J3XF+5C") are recovered against the
+// Calatrava poblacion reference point.
+const OLC_ALPHABET = '23456789CFGHJMPQRVWX';
+const OLC_REF = { lat: 12.61, lng: 122.07 };
+
+function olcEncode(lat, lng) {
+  let la = Math.min(89.999999, Math.max(-90, lat)) + 90;
+  let lo = lng - Math.floor((lng + 180) / 360) * 360 + 180;
+  let code = '', prec = 20;
+  for (let i = 0; i < 5; i++) {
+    const a = Math.min(19, Math.floor(la / prec));
+    const b = Math.min(19, Math.floor(lo / prec));
+    code += OLC_ALPHABET[a] + OLC_ALPHABET[b];
+    la -= a * prec; lo -= b * prec;
+    prec /= 20;
+    if (code.length === 8) code += '+';
+  }
+  return code;
+}
+
+function olcDecode(code) {
+  const clean = code.toUpperCase().replace(/\+/g, '');
+  if (clean.length < 8 || /[^23456789CFGHJMPQRVWX]/.test(clean)) return null;
+  let lat = -90, lng = -180, prec = 20;
+  const digits = clean.slice(0, 10);
+  for (let i = 0; i + 1 < digits.length; i += 2) {
+    lat += OLC_ALPHABET.indexOf(digits[i]) * prec;
+    lng += OLC_ALPHABET.indexOf(digits[i + 1]) * prec;
+    prec /= 20;
+  }
+  return { lat: lat + prec * 10, lng: lng + prec * 10 };
+}
+
+// Accepts "7Q63J3XF+5C", "J3XF+5C", or "J3XF+5C Calatrava". Returns {lat,lng} or null.
+function olcToLatLng(input) {
+  let code = (input || '').trim().toUpperCase().split(/\s+/)[0];
+  const plusIdx = code.indexOf('+');
+  if (plusIdx === -1) return null;
+  if (plusIdx < 8) {
+    const missing = 8 - plusIdx;
+    if (missing % 2 !== 0) return null;
+    code = olcEncode(OLC_REF.lat, OLC_REF.lng).slice(0, missing) + code;
+    const pt = olcDecode(code);
+    if (!pt) return null;
+    // Snap to the grid repetition nearest the reference point.
+    const res = Math.pow(20, 2 - missing / 2);
+    if (OLC_REF.lat + res / 2 < pt.lat && pt.lat - res >= -90) pt.lat -= res;
+    else if (OLC_REF.lat - res / 2 > pt.lat && pt.lat + res <= 90) pt.lat += res;
+    if (OLC_REF.lng + res / 2 < pt.lng) pt.lng -= res;
+    else if (OLC_REF.lng - res / 2 > pt.lng) pt.lng += res;
+    return pt;
+  }
+  return olcDecode(code);
+}
+
+// Normalize an asset path typed/pasted by staff: Windows backslashes become
+// forward slashes and a missing file extension gets .jpg appended (every
+// site photo is a .jpg). Prevents broken images from Explorer copy-paste.
+function fixAssetPath(s) {
+  s = (s || '').trim().replace(/\\/g, '/');
+  if (s && !/\.[a-z0-9]{2,5}$/i.test(s)) s += '.jpg';
+  return s;
+}
+function parseImageLines(raw) {
+  return raw.split('\n').map(fixAssetPath).filter(Boolean);
+}
+
+// Reads the modal's plus-code + lat/lng inputs; returns {lat,lng} or null, or
+// the string 'invalid' when a plus code was given but could not be decoded.
+function resolveCoords(g) {
+  const plus = g('f_pluscode');
+  if (plus) {
+    const pt = olcToLatLng(plus);
+    if (!pt) return 'invalid';
+    return { lat: +pt.lat.toFixed(6), lng: +pt.lng.toFixed(6) };
+  }
+  return { lat: parseFloat(g('f_lat')) || null, lng: parseFloat(g('f_lng')) || null };
+}
+
+// ══════════════════════════════════
+// DESTINATIONS
+// ══════════════════════════════════
+function renderDestTable() {
+  const filter = document.getElementById('destFilter')?.value || 'all';
+  const items = (data.destinations || []).filter(d => filter === 'all' || d.category === filter);
+  const tbody = document.getElementById('destBody');
+  if (!tbody) return;
+  tbody.innerHTML = items.map((d, i) => {
+    const realIdx = data.destinations.indexOf(d);
+    const img = d.images && d.images[0]
+      ? `<img class="td-img" src="${fixAssetPath(d.images[0])}" alt="${d.name}" onerror="this.style.display='none'">`
+      : `<span class="td-img-ph"></span>`;
+    return `<tr>
+      <td>${img}</td>
+      <td><strong>${d.name}</strong></td>
+      <td><span class="badge badge-${d.badge}">${d.category}</span></td>
+      <td>${d.barangay}</td>
+      <td style="font-size:13.4px">${d.fee}</td>
+      <td><span class="badge ${d.lat && d.lng ? 'badge-yes' : 'badge-no'}" title="${d.lat && d.lng ? `${d.lat}, ${d.lng}` : 'No coordinates set'}">${d.lat && d.lng ? '📍 Set' : '—'}</span></td>
+      <td><span class="badge ${d.featured ? 'badge-yes' : 'badge-no'}">${d.featured ? 'Yes' : 'No'}</span></td>
+      <td>
+        <button class="btn btn-outline btn-sm" onclick="openDestModal(${realIdx})">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteDest(${realIdx})" style="margin-left:.3rem">Delete</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function deleteDest(idx) {
+  if (!confirm(`Delete "${data.destinations[idx].name}"?`)) return;
+  data.destinations.splice(idx, 1);
+  persist('destinations');
+  renderDestTable();
+  updateBadges();
+  toast('Destination deleted');
+}
+
+function openDestModal(idx) {
+  currentModalType = 'destination';
+  currentModalIdx = idx;
+  const d = idx !== null ? data.destinations[idx] : {id:'',name:'',type:'',category:'beach',barangay:'',description:'',fee:'',feeNote:'',badge:'beach',featured:false,featuredOrder:null,images:[],thumbnail:null,lat:'',lng:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Destination' : 'Add Destination';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid">
+      <div class="form-group"><label>Name *</label><input id="f_name" value="${d.name}"></div>
+      <div class="form-group"><label>ID / Slug *</label><input id="f_id" value="${d.id}" placeholder="tinagong-dagat"></div>
+      <div class="form-group"><label>Type / Subtitle</label><input id="f_type" value="${d.type}" placeholder="Saltwater Lake — Hidden Sea"></div>
+      <div class="form-group"><label>Tagline (card hook)</label><input id="f_tagline" value="${d.tagline||''}" placeholder="The Lake That Breathes with the Sea"></div>
+      <div class="form-group"><label>Category</label>
+        <select id="f_category">
+          <option value="beach" ${d.category==='beach'?'selected':''}>Beach / Island</option>
+          <option value="falls" ${d.category==='falls'?'selected':''}>Waterfall</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Badge style</label>
+        <select id="f_badge">
+          <option value="beach" ${d.badge==='beach'?'selected':''}>beach (blue)</option>
+          <option value="falls" ${d.badge==='falls'?'selected':''}>falls (green)</option>
+          <option value="resort" ${d.badge==='resort'?'selected':''}>resort (amber)</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Barangay</label><input id="f_barangay" value="${d.barangay}"></div>
+      <div class="form-group full"><label>Description</label><textarea id="f_desc">${d.description}</textarea></div>
+      <div class="form-group full"><label>Insider tip (optional)</label><input id="f_tip" value="${d.insiderTip||''}" placeholder="Ask a local guide to show you the hidden entry point during high tide.">
+        <span class="hint">Shown as an italic "Insider tip" line on the destination card</span>
+      </div>
+      <div class="form-group"><label>Entrance Fee</label><input id="f_fee" value="${d.fee}" placeholder="₱25 entrance fee"></div>
+      <div class="form-group"><label>Fee Note</label><input id="f_feeNote" value="${d.feeNote||''}" placeholder="Boat via Tourism Council"></div>
+      <div class="form-group"><label>Latitude</label><input id="f_lat" value="${d.lat||''}" placeholder="12.595"></div>
+      <div class="form-group"><label>Longitude</label><input id="f_lng" value="${d.lng||''}" placeholder="122.205"></div>
+      <div class="form-group full"><label>Plus Code (optional)</label>
+        <input id="f_pluscode" placeholder="7Q63J3XF+5C or J3XF+5C">
+        <span class="hint">Open Location Code from Google Maps. When filled, it overrides the latitude/longitude above on save. Short codes are resolved near Calatrava.</span>
+      </div>
+      <div class="form-group full"><label>Images (one URL per line)</label>
+        ${publishMode === 'github' ? `<button type="button" class="btn btn-outline btn-sm ip-pick-btn" onclick="openImgPicker('assets/destinations','f_images',true)">🖼 Browse / upload photos</button>` : ''}
+        <textarea id="f_images" style="min-height:70px">${(d.images||[]).join('\n')}</textarea>
+        <span class="hint">One per line, forward slashes, with extension — e.g. <code>assets/accommodations/photo_main.jpg</code>. Backslashes and missing .jpg are fixed automatically</span>
+      </div>
+      <div class="form-group"><label>Thumbnail path</label><input id="f_thumb" value="${d.thumbnail||''}" placeholder="assets/thumbnails/..."></div>
+      <div class="form-group">
+        <label>Featured on homepage?</label>
+        <div class="form-check" style="margin-top:.4rem">
+          <input type="checkbox" id="f_featured" ${d.featured?'checked':''}>
+          <label for="f_featured" style="font-weight:400">Show as featured destination</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Featured order (1–3)</label><input id="f_featuredOrder" type="number" min="1" max="3" value="${d.featuredOrder||''}"></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// ACTIVITIES
+// ══════════════════════════════════
+function renderActivities() {
+  const items = data.activities || [];
+  document.getElementById('activitiesList').innerHTML = items.map((a, i) => `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <h3>${a.number}. ${a.title}</h3>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn-outline btn-sm" onclick="openActivityModal(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteActivity(${i})">Delete</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <p style="font-size:14.6px;color:var(--muted);margin-bottom:.5rem">${a.description}</p>
+        <p style="font-size:13.4px;color:var(--gold);font-weight:500">${a.rate}</p>
+      </div>
+    </div>`).join('');
+}
+
+function deleteActivity(i) {
+  if (!confirm(`Delete "${data.activities[i].title}"?`)) return;
+  data.activities.splice(i, 1);
+  persist('activities');
+  renderActivities();
+  updateBadges();
+  toast('Activity deleted');
+}
+
+function openActivityModal(idx) {
+  currentModalType = 'activity';
+  currentModalIdx = idx;
+  const a = idx !== null ? data.activities[idx] : {id:'',number:'04',title:'',description:'',rate:'',credit:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Activity' : 'Add Activity';
+
+  // Contacts: up to 2 numbers and 3 links. Read the arrays, falling back to the
+  // legacy single contactPhone / contactUrl fields so older activities migrate.
+  const esc = s => String(s ?? '').replace(/"/g, '&quot;');
+  const phones = a.contactPhones?.length ? a.contactPhones : (a.contactPhone ? [{ number: a.contactPhone }] : []);
+  const urls = a.contactUrls?.length ? a.contactUrls : (a.contactUrl ? [{ url: a.contactUrl }] : []);
+  const phoneRows = [0, 1].map(i => {
+    const p = phones[i] || {};
+    return `<div style="display:flex;gap:.5rem;margin-bottom:.4rem">
+      <input id="f_phoneLabel${i}" value="${esc(p.label)}" placeholder="Label (optional) — e.g. Tourism Office" style="flex:1">
+      <input id="f_phone${i}" value="${esc(p.number)}" placeholder="0919 335 0314" style="flex:1">
+    </div>`;
+  }).join('');
+  const urlRows = [0, 1, 2].map(i => {
+    const u = urls[i] || {};
+    return `<div style="display:flex;gap:.5rem;margin-bottom:.4rem">
+      <input id="f_urlLabel${i}" value="${esc(u.label)}" placeholder="Label (optional) — e.g. Facebook Page" style="flex:1">
+      <input id="f_url${i}" value="${esc(u.url)}" placeholder="https://www.facebook.com/..." style="flex:1">
+    </div>`;
+  }).join('');
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Number label</label><input id="f_number" value="${a.number}" placeholder="04"></div>
+      <div class="form-group"><label>Title *</label><input id="f_title" value="${a.title}"></div>
+      <div class="form-group"><label>Tagline (display headline)</label><input id="f_tagline" value="${a.tagline||''}" placeholder="Chart Unmapped Coves">
+        <span class="hint">Shown as the big card headline; the title becomes the small label next to the number. Leave blank to show the title only.</span>
+      </div>
+      <div class="form-group"><label>Description</label><textarea id="f_desc">${a.description}</textarea></div>
+      <div class="form-group"><label>Rate / Price note</label><input id="f_rate" value="${a.rate}" placeholder="From ₱3,000 for 10 persons"></div>
+      <div class="form-group"><label>Photo credit</label><input id="f_credit" value="${a.credit || ''}" placeholder="e.g. RJ Fabella"></div>
+      <div class="form-group"><label>Contact numbers (up to 2)</label>
+        ${phoneRows}
+        <span class="hint">Each row: optional label + phone number. Leave both blank to skip.</span>
+      </div>
+      <div class="form-group"><label>Booking / contact links (up to 3)</label>
+        ${urlRows}
+        <span class="hint">Each row: optional label + URL. Leave both blank to skip.</span>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// ACCOMMODATION
+// ══════════════════════════════════
+function renderAccommodation() {
+  const items = data.accommodation || [];
+  document.getElementById('accommodationList').innerHTML = items.map((a, i) => `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <h3>${a.name} <span style="font-size:12.3px;color:var(--gold);font-weight:400;margin-left:.5rem">${a.type}</span></h3>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn-outline btn-sm" onclick="openAccomModal(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteAccom(${i})">Delete</button>
+        </div>
+      </div>
+      <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
+        ${a.images?.[0] ? `<img src="${fixAssetPath(a.images[0])}" onerror="this.style.display='none'" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
+        <div>
+          <p style="font-size:13.4px;color:var(--muted)">Brgy. ${a.barangay}</p>
+          <p style="font-size:14.6px;margin-top:.25rem">${a.description}</p>
+          <p style="font-size:12.3px;margin-top:.4rem;color:${a.lat && a.lng ? 'var(--success)' : 'var(--muted)'}">${a.lat && a.lng ? `📍 ${a.lat}, ${a.lng}` : '📍 No coordinates set'}</p>
+          ${a.phone || a.facebook ? `<p style="font-size:12.3px;margin-top:.25rem;color:var(--muted)">${a.phone ? '📞 ' + a.phone : ''}${a.phone && a.facebook ? ' · ' : ''}${a.facebook ? '🔗 ' + a.facebook : ''}</p>` : ''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function deleteAccom(i) {
+  if (!confirm(`Delete "${data.accommodation[i].name}"?`)) return;
+  data.accommodation.splice(i, 1);
+  persist('accommodation');
+  renderAccommodation();
+  updateBadges();
+  toast('Resort deleted');
+}
+
+function openAccomModal(idx) {
+  currentModalType = 'accommodation';
+  currentModalIdx = idx;
+  const a = idx !== null ? data.accommodation[idx] : {id:'',name:'',type:'Beach Resort',barangay:'',description:'',image:null,detailsUrl:'',lat:'',lng:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Resort' : 'Add Resort';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid">
+      <div class="form-group full"><label>Name *</label><input id="f_name" value="${a.name}"></div>
+      <div class="form-group"><label>Type / Subtitle</label><input id="f_type" value="${a.type}" placeholder="Beach Resort"></div>
+      <div class="form-group"><label>Barangay</label><input id="f_barangay" value="${a.barangay}"></div>
+      <div class="form-group full"><label>Short description</label><textarea id="f_desc" style="min-height:55px">${a.description}</textarea></div>
+      <div class="form-group full"><label>Starting rate / price range</label><input id="f_priceRange" value="${a.priceRange||''}" placeholder="₱25 entrance · ₱200+ cottage rental">
+        <span class="hint">Shown on the accommodation page cards — e.g. <code>From ₱1,500/night</code> or <code>Rates available on-site</code></span>
+      </div>
+      <div class="form-group"><label>Contact number</label><input id="f_phone" value="${a.phone||''}" placeholder="0919 335 0314"></div>
+      <div class="form-group"><label>Contact name / label</label><input id="f_phoneLabel" value="${a.phoneLabel||''}" placeholder="Calatrava Tourism Council"></div>
+      <div class="form-group"><label>Contact URL</label><input id="f_facebook" value="${a.facebook||''}" placeholder="https://www.facebook.com/..."></div>
+      <div class="form-group"><label>Contact URL label</label><input id="f_facebookLabel" value="${a.facebookLabel||''}" placeholder="Facebook Page"></div>
+      <div class="form-group"><label>Latitude</label><input id="f_lat" value="${a.lat||''}" placeholder="12.619"></div>
+      <div class="form-group"><label>Longitude</label><input id="f_lng" value="${a.lng||''}" placeholder="122.071"></div>
+      <div class="form-group full"><label>Plus Code (optional)</label>
+        <input id="f_pluscode" placeholder="7Q63J3XF+5C or J3XF+5C">
+        <span class="hint">Open Location Code from Google Maps. When filled, it overrides the latitude/longitude above on save. Short codes are resolved near Calatrava.</span>
+      </div>
+      <div class="form-group full"><label>Images (one path per line)</label>
+        ${publishMode === 'github' ? `<button type="button" class="btn btn-outline btn-sm ip-pick-btn" onclick="openImgPicker('assets/accommodations','f_images',true)">🖼 Browse / upload photos</button>` : ''}
+        <textarea id="f_images" style="min-height:70px">${(a.images||[]).join('\n')}</textarea>
+        <span class="hint">One per line, forward slashes, with extension — e.g. <code>assets/accommodations/photo_main.jpg</code>. Backslashes and missing .jpg are fixed automatically. First image shown as cover.</span>
+      </div>
+      <div class="form-group"><label>Details URL</label><input id="f_detailsUrl" value="${a.detailsUrl||''}" placeholder="accommodation.html#cove-aurelio"></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// ESTABLISHMENTS (LOCAL LIFE GUIDE)
+// ══════════════════════════════════
+const ESTAB_CATEGORIES = [['dining','Dining'],['cafe','Café'],['shop','Shop'],['pharmacy','Pharmacy'],['clinic','Clinic'],['gym','Gym'],['church','Church'],['events place','Events Place']];
+const estabLabel = c => (ESTAB_CATEGORIES.find(([v]) => v === c) || [c, c||''])[1];
+
+function renderEstablishments() {
+  const items = data.establishments || [];
+  const el = document.getElementById('establishmentsList');
+  if (!el) return;
+  if (!items.length) {
+    el.innerHTML = `<div class="card"><div class="card-body" style="color:var(--muted);font-size:14.6px">No establishments yet. Click <strong>+ Add Establishment</strong> to add the first dining spot, shop, or service.</div></div>`;
+    return;
+  }
+  el.innerHTML = items.map((e, i) => `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <h3>${e.name || '(unnamed)'} <span style="font-size:12.3px;color:var(--gold);font-weight:400;margin-left:.5rem">${estabLabel(e.category)}</span></h3>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn-outline btn-sm" onclick="openEstabModal(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteEstab(${i})">Delete</button>
+        </div>
+      </div>
+      <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
+        ${e.image ? `<img src="${fixAssetPath(e.image)}" onerror="this.style.display='none'" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
+        <div>
+          ${e.address ? `<p style="font-size:13.4px;color:var(--muted)">${e.address}</p>` : ''}
+          <p style="font-size:12.3px;margin-top:.4rem;color:${e.mapsUrl ? 'var(--success)' : 'var(--muted)'}">${e.mapsUrl ? '📍 Google Maps link set' : '📍 No maps link'}</p>
+          ${e.phone || e.socials ? `<p style="font-size:12.3px;margin-top:.25rem;color:var(--muted)">${e.phone ? '📞 ' + e.phone : ''}${e.phone && e.socials ? ' · ' : ''}${e.socials ? '🔗 ' + e.socials : ''}</p>` : ''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function deleteEstab(i) {
+  if (!confirm(`Delete "${data.establishments[i].name}"?`)) return;
+  data.establishments.splice(i, 1);
+  persist('establishments');
+  renderEstablishments();
+  updateBadges();
+  toast('Establishment deleted');
+}
+
+function openEstabModal(idx) {
+  currentModalType = 'establishment';
+  currentModalIdx = idx;
+  const e = idx !== null ? data.establishments[idx] : {id:'',name:'',category:'dining',address:'',phone:'',socials:'',mapsUrl:'',image:''};
+  const opts = ESTAB_CATEGORIES.map(([v,l]) => `<option value="${v}" ${e.category===v?'selected':''}>${l}</option>`).join('');
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Establishment' : 'Add Establishment';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid">
+      <div class="form-group full"><label>Name *</label><input id="f_name" value="${e.name||''}"></div>
+      <div class="form-group"><label>Category *</label><select id="f_category">${opts}</select></div>
+      <div class="form-group"><label>Contact number</label><input id="f_phone" value="${e.phone||''}" placeholder="0919 335 0314"></div>
+      <div class="form-group full"><label>Address</label><input id="f_address" value="${e.address||''}" placeholder="Rizal St, Poblacion, Calatrava"></div>
+      <div class="form-group full"><label>Socials URL</label><input id="f_socials" value="${e.socials||''}" placeholder="https://www.facebook.com/...">
+        <span class="hint">Facebook page, Instagram, or website. Powers the “Socials” button on the card.</span>
+      </div>
+      <div class="form-group full"><label>Google Maps link</label><input id="f_mapsUrl" value="${e.mapsUrl||''}" placeholder="https://maps.app.goo.gl/...">
+        <span class="hint">Paste the place's Google Maps share link. Powers the “Directions” button (falls back to an address search if blank).</span>
+      </div>
+      <div class="form-group full"><label>Image reference</label>
+        ${publishMode === 'github' ? `<button type="button" class="btn btn-outline btn-sm ip-pick-btn" onclick="openImgPicker('assets/establishments','f_image',false)">🖼 Browse / upload photo</button>` : ''}
+        <input id="f_image" value="${e.image||''}" placeholder="assets/establishments/photo.jpg">
+        <span class="hint">Single image path under <code>assets/establishments/</code>. Forward slashes, with extension; backslashes and a missing .jpg are fixed automatically. Leave blank to show a category icon.</span>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// VIDEOS
+// ══════════════════════════════════
+// Accepts a full YouTube URL (watch, youtu.be, shorts, embed, live) or a bare
+// 11-character video ID. Returns the ID or null.
+function parseYouTubeId(input) {
+  const s = (input || '').trim();
+  if (/^[\w-]{11}$/.test(s)) return s;
+  const m = s.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+function renderVideos() {
+  const items = data.videos || [];
+  document.getElementById('videosList').innerHTML = items.map((v, i) => `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <h3>${v.title}</h3>
+        <div style="display:flex;gap:.5rem">
+          ${i > 0 ? `<button class="btn btn-outline btn-sm" onclick="moveVideo(${i},-1)" title="Move up">↑</button>` : ''}
+          ${i < items.length - 1 ? `<button class="btn btn-outline btn-sm" onclick="moveVideo(${i},1)" title="Move down">↓</button>` : ''}
+          <button class="btn btn-outline btn-sm" onclick="openVideoModal(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteVideo(${i})">Delete</button>
+        </div>
+      </div>
+      <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" style="width:120px;height:68px;object-fit:cover;border-radius:4px;flex-shrink:0" alt="">
+        <div>
+          <p style="font-size:13.4px;color:var(--muted)">${v.caption || ''}</p>
+          <p style="font-size:12.3px;margin-top:.35rem"><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">youtube.com/watch?v=${v.id}</a></p>
+        </div>
+      </div>
+    </div>`).join('') || '<p style="font-size:14.6px;color:var(--muted)">No videos yet — click "+ Add Video" and paste a YouTube link.</p>';
+}
+
+function moveVideo(i, dir) {
+  const items = data.videos;
+  const j = i + dir;
+  if (j < 0 || j >= items.length) return;
+  [items[i], items[j]] = [items[j], items[i]];
+  persist('videos');
+  renderVideos();
+}
+
+function deleteVideo(i) {
+  if (!confirm(`Delete "${data.videos[i].title}"?`)) return;
+  data.videos.splice(i, 1);
+  persist('videos');
+  renderVideos();
+  updateBadges();
+  toast('Video deleted');
+}
+
+function openVideoModal(idx) {
+  currentModalType = 'video';
+  currentModalIdx = idx;
+  const v = idx !== null ? data.videos[idx] : {id:'',title:'',caption:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Video' : 'Add Video';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>YouTube link or video ID *</label>
+        <input id="f_videoUrl" value="${v.id}" placeholder="https://www.youtube.com/watch?v=...">
+        <span class="hint">Paste the full URL from YouTube (watch, youtu.be, or Shorts) — the ID is extracted automatically.</span>
+      </div>
+      <div class="form-group"><label>Title *</label><input id="f_title" value="${v.title}" placeholder="Maley Kamo sa Calatrava!"></div>
+      <div class="form-group"><label>Caption</label><input id="f_caption" value="${v.caption||''}" placeholder="Official Calatrava Tourism Promo Video"></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// GETTING HERE
+// ══════════════════════════════════
+function renderGettingHere() {
+  const gh = data['getting-here'] || {};
+  const tips = (gh.tips || []);
+  const infoBoxes = (gh.infoBoxes || []);
+  document.getElementById('gettingHereContent').innerHTML = `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Travel Tips</h3><button class="btn btn-primary btn-sm" onclick="openTipModal(null)">+ Add Tip</button></div>
+      <div class="card-body">
+        ${tips.map((t,i)=>`
+          <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem;margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem">
+            <div><strong style="font-size:14.6px">${t.title}</strong><p style="font-size:14px;color:var(--muted);margin-top:.25rem">${t.text}</p></div>
+            <div style="display:flex;gap:.35rem;flex-shrink:0">
+              <button class="btn btn-outline btn-sm" onclick="openTipModal(${i})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteTip(${i})">×</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Info Boxes</h3><button class="btn btn-primary btn-sm" onclick="openInfoBoxModal(null)">+ Add Box</button></div>
+      <div class="card-body">
+        ${infoBoxes.map((b,i)=>`
+          <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem;margin-bottom:.6rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+              <strong>${b.title}</strong>
+              <div style="display:flex;gap:.35rem">
+                <button class="btn btn-outline btn-sm" onclick="openInfoBoxModal(${i})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteInfoBox(${i})">×</button>
+              </div>
+            </div>
+            <ul style="padding-left:1rem;font-size:13.4px;color:var(--muted)">${b.items.map(it=>`<li>${it}</li>`).join('')}</ul>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function deleteTip(i) {
+  data['getting-here'].tips.splice(i,1);
+  persist('getting-here');
+  renderGettingHere();
+  toast('Tip deleted');
+}
+
+function openTipModal(idx) {
+  currentModalType = 'tip';
+  currentModalIdx = idx;
+  const t = idx !== null ? data['getting-here'].tips[idx] : {id:'',title:'',text:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Tip' : 'Add Tip';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Title *</label><input id="f_title" value="${t.title}"></div>
+      <div class="form-group"><label>Text *</label><textarea id="f_text">${t.text}</textarea></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+function deleteInfoBox(i) {
+  data['getting-here'].infoBoxes.splice(i,1);
+  persist('getting-here');
+  renderGettingHere();
+  toast('Info box deleted');
+}
+
+function openInfoBoxModal(idx) {
+  currentModalType = 'infobox';
+  currentModalIdx = idx;
+  const b = idx !== null ? data['getting-here'].infoBoxes[idx] : {id:'',title:'',intro:'',items:[]};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Info Box' : 'Add Info Box';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Title *</label><input id="f_title" value="${b.title}"></div>
+      <div class="form-group"><label>Intro sentence</label><input id="f_intro" value="${b.intro||''}"></div>
+      <div class="form-group"><label>List items (one per line)</label>
+        <textarea id="f_items" style="min-height:100px">${(b.items||[]).join('\n')}</textarea>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// ABOUT
+// ══════════════════════════════════
+function renderAbout() {
+  const ab = data.about || {};
+  const stats = ab.stats || [];
+  document.getElementById('aboutContent').innerHTML = `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Hero Text</h3></div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="form-group"><label>Hero Eyebrow</label><input id="ab_eyebrow" value="${ab.heroEyebrow||''}" oninput="updateAboutField('heroEyebrow',this.value)"></div>
+          <div class="form-group"><label>Hero Title</label><input id="ab_title" value="${ab.heroTitle||''}" oninput="updateAboutField('heroTitle',this.value)"></div>
+          <div class="form-group"><label>Hero Subtitle</label><input id="ab_sub" value="${ab.heroSub||''}" oninput="updateAboutField('heroSub',this.value)"></div>
+          <div class="form-group"><label>Tagline</label><input id="ab_tagline" value="${ab.tagline||''}" oninput="updateAboutField('tagline',this.value)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>About Section</h3></div>
+      <div class="card-body">
+        <div class="form-grid single">
+          <div class="form-group"><label>Section label</label><input value="${ab.intro?.label||''}" oninput="updateAboutIntro('label',this.value)"></div>
+          <div class="form-group"><label>Title</label><input value="${ab.intro?.title||''}" oninput="updateAboutIntro('title',this.value)"></div>
+          <div class="form-group"><label>Body paragraph</label><textarea oninput="updateAboutIntro('body',this.value)">${ab.intro?.body||''}</textarea></div>
+          <div class="form-group"><label>CTA Button label</label><input value="${ab.intro?.ctaLabel||''}" oninput="updateAboutIntro('ctaLabel',this.value)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h3>Stats</h3></div>
+      <div class="card-body">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">
+          ${stats.map((s,i)=>`
+            <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem">
+              <div style="font-family:var(--fd);font-size:1.75rem;margin-bottom:.35rem">${s.value}<sup style="font-size:.8rem">${s.suffix}</sup></div>
+              <div style="font-size:12.3px;color:var(--muted);margin-bottom:.5rem">${s.label}</div>
+              <div class="form-group" style="margin-bottom:.4rem"><label>Value</label><input value="${s.value}" oninput="updateStat(${i},'value',this.value)"></div>
+              <div class="form-group" style="margin-bottom:.4rem"><label>Suffix</label><input value="${s.suffix}" oninput="updateStat(${i},'suffix',this.value)" placeholder="hrs"></div>
+              <div class="form-group"><label>Label</label><input value="${s.label}" oninput="updateStat(${i},'label',this.value)"></div>
+            </div>`).join('')}
+        </div>
+        <button class="btn btn-success btn-sm" style="margin-top:1rem" onclick="saveAbout()">Save About & Stats</button>
+      </div>
+    </div>`;
+}
+
+function updateAboutField(key, val) { if (!data.about) data.about={}; data.about[key]=val; }
+function updateAboutIntro(key, val) { if (!data.about.intro) data.about.intro={}; data.about.intro[key]=val; }
+function updateStat(i, key, val) { data.about.stats[i][key]=val; }
+function saveAbout() { persist('about'); toast('About saved'); }
+
+// ══════════════════════════════════
+// CONTACT
+// ══════════════════════════════════
+function renderContact() {
+  const c = data.contact || {};
+  const contacts = c.contacts || [];
+  document.getElementById('contactContent').innerHTML = `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Environmental Fee Notice</h3></div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="form-group"><label>Fee Amount</label><input id="ct_envFee" value="${c.envFee||'₱20'}" oninput="updateContactField('envFee',this.value)"></div>
+          <div class="form-group full"><label>Notice Message</label><input id="ct_envMsg" value="${c.envFeeMessage||''}" oninput="updateContactField('envFeeMessage',this.value)"></div>
+        </div>
+        <button class="btn btn-success btn-sm" style="margin-top:.25rem" onclick="saveContact()">Save Fee Notice</button>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Contact Cards</h3><button class="btn btn-primary btn-sm" onclick="openContactModal(null)">+ Add Contact</button></div>
+      <div class="card-body">
+        ${contacts.map((ct,i)=>`
+          <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem;margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <span style="font-size:11.2px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em">${ct.label}</span>
+              <p style="font-size:16.8px;font-weight:500;margin:.2rem 0">${ct.value}</p>
+              <p style="font-size:12.3px;color:var(--muted)">${ct.href}</p>
+            </div>
+            <div style="display:flex;gap:.35rem;flex-shrink:0">
+              <button class="btn btn-outline btn-sm" onclick="openContactModal(${i})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteContact(${i})">×</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Map Display</h3></div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Mode</label>
+          <select onchange="updateContactField('mapMode',this.value)">
+            <option value="iframe" ${(c.mapMode||'iframe')==='iframe'?'selected':''}>Iframe widget (Neighborhood Discovery / My Maps)</option>
+            <option value="pins"   ${c.mapMode==='pins'?'selected':''}>Custom pins (from destinations &amp; accommodation)</option>
+          </select>
+          <p class="hint" style="margin-top:.4rem">Iframe = sealed Google widget, no editable pins. Pins = our JSON-driven markers, needs API key below.</p>
+        </div>
+        <div class="form-group">
+          <label>Iframe URL</label>
+          <input type="text" value="${c.mapIframeUrl||''}" oninput="updateContactField('mapIframeUrl',this.value)" placeholder="https://storage.googleapis.com/maps-solutions-.../neighborhood-discovery.html">
+          <p class="hint" style="margin-top:.4rem">Paste the <code>src</code> from a Google Maps Solutions widget or a Google My Maps embed. Only used when Mode = Iframe.</p>
+        </div>
+        <div class="form-group">
+          <label>API Key</label>
+          <input type="text" value="${c.mapsApiKey||''}" oninput="updateContactField('mapsApiKey',this.value)">
+          <p class="hint" style="margin-top:.4rem">⚠️ Only used in <strong>Pins</strong> mode. Restrict this key in Google Cloud Console → APIs &amp; Services → Credentials → HTTP referrers.</p>
+        </div>
+        <button class="btn btn-success btn-sm" style="margin-top:.25rem" onclick="saveContact()">Save Map Settings</button>
+        <div style="margin-top:.85rem;padding:.75rem .9rem;background:#FEF3C7;border:1px solid #FCD34D;border-radius:4px;font-size:13.4px;line-height:1.5;color:#92400E">
+          <strong>To publish:</strong> Signed in with a GitHub token, Save commits to the repo and is live in about a minute. Without a token, changes stay in this browser only — click <strong>Export All</strong> (top bar), replace <code>data/contact.json</code> in the repo, then commit &amp; push.
+        </div>
+      </div>
+    </div>`;
+}
+
+function updateContactField(key, val) { if(!data.contact) data.contact={}; data.contact[key]=val; }
+function saveContact() { persist('contact'); toast('Contact info saved'); }
+
+function deleteContact(i) {
+  data.contact.contacts.splice(i,1);
+  persist('contact');
+  renderContact();
+  toast('Contact deleted');
+}
+
+function openContactModal(idx) {
+  currentModalType = 'contact';
+  currentModalIdx = idx;
+  const ct = idx !== null ? data.contact.contacts[idx] : {id:'',label:'',value:'',href:'',sub:'',type:'phone'};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Contact' : 'Add Contact';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Label</label><input id="f_label" value="${ct.label}" placeholder="Calatrava Tourism Council"></div>
+      <div class="form-group"><label>Display Value</label><input id="f_value" value="${ct.value}" placeholder="0919 335 0314"></div>
+      <div class="form-group"><label>Link (href)</label><input id="f_href" value="${ct.href}" placeholder="tel:09193350314"></div>
+      <div class="form-group"><label>Sub-text</label><input id="f_sub" value="${ct.sub||''}" placeholder="Tap to call"></div>
+      <div class="form-group"><label>Type</label>
+        <select id="f_type">
+          <option value="phone" ${ct.type==='phone'?'selected':''}>Phone</option>
+          <option value="social" ${ct.type==='social'?'selected':''}>Social</option>
+          <option value="email" ${ct.type==='email'?'selected':''}>Email</option>
+        </select>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// SITE SETTINGS
+// ══════════════════════════════════
+function renderSettings() {
+  const g = (data.settings && data.settings.visitorGate) || {};
+  const enabled = g.enabled !== false;
+  document.getElementById('settingsContent').innerHTML = `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Visitor Gate (Tourist / Local pop-up)</h3></div>
+      <div class="card-body">
+        <p style="font-size:14.6px;color:var(--muted);line-height:1.6;margin-bottom:1rem">
+          When enabled, the homepage opens with a blurred pop-up asking visitors whether they're a
+          <strong>Tourist</strong> (continues to this tourism site) or a <strong>Local</strong>
+          (redirected to the municipal site below). The choice is remembered for the rest of the
+          visitor's browser session.
+        </p>
+        <div class="form-group">
+          <label>Show the pop-up?</label>
+          <div class="form-check" style="margin-top:.4rem">
+            <input type="checkbox" id="set_gateEnabled" ${enabled?'checked':''} onchange="updateGate('enabled',this.checked)">
+            <label for="set_gateEnabled" style="font-weight:400">Enable the Tourist / Local gate on the homepage</label>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:1rem">
+          <label>Local redirect URL</label>
+          <input id="set_localUrl" value="${g.localUrl||''}" placeholder="/lgu/" oninput="updateGate('localUrl',this.value)">
+        </div>
+        <button class="btn btn-success btn-sm" style="margin-top:1rem" onclick="saveSettings()">Save Settings</button>
+        <div style="margin-top:.85rem;padding:.75rem .9rem;background:#FEF3C7;border:1px solid #FCD34D;border-radius:4px;font-size:13.4px;line-height:1.5;color:#92400E">
+          <strong>To publish:</strong> Signed in with a GitHub token, Save commits to the repo and is live in about a minute. Without a token, changes stay in this browser only — click <strong>Export All</strong> (top bar), replace <code>data/settings.json</code> in the repo, then commit &amp; push.
+        </div>
+      </div>
+    </div>`;
+}
+
+function updateGate(key, val) {
+  if (!data.settings) data.settings = {};
+  if (!data.settings.visitorGate) data.settings.visitorGate = {};
+  data.settings.visitorGate[key] = val;
+}
+function saveSettings() { persist('settings'); toast('Settings saved'); }
+
+// ══════════════════════════════════
+// MODAL SAVE HANDLER
+// ══════════════════════════════════
+function saveModal() {
+  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const gb = id => { const el = document.getElementById(id); return el ? el.checked : false; };
+
+  if (currentModalType === 'destination') {
+    const coords = resolveCoords(g);
+    if (coords === 'invalid') { toast('Invalid Plus Code','error'); return; }
+    const existing = currentModalIdx !== null ? data.destinations[currentModalIdx] : {};
+    const item = {
+      ...existing,
+      id: g('f_id') || g('f_name').toLowerCase().replace(/\s+/g,'-'),
+      name: g('f_name'), type: g('f_type'), tagline: g('f_tagline'), category: g('f_category'),
+      barangay: g('f_barangay'), description: g('f_desc'), insiderTip: g('f_tip'),
+      fee: g('f_fee'), feeNote: g('f_feeNote'), badge: g('f_badge'),
+      featured: gb('f_featured'),
+      featuredOrder: g('f_featuredOrder') ? parseInt(g('f_featuredOrder')) : null,
+      images: parseImageLines(g('f_images')),
+      thumbnail: fixAssetPath(g('f_thumb')) || null,
+      lat: coords.lat,
+      lng: coords.lng
+    };
+    if (!item.name) { toast('Name is required','error'); return; }
+    if (currentModalIdx !== null) data.destinations[currentModalIdx] = item;
+    else data.destinations.push(item);
+    persist('destinations');
+    renderDestTable();
+    updateBadges();
+
+  } else if (currentModalType === 'activity') {
+    const existing = currentModalIdx !== null ? data.activities[currentModalIdx] : {};
+    // Collect up to 2 numbers / 3 links, keeping only rows with a value.
+    const contactPhones = [0, 1]
+      .map(i => ({ label: g('f_phoneLabel' + i), number: g('f_phone' + i) }))
+      .filter(p => p.number);
+    const contactUrls = [0, 1, 2]
+      .map(i => ({ label: g('f_urlLabel' + i), url: g('f_url' + i) }))
+      .filter(u => u.url);
+    const item = {
+      ...existing,
+      id: g('f_title').toLowerCase().replace(/\s+/g,'-'),
+      number: g('f_number'),
+      title: g('f_title'),
+      tagline: g('f_tagline'),
+      description: g('f_desc'),
+      rate: g('f_rate'),
+      credit: g('f_credit'),
+      contactPhones,
+      contactUrls
+    };
+    // Drop the legacy single-value fields now that arrays are the source.
+    delete item.contactPhone;
+    delete item.contactUrl;
+    if (!item.title) { toast('Title is required','error'); return; }
+    if (currentModalIdx !== null) data.activities[currentModalIdx] = item;
+    else data.activities.push(item);
+    persist('activities');
+    renderActivities();
+    updateBadges();
+
+  } else if (currentModalType === 'accommodation') {
+    const coords = resolveCoords(g);
+    if (coords === 'invalid') { toast('Invalid Plus Code','error'); return; }
+    // Spread the existing item so fields without admin inputs (address,
+    // amenities, priceRange, bookingNote, …) survive an edit — the public
+    // accommodation page renders them.
+    const existing = currentModalIdx !== null ? data.accommodation[currentModalIdx] : {};
+    const item = { ...existing, id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), priceRange: g('f_priceRange'), phone: g('f_phone'), phoneLabel: g('f_phoneLabel'), facebook: g('f_facebook'), facebookLabel: g('f_facebookLabel'), lat: coords.lat, lng: coords.lng, images: parseImageLines(g('f_images')), detailsUrl: g('f_detailsUrl')||'' };
+    if (!item.name) { toast('Name is required','error'); return; }
+    // Standard "Brgy. X, …" addresses follow the barangay field; custom
+    // addresses (street/sitio detail) are left alone.
+    if (item.barangay && (!item.address || /^Brgy\.\s/i.test(item.address))) {
+      item.address = 'Brgy. ' + item.barangay + ', Calatrava, Romblon';
+    }
+    if (currentModalIdx !== null) data.accommodation[currentModalIdx] = item;
+    else data.accommodation.push(item);
+    persist('accommodation');
+    renderAccommodation();
+    updateBadges();
+
+  } else if (currentModalType === 'video') {
+    const vid = parseYouTubeId(g('f_videoUrl'));
+    if (!vid) { toast('Could not read a YouTube video ID from that link','error'); return; }
+    const item = { id: vid, title: g('f_title'), caption: g('f_caption') };
+    if (!item.title) { toast('Title is required','error'); return; }
+    if (!data.videos) data.videos = [];
+    if (currentModalIdx !== null) data.videos[currentModalIdx] = item;
+    else data.videos.push(item);
+    persist('videos');
+    renderVideos();
+    updateBadges();
+
+  } else if (currentModalType === 'tip') {
+    const item = { id: g('f_title').toLowerCase().replace(/\s+/g,'-'), title: g('f_title'), text: g('f_text') };
+    if (!item.title) { toast('Title is required','error'); return; }
+    if (!data['getting-here'].tips) data['getting-here'].tips = [];
+    if (currentModalIdx !== null) data['getting-here'].tips[currentModalIdx] = item;
+    else data['getting-here'].tips.push(item);
+    persist('getting-here');
+    renderGettingHere();
+
+  } else if (currentModalType === 'infobox') {
+    const item = { id: g('f_title').toLowerCase().replace(/\s+/g,'-'), title: g('f_title'), intro: g('f_intro'), items: g('f_items').split('\n').map(s=>s.trim()).filter(Boolean) };
+    if (!item.title) { toast('Title is required','error'); return; }
+    if (!data['getting-here'].infoBoxes) data['getting-here'].infoBoxes = [];
+    if (currentModalIdx !== null) data['getting-here'].infoBoxes[currentModalIdx] = item;
+    else data['getting-here'].infoBoxes.push(item);
+    persist('getting-here');
+    renderGettingHere();
+
+  } else if (currentModalType === 'contact') {
+    const item = { id: g('f_label').toLowerCase().replace(/\s+/g,'-'), label: g('f_label'), value: g('f_value'), href: g('f_href'), sub: g('f_sub'), type: g('f_type') };
+    if (!item.label) { toast('Label is required','error'); return; }
+    if (!data.contact.contacts) data.contact.contacts = [];
+    if (currentModalIdx !== null) data.contact.contacts[currentModalIdx] = item;
+    else data.contact.contacts.push(item);
+    persist('contact');
+    renderContact();
+
+  } else if (currentModalType === 'establishment') {
+    const existing = currentModalIdx !== null ? data.establishments[currentModalIdx] : {};
+    const item = {
+      ...existing,
+      id: g('f_name').toLowerCase().replace(/\s+/g,'-'),
+      name: g('f_name'),
+      category: g('f_category'),
+      address: g('f_address'),
+      phone: g('f_phone'),
+      socials: g('f_socials'),
+      mapsUrl: g('f_mapsUrl'),
+      image: fixAssetPath(g('f_image'))
+    };
+    if (!item.name) { toast('Name is required','error'); return; }
+    if (!data.establishments) data.establishments = [];
+    if (currentModalIdx !== null) data.establishments[currentModalIdx] = item;
+    else data.establishments.push(item);
+    persist('establishments');
+    renderEstablishments();
+    updateBadges();
+  }
+
+  closeModal();
+  toast('Saved successfully');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  currentModalType = null;
+  currentModalIdx = null;
+}
+document.getElementById('modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+// ══════════════════════════════════
+// IMPORT / EXPORT
+// ══════════════════════════════════
+function exportJSON(key) {
+  const blob = new Blob([JSON.stringify(data[key], null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = key + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('Downloaded ' + key + '.json');
+}
+
+function exportAll() {
+  const keys = Object.keys(data);
+  if (!keys.length) { toast('Nothing to export yet','error'); return; }
+  keys.forEach((key, i) => {
+    setTimeout(() => {
+      const blob = new Blob([JSON.stringify(data[key], null, 2)], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = key + '.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }, i * 150);
+  });
+  toast('Downloading all ' + keys.length + ' JSON files…','success');
+}
+
+function importJSON(key) {
+  importTarget = key;
+  document.getElementById('importFileInput').click();
+}
+
+function handleImportFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      data[importTarget] = JSON.parse(ev.target.result);
+      persist(importTarget);
+      renderAll();
+      toast('Imported ' + importTarget + '.json');
+    } catch(err) {
+      toast('Invalid JSON file','error');
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>
