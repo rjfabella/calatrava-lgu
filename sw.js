@@ -1,5 +1,7 @@
-// Calatrava Tourism PWA Service Worker
-const CACHE_VERSION = "v2";
+// Calatrava PWA Service Worker
+// Scope is the whole domain, so this sits in front of both halves of the site:
+// the tourism portal at "/" and the LGU government portal at "/lgu/".
+const CACHE_VERSION = "v3";
 const SHELL_CACHE = `calatrava-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `calatrava-runtime-${CACHE_VERSION}`;
 
@@ -12,7 +14,6 @@ const SHELL_ASSETS = [
   "/accommodation.html",
   "/establishments.html",
   "/getting-here.html",
-  "/activities.html",
   "/404.html",
   "/assets/emergency.css",
   "/assets/i18n.js",
@@ -28,7 +29,13 @@ const SHELL_ASSETS = [
   "/data/videos.json",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
-  "/manifest.json"
+  "/manifest.json",
+  // LGU half: its shell only. Its nine pages and its JSON are cached as they
+  // are visited, by the navigation and /data/ branches below.
+  "/lgu/",
+  "/lgu/index.html",
+  "/lgu/assets/style.css",
+  "/lgu/assets/app.js"
 ];
 
 // External CDN resources to pre-cache (fonts, etc.)
@@ -136,16 +143,23 @@ self.addEventListener("fetch", (event) => {
           return response;
         })
         .catch(() =>
-          caches
-            .match(request)
-            .then((cached) => cached || caches.match("/offline.html") || caches.match("/index.html"))
+          caches.match(request).then((cached) => {
+            if (cached) return cached;
+            // Offline and never visited: fall back to the homepage of the half
+            // being asked for, so an LGU URL doesn't land on the tourism site.
+            const home = url.pathname.startsWith("/lgu/")
+              ? "/lgu/index.html"
+              : "/index.html";
+            return caches.match(home);
+          })
         )
     );
     return;
   }
 
   // ── JSON data files: network-first → cached fallback ────────────────────
-  if (url.pathname.startsWith("/data/")) {
+  // Both halves keep their content in their own data/ directory.
+  if (url.pathname.startsWith("/data/") || url.pathname.startsWith("/lgu/data/")) {
     event.respondWith(
       fetch(request)
         .then((response) => {
@@ -185,18 +199,30 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // ── CSS, JS, fonts: cache-first, network fallback ───────────────────────
+  // ── CSS, JS, fonts: stale-while-revalidate ──────────────────────────────
+  // Serve the cached copy at once, then refresh it in the background so the
+  // next load has the new one. Plain cache-first kept a stylesheet or script
+  // until the cache version changed, which would now pin the LGU half's
+  // app.js — the file that renders its whole nav and footer — to whatever was
+  // cached on the visitor's first visit.
   if (/\.(css|js|woff2?|ttf|otf)$/i.test(url.pathname)) {
     event.respondWith(
       caches.match(request).then((cached) => {
-        if (cached) return cached;
-        return fetch(request).then((response) => {
-          if (response.ok) {
-            const copy = response.clone();
-            caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
-          }
-          return response;
-        });
+        const fresh = fetch(request)
+          .then((response) => {
+            if (response.ok) {
+              const copy = response.clone();
+              caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
+            }
+            return response;
+          })
+          .catch(() => cached);
+        if (cached) {
+          // Keep the worker alive long enough for the refresh to land.
+          event.waitUntil(fresh);
+          return cached;
+        }
+        return fresh;
       })
     );
     return;
