@@ -139,18 +139,19 @@ files directly falls back to the inline defaults.
 ## Deployment
 
 **GitHub Pages**, `main` from the repo root, no build step, no secrets, no
-backend. `CNAME` binds calatravaromblon.gov.ph, and `data/*.json` plus
-`lgu/data/*.json` are the source of truth.
+backend. `CNAME` binds calatravaromblon.gov.ph — served from this repo since
+2026-11-01 — and `data/*.json` plus `lgu/data/*.json` are the source of truth.
+The predecessor repo, `rjfabella/calatrava-tourism-portal`, is archived and
+read-only; its Pages site still serves a frozen pre-merge copy at its own
+github.io URL.
 
-A custom domain can only be attached to one Pages site at a time, so moving it
-here is a two-step swap:
+One job is left over from the move: `admin.html` needs a fresh fine-grained
+PAT with Contents read & write on `rjfabella/calatrava-lgu`. The token saved
+on the LGU's device is scoped to the archived repo and will fail on Save.
 
-1. In `rjfabella/calatrava-tourism-portal` → Settings → Pages, remove the
-   custom domain (this is what frees calatravaromblon.gov.ph).
-2. In this repo → Settings → Pages, deploy from `main` / `/root` and set the
-   custom domain to `calatravaromblon.gov.ph`, then wait for the certificate.
-
-The DNS records themselves don't change. Afterwards, archive the old repo so
-nobody publishes to it by accident, and issue a fresh PAT for `admin.html`
-scoped to this repo — the one saved on the LGU's device is scoped to the old
-one and will stop working.
+If the domain ever has to move between Pages sites again — it can only be
+attached to one at a time, so release it from the old repo's Settings → Pages
+before setting it on the new one. The DNS records don't change, and GitHub
+commits the `CNAME` file on both sides for you. Expect the CDN to keep serving
+404s cached from before the move; requesting a fresh build
+(`gh api -X POST repos/<owner>/<repo>/pages/builds`) purges them.

@@ -57,17 +57,30 @@ municipal government.
   live tourism site should change. What the merge bought: "Local" on the gate
   is now a same-site navigation instead of a cross-origin hop to github.io,
   one deploy instead of two, and one place to keep the shared green + gold
-  identity honest. Still to do by hand in GitHub, not in the repo: free
-  `calatravaromblon.gov.ph` from the old repo's Pages settings before setting
-  it here (a domain can only bind one Pages site), archive the old repo, and
-  issue a fresh fine-grained PAT for `admin.html` scoped to this repo — the
-  token on the LGU's device is scoped to the old one and will stop working.
+  identity honest.
 
-  One timing trap: until the merge is deployed, the `admin.html` the staff
-  actually open is still the old repo's copy, publishing to the old repo. Any
-  content saved in that gap lands there, not here. At cutover, re-fetch and
-  merge its `data/` first — the `tourism` remote is left configured for
-  exactly that (`git fetch tourism main`).
+  **Cut over the same day.** PR #4 merged, then the custom domain moved: the
+  old repo's Pages settings released `calatravaromblon.gov.ph` (GitHub
+  auto-committed a `Delete CNAME` there, so it cannot re-claim it) and this
+  repo took it, reusing the already-approved certificate — no DNS change and
+  no certificate wait. Verified live end to end: the gate's "Local" lands on
+  `calatravaromblon.gov.ph/lgu/`, and a pre-merge URL like `/services.html`
+  forwards to `/lgu/services.html`. `rjfabella/calatrava-tourism-portal` is
+  archived, so its copy of `admin.html` can no longer publish; nothing had
+  been published to it in the gap, so no content was stranded. Its Pages site
+  still serves the frozen pre-merge copy at
+  `rjfabella.github.io/calatrava-tourism-portal/`.
+
+  Worth knowing if a domain is ever moved between Pages sites again: GitHub's
+  CDN went on serving the 404s it had cached for `/lgu/` and the old root
+  URLs from before the swap, so the site looked half-broken for about fifteen
+  minutes after it was in fact correct. Requesting a fresh Pages build
+  (`gh api -X POST repos/<owner>/<repo>/pages/builds`) purges the edge.
+
+  **Still open:** a fresh fine-grained PAT for `admin.html`, scoped to
+  `rjfabella/calatrava-lgu` with Contents read & write. The token on the LGU's
+  device is scoped to the archived repo, so the content editor cannot publish
+  until it is replaced.
 
 ## Standards research
 
