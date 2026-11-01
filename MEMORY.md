@@ -44,6 +44,25 @@ municipal government.
   legal/compliance completeness (DILG FDP expects the actual document to be
   available), but the site's own pages render from the JSON.
 
+- **The two sites became one repo** (2026-11-01) — the tourism portal
+  (`rjfabella/calatrava-tourism-portal`) was merged into this repo, with its
+  history, so both halves of `calatravaromblon.gov.ph` deploy as one GitHub
+  Pages site. Layout: the tourism portal keeps the domain root, the LGU site
+  moved to `/lgu/`. Root was the portal's because it already held the `CNAME`
+  and the Tourist/Local gate, and its pages reference absolute `/manifest.json`,
+  `/icons/`, `/assets/` paths that only resolve at a domain root; the LGU
+  site's paths are all relative, so it relocated without a single path edit.
+  RJ chose this layout over LGU-at-root (which DICT GWTD would mildly favour)
+  and over a shared gate page at root, on the grounds that nothing about the
+  live tourism site should change. What the merge bought: "Local" on the gate
+  is now a same-site navigation instead of a cross-origin hop to github.io,
+  one deploy instead of two, and one place to keep the shared green + gold
+  identity honest. Still to do by hand in GitHub, not in the repo: free
+  `calatravaromblon.gov.ph` from the old repo's Pages settings before setting
+  it here (a domain can only bind one Pages site), archive the old repo, and
+  issue a fresh fine-grained PAT for `admin.html` scoped to this repo — the
+  token on the LGU's device is scoped to the old one and will stop working.
+
 ## Standards research
 
 Full governing-standards table (DICT GWTD, WCAG 2.0 AA, RA 10173, DILG FDP,
@@ -52,6 +71,10 @@ checklist are in the Claude Project doc `claude/standards-and-checklist.md`
 — treat that as the source of truth, this file only tracks status.
 
 ## Current repo status (updated 2026-09-06)
+
+> Paths in this section predate the 2026-11-01 repo merge: everything it calls
+> `assets/…` or `data/…` now lives under `lgu/`. The status itself has not been
+> re-audited since 2026-09-06 — trust `git log` over this section.
 
 Site scaffold is built and functional (7 pages, shared chrome via
 `assets/app.js`, content via `data/*.json`) — see `CLAUDE.md` for the
