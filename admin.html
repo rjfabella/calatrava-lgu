@@ -490,8 +490,10 @@ textarea{resize:vertical;min-height:80px}
 const FALLBACK_PW = 'calatrava2026';
 // GitHub publishing (GitHub Pages hosting): commits straight to the repo,
 // which is what the site serves. Needs a fine-grained PAT with Contents
-// read & write on this repo, pasted once into the login box.
-const GH_REPO   = 'rjfabella/calatrava-tourism-portal';
+// read & write on this repo, pasted once into the login box. The portal and
+// the LGU site now share one repo; this editor only writes the portal's own
+// data/ and assets/, which are still at the repo root.
+const GH_REPO   = 'rjfabella/calatrava-lgu';
 const GH_BRANCH = 'main';
 let data = {};
 let draftSections = new Set();
