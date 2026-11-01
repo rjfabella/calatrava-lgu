@@ -63,6 +63,12 @@ municipal government.
   issue a fresh fine-grained PAT for `admin.html` scoped to this repo — the
   token on the LGU's device is scoped to the old one and will stop working.
 
+  One timing trap: until the merge is deployed, the `admin.html` the staff
+  actually open is still the old repo's copy, publishing to the old repo. Any
+  content saved in that gap lands there, not here. At cutover, re-fetch and
+  merge its `data/` first — the `tourism` remote is left configured for
+  exactly that (`git fetch tourism main`).
+
 ## Standards research
 
 Full governing-standards table (DICT GWTD, WCAG 2.0 AA, RA 10173, DILG FDP,
