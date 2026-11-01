@@ -3,6 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- The LGU site was its own repo, served from its own root, until both halves
+     of calatravaromblon.gov.ph were merged and it moved under /lgu/. Old links,
+     bookmarks and search results point at the root copies and land here, so
+     forward them before anything paints. GitHub Pages serves this single 404
+     for the whole domain, which makes it the one place that can catch them. -->
+<script>
+(function () {
+  var MOVED = ['about', 'about-us', 'services', 'barangays',
+               'transparency', 'news', 'contact', 'privacy'];
+  var path = location.pathname;
+  if (path.indexOf('/lgu/') === 0) return;
+  var page = path.match(/^\/([a-z-]+)\.html$/);
+  if (page && MOVED.indexOf(page[1]) > -1) {
+    location.replace('/lgu/' + page[1] + '.html' + location.search + location.hash);
+  }
+})();
+</script>
 <title>Page Not Found — Calatrava, Romblon</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
@@ -55,6 +72,23 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   <path d="M0 70 Q 180 30 360 70 T 720 70 T 1080 70 T 1440 70 V 120 H 0 Z" fill="#1A5C7A" opacity=".6"/>
   <path d="M0 90 Q 180 55 360 90 T 720 90 T 1080 90 T 1440 90 V 120 H 0 Z" fill="#1E8B72" opacity=".5"/>
 </svg>
+<script>
+// A miss somewhere under /lgu/ is someone looking for the municipal
+// government, not a beach. Same shell, government copy and links.
+addEventListener('DOMContentLoaded', function () {
+  if (location.pathname.indexOf('/lgu/') !== 0) return;
+  document.title = 'Page Not Found — Municipality of Calatrava, Romblon';
+  document.querySelector('h1').innerHTML =
+    'This page isn\'t here <em>any more.</em>';
+  document.querySelector('.wrap p').textContent =
+    'The page you are looking for may have been moved or renamed. ' +
+    'The main sections of the municipal government site are below.';
+  document.querySelector('.actions').innerHTML =
+    '<a class="btn-solid" href="/lgu/">Municipal Government</a>' +
+    '<a class="btn-line" href="/lgu/services.html">Public Services</a>' +
+    '<a class="btn-line" href="/lgu/contact.html">Contact Us</a>';
+});
+</script>
 <script src="assets/i18n.js" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
