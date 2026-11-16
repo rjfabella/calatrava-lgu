@@ -82,6 +82,65 @@ municipal government.
   device is scoped to the archived repo, so the content editor cannot publish
   until it is replaced.
 
+## 2026-11-16, later — five uploaded documents: Accounting's FDP forms published
+
+RJ was away from his main machine and uploaded five documents to the session
+instead, which is how work continued without the gitignored batch. Three were
+re-sends of Sept 2026 files (BPLO, OMAG, MBO) — which is exactly what made them
+parseable here. One was a duplicate. One was new and substantial.
+
+**The Accounting office's submission is 20 FDP forms in a single 20-page scan**,
+covering CY2025 Q3–Q4 and CY2026 Q1–Q2: Form 6 (Trust Fund), Form 8 (LDRRMF),
+Form 9 (Statement of Cash Flows), Form 11 (SEF) and Form 12 (Unliquidated Cash
+Advances), four quarters each. Accounting had submitted nothing before.
+- **Split one file per form per quarter** into `lgu/assets/contents/fdp/` and
+  linked individually from a new "Quarterly Financial Reports (Full Disclosure)"
+  section on `transparency.html`. RJ's call, and it matches how DILG FDP expects
+  them posted — a reader can reach one period without paging a bundle.
+- **The scans were NOT re-encoded**, deliberately: ~267 DPI CamScanner JPEGs,
+  ~400 KB each, 7.9 MB total against a repo already carrying 155 MB of tourism
+  assets. These are financial forms whose peso figures must stay readable, and
+  re-encoding an already-compressed LGU export has backfired before (portraits).
+- `transparency.html` gained support for an optional per-section `intro`; the
+  renderer ignored the field before, so it would have been silently dropped.
+- **Flagged to the Accountant, published anyway on RJ's explicit decision:** the
+  CY2025 Q3 Form 12's listed balances sum to ₱731,332.00 while the form's total
+  reads ₱651,357.00 — the ₱79,975 gap is exactly the three aged rows, so the
+  total looks like it counts only the current column. Same form carries an
+  advance dated 01/09/2019 sitting in the under-30-days column. Form 12 also
+  names ~24 individuals with amounts; FDP prescribes that column, so it is
+  required disclosure. All three are written up in the reference-docs README so
+  they reach the office rather than living in a chat log.
+
+**Three offices are now actually parsed** in `offices.json` — BPLO (mandate,
+4 key functions, 6 services), MBO (mandate of 5, vision, mission, organizational
+outcome, CY2027 figures) and MAO/OMAG (6 staff, 7 statistics, 12 programmes,
+letterhead email). Nothing renders them yet.
+- **MBO's CY2027 figures are a PROPOSED budget** on a budget-preparation form,
+  not an approved appropriation. Recorded with that label in `source`; decide
+  whether a proposed figure belongs on a public page at all before rendering it,
+  and if it is shown, say "proposed" on the page itself.
+- MBO's scan is **cropped at the foot of page 1**, cutting the last performance
+  indicator across the page break. Needs the LGU's original.
+- OMAG's **"Total rice area 60 hectares"** against 5,987.502 ha of agricultural
+  land looks low by an order of magnitude — confirm before rendering.
+- OMAG's missing organisations list is now **confirmed from the file itself**,
+  not inferred: the heading is the document's last line and nothing follows it.
+
+**The MCR re-send verified part of the Citizen's Charter.** It duplicates
+pp. 21–26, so no new content, but it is legible: Marriage Licence ₱450.00,
+Marriage Certificate ₱100.00 and Death Certificate ₱50.00 are now **confirmed
+against the source**, and two services that had empty `fees` were filled with
+the form's own "Based on Revenue Code" rather than left blank. A stray
+"30 minutes" on the birth-registration entry belonged to the facing page and was
+removed. The Charter's own requirement numbering jumps 1 → 6 for births —
+**that is the source document, not a parse error; don't "fix" it.** This clears
+the civil-registry half of next-step 2 below; business permit and RPT are next.
+
+**IA decision taken (RJ, 2026-11-16):** office profiles render as **expandable
+panels on `about.html#departments-section`**, not as per-office pages and not as
+a combined offices page. Not built yet — only 3 of 16 offices have content.
+
 ## 2026-11-16 — admin PAT diagnostics, and the reference-doc parse structure
 
 **The admin editor's token (the job left over from the merge).** The code side

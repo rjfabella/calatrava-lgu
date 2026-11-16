@@ -7,7 +7,7 @@
     "covered-elsewhere": "The office's submission duplicated content already parsed into another data file.",
     "awaiting-submission": "The office sent nothing in this batch. Listed so the gap is visible and chaseable.",
     "fdp-only": "Submission is a Full Disclosure document, not office-profile content; belongs in transparency.json.",
-    "parsed": "Content typed in and checked against the source. Nothing has reached this state yet."
+    "parsed": "Content typed in from the source document and checked against it."
   },
   "_schema": {
     "acronym": "Short label as used elsewhere on this site (officials.json departments). Empty string where the Citizen's Charter gives none -- do not invent one.",
@@ -33,16 +33,70 @@
       "acronym": "BPLO",
       "office": "Business Permits and Licensing Office",
       "orgChartOffice": null,
-      "status": "pending-parse",
+      "status": "parsed",
       "sourceDocs": [
         "BPLO_Mandate Key Functions and Services Offered.docx"
       ],
       "charterPages": "7–11",
-      "mandate": "",
+      "mandate": "To regulate, facilitate, and monitor the licensing of all businesses within the municipality — ensuring legal operation, compliance with laws/ordinances, revenue generation, and promotion of ease of doing business.",
       "vision": "",
       "mission": "",
-      "keyFunctions": [],
-      "services": [],
+      "keyFunctions": [
+        "Receive, evaluate, and approve business permit applications (new & renewal)",
+        "Enforce compliance with zoning, health, safety, environmental, and other regulatory standards",
+        "Maintain business registry and records",
+        "Operate under the Electronic Business One Stop Shop (E-BOSS)/BPLS for unified, streamlined processing"
+      ],
+      "services": [
+        {
+          "name": "New Business Permit (Mayor's Permit)",
+          "description": "Primary license to legally operate; verifies DTI/SEC registration, barangay clearance, health and sanitary and other clearances.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Annual Permit Renewal",
+          "description": "January; updates records, confirms tax payment, extends authority to operate.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Business Modifications",
+          "description": "Change of location, business name, ownership, capital, line of business or expansion.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Closure/Retirement of Business",
+          "description": "Formal deactivation of business account; clearance of outstanding obligations.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Special Permit/Clearances",
+          "description": "Temporary operations, sales, events, ambulant vendors, etc.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Compliance Monitoring & Inspection",
+          "description": "Verifies adherence to rules; addresses violations; conducts spot check/complaint investigations.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        }
+      ],
       "programs": [],
       "staff": [],
       "statistics": [],
@@ -56,7 +110,7 @@
         "keyFunctions (4)",
         "services (6): new permit, renewal, modification, closure, special permits, inspection"
       ],
-      "gaps": "No vision, mission, staff list or office contact supplied."
+      "gaps": "No vision, mission, staff list or office contact supplied. Fees and processing times are deliberately empty here: the business-permit procedure is in citizens-charter.json (Charter pp. 7–11) and must not be restated, or the two will drift."
     },
     {
       "acronym": "MASSO",
@@ -92,19 +146,47 @@
       "acronym": "MBO",
       "office": "Office of the Municipal Budget Officer",
       "orgChartOffice": "Office of the Municipal Budget Officer",
-      "status": "pending-parse",
+      "status": "parsed",
       "sourceDocs": [
         "MBO_Mandate Vision Mission MFO and Targets CY2027 (LBP Form 4).pdf"
       ],
       "charterPages": "62–64",
-      "mandate": "",
-      "vision": "",
-      "mission": "",
+      "mandate": [
+        "Review and consolidate budget proposals of different departments and offices of the LGU;",
+        "Assist the LCE in the preparation of the Annual and Supplemental Budgets;",
+        "Study and evaluate budgetary implications of proposed legislation and submit comments and recommendations thereon;",
+        "Review Annual and Supplemental Budgets of the component barangays.",
+        "Acts as member of the Local Finance Committee."
+      ],
+      "vision": "To be proactive development partner/advocate of the financial management team of the Municipal Government in the effective allocation and management of public resources and expenditures towards achieving its pursuit for fiscal strength and good governance.",
+      "mission": "The Municipal Budget Office is committed to promote, implement and strengthen public expenditure management policies and directions that are sustainable and supportive to the program thrusts and development goals of the Municipal Government; Advocate policies and directives that ensure efficiency, effectiveness, transparency and accountability in public spending.",
       "keyFunctions": [],
       "services": [],
       "programs": [],
       "staff": [],
-      "statistics": [],
+      "statistics": [
+        {
+          "label": "Budget Management Program — Personal Services",
+          "value": "1,472,457.21",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Budget Management Program — MOOE",
+          "value": "248,000.00",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Budget Management Program — Total",
+          "value": "1,720,457.21",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        }
+      ],
       "contact": {
         "phone": "",
         "email": "",
@@ -117,7 +199,8 @@
         "organizational outcome",
         "Budget Management Program targets CY2027"
       ],
-      "gaps": "Scanned PDF with no text layer — content must be re-typed and figures double-checked against the scan. No staff list or office contact supplied."
+      "gaps": "No staff list or office contact supplied. TWO THINGS TO SETTLE BEFORE RENDERING: (1) the CY2027 figures are a PROPOSED budget on a budget-preparation form, not an approved appropriation — decide whether a proposed figure belongs on a public page at all, and if it is shown, label it 'proposed' on the page, not only here. (2) The scan's page 1 is cropped at the foot, cutting the last performance indicator ('No overdrafts in … appropriation', target 0) across the page break — the full row needs the LGU's original before the indicator list is published. The six fully legible indicators all carry a 100% target. The source mission reads 'effieciency'; corrected to 'efficiency' here, the same way the org chart's doubled 'OFFICE OF THE OFFICE OF THE' was normalised during parsing.",
+      "organizationalOutcome": "Fiscal discipline, effective resources allocation, and efficient government fiscal operation"
     },
     {
       "acronym": "MEO / OBO",
@@ -224,7 +307,7 @@
       "acronym": "MAO",
       "office": "Office of the Municipal Agriculturist",
       "orgChartOffice": "Office of the Municipal Agriculturist",
-      "status": "pending-parse",
+      "status": "parsed",
       "sourceDocs": [
         "OMAG_Office Profile Agricultural Statistics and Programs.docx"
       ],
@@ -234,12 +317,154 @@
       "mission": "",
       "keyFunctions": [],
       "services": [],
-      "programs": [],
-      "staff": [],
-      "statistics": [],
+      "programs": [
+        {
+          "name": "Rice Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "High Value Crops Development Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Livestock Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Fisheries Development Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Farmer and Fisherfolk Registration / RSBSA",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "FishR / BoatR and fishing boat registration",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Agricultural insurance / PCIC assistance",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Animal Health Support Services",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Anti-rabies vaccination",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Distribution of seeds, seedlings, fertilizers and other inputs",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Technical assistance and farm visits",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Assistance to Farmers' and Fisherfolk Organizations",
+          "description": "",
+          "beneficiaries": ""
+        }
+      ],
+      "staff": [
+        {
+          "name": "Erwin M. Mortel",
+          "position": "Municipal Agriculturist",
+          "mobile": ""
+        },
+        {
+          "name": "Grace Ellen F. Culpa",
+          "position": "Agricultural Technologist / Rice Coordinator",
+          "mobile": ""
+        },
+        {
+          "name": "Dennie Evern F. Fabito",
+          "position": "Agricultural Technologist / Livestock & Fishery Coordinator",
+          "mobile": ""
+        },
+        {
+          "name": "Roy Motin",
+          "position": "MAO Staff / Fishery Coordinator",
+          "mobile": ""
+        },
+        {
+          "name": "Erna Moreno",
+          "position": "MAO Staff / High Value Crop Coordinator",
+          "mobile": ""
+        },
+        {
+          "name": "Rexphil Blasé",
+          "position": "MAO Staff / Corn & Cassava Coordinator",
+          "mobile": ""
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Registered farmers",
+          "value": "1,692",
+          "unit": "",
+          "asOf": "",
+          "source": "RSBSA Dashboard"
+        },
+        {
+          "label": "Registered fisherfolk",
+          "value": "2,327",
+          "unit": "",
+          "asOf": "",
+          "source": "Fisherfolk Registration System"
+        },
+        {
+          "label": "Livestock/poultry raisers",
+          "value": "1,029",
+          "unit": "",
+          "asOf": "",
+          "source": ""
+        },
+        {
+          "label": "Farmers'/fisherfolk associations",
+          "value": "17",
+          "unit": "",
+          "asOf": "",
+          "source": ""
+        },
+        {
+          "label": "Total agricultural land area",
+          "value": "5,987.502",
+          "unit": "hectares",
+          "asOf": "",
+          "source": "CLUP"
+        },
+        {
+          "label": "Total rice area",
+          "value": "60",
+          "unit": "hectares",
+          "asOf": "",
+          "source": ""
+        },
+        {
+          "label": "Registered fishing boats",
+          "value": "121",
+          "unit": "",
+          "asOf": "",
+          "source": ""
+        }
+      ],
       "contact": {
         "phone": "",
-        "email": "",
+        "email": "maocalatrava@gmail.com",
         "hours": ""
       },
       "has": [
@@ -248,7 +473,7 @@
         "programs/services (12)",
         "letterhead email maocalatrava@gmail.com"
       ],
-      "gaps": "No mandate, vision or mission supplied. The heading 'List of Registered Farmers and Fisherfolk Organizations' is in the document but the list itself was not included — request it. The office labels itself OMAG in its own documents; the site uses MAO (Citizen's Charter acronym) — keep one label per surface."
+      "gaps": "No mandate, vision or mission supplied. The heading 'LIST OF REGISTERED FARMERS AND FISHERFOLKS ORGANIZATION' is the document's last line and the list itself is absent — confirmed in the file, not inferred; request it. VERIFY BEFORE PUBLISHING: 'Total rice area 60 hectares' against 5,987.502 ha of agricultural land looks low by an order of magnitude — confirm it is not 600 or 6,000. The email is from the document's letterhead, not a directory entry. The office labels itself OMAG in its own documents; the site uses MAO (Citizen's Charter acronym)."
     },
     {
       "acronym": "MDRRMO",
@@ -527,5 +752,6 @@
       ],
       "gaps": "Received unrequested; both are FDP-postable documents and belong on transparency.html rather than in an office profile. Only the PCM sheet of the FY2027 workbook is the form — Sheet1–3 are scratch."
     }
-  ]
+  ],
+  "_parsed": "2026-11-16: BPLO, MBO and MAO parsed from files RJ uploaded to the session (same documents as the Sept 2026 batch, so the audit entries still apply). The remaining pending-parse offices need the documents that live on RJ's machine."
 }

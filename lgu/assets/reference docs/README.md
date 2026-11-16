@@ -54,6 +54,73 @@ ask for them if you need to re-parse anything.
 | `MEO_Raising Permit (NBC Form B-09).pdf` | B-09 | generic |
 | `MEO_Repair Permit (NBC Accessory Form 08-B).pdf` | Acc. 08-B | generic |
 
+## Nov 2026 batch (uploaded to a Claude session, not to this folder)
+
+Five files RJ uploaded on **2026-11-16** while away from his main machine. They
+are **not stored in this folder** — session uploads are not part of the repo.
+Three were re-sends of Sept 2026 documents, which is what made them parseable
+without the machine that holds the originals; two were new.
+
+| File (as uploaded) | Office | Status | Outcome |
+|---|---|---|---|
+| `BUSINESS_PERMIT_AND_LICENSING_OFFICE-Mandate_and_services.docx` | BPLO | re-send of the Sept file | **Parsed** into `lgu/data/offices.json` — mandate, 4 key functions, 6 services |
+| `OMAG.docx` | Agriculture | re-send | **Parsed** — 6 staff, 7 statistics, 12 programmes, letterhead email |
+| `Office_of_the_Budget_Officer.pdf` | Budget | re-send (LBP Form 4) | **Parsed** — mandate (5), vision, mission, organizational outcome, CY2027 proposed figures |
+| `mcr.pdf` | Civil Registrar | re-send, duplicate of Charter pp. 21–26 | No new content, but **used to verify** `citizens-charter.json` |
+| `Accounting_Docs-Cal.pdf` | Accounting | **NEW** — the office had submitted nothing before | **Split and published** — 20 FDP forms |
+
+### `Accounting_Docs-Cal.pdf` → `lgu/assets/contents/fdp/`
+
+20 pages, one FDP form per page, in no particular order. Split one file per
+form per quarter and published on `transparency.html`. Source bundle MD5
+`ad73e8f2f21dd395ca46287bfdd50ae3` (the bundle itself is not in the repo).
+
+| FDP Form | Document | Periods | Source pages |
+|---|---|---|---|
+| Form 6 | Trust Fund Utilization / quarterly report on projects | CY2025 Q3–Q4, CY2026 Q1–Q2 | 14, 4, 9, 10 |
+| Form 8 | LDRRM Fund Utilization | CY2025 Q3–Q4, CY2026 Q1–Q2 | 11, 5, 13, 12 |
+| Form 9 | Statement of Cash Flows | CY2025 Q3–Q4, CY2026 Q1–Q2 | 19, 20, 18, 17 |
+| Form 11 | Special Education Fund Utilization | CY2025 Q3–Q4, CY2026 Q1–Q2 | 7, 2, 15, 6 |
+| Form 12 | Unliquidated Cash Advances | CY2025 Q3–Q4, CY2026 Q1–Q2 | 8, 1, 16, 3 |
+
+**The scans were deliberately not re-encoded.** They are ~267 DPI CamScanner
+JPEGs, ~400 KB per file, 7.9 MB in total. These are financial forms whose peso
+figures have to stay readable, and re-encoding an already-compressed LGU export
+has backfired here before (see `MEMORY.md` on the portraits).
+
+### Flagged for the Municipal Accountant — published as supplied, on RJ's call
+
+1. **CY2025 Q3 Form 12 totals do not add up.** The listed balances sum to
+   **₱731,332.00**; the form's own total reads **₱651,357.00**. The ₱79,975
+   difference is exactly the three aged rows (41,460.00 + 29,000.00 +
+   9,515.00), so the total appears to count only the current column. Read off a
+   scan — verify against the office's original before correcting anything.
+2. **An advance dated 01/09/2019** (Susan Fajilan, ₱16,412.00) sits in the
+   *under-30-days* column on the same form. Either the date or the ageing is
+   wrong; a six-year-old unliquidated advance is also the first thing a reader
+   will notice.
+3. **Form 12 names individuals with amounts** (~24 people, incl. Sanggunian
+   members). FDP Form 12 prescribes the debtor-name column, so this is required
+   disclosure rather than a choice — recorded here only so nobody later assumes
+   it was published without anyone noticing. RJ decided on 2026-11-16 to post
+   all five forms as supplied and raise 1 and 2 with the Accountant separately.
+
+### Other quality notes from this batch
+
+- `Office_of_the_Budget_Officer.pdf` **page 1 is cropped at the foot**: the last
+  performance indicator ("No overdrafts in … appropriation", target 0) is cut
+  across the page break. The full row needs the LGU's original.
+- The MBO mission reads "effieciency" in the source; normalised to "efficiency"
+  when parsed, the same way the org chart's doubled office name was.
+- OMAG's **"Total Rice area — 60 hectares"** against 5,987.502 ha of
+  agricultural land looks low by an order of magnitude. Confirm before it is
+  rendered.
+- `mcr.pdf` confirmed three Charter fees exactly (Marriage Licence ₱450,
+  Marriage Certificate ₱100, Death Certificate ₱50) and filled two empty ones
+  with "Based on Revenue Code". It also shows the Charter's own requirement
+  numbering jumping **1 → 6** for birth registration; items 2–5 do not exist in
+  the source, so that is not a parse error.
+
 ## Redundant / already-covered files
 
 | File | Why |
