@@ -82,6 +82,58 @@ municipal government.
   device is scoped to the archived repo, so the content editor cannot publish
   until it is replaced.
 
+## 2026-11-16, fourth pass — permit forms published; MNAO wording settled
+
+**MNAO's vision/mission conflict is RESOLVED (RJ): the Office Profile
+(`MNAO.docx`) is the reference**, being the later of the two uploads
+(06:09:16.05 vs 06:09:15.88 — checked, not assumed). So the data now reads
+"We envision **a** nutritionally educated people … **to** abundance …" and the
+mission ends at "preschool and school children", **without** "and other
+vulnerable groups". The Services Offered document's variant is explicitly
+marked do-not-reinstate in `offices.json`, since on wording alone it looks like
+the better text and someone will be tempted. Its *services* list is still the
+source for `services[]` — the Office Profile has none. "thru" is the office's
+own wording and stays verbatim. MSWDO was confirmed as-is, "family alleviation"
+included.
+
+**Twelve permit forms are now downloadable** — `lgu/assets/contents/forms/`,
+rendered from the new `lgu/data/forms.json` on a fourth `services.html` tab,
+**Forms & Permits**. Grouped into Building & occupancy (the two unified forms)
+and Ancillary permits (ten NBC forms), each group linking across to
+`services.html#charter`.
+- **`forms.json` deliberately carries no fees, requirements or processing
+  time.** Those live in `citizens-charter.json`; restating them here would give
+  the site two numbers to keep current. Keep it that way.
+- Files renamed to carry their NBC number
+  (`NBC-Form-A-01_Architectural-Permit.pdf`). **Form numbers were read off each
+  PDF**, not copied from the audit index — all twelve matched.
+- **The generic B-02 excavation form was deliberately not published**: it
+  duplicates the Calatrava-branded one, and offering two identical forms helps
+  nobody. 13 files in, 12 published.
+- Eight forms have a blank LGU header. **That is correct** — they are national
+  NBC forms and the applicant writes in the municipality. Don't "fix" it.
+- The occupancy unified form has gained a Calatrava header since the Sept
+  audit recorded it as generic.
+
+**The "CEBU" leftover is not fixed, and the standalone re-upload is not a fix.**
+Both copies extract identical text; only the MD5 differs. What renders is
+correct — header reads Calatrava/Romblon, the Location of Construction line is
+blank — but three "CEBU" strings, including `CITY/ MUNICIPALITY OF CEBU`, sit in
+the PDF's text layer **underneath** the correction. Invisible on screen and in
+print; still extractable by copy-paste and readable by a screen reader.
+Published anyway, because a usable form beats no form; recorded in `forms.json`.
+**Ask the LGU for a clean master rather than another re-save.**
+
+Verified in a browser: 12 downloads resolve as PDFs, `#forms` deep-links to the
+tab, arrow-key roving tabindex still works with four tabs, no overflow or
+undersized text at 375px, no console errors.
+
+**Worth doing later:** the site search (`buildSearchIndex` in `assets/app.js`)
+indexes `citizens-charter.json` + `services.json` only, so a resident searching
+"building permit form" finds the service but not the downloadable form. Adding
+`forms.json` to the index is a small change to shared code — not done here to
+keep this pass to what was asked.
+
 ## 2026-11-16, third pass — six of sixteen offices parsed; two permits corrected
 
 A second upload of five documents (two MEO PDFs, two MNAO .docx, one MSWDO

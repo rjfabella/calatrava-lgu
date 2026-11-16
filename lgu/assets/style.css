@@ -207,6 +207,9 @@ html{scroll-behavior:smooth}
 .svc-group-head svg{width:30px;height:30px;color:var(--ocean);stroke-width:1.6}
 .svc-group-head h2{font-family:var(--fd);font-size:1.55rem;font-weight:700;color:var(--deep)}
 .svc-group-intro{color:var(--muted);max-width:62ch;margin:-.75rem 0 1.5rem}
+.form-meta{display:block;margin-top:.2rem;color:var(--muted);font-weight:600}
+.forms-charter-link{margin-top:1rem}
+.forms-charter-link a{font-weight:600}
 .svc-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .svc-item{background:var(--white);padding:1.5rem 1.7rem}
 .svc-item--lead{grid-column:1 / -1;background:var(--cream);border-left:4px solid var(--gold)}

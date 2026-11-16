@@ -181,6 +181,37 @@ systemic problem and does not need re-checking service by service.
    (rounding). The **"C.Y. 2026" label is still unconfirmed** — it may be CY2025
    data reported in 2026.
 
+### Third upload, 2026-11-16 — the permit forms, now published
+
+`Permits-20260921T014451Z-1-001.zip` (13 PDFs) plus a standalone
+`Unified-Application-for-Bldg-Permit.pdf`. These are the Sept batch's
+`MEO_Permits/` set. **Twelve are now published** under
+`lgu/assets/contents/forms/`, rendered on the `services.html` → *Forms &
+Permits* tab from `lgu/data/forms.json`. Renamed to carry their NBC form
+number, e.g. `NBC-Form-A-01_Architectural-Permit.pdf`. Form numbers were read
+off each PDF, not taken from this index, and all matched.
+
+- **The generic `Excavation-Permit.pdf` (B-02) was NOT published.** It is the
+  same form as the Calatrava-branded `GROUND-AND-EXCAVATION-PERMIT-FORM.pdf`;
+  publishing both would offer applicants a choice between identical forms.
+- **`UNIFIED APPLICATION FORMS FOR CERTIFICATE OF OCCUPANY.pdf` now carries a
+  Calatrava header**, where the Sept audit recorded it as generic. The LGU has
+  evidently branded it since.
+- Eight forms (A-01, A-02, A-03, A-06, A-08, B-09, Accessory 08-B) have a blank
+  LGU header. **That is correct, not a defect** — they are national NBC forms
+  and the applicant writes in the municipality.
+
+**The "CEBU" leftover is still there, and the standalone re-upload does not fix
+it.** The two copies differ by MD5 but their extracted text is identical. What
+the page actually shows is correct: the header reads *City/Municipality of
+Calatrava, Province of Romblon* and the Location of Construction line is blank.
+The superseded text sits **underneath** the correction — three occurrences,
+including `CITY/ MUNICIPALITY OF CEBU` on the location line. It is invisible on
+screen and in print, but still comes out on copy-paste and would be read aloud
+by a screen reader. Published anyway, because a usable form beats no form, with
+the caveat recorded in `forms.json`. **Ask the LGU for a clean master**, not
+another re-save of the same file.
+
 ## Redundant / already-covered files
 
 | File | Why |

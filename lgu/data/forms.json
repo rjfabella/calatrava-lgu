@@ -1,0 +1,133 @@
+{
+ "_source": "Blank application forms supplied by the Office of the Municipal Engineer / Office of the Building Official (Sept 2026 batch, re-uploaded 2026-11-16). Originals under lgu/assets/contents/forms/.",
+ "_note": "Downloadable blank forms, rendered on services.html under the 'Forms & Permits' tab. These are BLANK APPLICATION FORMS, not filled documents and not Full Disclosure records — they do not belong in transparency.json. The procedure, requirements, fees and processing time for each permit live in citizens-charter.json (Charter pp. 64-67) and are NOT restated here, so the two can never drift. 'calatravaBranded' false means a national NBC form with a blank LGU header, which is normal and correct: the applicant writes in the municipality.",
+ "_pending": "Only Engineering/OBO forms exist so far. BPLO business-permit forms, MSWDO application forms and MCR civil-registry forms have not been supplied — add groups here as they arrive rather than inventing placeholders.",
+ "groups": [
+  {
+   "id": "building",
+   "office": "Office of the Municipal Engineer / Office of the Building Official",
+   "title": "Building & occupancy",
+   "intro": "Start here. The unified forms cover the main application; the National Building Code forms below are the ancillary permits filed with it.",
+   "charterRef": "services.html#charter",
+   "forms": [
+    {
+     "title": "Unified Application Form for Building Permit",
+     "form": "Unified form",
+     "file": "assets/contents/forms/Unified-Application-for-Building-Permit.pdf",
+     "sizeKB": 284,
+     "description": "The main application for a new building permit, renewal or amendment. Also serves as the application for Locational Clearance and Fire Safety Evaluation Clearance.",
+     "calatravaBranded": true,
+     "note": "Visually correct — the header reads Calatrava, Romblon and the Location of Construction line is blank. A superseded 'CEBU' remains in the PDF's hidden text layer underneath the correction: invisible on screen and in print, but still extractable by copy-paste and readable by a screen reader. Ask the LGU for a clean master."
+    },
+    {
+     "title": "Unified Application Form for Certificate of Occupancy",
+     "form": "Unified form",
+     "file": "assets/contents/forms/Unified-Application-for-Certificate-of-Occupancy.pdf",
+     "sizeKB": 287,
+     "description": "Filed once the building is complete, before it may be occupied, or when the owner changes the required occupancy.",
+     "calatravaBranded": true,
+     "note": ""
+    }
+   ]
+  },
+  {
+   "id": "ancillary",
+   "office": "Office of the Municipal Engineer / Office of the Building Official",
+   "title": "Ancillary permits (National Building Code)",
+   "intro": "Filed alongside the building permit. Which of these you need depends on the scope of work — your architect or civil engineer will advise.",
+   "charterRef": "services.html#charter",
+   "forms": [
+    {
+     "title": "Architectural Permit",
+     "form": "NBC Form A-01",
+     "file": "assets/contents/forms/NBC-Form-A-01_Architectural-Permit.pdf",
+     "sizeKB": 199,
+     "description": "Architectural works, signed and sealed by the architect.",
+     "calatravaBranded": false,
+     "note": ""
+    },
+    {
+     "title": "Civil/Structural Permit",
+     "form": "NBC Form A-02",
+     "file": "assets/contents/forms/NBC-Form-A-02_Civil-Structural-Permit.pdf",
+     "sizeKB": 191,
+     "description": "Structural works, signed and sealed by the civil engineer.",
+     "calatravaBranded": false,
+     "note": ""
+    },
+    {
+     "title": "Electrical Permit",
+     "form": "NBC Form A-03",
+     "file": "assets/contents/forms/NBC-Form-A-03_Electrical-Permit.pdf",
+     "sizeKB": 120,
+     "description": "Electrical installation, signed and sealed by the electrical engineer.",
+     "calatravaBranded": false,
+     "note": ""
+    },
+    {
+     "title": "Plumbing Permit",
+     "form": "NBC Form A-06",
+     "file": "assets/contents/forms/NBC-Form-A-06_Plumbing-Permit.pdf",
+     "sizeKB": 108,
+     "description": "Plumbing and sanitary installation, signed and sealed by the sanitary engineer or master plumber.",
+     "calatravaBranded": false,
+     "note": ""
+    },
+    {
+     "title": "Electronics Permit",
+     "form": "NBC Form A-07",
+     "file": "assets/contents/forms/NBC-Form-A-07_Electronics-Permit.pdf",
+     "sizeKB": 242,
+     "description": "Electronics installation, signed and sealed by the electronics engineer.",
+     "calatravaBranded": true,
+     "note": ""
+    },
+    {
+     "title": "Demolition Permit",
+     "form": "NBC Form A-08",
+     "file": "assets/contents/forms/NBC-Form-A-08_Demolition-Permit.pdf",
+     "sizeKB": 37,
+     "description": "Demolition of an existing structure or part of one.",
+     "calatravaBranded": false,
+     "note": ""
+    },
+    {
+     "title": "Excavation and Ground Preparation Permit",
+     "form": "NBC Form B-02",
+     "file": "assets/contents/forms/NBC-Form-B-02_Excavation-and-Ground-Preparation-Permit.pdf",
+     "sizeKB": 497,
+     "description": "Excavation and fills, foundations and retaining walls, pile foundations, grading and earthworks.",
+     "calatravaBranded": true,
+     "note": "The LGU supplied two copies of this form, a Calatrava-branded one and a generic one. Only the branded copy is published, so applicants are not offered a choice between identical forms."
+    },
+    {
+     "title": "Fencing Permit",
+     "form": "NBC Form B-03",
+     "file": "assets/contents/forms/NBC-Form-B-03_Fencing-Permit.pdf",
+     "sizeKB": 257,
+     "description": "Construction of a perimeter fence.",
+     "calatravaBranded": true,
+     "note": ""
+    },
+    {
+     "title": "Raising Permit",
+     "form": "NBC Form B-09",
+     "file": "assets/contents/forms/NBC-Form-B-09_Raising-Permit.pdf",
+     "sizeKB": 169,
+     "description": "Raising an existing building or structure.",
+     "calatravaBranded": false,
+     "note": ""
+    },
+    {
+     "title": "Repair Permit",
+     "form": "NBC Accessory Form 08-B",
+     "file": "assets/contents/forms/NBC-Accessory-Form-08-B_Repair-Permit.pdf",
+     "sizeKB": 165,
+     "description": "Repair works on an existing building or structure.",
+     "calatravaBranded": false,
+     "note": ""
+    }
+   ]
+  }
+ ]
+}

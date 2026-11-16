@@ -143,6 +143,14 @@ Paths in this subsection are relative to `lgu/`.
   - `data/transparency.json` — Full Disclosure document links, including
     the actual Citizen's Charter PDF and Org Chart PPTX
   - `data/contact.json` — office directory, address, map embed
+  - `data/forms.json` — downloadable blank application forms, rendered on the
+    `services.html` **Forms & Permits** tab from `assets/contents/forms/`
+    (12 Engineering/OBO permit forms so far). It deliberately carries **no
+    fees, requirements or processing time** — those live in
+    `citizens-charter.json` and each group links across to
+    `services.html#charter` instead, so there is only one number to keep
+    current. `calatravaBranded: false` means a national NBC form with a blank
+    LGU header, which is correct: the applicant writes in the municipality.
   - `data/offices.json` — **structure only, no content parsed yet.** The
     target shape for the per-office profiles (mandate / vision / mission /
     key functions / services / programs / staff / statistics) in the Sept
@@ -163,8 +171,8 @@ Paths in this subsection are relative to `lgu/`.
 - **Pages**: `index.html`, `about.html` (Government — elected officials +
   offices/departments), `about-us.html` (three tabs: History / Barangays /
   Map),
-  `services.html` (Public Services, three tabs: Citizen's Charter explainer /
-  Charter directory / services by category), `barangays.html`,
+  `services.html` (Public Services, four tabs: Citizen's Charter explainer /
+  Charter directory / services by category / Forms & Permits), `barangays.html`,
   `transparency.html`, `news.html`, `contact.html` (office directory only),
   `privacy.html`. `barangays.html` is a redirect stub to
   `about-us.html#barangays` — keep it so old links and bookmarks survive.

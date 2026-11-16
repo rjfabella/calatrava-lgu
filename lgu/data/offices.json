@@ -515,8 +515,8 @@
       ],
       "charterPages": "",
       "mandate": "",
-      "vision": "We envision nutritionally educated people peacefully living with their families and children in abundance and prosperity in a clean and green environment.",
-      "mission": "To create a nutritionally healthy society by providing sustainable and integrated linkages of development services through the establishment and maintenance of a municipal network of nutrition implementers and workers that shall safeguard and regularly monitor the nutritional status of preschool and school children and other vulnerable groups.",
+      "vision": "We envision a nutritionally educated people peacefully living with their families and children to abundance and prosperity in a clean and green environment.",
+      "mission": "To create a nutritionally healthy society by providing sustainable and integrated linkages of development services thru the establishment and maintenance of a municipal network of nutrition implementers and workers that shall safeguard and regularly monitor the nutritional status of preschool and school children.",
       "keyFunctions": [],
       "services": [
         {
@@ -641,7 +641,7 @@
         "all 7 barangay seals as embedded images",
         "NNC logo"
       ],
-      "gaps": "No mandate. VISION AND MISSION DIFFER BETWEEN THE OFFICE'S OWN TWO DOCUMENTS - confirm which is current before publishing. Used here: the Services Offered document. The Office Profile document instead reads 'We envision a nutritionally educated people ... to abundance ...' and ends its mission at 'preschool and school children', without 'and other vulnerable groups'. The Services version was chosen as the fuller and grammatically sound one, which is a judgement, not a confirmation. The 'Weight for Age C.Y. 2026' label may be CY2025 data reported in 2026 - still unconfirmed. Percentages sum to 100.01% (rounding) and the four counts do total 900. Poblacion's BNS post is vacant and is left as an empty name, not 'TBA'. Falcutila is spelled 'Norvel Kimwell' in this document; kept as 'NorvelKimwell' per the org-chart ruling in MEMORY.md. The two staff mobile numbers come from the office's own profile and are personal mobiles - confirm the office is content for them to be public before they render.",
+      "gaps": "No mandate. RESOLVED 2026-11-16 (RJ): the office's two documents carried different vision/mission wordings; the Office Profile ('MNAO.docx', the later upload) is the reference, and its wording is what is above. The Services Offered document's variant — 'nutritionally educated people … in abundance …', mission ending 'and other vulnerable groups' — is NOT used; do not reinstate it from that file. Its SERVICES list is still the source for services[], since the Office Profile has none. 'thru' is the office's own wording and is left verbatim rather than modernised to 'through'. The 'Weight for Age C.Y. 2026' label may be CY2025 data reported in 2026 — still unconfirmed. Percentages sum to 100.01% (rounding); the four counts do total 900. Poblacion's BNS post is vacant and left as an empty name, not 'TBA'. Falcutila is spelled 'Norvel Kimwell' in this document; kept as 'NorvelKimwell' per the org-chart ruling in MEMORY.md. The two staff mobile numbers come from the office's own profile and are personal mobiles — confirm the office is content for them to be public before they render.",
       "committee": {
         "name": "Municipal Nutrition Committee (MNC)",
         "members": [
