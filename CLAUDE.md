@@ -227,7 +227,16 @@ Paths in this subsection are relative to `lgu/`.
   collected from the LGU — PDFs, DOCX, PPTX). Parse new source documents
   into the relevant `data/*.json` (that's the pattern for the Citizen's
   Charter and Org Chart); the originals also stay linked from
-  `transparency.json` for FDP/legal completeness.
+  `transparency.json` for FDP/legal completeness. Two subfolders are
+  published directly: `assets/contents/fdp/` (27 Full Disclosure forms, one
+  file per form per period, linked from `transparency.json`) and
+  `assets/contents/forms/` (12 blank permit forms, linked from
+  `forms.json`). **Scans in both are served exactly as the LGU supplied
+  them** — they are financial and legal records whose figures must stay
+  legible, so don't re-encode or rasterise to save bytes; a sideways scan is
+  turned with `/Rotate`, which leaves the image untouched. The one exception
+  is `forms/Unified-Application-for-Building-Permit.pdf`, whose superseded
+  "CEBU" text was removed; `forms.json` records that.
   `assets/reference docs/` is the **staging area** for the Sept 2026 batch
   of office submissions — audited, renamed `Dept_DocName`, and indexed in
   its `README.md`; nothing there is on the site yet. The tracking sheet is
