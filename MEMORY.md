@@ -82,6 +82,52 @@ municipal government.
   device is scoped to the archived repo, so the content editor cannot publish
   until it is replaced.
 
+## 2026-11-16, sixth pass — the office panels are built (batch 5)
+
+`offices.json` now renders. A department card on
+`about.html#departments-section` whose office is `parsed` becomes a
+`<details>`; everything else stays a plain card, so an office that has sent
+nothing still reads as a gap rather than as an office with nothing to say.
+Four of the twelve org-chart cards expand (MSWDO, MAO, MBO, MEO/OBO).
+
+**Design decisions worth not re-litigating:**
+- **An open panel takes `grid-column:1/-1`.** A mandate and a seven-item
+  service list do not read in a one-third column, and pulling the card out of
+  the grid would have been far more code for a worse result.
+- **BPLO and MNAO get a second grid, "Other offices & units."** Neither is a
+  separate office on the 2026 plantilla — BPLO sits under the Mayor, MNAO is a
+  designated officer — so neither has a card in `officials.json`. Forcing them
+  into the org-chart grid would break the rule that it matches
+  `organization.json`. Matching is on the Charter acronym, falling back to the
+  office name; the Accountant's office has no acronym and matches by name.
+- **Proposed budget figures are NOT rendered.** The renderer drops any
+  statistic whose `source` says `PROPOSED`, which is MBO's and MEO's CY2027
+  LBP Form 4 figures. They are proposals on a preparation form, not
+  appropriations, and a peso figure on a "who does what" card reads as money
+  spent. Budget belongs on `transparency.html`. This is the open question the
+  third pass flagged, now answered — the data keeps the figures, the page does
+  not show them. Verified by test: none of the six amounts appears anywhere in
+  the section. MEO's ten planned projects DO render, labelled, because they
+  carry no money.
+- **Fees, requirements and processing times are never restated** in a panel.
+  Each service block links to `services.html#charter` instead, so there is one
+  number to keep current. Four such links render.
+- **An office with no head on file gets no portrait slot at all.** The
+  monogram stands for a person, and initials built from an office name read as
+  one — BPLO rendered as "BPA" before this was fixed. Caught by looking at the
+  render, which is the only way it would have been.
+
+**Fixed in passing, pre-existing:** `.dept-acr` (the acronym chip) was 12px,
+below this half's 12.5px floor. It post-dates the 2026-09-06 readability audit,
+so the audit never saw it. Now 12.5px, and **all nine LGU pages sweep clean at
+zero text nodes under 12.5px** — that sweep is worth re-running after any type
+change.
+
+Verified: no WCAG AA contrast failures in the panels (computed colour against
+real backdrop, not eyeballed), no console errors, `<summary>` toggles on Enter
+and takes a visible focus ring, open card spans the full grid width, and at
+375px there is no overflow, no undersized text and no summary shorter than 44px.
+
 ## 2026-11-16, fifth pass — the building-permit form was actually broken, and is fixed
 
 **Correcting what the fourth pass said.** I reported that the unified building

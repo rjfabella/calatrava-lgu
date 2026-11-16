@@ -151,18 +151,30 @@ Paths in this subsection are relative to `lgu/`.
     `services.html#charter` instead, so there is only one number to keep
     current. `calatravaBranded: false` means a national NBC form with a blank
     LGU header, which is correct: the applicant writes in the municipality.
-  - `data/offices.json` — **structure only, no content parsed yet.** The
-    target shape for the per-office profiles (mandate / vision / mission /
-    key functions / services / programs / staff / statistics) in the Sept
-    2026 `assets/reference docs/` batch, plus the two programme bodies
-    (KALAHI-CIDSS, GFPS). Every office carries `status`, `sourceDocs` and
-    `gaps`; content fields are deliberately empty. The raw submissions are
-    gitignored and live only on RJ's machine, so the parse has to run there
-    — and each field must be typed from the source document, not from the
-    audit README's summary. Nothing renders it yet; the IA decision (per-
-    office pages vs. panels on `about.html#departments-section`) comes
-    first. Keep `office`/`orgChartOffice` in step with `organization.json`
-    and `acronym` in step with `officials.json`'s departments.
+  - `data/offices.json` — per-office profiles (mandate / vision / mission /
+    key functions / services / programmes / staff / statistics), **rendered as
+    expandable panels on `about.html#departments-section`**. A department card
+    whose office has `status: "parsed"` becomes a `<details>`; everything else
+    stays a plain card, so an office that has sent nothing reads as a gap. An
+    open panel takes `grid-column:1/-1` — a mandate does not read in a
+    one-third column. Offices with content but no card on the 2026 plantilla
+    (BPLO, MNAO) render in a second "Other offices & units" grid rather than
+    being forced into the org-chart grid, which must keep matching
+    `organization.json`. **Two deliberate omissions in the renderer:**
+    statistics whose `source` says `PROPOSED` are not rendered (CY2027 office
+    budget proposals are not appropriations, and a peso figure on a "who does
+    what" card reads as money spent — budget belongs on `transparency.html`);
+    and fees/requirements/processing times are never restated, each service
+    linking to `services.html#charter` instead.
+    Matching is on the Citizen's Charter acronym, falling back to the office
+    name — keep `acronym` in step with `officials.json`'s departments and
+    `office` with `organization.json`.
+    Six of sixteen offices are parsed (BPLO, MBO, MAO, MEO/OBO, MNAO,
+    MSWDO); MASSO and MDRRMO hold documents still to be typed and the rest
+    have submitted nothing. Each entry carries `status`, `sourceDocs` and
+    `gaps`, and `gaps` is where the open questions live — read it before
+    touching an office's content. Type a field from the source document,
+    never from the audit README's summary.
 - **Styling**: single `assets/style.css` design system (Merriweather + Source
   Sans 3 fonts, green/gold palette) driven by `:root` CSS variables. Re-theme
   there, not with inline styles or per-page stylesheets. Type is deliberately
