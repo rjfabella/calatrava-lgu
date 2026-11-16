@@ -14,10 +14,10 @@
      "title": "Unified Application Form for Building Permit",
      "form": "Unified form",
      "file": "assets/contents/forms/Unified-Application-for-Building-Permit.pdf",
-     "sizeKB": 284,
+     "sizeKB": 370,
      "description": "The main application for a new building permit, renewal or amendment. Also serves as the application for Locational Clearance and Fire Safety Evaluation Clearance.",
      "calatravaBranded": true,
-     "note": "Visually correct — the header reads Calatrava, Romblon and the Location of Construction line is blank. A superseded 'CEBU' remains in the PDF's hidden text layer underneath the correction: invisible on screen and in print, but still extractable by copy-paste and readable by a screen reader. Ask the LGU for a clean master."
+     "note": "Corrected 2026-11-16. The LGU's copy carried the superseded 'CEBU' from the form it was adapted from, in three places: twice in the header, hidden under the Calatrava/Romblon overlays, and ONCE VISIBLY on the Location of Construction line, which printed as 'CITY/ MUNICIPALITY OF CEBU'. All three text objects were removed from the page's content stream; the line now prints blank for the applicant to fill in. Verified: no 'CEBU' remains in the text layer, and the two rendered pages are pixel-identical to the original apart from that one line. If the LGU ever re-sends this form, re-check it - their copy is still the uncorrected one."
     },
     {
      "title": "Unified Application Form for Certificate of Occupancy",
@@ -129,5 +129,6 @@
     }
    ]
   }
- ]
+ ],
+ "_corrections": "lgu/assets/contents/forms/Unified-Application-for-Building-Permit.pdf is the only published file this repo has modified rather than passed through unchanged. Everything else under lgu/assets/contents/ is exactly as the LGU supplied it. The edit removed three 'CEBU' text objects; the method and the before/after verification are in MEMORY.md."
 }

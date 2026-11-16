@@ -82,6 +82,46 @@ municipal government.
   device is scoped to the archived repo, so the content editor cannot publish
   until it is replaced.
 
+## 2026-11-16, fifth pass — the building-permit form was actually broken, and is fixed
+
+**Correcting what the fourth pass said.** I reported that the unified building
+permit form was "visually correct" and that "CEBU" survived only in the hidden
+text layer. **That was wrong**, and it mattered: of the three occurrences, two
+were header text hidden under the Calatrava/Romblon overlays, but the third
+**printed plainly** on the Location of Construction line, which read
+`CITY/ MUNICIPALITY OF CEBU`. Anyone downloading the form would have filed a
+sheet naming the wrong municipality. The Sept 2026 audit row had this right all
+along; my render check read a downscaled image and I downgraded it. **A
+pixel-diff is what caught it — the eyeball check is what missed it.**
+
+**The file is now fixed in place** (RJ's instruction, rather than waiting on the
+LGU). The three `[...]TJ` text-showing operators that draw "CEBU" on page 1 were
+replaced with empty `[]TJ` arrays in the page content stream — fonts, geometry
+and every other operator untouched. The Location line now prints blank for the
+applicant to fill in; the header still reads *City/Municipality of Calatrava,
+Province of Romblon*.
+
+**Why this method, if it ever has to be redone:** painting over the text is what
+the LGU did and is what failed — it leaves the old words readable by copy-paste
+and by screen readers. Rasterising the page would have destroyed the text layer
+and the form's accessibility. Removing the operators is the only option that
+fixes both the print and the text layer. The script used is
+`strip_cebu.py`, kept in the scratchpad, not the repo — it is a
+one-off, and committing it would imply the repo has PDF tooling, which it
+deliberately does not.
+
+**Verified, not assumed:** no "CEBU" anywhere in the text layer; page 2
+pixel-identical; page 1 differing in exactly one region of 268 pixels at 150 dpi,
+which is the corrected line; "Calatrava" and "Romblon" still present once each.
+The file grew 290 KB → 370 KB — that is pypdf's serialisation, not the content:
+decoded content streams and image bytes are byte-identical in both.
+
+**This is the only published file in the repo that we have modified rather than
+passed through unchanged**, and `forms.json` now records that in
+`_corrections`. Everything else under `lgu/assets/contents/` is exactly as the
+LGU supplied it. **The LGU's own copy is still the uncorrected one** — if they
+re-send this form, re-check it rather than assuming it supersedes ours.
+
 ## 2026-11-16, fourth pass — permit forms published; MNAO wording settled
 
 **MNAO's vision/mission conflict is RESOLVED (RJ): the Office Profile

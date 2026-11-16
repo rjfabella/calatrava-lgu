@@ -40,7 +40,7 @@ ask for them if you need to re-parse anything.
 
 | File | NBC form | Notes |
 |---|---|---|
-| `MEO_Unified Application Form for Building Permit.pdf` | Unified form | Calatrava header, but "CITY/MUNICIPALITY OF **CEBU**" left in the Location of Construction line — LGU to fix |
+| `MEO_Unified Application Form for Building Permit.pdf` | Unified form | Calatrava header, but "CITY/MUNICIPALITY OF **CEBU**" left in the Location of Construction line — LGU to fix — **FIXED 2026-11-16 in the published copy, see below.** This row was right; a later note wrongly downgraded it to a hidden-text-only problem. |
 | `MEO_Unified Application Form for Certificate of Occupancy.pdf` | Unified form | generic header (blank LGU) |
 | `MEO_Architectural Permit (NBC Form A-01).pdf` | A-01 | generic |
 | `MEO_Civil-Structural Permit (NBC Form A-02).pdf` | A-02 | generic |
@@ -201,16 +201,26 @@ off each PDF, not taken from this index, and all matched.
   LGU header. **That is correct, not a defect** — they are national NBC forms
   and the applicant writes in the municipality.
 
-**The "CEBU" leftover is still there, and the standalone re-upload does not fix
-it.** The two copies differ by MD5 but their extracted text is identical. What
-the page actually shows is correct: the header reads *City/Municipality of
-Calatrava, Province of Romblon* and the Location of Construction line is blank.
-The superseded text sits **underneath** the correction — three occurrences,
-including `CITY/ MUNICIPALITY OF CEBU` on the location line. It is invisible on
-screen and in print, but still comes out on copy-paste and would be read aloud
-by a screen reader. Published anyway, because a usable form beats no form, with
-the caveat recorded in `forms.json`. **Ask the LGU for a clean master**, not
-another re-save of the same file.
+**The "CEBU" leftover is FIXED in the published copy (2026-11-16).** The
+standalone re-upload was not a fix — the two copies differ by MD5 but extract
+identical text — so the file itself was corrected instead.
+
+**It was worse than first recorded.** An earlier note here said the form was
+"visually correct" and that only the hidden text layer carried the old name.
+That was wrong, and a pixel-diff of the rendered pages is what caught it. Of
+the three occurrences, two were header text hidden under the Calatrava/Romblon
+overlays, but **the third printed plainly** on the Location of Construction
+line, which read `CITY/ MUNICIPALITY OF CEBU`. Anyone who downloaded the form
+would have filled in and filed a sheet naming the wrong municipality.
+
+All three text objects were removed from page 1's content stream. The line now
+prints blank for the applicant. Verified: no "CEBU" in the text layer, page 2
+pixel-identical, page 1 differing only in that one line (268 pixels at 150 dpi),
+header still reading *City/Municipality of Calatrava, Province of Romblon*. The
+file grew 290 KB → 370 KB, which is the cost of the rewrite, not of the content.
+
+**The LGU's own copy is still the uncorrected one.** If they re-send this form,
+re-check it rather than assuming it supersedes ours.
 
 ## Redundant / already-covered files
 
@@ -243,7 +253,7 @@ staff list or office contact (2).
 - Engineer office number in the profile doc reads "+6939 695236538" — not a
   valid PH mobile length; confirm before publishing (never publish an
   unverified dialable number).
-- Building Permit unified form carries a "CEBU" leftover.
+- Building Permit unified form carries a "CEBU" leftover. **Fixed 2026-11-16 in the published copy; the LGU's own file is still uncorrected.**
 - OMAG's farmer/fisherfolk organizations list was not actually included.
 - MNAO's "Weight for Age C.Y. 2026" label may be CY2025 data reported in
   2026 — confirm the reference year.
