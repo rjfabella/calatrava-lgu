@@ -82,6 +82,96 @@ municipal government.
   device is scoped to the archived repo, so the content editor cannot publish
   until it is replaced.
 
+## 2026-11-16 — admin PAT diagnostics, and the reference-doc parse structure
+
+**The admin editor's token (the job left over from the merge).** The code side
+was already right — `GH_REPO` in `admin.html` has pointed at
+`rjfabella/calatrava-lgu` since commit `1dcee55`. What was missing was a
+usable failure message: GitHub answers **404, not 403**, for a repo a
+fine-grained token cannot see, so the old token (scoped to the archived
+`calatrava-tourism-portal`) failed identically to a typo'd password. The LGU
+staffer had no way to tell the two apart.
+- `validateGhToken()` now returns `{ ok, reason }` — `invalid` / `scope` /
+  `readonly` / `offline` — and the sign-in screen prints the matching
+  sentence from `GH_TOKEN_ERRORS` instead of "Incorrect password".
+- **This repo is public, so a bad token can still get 200** with public repo
+  data. GitHub only returns a `permissions` object on an *authenticated*
+  request, so the absence of `permissions` is what distinguishes a dead token
+  from a genuinely read-only one. Don't "simplify" that back to
+  `permissions?.push`.
+- The error `<p>` got `role="alert"`, a line-height and left alignment, since
+  the messages are now sentences rather than four words.
+- **Fixed a pre-existing invisible-text bug on the same screen**: the helper
+  paragraph under the Sign In button was `color:rgba(255,255,255,.45)` on a
+  white card — white on white, unreadable, and it was the one line telling
+  staff a token is needed. Now `var(--muted)` (4.83:1 on white) and rewritten
+  to name the repo and the exact permission. The `.auth-box` was evidently
+  dark once; the leftover `rgba(0,0,0,.1)` divider is the other survivor.
+- All four messages verified in a real browser, including a stubbed 404 and a
+  stubbed read-only response.
+- **Still a human job: RJ generates the token.** Step-by-step instructions are
+  now in `README.md` under "The admin editor's GitHub token" so nobody has to
+  reconstruct the scopes. Nothing in the repo can create it.
+- Noticed, not changed: the visit-counter badge on the login screen still
+  points at `hits.sh/rjfabella.github.io/calatrava-tourism-portal.svg`.
+  Repointing it at the live domain restarts the count from zero — RJ's call.
+
+**The reference-doc parse: structure agreed and committed, content still
+blocked.** `lgu/data/offices.json` is new and is the target shape for the
+Sept 2026 office submissions — 16 offices plus KALAHI-CIDSS and GFPS, each
+with `status`, `sourceDocs`, `charterPages`, `has` (what the document
+actually contains) and `gaps` (what it doesn't, plus any quality warning).
+**Every content field is deliberately empty.** `_schema` in the file defines
+each field; `_statusValues` defines `pending-parse` / `covered-elsewhere` /
+`awaiting-submission` / `fdp-only` / `parsed` (nothing is `parsed` yet).
+- **Why no content: the raw submissions are gitignored** (`lgu/assets/
+  reference docs/*`, ~30 MB of scans and DOCX) and exist only on RJ's
+  machine. A cloud session clones from GitHub, so they are simply not here —
+  and no computer folder is shared with this session. The parse has to run
+  where those files are, or the files have to be uploaded.
+- **Do not fill these fields from the audit `README.md`.** It is a
+  second-hand index written to catalogue the batch, not a transcript. Five
+  documents are scans with no text layer (MSWDO, MBO, MEO LBP4, LDRRMF,
+  Supplemental Budgets) and must be re-typed with figures checked against
+  the scan.
+- Offices that submitted nothing (MPDO, MTO, MHO, Accountant, SB, Mayor's
+  Office, HRMO) are listed as `awaiting-submission` rather than omitted, so
+  the file doubles as the chase-list.
+- **A real conflict surfaced, left unresolved on purpose:**
+  `MDRRMO_Municipal Emergency Hotline Calatrava.docx` gives **RHU
+  0962 462 4365**, while `services.json` carries **Health 0907 237 1460**
+  from the LGU's "Calatrava Hotlines" infographic. Both look like live
+  numbers and only one can be right. Recorded in the MDRRMO entry's `gaps`;
+  **confirm with MDRRMO before touching either.** (Note this also corrects a
+  stale line in next-step 6 below: the four hotlines are *not* pending rows —
+  all six have been real since 2026-09-10.)
+- The `MAO` / `OMAG` label split is recorded too: the office calls itself
+  OMAG in its own documents, the site uses MAO from the Citizen's Charter.
+  One label per surface.
+- **Nothing renders `offices.json` yet, by design.** The IA decision comes
+  first: per-office detail pages linked from `about.html#departments-section`,
+  or an expandable panel per office there. Whichever wins, office-level
+  vision/mission must stay visually distinct from the *municipal* vision and
+  mission on the homepage, and any service already in
+  `citizens-charter.json` should link to `services.html#charter` rather than
+  restate a fee that can then drift.
+
+**Transparency page now lists what the batch actually delivered.**
+`transparency.json` gained four rows — Supplemental Budgets Nos. 1–4 CY2025,
+Annual GAD Accomplishment Report CY2025 (FDP Form 5), Annual GAD Plan and
+Budget FY2027, and LDRRM Fund Utilization Reports Jan–Jul 2026 (FDP Form 8).
+The combined "GAD Plan & Accomplishment Report" row was split in two, since
+FDP posts them as separate documents for different periods, and the "Annual
+Budget" row now says plainly that only supplementals have come in.
+- **All four are `pending`, because the files are not in the repo.** DILG FDP
+  expects the actual document to be publicly posted, so flipping one to
+  `available` means committing that file — un-ignore just it, or copy it into
+  the tracked `lgu/assets/contents/` — and setting `href` with spaces
+  URL-encoded. The reasoning is in `_pendingNote` in the file.
+- The LDRRMF scan needs re-orienting before it is linked: landscape pages,
+  alternate pages scanned upside down.
+- Verified in a browser: 24 rows, 18 pending, no console errors.
+
 ## Standards research
 
 Full governing-standards table (DICT GWTD, WCAG 2.0 AA, RA 10173, DILG FDP,

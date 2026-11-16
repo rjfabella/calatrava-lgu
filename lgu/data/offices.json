@@ -1,0 +1,531 @@
+{
+  "_source": "lgu/assets/reference docs/ — the Sept 2026 batch of office submissions. Per-file audit: that folder's README.md. Checklist mapping: 'Calatrava LGU Website Development.xlsx' -> Checklist tab, columns H (Reference Document(s)) and I (Coverage / Gaps).",
+  "_status": "STRUCTURE ONLY — NO CONTENT PARSED YET. Every content field below is deliberately empty.",
+  "_note": "Target shape for the per-office profiles in the Sept 2026 batch. The raw submissions are .gitignore'd (~30 MB of scans and DOCX) and live only on RJ's machine, so the parse has to run where those files are. Fill each field by typing it from the source document itself -- NOT from the audit README's summary and NOT from memory: the README is a second-hand index written to catalogue the batch, not a transcript. Five of the documents are scans with no text layer (MSWDO, MBO, MEO LBP4, LDRRMF, Supplemental Budgets), so their figures must be double-checked against the scan. Keep every figure, name and peso amount verbatim. Leave a field empty rather than filling it from a plausible guess -- the renderer degrades honestly and an empty field is a visible gap, which is the house rule for this site.",
+  "_statusValues": {
+    "pending-parse": "A source document is on hand; its content has not been typed into this file yet.",
+    "covered-elsewhere": "The office's submission duplicated content already parsed into another data file.",
+    "awaiting-submission": "The office sent nothing in this batch. Listed so the gap is visible and chaseable.",
+    "fdp-only": "Submission is a Full Disclosure document, not office-profile content; belongs in transparency.json.",
+    "parsed": "Content typed in and checked against the source. Nothing has reached this state yet."
+  },
+  "_schema": {
+    "acronym": "Short label as used elsewhere on this site (officials.json departments). Empty string where the Citizen's Charter gives none -- do not invent one.",
+    "office": "Canonical office name. Matches organization.json's 'office' where the office is in the 2026 org chart.",
+    "orgChartOffice": "The organization.json office this profile belongs to, or null for a body that is not a plantilla office (BPLO, MNAO, HRMO, SB).",
+    "sourceDocs": "File names inside 'lgu/assets/reference docs/', exactly as renamed there.",
+    "charterPages": "Pages of Citizen's Charter 2023 covering this office's frontline services, where it has any. Cross-reference only -- the services themselves stay in citizens-charter.json.",
+    "mandate": "Verbatim mandate statement. Plain string, or an array of strings where the source numbers them (MBO has 5, MEO has 4).",
+    "vision": "Verbatim office-level vision. Distinct from the municipal vision in officials.json -- do not merge the two.",
+    "mission": "Verbatim office-level mission.",
+    "keyFunctions": "Array of strings, verbatim.",
+    "services": "Array of { name, description, requirements[], fees, processingTime, charterRef }. Where a service is already in citizens-charter.json, set charterRef and leave fees/processingTime empty rather than copying a second figure that can drift.",
+    "programs": "Array of { name, description, beneficiaries }.",
+    "staff": "Array of { name, position, mobile }. Only where the office supplied it. These are office staff lists, distinct from organization.json's plantilla positions and from contact.json's office-head directory.",
+    "statistics": "Array of { label, value, unit, asOf, source }. 'asOf' is the reference period the document states; 'source' names the document or the cited original (e.g. CLUP).",
+    "contact": "Office-level phone/email/hours as the document gives them. Never publish a number that is not a valid PH length.",
+    "has": "What the source document actually contains, from the audit. A checklist for the parse, not site content -- drop or ignore it once 'status' is 'parsed'.",
+    "gaps": "What the office did not supply, plus any quality warning that must be resolved before publishing."
+  },
+  "_render": "Not rendered on any page yet, by design. The IA decision comes first: per-office detail pages linked from about.html#departments-section, or an expandable panel per office on that page. Whichever is chosen, office-level vision/mission must stay visually distinct from the municipal vision/mission on the homepage, and a service that is already in citizens-charter.json should link to services.html#charter rather than restate its fees. See MEMORY.md.",
+  "offices": [
+    {
+      "acronym": "BPLO",
+      "office": "Business Permits and Licensing Office",
+      "orgChartOffice": null,
+      "status": "pending-parse",
+      "sourceDocs": [
+        "BPLO_Mandate Key Functions and Services Offered.docx"
+      ],
+      "charterPages": "7–11",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "mandate",
+        "keyFunctions (4)",
+        "services (6): new permit, renewal, modification, closure, special permits, inspection"
+      ],
+      "gaps": "No vision, mission, staff list or office contact supplied."
+    },
+    {
+      "acronym": "MASSO",
+      "office": "Office of the Municipal Assessor",
+      "orgChartOffice": "Office of the Municipal Assessor",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "MASSO_Mandate Vision Mission and Services.docx"
+      ],
+      "charterPages": "38–45",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "mandate",
+        "vision",
+        "mission",
+        "services (7)"
+      ],
+      "gaps": "No staff list or office contact supplied."
+    },
+    {
+      "acronym": "MBO",
+      "office": "Office of the Municipal Budget Officer",
+      "orgChartOffice": "Office of the Municipal Budget Officer",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "MBO_Mandate Vision Mission MFO and Targets CY2027 (LBP Form 4).pdf"
+      ],
+      "charterPages": "62–64",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "mandate (5 items)",
+        "vision",
+        "mission",
+        "organizational outcome",
+        "Budget Management Program targets CY2027"
+      ],
+      "gaps": "Scanned PDF with no text layer — content must be re-typed and figures double-checked against the scan. No staff list or office contact supplied."
+    },
+    {
+      "acronym": "MEO / OBO",
+      "office": "Office of the Municipal Engineer / Office of the Building Official",
+      "orgChartOffice": "Office of the Municipal Engineer",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "MEO_Mandate Vision Mission MFO and Targets CY2027 (LBP Form 4).pdf",
+        "MEO_Municipal Engineer Profile (Portrait and Office Contact).docx",
+        "MEO_Permits/ (13 NBC permit application forms)"
+      ],
+      "charterPages": "64–67",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "mandate (4 items)",
+        "vision",
+        "mission",
+        "PPAs CY2027 (5)",
+        "20% Development Fund projects CY2027 (10)",
+        "office hours 8:00–5:00",
+        "13 downloadable permit forms"
+      ],
+      "gaps": "LBP Form 4 is a scan with no text layer. The office number in the profile doc reads '+6939 695236538' — 12 digits after +63, not a valid PH number as written; do not publish it until the LGU confirms. The Unified Building Permit form still reads 'CITY/MUNICIPALITY OF CEBU' in its Location of Construction line — LGU to fix before the form is offered as a download."
+    },
+    {
+      "acronym": "MSWDO",
+      "office": "Office of the Municipal Social Welfare and Development Officer",
+      "orgChartOffice": "Office of the Municipal Social Welfare and Development Officer",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "MSWDO_Vision Mission and Services Offered.pdf"
+      ],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "vision",
+        "mission",
+        "services (5)",
+        "requirement lists: medical, burial, fire, social case study, VAWC, PMC",
+        "livelihood programs",
+        "solo parent / PWD / senior citizen registration requirements"
+      ],
+      "gaps": "No mandate, staff list or office contact supplied. CamScanner scan with no text layer — content must be re-typed."
+    },
+    {
+      "acronym": "MNAO",
+      "office": "Municipal Nutrition Action Office",
+      "orgChartOffice": null,
+      "status": "pending-parse",
+      "sourceDocs": [
+        "MNAO_Office Profile and Weight for Age CY2026.docx"
+      ],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "vision",
+        "mission",
+        "MNAO designee + staff with mobile numbers",
+        "Municipal Nutrition Committee (16 members)",
+        "Barangay Nutrition Scholars (7 barangays)",
+        "Weight-for-Age CY2026 (900 children, 92.56% normal)",
+        "all 7 barangay seals as embedded images",
+        "NNC logo"
+      ],
+      "gaps": "No mandate or programs list supplied. The 'Weight for Age C.Y. 2026' label may be CY2025 data reported in 2026 — confirm the reference year before publishing the figures. Poblacion's BNS post is vacant."
+    },
+    {
+      "acronym": "MAO",
+      "office": "Office of the Municipal Agriculturist",
+      "orgChartOffice": "Office of the Municipal Agriculturist",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "OMAG_Office Profile Agricultural Statistics and Programs.docx"
+      ],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "staff (6)",
+        "agricultural statistics (7 figures incl. 1,692 farmers; 2,327 fisherfolk; 121 boats)",
+        "programs/services (12)",
+        "letterhead email maocalatrava@gmail.com"
+      ],
+      "gaps": "No mandate, vision or mission supplied. The heading 'List of Registered Farmers and Fisherfolk Organizations' is in the document but the list itself was not included — request it. The office labels itself OMAG in its own documents; the site uses MAO (Citizen's Charter acronym) — keep one label per surface."
+    },
+    {
+      "acronym": "MDRRMO",
+      "office": "Municipal Disaster Risk Reduction and Management Office",
+      "orgChartOffice": "Municipal Disaster Risk Reduction and Management Office",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "MDRRMO_Municipal Emergency Hotline Calatrava.docx",
+        "MDRRMO_LDRRMF Utilization Reports Jan-Jul 2026 (FDP Form 8).pdf"
+      ],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "4 hotlines (Emergency Command Center, PNP, BFP, RHU)",
+        "MDRRMO logo (2015)",
+        "letterhead: E. Fetalino St., Poblacion; drrmcalatrava@gmail.com",
+        "LDRRMF utilization Jan–Jul 2026"
+      ],
+      "gaps": "No mandate, vision, mission, staff, programs, evacuation centres or hazard maps supplied. HOTLINE DISCREPANCY: this document gives RHU 0962 462 4365, while services.json carries Health 0907 237 1460 from the LGU's 'Calatrava Hotlines' infographic — both are live-looking numbers and only one can be right. Confirm with MDRRMO before changing either."
+    },
+    {
+      "acronym": "MCR",
+      "office": "Office of the Municipal Civil Registrar",
+      "orgChartOffice": "Office of the Municipal Civil Registrar",
+      "status": "covered-elsewhere",
+      "sourceDocs": [
+        "MCR_Citizens Charter 2023 pp21-26 Civil Registry Services (DUPLICATE).pdf"
+      ],
+      "charterPages": "21–26",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "The office re-sent Citizen's Charter pp. 21–26; all 5 services are already in citizens-charter.json. Still missing: mandate, vision, mission, staff, office contact."
+    },
+    {
+      "acronym": "MPDO",
+      "office": "Municipal Planning & Development Office",
+      "orgChartOffice": "Municipal Planning & Development Office",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "17–21",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Also the source office for the missing CLUP (item 10) and LDIP (item 12)."
+    },
+    {
+      "acronym": "MTO",
+      "office": "Office of the Municipal Treasurer",
+      "orgChartOffice": "Office of the Municipal Treasurer",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "51–54",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Also the source office for SRE and Statement of Debt Service (FDP)."
+    },
+    {
+      "acronym": "MHO",
+      "office": "Office of the Municipal Health Officer",
+      "orgChartOffice": "Office of the Municipal Health Officer",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch."
+    },
+    {
+      "acronym": "",
+      "office": "Office of the Municipal Accountant",
+      "orgChartOffice": "Office of the Municipal Accountant",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. No acronym in the Citizen's Charter — the chip is deliberately blank, do not invent one. Also the source office for the Annual Financial Statement / Trial Balance (FDP)."
+    },
+    {
+      "acronym": "SB",
+      "office": "Office of the Sangguniang Bayan",
+      "orgChartOffice": null,
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Also the source for ordinances, resolutions and the Annual Budget appropriation ordinance (FDP)."
+    },
+    {
+      "acronym": "",
+      "office": "Office of the Municipal Mayor",
+      "orgChartOffice": "Office of the Municipal Mayor",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Missing the main trunkline and the Mayor's Office email/phone (checklist item 2)."
+    },
+    {
+      "acronym": "HRMO",
+      "office": "Human Resource Management Office",
+      "orgChartOffice": null,
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Sits under the Office of the Municipal Mayor in the 2026 org chart (Administrative Officer IV / HRMO II), not as a separate office."
+    }
+  ],
+  "programs": [
+    {
+      "acronym": "KALAHI-CIDSS",
+      "name": "Philippine Community Resilience Project (PCRP)",
+      "leadOffice": "Municipal Planning & Development Office",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "KALAHI_Philippine Community Resilience Project (PCRP) Overview.docx"
+      ],
+      "summary": "",
+      "principles": [],
+      "components": [],
+      "eligibility": {
+        "eligible": [],
+        "negativeList": []
+      },
+      "grant": {
+        "amount": "",
+        "period": "",
+        "schedule": []
+      },
+      "has": [
+        "PCRP overview",
+        "PAGKILOS principles",
+        "components (4)",
+        "targeting criteria",
+        "eligible / negative sub-project list",
+        "₱70M 3-year grant 2026–2029",
+        "6 infographics + logo"
+      ],
+      "gaps": "No Calatrava-specific sub-project list, no MResT/ACT staff, no contact."
+    },
+    {
+      "acronym": "GFPS",
+      "name": "Gender and Development Focal Point System",
+      "leadOffice": "Office of the Municipal Social Welfare and Development Officer",
+      "status": "fdp-only",
+      "sourceDocs": [
+        "GFPS_Annual GAD Accomplishment Report CY2025 (FDP Form 5).xlsx",
+        "GFPS_Annual GAD Plan and Budget FY2027.xlsx"
+      ],
+      "summary": "",
+      "principles": [],
+      "components": [],
+      "eligibility": {
+        "eligible": [],
+        "negativeList": []
+      },
+      "grant": {
+        "amount": "",
+        "period": "",
+        "schedule": []
+      },
+      "has": [
+        "GAD Accomplishment Report CY2025 (FDP Form 5)",
+        "GAD Plan and Budget FY2027 (sheet 'PCM' is the form)"
+      ],
+      "gaps": "Received unrequested; both are FDP-postable documents and belong on transparency.html rather than in an office profile. Only the PCM sheet of the FY2027 workbook is the form — Sheet1–3 are scratch."
+    }
+  ]
+}

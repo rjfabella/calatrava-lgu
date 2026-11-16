@@ -143,6 +143,18 @@ Paths in this subsection are relative to `lgu/`.
   - `data/transparency.json` — Full Disclosure document links, including
     the actual Citizen's Charter PDF and Org Chart PPTX
   - `data/contact.json` — office directory, address, map embed
+  - `data/offices.json` — **structure only, no content parsed yet.** The
+    target shape for the per-office profiles (mandate / vision / mission /
+    key functions / services / programs / staff / statistics) in the Sept
+    2026 `assets/reference docs/` batch, plus the two programme bodies
+    (KALAHI-CIDSS, GFPS). Every office carries `status`, `sourceDocs` and
+    `gaps`; content fields are deliberately empty. The raw submissions are
+    gitignored and live only on RJ's machine, so the parse has to run there
+    — and each field must be typed from the source document, not from the
+    audit README's summary. Nothing renders it yet; the IA decision (per-
+    office pages vs. panels on `about.html#departments-section`) comes
+    first. Keep `office`/`orgChartOffice` in step with `organization.json`
+    and `acronym` in step with `officials.json`'s departments.
 - **Styling**: single `assets/style.css` design system (Merriweather + Source
   Sans 3 fonts, green/gold palette) driven by `:root` CSS variables. Re-theme
   there, not with inline styles or per-page stylesheets. Type is deliberately
