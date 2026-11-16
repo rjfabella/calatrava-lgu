@@ -169,9 +169,12 @@ Paths in this subsection are relative to `lgu/`.
     Matching is on the Citizen's Charter acronym, falling back to the office
     name — keep `acronym` in step with `officials.json`'s departments and
     `office` with `organization.json`.
-    Six of sixteen offices are parsed (BPLO, MBO, MAO, MEO/OBO, MNAO,
-    MSWDO); MASSO and MDRRMO hold documents still to be typed and the rest
-    have submitted nothing. Each entry carries `status`, `sourceDocs` and
+    Seven of sixteen offices are parsed (BPLO, MASSO, MBO, MAO, MEO/OBO,
+    MNAO, MSWDO). **MDRRMO is the only one left with content outstanding**,
+    and it has never supplied profile fields — asking for "the MDRRMO
+    documents" has twice produced FDP financial reports instead, so ask for
+    mandate/vision/mission/services/staff by name. The rest have submitted
+    nothing. Each entry carries `status`, `sourceDocs` and
     `gaps`, and `gaps` is where the open questions live — read it before
     touching an office's content. Type a field from the source document,
     never from the audit README's summary.
