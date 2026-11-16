@@ -121,16 +121,74 @@
       "acronym": "MASSO",
       "office": "Office of the Municipal Assessor",
       "orgChartOffice": "Office of the Municipal Assessor",
-      "status": "pending-parse",
+      "status": "parsed",
       "sourceDocs": [
-        "MASSO_Mandate Vision Mission and Services.docx"
+        "MASSO_Mandate Vision Mission and Services.docx",
+        "Masso_for_website.docx (uploaded 2026-11-16)"
       ],
       "charterPages": "38–45",
-      "mandate": "",
-      "vision": "",
-      "mission": "",
+      "mandate": "Ensure all laws and policies governing the appraisal and assessment of real properties for taxation purposes are properly executed, and exercise the functions of appraisal and assessment primarily for taxation purposes of all real properties in the LGU concerned.",
+      "vision": "A progressive place where real property tax serves as the primary source of local revenue and life blood of development.",
+      "mission": "To install systematic method of appraisal and assessment to ensure fair and realistic valuation for taxation purposes to maximize the yield from real property tax towards achieving local fiscal self-sufficiency.",
       "keyFunctions": [],
-      "services": [],
+      "services": [
+        {
+          "name": "Transfer of tax declaration of real property",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Revision of tax declaration of real property due to incorrect entries",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Revision of tax declaration of real property due to reassessment or reclassification",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Assessment and issuance of tax declaration for new improvement on real property",
+          "description": "Buildings, machinery and equipment.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Appraisal/assessment and issuance of tax declaration of land declared for the first time",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Issuance of real property certifications",
+          "description": "Certified true copy of tax declaration, assessment documents and sketch plan.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Annotation/cancellation of encumbrances, liens and adverse claims",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        }
+      ],
       "programs": [],
       "staff": [],
       "statistics": [],
@@ -145,7 +203,7 @@
         "mission",
         "services (7)"
       ],
-      "gaps": "No staff list or office contact supplied."
+      "gaps": "No staff list or office contact supplied. The source lists the seven services in capitals with no descriptions, fees or processing times; they are set in sentence case here and the two that needed a gloss got one. Fees and processing times are deliberately absent - the Charter covers the Assessor's services on pp. 38-45 and each service links there instead. Three of the seven appear in the Charter; the other four are office services the Charter does not list, so searching the Charter for them will come up empty."
     },
     {
       "acronym": "MBO",
@@ -959,7 +1017,7 @@
         "letterhead: E. Fetalino St., Poblacion; drrmcalatrava@gmail.com",
         "LDRRMF utilization Jan–Jul 2026"
       ],
-      "gaps": "No mandate, vision, mission, staff, programs, evacuation centres or hazard maps supplied. HOTLINE DISCREPANCY: this document gives RHU 0962 462 4365, while services.json carries Health 0907 237 1460 from the LGU's 'Calatrava Hotlines' infographic — both are live-looking numbers and only one can be right. Confirm with MDRRMO before changing either."
+      "gaps": "STILL NO OFFICE-PROFILE CONTENT. The file sent on 2026-11-16 as 'MDRRMO.pdf' was NOT a profile - it was the LDRRMF monthly utilisation series (FDP Form 8, Jan-Jul 2026), which is now published on transparency.html. The office has still never supplied a mandate, vision, mission, services, staff, programmes, evacuation centres or hazard maps. Ask for those specifically; asking for 'the MDRRMO documents' has twice produced financial reports instead. HOTLINE DISCREPANCY, STILL UNRESOLVED: the office's own hotline document gives RHU 0962 462 4365, while services.json carries Health 0907 237 1460 from the LGU's 'Calatrava Hotlines' infographic. Both look like live numbers and only one can be right. Confirm with MDRRMO before changing either."
     },
     {
       "acronym": "MCR",
@@ -1208,5 +1266,5 @@
       "gaps": "Received unrequested; both are FDP-postable documents and belong on transparency.html rather than in an office profile. Only the PCM sheet of the FY2027 workbook is the form — Sheet1–3 are scratch."
     }
   ],
-  "_parsed": "2026-11-16: BPLO, MBO and MAO parsed from files RJ uploaded to the session (same documents as the Sept 2026 batch, so the audit entries still apply). The remaining pending-parse offices need the documents that live on RJ's machine. | 2026-11-16, second upload: MEO, MNAO and MSWDO parsed, from two MEO PDFs, two MNAO .docx files and one MSWDO .docx. Six of sixteen offices are now parsed; the rest still need the machine that holds the Sept batch."
+  "_parsed": "2026-11-16: BPLO, MBO and MAO parsed from files RJ uploaded to the session (same documents as the Sept 2026 batch, so the audit entries still apply). The remaining pending-parse offices need the documents that live on RJ's machine. | 2026-11-16, second upload: MEO, MNAO and MSWDO parsed, from two MEO PDFs, two MNAO .docx files and one MSWDO .docx. Six of sixteen offices are now parsed; the rest still need the machine that holds the Sept batch. | 2026-11-16, third upload: MASSO parsed from 'Masso_for_website.docx'. Seven of sixteen offices now have content. MDRRMO is the ONLY office left with a document still to be typed - and the file sent for it on 2026-11-16 was not office-profile content at all but the LDRRMF monthly reports, which went to transparency.html. MDRRMO has still never supplied a mandate, vision, mission, services, staff list or programmes."
 }

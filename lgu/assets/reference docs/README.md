@@ -222,6 +222,38 @@ file grew 290 KB → 370 KB, which is the cost of the rewrite, not of the conten
 **The LGU's own copy is still the uncorrected one.** If they re-send this form,
 re-check it rather than assuming it supersedes ours.
 
+### Fourth upload, 2026-11-16 — MASSO, and the MDRRMO file that wasn't
+
+| File (as uploaded) | Office | Status | Outcome |
+|---|---|---|---|
+| `Masso_for_website.docx` | Assessor | **NEW** — written for the website | **Parsed** — mandate, vision, mission, 7 services |
+| `MDRRMO.pdf` | MDRRMO | **not an office profile** | **Published to Transparency** — LDRRMF Form 8, Jan–Jul 2026 |
+
+**`MDRRMO.pdf` is not what it was sent as.** It was offered as MDRRMO's office
+document; it is the **LDRRMF monthly utilisation series, FDP Form 8, January to
+July 2026** — the document the Sept audit listed and this README already had a
+pending Transparency row for. Published as seven monthly files under
+`lgu/assets/contents/fdp/`.
+
+**MDRRMO has still never supplied office-profile content** — no mandate,
+vision, mission, services, staff, programmes, evacuation centres or hazard
+maps. It is now the only office whose panel cannot be built. Asking for "the
+MDRRMO documents" has twice produced financial reports; **ask for the profile
+fields by name.**
+
+**Rotation: fixed, and not the way the Sept audit predicted.** Every page was
+scanned sideways. Each split file carries `/Rotate 270`, which is a viewer
+instruction, so the scan itself is never re-encoded — **do not "fix" these by
+rasterising.** The Sept audit warned that alternate pages ran in opposite
+directions; in this copy all seven run the same way. Checked page by page after
+rotating, not assumed: all seven render landscape and upright.
+
+**MASSO's seven services are listed in capitals with no fees or processing
+times.** They are set in sentence case in `offices.json` and link to the
+Charter instead. Note that only three of the seven appear in the Charter
+(pp. 38–45) — the other four are office services the Charter does not list, so
+a reader following the link will not find them there.
+
 ## Redundant / already-covered files
 
 | File | Why |

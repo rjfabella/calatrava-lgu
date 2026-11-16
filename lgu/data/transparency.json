@@ -231,10 +231,46 @@
      "status": "pending"
     },
     {
-     "title": "LDRRM Fund Utilization Reports, monthly Jan–Jul 2026",
-     "sub": "FDP Form 8 — monthly series submitted by the MDRRMO; the quarterly Form 8 reports for the same period are posted above · MDRRMO",
-     "href": "",
-     "status": "pending"
+     "title": "LDRRM Fund Utilization — January 2026",
+     "sub": "FDP Form 8 — monthly utilisation of the Local Disaster Risk Reduction and Management Fund · MDRRMO",
+     "href": "assets/contents/fdp/FDP-Form-08_LDRRMF-Utilization_CY2026-01-January.pdf",
+     "status": "available"
+    },
+    {
+     "title": "LDRRM Fund Utilization — February 2026",
+     "sub": "FDP Form 8 — monthly utilisation of the Local Disaster Risk Reduction and Management Fund · MDRRMO",
+     "href": "assets/contents/fdp/FDP-Form-08_LDRRMF-Utilization_CY2026-02-February.pdf",
+     "status": "available"
+    },
+    {
+     "title": "LDRRM Fund Utilization — March 2026",
+     "sub": "FDP Form 8 — monthly utilisation of the Local Disaster Risk Reduction and Management Fund · MDRRMO",
+     "href": "assets/contents/fdp/FDP-Form-08_LDRRMF-Utilization_CY2026-03-March.pdf",
+     "status": "available"
+    },
+    {
+     "title": "LDRRM Fund Utilization — April 2026",
+     "sub": "FDP Form 8 — monthly utilisation of the Local Disaster Risk Reduction and Management Fund · MDRRMO",
+     "href": "assets/contents/fdp/FDP-Form-08_LDRRMF-Utilization_CY2026-04-April.pdf",
+     "status": "available"
+    },
+    {
+     "title": "LDRRM Fund Utilization — May 2026",
+     "sub": "FDP Form 8 — monthly utilisation of the Local Disaster Risk Reduction and Management Fund · MDRRMO",
+     "href": "assets/contents/fdp/FDP-Form-08_LDRRMF-Utilization_CY2026-05-May.pdf",
+     "status": "available"
+    },
+    {
+     "title": "LDRRM Fund Utilization — June 2026",
+     "sub": "FDP Form 8 — monthly utilisation of the Local Disaster Risk Reduction and Management Fund · MDRRMO",
+     "href": "assets/contents/fdp/FDP-Form-08_LDRRMF-Utilization_CY2026-06-June.pdf",
+     "status": "available"
+    },
+    {
+     "title": "LDRRM Fund Utilization — July 2026",
+     "sub": "FDP Form 8 — monthly utilisation of the Local Disaster Risk Reduction and Management Fund · MDRRMO",
+     "href": "assets/contents/fdp/FDP-Form-08_LDRRMF-Utilization_CY2026-07-July.pdf",
+     "status": "available"
     },
     {
      "title": "Annual GAD Accomplishment Report, CY2025",
@@ -293,5 +329,5 @@
   }
  ],
  "_pendingNote": "Rows added 2026-11-16 for documents the Sept 2026 office batch actually delivered (four CY2025 supplemental budget ordinances, GAD AR CY2025, GAD PB FY2027, LDRRMF Jan-Jul 2026). They stay 'pending' because the files themselves are not in the repo: lgu/assets/reference docs/ is .gitignore'd. DILG FDP expects the actual document to be publicly posted, so to flip any of these to 'available' the file has to be committed (un-ignore just that file, or copy it into lgu/assets/contents/ which is tracked) and its path set as 'href' with spaces URL-encoded. The LDRRMF scan needs re-orienting first: its pages are landscape and alternate pages are scanned upside down.",
- "_fdpNote": "2026-11-16: the Municipal Accounting Office supplied 20 FDP forms as a single 20-page scan. They were split one file per form per quarter into lgu/assets/contents/fdp/ and are linked individually, which is how DILG FDP expects them posted and lets a reader find one period without paging a bundle. The scans were NOT re-encoded: they are ~267 DPI CamScanner JPEGs of financial forms and legibility of the figures outranks the ~400 KB each. Source bundle checksum and the page-to-file mapping are in 'lgu/assets/reference docs/README.md'."
+ "_fdpNote": "2026-11-16: the Municipal Accounting Office supplied 20 FDP forms as a single 20-page scan. They were split one file per form per quarter into lgu/assets/contents/fdp/ and are linked individually, which is how DILG FDP expects them posted and lets a reader find one period without paging a bundle. The scans were NOT re-encoded: they are ~267 DPI CamScanner JPEGs of financial forms and legibility of the figures outranks the ~400 KB each. Source bundle checksum and the page-to-file mapping are in 'lgu/assets/reference docs/README.md'. | 2026-11-16: the MDRRMO's monthly LDRRMF series (FDP Form 8, Jan-Jul 2026) arrived as a single 7-page scan and was split one file per month. Every page was scanned sideways; each file carries /Rotate 270 so it opens upright. That is a viewer instruction, so the scan itself is never re-encoded - do NOT 'fix' these by rasterising. The Sept audit warned that alternate pages were scanned in opposite directions; in this copy all seven run the same way, checked page by page after rotating."
 }

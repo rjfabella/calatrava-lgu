@@ -82,6 +82,43 @@ municipal government.
   device is scoped to the archived repo, so the content editor cannot publish
   until it is replaced.
 
+## 2026-11-16, seventh pass — MASSO parsed; the MDRRMO file was something else
+
+**MASSO is parsed** — mandate, vision, mission and seven services, from
+`Masso_for_website.docx`, a document the office wrote for the site. **Seven of
+sixteen offices now have content** and five of the twelve org-chart cards
+expand. Worth knowing: only three of MASSO's seven services appear in the
+Citizen's Charter (pp. 38–45); the other four are office services the Charter
+does not list, so a reader following the "see the Charter" link will not find
+them. The services are listed in capitals in the source and are set in
+sentence case in the data.
+
+**The file sent as MDRRMO's was not an office profile.** `MDRRMO.pdf` is the
+**LDRRMF monthly utilisation series (FDP Form 8, January–July 2026)** — the
+document this repo already had a pending Transparency row for. Split into seven
+monthly files and published; the placeholder row is replaced by the real set.
+Transparency now carries **33 available documents against 17 pending**, up from
+6 available when this session started.
+
+**MDRRMO is now the only office whose panel cannot be built**, and it has still
+never supplied a mandate, vision, mission, services, staff, programmes,
+evacuation centres or hazard maps. **Asking for "the MDRRMO documents" has
+twice produced financial reports instead — ask for the profile fields by
+name.** Its hotline discrepancy (the office's own document says RHU
+0962 462 4365, `services.json` carries Health 0907 237 1460) is still
+unresolved and still recorded in its `gaps`.
+
+**Rotation, fixed the lossless way.** Every page of the LDRRMF scan was
+sideways. Each file carries `/Rotate 270`, a viewer instruction, so the scan is
+never re-encoded — **don't "fix" these by rasterising.** The Sept audit warned
+that alternate pages ran in opposite directions; in this copy all seven run the
+same way. Verified page by page after rotating, not assumed: all seven render
+landscape and upright.
+
+Re-verified after the change: 33 Transparency links resolve, five office panels
+open, no WCAG AA contrast failures, zero text under 12.5px across all nine LGU
+pages, no console errors.
+
 ## 2026-11-16, sixth pass — the office panels are built (batch 5)
 
 `offices.json` now renders. A department card on
