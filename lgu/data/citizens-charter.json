@@ -1558,20 +1558,20 @@
        "whereToSecure": "7.DENR"
       }
      ],
-     "fees": [],
+     "fees": [
+      "No fixed amount, computed based on Rule II, Section 6 of the IRR of P.D. 1096"
+     ],
      "processingTime": [
       "1 minute",
-      "1 hour",
-      "1 day",
-      "15 minutes",
-      "2 Hours",
-      "30 minutes"
+      "1 hour to 1 day",
+      "15 minutes to 2 hours",
+      "30 minutes to 1 hour"
      ],
      "personResponsible": [
       "Mun. Engineer/OBO",
       "Mun. Engineer/OBO MTO Personnel"
      ],
-     "sourcePages": "64-66"
+     "sourcePages": "64-65"
     },
     {
      "name": "Processing of Occupancy Permit",
@@ -1609,19 +1609,20 @@
        "whereToSecure": "7.Building Owner"
       }
      ],
-     "fees": [],
+     "fees": [
+      "No fixed amount, computed based on Rule II, Section 6.10 of the IRR of P.D. 1096"
+     ],
      "processingTime": [
       "1 minute",
-      "30 minutes",
-      "1 hour",
-      "5- 10 minutes",
+      "30 minutes to 1 hour",
+      "5-10 minutes",
       "5 minutes"
      ],
      "personResponsible": [
       "Mun. Engineer/OBO",
       "Mun. Engineer/OBO MTO Personnel"
      ],
-     "sourcePages": "66-69"
+     "sourcePages": "66-67"
     }
    ]
   },
@@ -1905,5 +1906,5 @@
    ]
   }
  ],
- "_verified": "2026-11-16: the five Civil Registrar services on Charter pp. 21-26 were checked against a legible re-scan of those pages supplied by the MCR. CONFIRMED EXACT: Issuance of a Marriage License Php 450.00 / 30 minutes; Registering Marriage Certificates Php 100.00 / 10-20 minutes; Registering/Issuance of Death Certificates Php 50.00 / 15-20 minutes. CORRECTED: 'Registering Births' and 'Registration of Legal Instrument' had empty fees; both read 'Based on Revenue Code' on the form, which is now recorded instead of nothing. 'Registering Births' also carried a stray '30 minutes' that belongs to the Legal Instrument service on the facing page - removed. NOT A PARSE ERROR, LEAVE ALONE: the requirements checklist for Registering Births is numbered 1 then 6,7,8... in the Charter itself; items 2-5 do not exist in the source. The remaining unverified fees/processingTime are the other 40 services - business permit and RPT are the next highest-traffic ones to check."
+ "_verified": "2026-11-16: the five Civil Registrar services on Charter pp. 21-26 were checked against a legible re-scan of those pages supplied by the MCR. CONFIRMED EXACT: Issuance of a Marriage License Php 450.00 / 30 minutes; Registering Marriage Certificates Php 100.00 / 10-20 minutes; Registering/Issuance of Death Certificates Php 50.00 / 15-20 minutes. CORRECTED: 'Registering Births' and 'Registration of Legal Instrument' had empty fees; both read 'Based on Revenue Code' on the form, which is now recorded instead of nothing. 'Registering Births' also carried a stray '30 minutes' that belongs to the Legal Instrument service on the facing page - removed. NOT A PARSE ERROR, LEAVE ALONE: the requirements checklist for Registering Births is numbered 1 then 6,7,8... in the Charter itself; items 2-5 do not exist in the source. The remaining unverified fees/processingTime are the other 40 services - business permit and RPT are the next highest-traffic ones to check. | 2026-11-16, second pass: the Engineering office re-sent Charter pp. 64-67, so Building Permit and Occupancy Permit were checked the same way. Requirements, classification, transaction type and who-may-avail matched the source exactly. THREE FIELDS WERE WRONG AND ARE NOW FIXED: (1) both had empty 'fees' where the form states 'No fixed amount, computed based on Rule II, Section 6 (6.10 for occupancy) of the IRR of P.D. 1096' - a real answer to 'what does a building permit cost', so blank was worse than useless; (2) 'processingTime' had been split on the word 'to', turning '1 hour to 1 day' into '1 hour' + '1 day' and '15 minutes to 2 Hours' into two entries - all four ranges per service are restored; (3) sourcePages were 64-66 and 66-69, actually 64-65 and 66-67. The 'to'-splitting was then swept across the whole source: the Charter contains only four 'X to Y' duration ranges in total (pp. 64-67, wrapped across table cells), all in these two services and all now fixed. No other service's processingTime is a mangled range, so this does not need re-checking service by service. Fees remain unverified for the other 38 services; RPT (pp. 53-54) and the business permit (pp. 7-11) are the highest-traffic ones left."
 }

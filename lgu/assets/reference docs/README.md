@@ -121,6 +121,66 @@ has backfired here before (see `MEMORY.md` on the portraits).
   numbering jumping **1 → 6** for birth registration; items 2–5 do not exist in
   the source, so that is not a parse error.
 
+### Second upload, 2026-11-16 (same session, five more files)
+
+| File (as uploaded) | Office | Status | Outcome |
+|---|---|---|---|
+| `Office_of_the_Municipal_Engineer_Mission__Vision.pdf` | Engineering | re-send (LBP Form 4) — **has a text layer**, unlike the Sept scan | **Parsed** — mandate (4), vision, mission, outcome, 6 PPAs, 10 20%-DF projects |
+| `MEO_Services.pdf` | Engineering | re-send, duplicate of Charter pp. 64–67 | No new content, but **used to verify** — and it found three errors |
+| `MNAO.docx` | Nutrition | re-send of the Sept office profile | **Parsed** — staff, Nutrition Committee (16), 7 BNS, Weight-for-Age CY2026 |
+| `MNAO_Services_Offered.docx` | Nutrition | **NEW** — not in the Sept batch | **Parsed** — 7 service groups, plus a second vision/mission |
+| `Municipal_Social_Welfare_and_Development_Office.docx` | Social Welfare | re-send as .docx (Sept copy was a scan) | **Parsed** — vision, mission, 5 services, 9 requirement checklists, 3 livelihood programmes |
+
+Six of the sixteen offices in `lgu/data/offices.json` are now parsed: BPLO, MBO,
+MAO, MEO/OBO, MNAO, MSWDO. Only MASSO and MDRRMO remain `pending-parse`; the
+rest sent nothing and are `awaiting-submission`.
+
+**`MEO_Services.pdf` corrected three fields in `citizens-charter.json`.** The
+requirements, classification, transaction type and who-may-avail all matched the
+source exactly, as expected from bordered cells. But:
+
+- Both permits had **empty `fees`**, where the form states *"No fixed amount,
+  computed based on Rule II, Section 6 (6.10 for occupancy) of the IRR of
+  P.D. 1096."* That is a real answer to "what does a building permit cost".
+- **`processingTime` had been split on the word "to"**, because the ranges wrap
+  across table cells in the PDF: `1 hour to 1 day` had become `1 hour` + `1 day`,
+  and `15 minutes to 2 Hours` two entries. All four ranges per service restored.
+- **`sourcePages` were wrong** on both: 64–66 and 66–69, actually 64–65 and 66–67.
+
+The whole Charter text was then swept for the same fault: it contains **only
+four "X to Y" ranges in total**, all on pp. 64–67, all now fixed. This is not a
+systemic problem and does not need re-checking service by service.
+
+### Conflicts and judgements from this upload
+
+1. **MNAO's vision and mission differ between its own two documents.** The
+   Services Offered version is the one used — fuller ("and other vulnerable
+   groups") and grammatical ("in abundance", "through"). The Office Profile
+   version reads "a nutritionally educated people … to abundance …" and stops at
+   "preschool and school children". **That is a judgement, not a confirmation —
+   ask the office which is current.**
+2. **MSWDO's mission says "family alleviation"** where "poverty alleviation" is
+   almost certainly meant. Left exactly as written, because fixing it would
+   change the meaning rather than correct a spelling.
+3. **MEO mandate item 4** reads "Regulate and ensure compliance with existing
+   compliance with existing policies infrastructure development and public
+   works." The duplicated phrase was dropped and a comma added; the sentence is
+   still awkward, so confirm the intended wording.
+4. Normalised without asking, as plain spelling: MSWDO's "FURTHER MIDECATION" →
+   "further medication" and "PWD TREGISTRATION" → "PWD registration"; MEO's
+   "continuos" → "continuous".
+5. **MEO's office number is still not recorded anywhere.** The Sept profile's
+   "+6939 695236538" is not a valid PH length and remains unpublished.
+6. **CY2027 figures for both MBO and MEO are a PROPOSED budget** on a
+   preparation form, not an approved appropriation. MEO's ten 20%-Development-
+   Fund projects carry **no cost figures at all** on the form — list them as
+   planned projects, never with an implied budget.
+7. **MNAO's two staff mobile numbers** come from the office's own profile and
+   are personal mobiles. Confirm the office is content for them to be public.
+8. MNAO's Weight-for-Age counts do total 900 and the percentages sum to 100.01%
+   (rounding). The **"C.Y. 2026" label is still unconfirmed** — it may be CY2025
+   data reported in 2026.
+
 ## Redundant / already-covered files
 
 | File | Why |

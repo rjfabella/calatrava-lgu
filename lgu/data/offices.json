@@ -25,7 +25,12 @@
     "statistics": "Array of { label, value, unit, asOf, source }. 'asOf' is the reference period the document states; 'source' names the document or the cited original (e.g. CLUP).",
     "contact": "Office-level phone/email/hours as the document gives them. Never publish a number that is not a valid PH length.",
     "has": "What the source document actually contains, from the audit. A checklist for the parse, not site content -- drop or ignore it once 'status' is 'parsed'.",
-    "gaps": "What the office did not supply, plus any quality warning that must be resolved before publishing."
+    "gaps": "What the office did not supply, plus any quality warning that must be resolved before publishing.",
+    "requirementSets": "Array of { title, items[] } for offices that publish 'what to bring' checklists separately from their service list (MSWDO). Distinct from services[].requirements, which belongs to one named service.",
+    "organizationalOutcome": "Single-sentence outcome statement from an LBP Form 4 (MBO, MEO).",
+    "developmentFundProjects": "Array of project titles from a 20%-Development-Fund PPA table (MEO). Titles only: the source form carries no cost figures, so never render these with an implied budget.",
+    "committee": "{ name, members[] } for a body an office convenes (MNAO's Municipal Nutrition Committee).",
+    "barangayNutritionScholars": "MNAO-specific: array of { name, barangay }; an empty name means the post is vacant."
   },
   "_render": "Not rendered on any page yet, by design. The IA decision comes first: per-office detail pages linked from about.html#departments-section, or an expandable panel per office on that page. Whichever is chosen, office-level vision/mission must stay visually distinct from the municipal vision/mission on the homepage, and a service that is already in citizens-charter.json should link to services.html#charter rather than restate its fees. See MEMORY.md.",
   "offices": [
@@ -206,25 +211,107 @@
       "acronym": "MEO / OBO",
       "office": "Office of the Municipal Engineer / Office of the Building Official",
       "orgChartOffice": "Office of the Municipal Engineer",
-      "status": "pending-parse",
+      "status": "parsed",
       "sourceDocs": [
         "MEO_Mandate Vision Mission MFO and Targets CY2027 (LBP Form 4).pdf",
         "MEO_Municipal Engineer Profile (Portrait and Office Contact).docx",
         "MEO_Permits/ (13 NBC permit application forms)"
       ],
       "charterPages": "64–67",
-      "mandate": "",
-      "vision": "",
-      "mission": "",
+      "mandate": [
+        "To prepare, administer, coordinate, supervise and control all projects of the LGU.",
+        "Administer, coordinate, supervise, and control the construction, maintenance, improvement, and repair of roads, bridges and their engineering and public works projects of LGU concerned;",
+        "Provide engineering services to the LGU concerned, including investigation and survey, engineering designs, feasibility studies, and project management;",
+        "Regulate and ensure compliance with existing policies, infrastructure development and public works."
+      ],
+      "vision": "Committed to provide prompt, honest, responsive and efficient services to meet the demands of general public and implement infrastructure projects that will sustain it general welfare and stability.",
+      "mission": "The Engineering Office of the Municipality of Calatrava is on a mission to sustain development and progress to be globally competitive in terms of implementation of infrastructure projects through the efforts of continuous career development and application of the values of a good public servant as enshrined on the Philippine Constitution adopting the credo for the people working in government.",
       "keyFunctions": [],
-      "services": [],
-      "programs": [],
+      "services": [
+        {
+          "name": "Processing of Building Permit and Ancillary Permits",
+          "description": "Issued by the Office of the Building Official to any individual, company or association constructing, renovating or altering a building, to ensure structural safety.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Processing of Occupancy Permit",
+          "description": "Issued once a building is completed and before it may be occupied, or when the owner changes the required occupancy.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        }
+      ],
+      "programs": [
+        {
+          "name": "Supervision, evaluation of construction work and infrastructure projects",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Engineering and Infrastructure Management Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Repairs and Maintenance — Buildings and Other Structures",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Maintenance of Water System",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Maintenance of Municipal Roads",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Repair and Maintenance of Lights for Streetlight and Municipal Building Facilities",
+          "description": "",
+          "beneficiaries": ""
+        }
+      ],
       "staff": [],
-      "statistics": [],
+      "statistics": [
+        {
+          "label": "Engineering & Infrastructure programme — Personal Services",
+          "value": "2,765,549.95",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Engineering & Infrastructure programme — MOOE",
+          "value": "2,629,000.00",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Engineering & Infrastructure programme — Capital Outlay",
+          "value": "150,000.00",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Engineering & Infrastructure programme — Total",
+          "value": "5,544,549.95",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        }
+      ],
       "contact": {
         "phone": "",
         "email": "",
-        "hours": ""
+        "hours": "8:00 – 5:00"
       },
       "has": [
         "mandate (4 items)",
@@ -235,23 +322,93 @@
         "office hours 8:00–5:00",
         "13 downloadable permit forms"
       ],
-      "gaps": "LBP Form 4 is a scan with no text layer. The office number in the profile doc reads '+6939 695236538' — 12 digits after +63, not a valid PH number as written; do not publish it until the LGU confirms. The Unified Building Permit form still reads 'CITY/MUNICIPALITY OF CEBU' in its Location of Construction line — LGU to fix before the form is offered as a download."
+      "gaps": "No staff list. The office number in the Sept profile document reads '+6939 695236538' — 12 digits after +63, not a valid PH length — so it is deliberately NOT recorded here; never publish it until the LGU confirms the real number. The CY2027 figures are a PROPOSED budget on a preparation form, not an approved appropriation; label them 'proposed' on any page that shows them. The 10 developmentFundProjects are CY2027 20%-Development-Fund PPAs with NO cost figures on the form — list them as planned projects only, never with an implied budget. Mandate item 4 reads 'Regulate and ensure compliance with existing compliance with existing policies infrastructure development and public works' in the source; the duplicated phrase was removed and a comma added, but the sentence is still awkward — confirm the intended wording. The form heads the office 'OFFICE OF THE MUNICIPAL ENGINEERING'; the site uses 'Office of the Municipal Engineer'. The two charter services carry no fees/processingTime here on purpose — they live in citizens-charter.json.",
+      "organizationalOutcome": "Complete implementation of infrastructure Projects for the satisfaction and benefits of the people.",
+      "developmentFundProjects": [
+        "Electrification of Proposed Sanitary Landfill",
+        "Improvement of Multi Purpose Building — San Roque (BDC Award)",
+        "Installation of Street Lights to Victorio Sixon Balogo NHS–Balogo Annex (BPOC Award)",
+        "Improvement of Day Care Center at Sitio Aguada, Talisay (BCPC Award)",
+        "Construction of Water system of Municipal Lot to Upper Sitio Acacia",
+        "Opening of Access Road to San Roque Barangay Health Station",
+        "Construction of Covered Line Canal at Calatrava NHS",
+        "Concreting of Access Road at Victorio Sixon Balogo NHS, Barangay Balogo",
+        "Improvement/Concreting of Sitio Acacia Access Road",
+        "Construction of Municipal Sanitary Landfill Facilities Phase 2"
+      ]
     },
     {
       "acronym": "MSWDO",
       "office": "Office of the Municipal Social Welfare and Development Officer",
       "orgChartOffice": "Office of the Municipal Social Welfare and Development Officer",
-      "status": "pending-parse",
+      "status": "parsed",
       "sourceDocs": [
         "MSWDO_Vision Mission and Services Offered.pdf"
       ],
       "charterPages": "",
       "mandate": "",
-      "vision": "",
-      "mission": "",
+      "vision": "A society where poor, and disadvantaged individuals, families, and communities are empowered for an improved quality of life.",
+      "mission": "To provide a comprehensive social protection programs and services that will promote the rights and welfare of the poor, vulnerable and disadvantaged individuals, families and communities of Calatrava that will contribute to family alleviation and empowerment through quality service delivery.",
       "keyFunctions": [],
-      "services": [],
-      "programs": [],
+      "services": [
+        {
+          "name": "Assistance to Individuals in Crisis Situation (AICS)",
+          "description": "Provision of limited financial assistance to individuals in crisis situation.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Counselling services",
+          "description": "Counselling for VAWC cases, pre-marriage counselling, and counselling on marital conflict.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Issuance of Certificate of Indigency",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Issuance of Social Case Study Report",
+          "description": "For medical cases referred for further evaluation in Manila.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Disaster relief assistance",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        }
+      ],
+      "programs": [
+        {
+          "name": "Livelihood assistance for registered solo parents",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Livelihood assistance for indigent women",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Livelihood assistance for PWDs",
+          "description": "",
+          "beneficiaries": ""
+        }
+      ],
       "staff": [],
       "statistics": [],
       "contact": {
@@ -267,25 +424,208 @@
         "livelihood programs",
         "solo parent / PWD / senior citizen registration requirements"
       ],
-      "gaps": "No mandate, staff list or office contact supplied. CamScanner scan with no text layer — content must be re-typed."
+      "gaps": "No mandate, staff list or office contact supplied. VERIFY BEFORE PUBLISHING: the mission reads 'contribute to family alleviation and empowerment' - almost certainly meant to be 'poverty alleviation', but that is a change of meaning, so it is left exactly as written. Two clear heading typos WERE normalised: 'FURTHER MIDECATION' -> 'further medication' and 'PWD TREGISTRATION' -> 'PWD registration'. The requirement sets are the document's 'PROCEDURE ON HOW TO AVAIL' blocks; they are checklists, not the step-by-step procedure, and the office gave no fees or processing times - do not imply any.",
+      "requirementSets": [
+        {
+          "title": "Medical assistance",
+          "items": [
+            "Medical certificate or medical abstract",
+            "Hospital bill / billing",
+            "Prescription and receipt",
+            "Referral and laboratory result",
+            "Certificate of indigency from the barangay captain",
+            "Photocopy of valid ID"
+          ]
+        },
+        {
+          "title": "Burial assistance",
+          "items": [
+            "Photocopy of death certificate",
+            "Funeral contract, certificate of balance",
+            "Barangay indigency",
+            "Permit to transport cadaver if died outside the municipality",
+            "Photocopy of valid ID"
+          ]
+        },
+        {
+          "title": "Rehabilitation of burned / damaged house",
+          "items": [
+            "Fire incidence report from the fire department",
+            "Barangay indigency",
+            "Photocopy of valid ID",
+            "Picture of the incident"
+          ]
+        },
+        {
+          "title": "Social Case Study Report for further medication",
+          "items": [
+            "Medical certificate / medical abstract",
+            "Barangay indigency",
+            "Photocopy of valid ID"
+          ]
+        },
+        {
+          "title": "Counselling for VAWC victims and CICL",
+          "items": [
+            "Referral from PNP and barangay"
+          ]
+        },
+        {
+          "title": "Pre-Marriage Orientation and Counselling",
+          "items": [
+            "Application for marriage",
+            "Cedula"
+          ]
+        },
+        {
+          "title": "Solo Parent registration",
+          "items": [
+            "Application form",
+            "Barangay certificate",
+            "Proof of income",
+            "Child's PSA birth certificate",
+            "Valid ID and photos — at least one government ID",
+            "Proof of solo parent status (separated, widowed, annulled, abandoned, unmarried, spouse detained, spouse incapacitated, OFW family member)"
+          ]
+        },
+        {
+          "title": "PWD registration",
+          "items": [
+            "Birth certificate",
+            "Medical certificate",
+            "Whole body picture",
+            "1x1 photo"
+          ]
+        },
+        {
+          "title": "Senior Citizen registration",
+          "items": [
+            "Birth certificate"
+          ]
+        }
+      ]
     },
     {
       "acronym": "MNAO",
       "office": "Municipal Nutrition Action Office",
       "orgChartOffice": null,
-      "status": "pending-parse",
+      "status": "parsed",
       "sourceDocs": [
         "MNAO_Office Profile and Weight for Age CY2026.docx"
       ],
       "charterPages": "",
       "mandate": "",
-      "vision": "",
-      "mission": "",
+      "vision": "We envision nutritionally educated people peacefully living with their families and children in abundance and prosperity in a clean and green environment.",
+      "mission": "To create a nutritionally healthy society by providing sustainable and integrated linkages of development services through the establishment and maintenance of a municipal network of nutrition implementers and workers that shall safeguard and regularly monitor the nutritional status of preschool and school children and other vulnerable groups.",
       "keyFunctions": [],
-      "services": [],
+      "services": [
+        {
+          "name": "Nutrition Program Management",
+          "description": "Formulation of the Municipal/Local Nutrition Action Plan; organising and strengthening Barangay Nutrition Committees; MELLPI Pro monitoring and evaluation; nutrition budget tagging and resource mobilisation; coordination with MHO, MSWDO, MAO, DepEd, DILG and MDRRMO.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Nutrition Assessment & Surveillance",
+          "description": "Operation Timbang (OPT) Plus / eOPT; nutrition screening and assessment of children, pregnant and lactating women, senior citizens and PWDs; growth monitoring and promotion; management of nutrition data and reporting.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Nutrition Education and Counseling",
+          "description": "Infant and Young Child Feeding (IYCF) counselling; breastfeeding promotion including Breastfeeding Month and the First 1000 Days Program; Pabasa sa Nutrisyon and nutrition education classes for mothers; Pinggang Pinoy and healthy diet counselling.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Nutrition Intervention",
+          "description": "Dietary supplementation and supplementary feeding for children 6–59 months and pregnant women; micronutrient supplementation (Vitamin A, iron folic acid, micronutrient powder); management of acute malnutrition (MAM/SAM).",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Nutrition-Sensitive Services",
+          "description": "Food production — Gulayan sa Barangay, home and community gardens; food assistance coordination; Nutrition in Emergencies (NIE).",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Capacity Building and Advocacy",
+          "description": "Training and supervision of BNS, BHW, BNC and MNAO staff; Nutrition Month celebration and advocacy campaigns; Barangay and Municipal Nutrition Committee meetings.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Other Support Services",
+          "description": "Referral to MHO, MSWDO or hospital for malnourished cases; provision of IEC materials; technical assistance on nutrition programme implementation to all barangays.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        }
+      ],
       "programs": [],
-      "staff": [],
-      "statistics": [],
+      "staff": [
+        {
+          "name": "Login F. Jolejole",
+          "position": "Midwife II / MNAO Designee",
+          "mobile": "0909 152 0739"
+        },
+        {
+          "name": "Maricar F. Factor",
+          "position": "MNAO Staff",
+          "mobile": "0907 458 8650"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Children weighed — normal",
+          "value": "833",
+          "unit": "children (92.56%)",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        },
+        {
+          "label": "Children weighed — overweight",
+          "value": "7",
+          "unit": "children (0.79%)",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        },
+        {
+          "label": "Children weighed — underweight",
+          "value": "39",
+          "unit": "children (4.33%)",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        },
+        {
+          "label": "Children weighed — severely underweight",
+          "value": "21",
+          "unit": "children (2.33%)",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        },
+        {
+          "label": "Children weighed — total",
+          "value": "900",
+          "unit": "children",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        }
+      ],
       "contact": {
         "phone": "",
         "email": "",
@@ -301,7 +641,122 @@
         "all 7 barangay seals as embedded images",
         "NNC logo"
       ],
-      "gaps": "No mandate or programs list supplied. The 'Weight for Age C.Y. 2026' label may be CY2025 data reported in 2026 — confirm the reference year before publishing the figures. Poblacion's BNS post is vacant."
+      "gaps": "No mandate. VISION AND MISSION DIFFER BETWEEN THE OFFICE'S OWN TWO DOCUMENTS - confirm which is current before publishing. Used here: the Services Offered document. The Office Profile document instead reads 'We envision a nutritionally educated people ... to abundance ...' and ends its mission at 'preschool and school children', without 'and other vulnerable groups'. The Services version was chosen as the fuller and grammatically sound one, which is a judgement, not a confirmation. The 'Weight for Age C.Y. 2026' label may be CY2025 data reported in 2026 - still unconfirmed. Percentages sum to 100.01% (rounding) and the four counts do total 900. Poblacion's BNS post is vacant and is left as an empty name, not 'TBA'. Falcutila is spelled 'Norvel Kimwell' in this document; kept as 'NorvelKimwell' per the org-chart ruling in MEMORY.md. The two staff mobile numbers come from the office's own profile and are personal mobiles - confirm the office is content for them to be public before they render.",
+      "committee": {
+        "name": "Municipal Nutrition Committee (MNC)",
+        "members": [
+          {
+            "name": "Engr. Robert M. Fabella",
+            "position": "Municipal Mayor / Chairperson",
+            "mobile": ""
+          },
+          {
+            "name": "Gianne S. Falcutila",
+            "position": "School Principal / Co-Chairperson",
+            "mobile": ""
+          },
+          {
+            "name": "Login F. Jolejole",
+            "position": "Midwife II / MNAO Designee",
+            "mobile": ""
+          },
+          {
+            "name": "Hon. NorvelKimwell F. Falcutila",
+            "position": "ABC President",
+            "mobile": ""
+          },
+          {
+            "name": "Erwin M. Mortel",
+            "position": "Municipal Agriculturist",
+            "mobile": ""
+          },
+          {
+            "name": "Dr. Jennie F. Matta",
+            "position": "Municipal Health Officer",
+            "mobile": ""
+          },
+          {
+            "name": "Hon. Ramon F. Reandelar",
+            "position": "IPMR",
+            "mobile": ""
+          },
+          {
+            "name": "Hon. Carlo C. Fetalvero",
+            "position": "SB Member",
+            "mobile": ""
+          },
+          {
+            "name": "Jeanlyn F. Fallaria",
+            "position": "Municipal Budget Officer",
+            "mobile": ""
+          },
+          {
+            "name": "Aleza F. Refe",
+            "position": "MLGOO VI",
+            "mobile": ""
+          },
+          {
+            "name": "Levie F. Fajilan",
+            "position": "MSWDO",
+            "mobile": ""
+          },
+          {
+            "name": "Charlemagne F. Fortu",
+            "position": "Municipal Treasurer",
+            "mobile": ""
+          },
+          {
+            "name": "Ariel F. Famadulan",
+            "position": "Municipal Accountant",
+            "mobile": ""
+          },
+          {
+            "name": "Engr. Berlito F. Fajel, Jr.",
+            "position": "MPDC / MENRO",
+            "mobile": ""
+          },
+          {
+            "name": "Maricar N. Magbata",
+            "position": "NGO / General Manager",
+            "mobile": ""
+          },
+          {
+            "name": "John Arvill F. Rabino",
+            "position": "MDRRMO II",
+            "mobile": ""
+          }
+        ]
+      },
+      "barangayNutritionScholars": [
+        {
+          "name": "Digna M. Mana",
+          "barangay": "Balogo"
+        },
+        {
+          "name": "Melanie F. Echapari",
+          "barangay": "Talisay"
+        },
+        {
+          "name": "Enily R. Fallaria",
+          "barangay": "Pagsangahan"
+        },
+        {
+          "name": "Evelyn M. Maestro",
+          "barangay": "Pangulo"
+        },
+        {
+          "name": "Edelyn M. Mirabete",
+          "barangay": "Linao"
+        },
+        {
+          "name": "Janet B. Fabic",
+          "barangay": "San Roque"
+        },
+        {
+          "name": "",
+          "barangay": "Poblacion"
+        }
+      ]
     },
     {
       "acronym": "MAO",
@@ -753,5 +1208,5 @@
       "gaps": "Received unrequested; both are FDP-postable documents and belong on transparency.html rather than in an office profile. Only the PCM sheet of the FY2027 workbook is the form — Sheet1–3 are scratch."
     }
   ],
-  "_parsed": "2026-11-16: BPLO, MBO and MAO parsed from files RJ uploaded to the session (same documents as the Sept 2026 batch, so the audit entries still apply). The remaining pending-parse offices need the documents that live on RJ's machine."
+  "_parsed": "2026-11-16: BPLO, MBO and MAO parsed from files RJ uploaded to the session (same documents as the Sept 2026 batch, so the audit entries still apply). The remaining pending-parse offices need the documents that live on RJ's machine. | 2026-11-16, second upload: MEO, MNAO and MSWDO parsed, from two MEO PDFs, two MNAO .docx files and one MSWDO .docx. Six of sixteen offices are now parsed; the rest still need the machine that holds the Sept batch."
 }

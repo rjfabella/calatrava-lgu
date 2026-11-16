@@ -82,6 +82,60 @@ municipal government.
   device is scoped to the archived repo, so the content editor cannot publish
   until it is replaced.
 
+## 2026-11-16, third pass — six of sixteen offices parsed; two permits corrected
+
+A second upload of five documents (two MEO PDFs, two MNAO .docx, one MSWDO
+.docx). **MEO, MNAO and MSWDO are now parsed**, joining BPLO, MBO and MAO —
+six of sixteen offices. Only MASSO and MDRRMO are still `pending-parse`; the
+rest sent nothing.
+
+**The Engineering re-send of Charter pp. 64–67 found three real errors** in
+`citizens-charter.json`, which is the first time a duplicate has earned its
+keep twice over:
+- Both permits had **empty `fees`** where the form says "No fixed amount,
+  computed based on Rule II, Section 6 (6.10 for occupancy) of the IRR of
+  P.D. 1096" — a real answer to "what does a building permit cost", now recorded.
+- **`processingTime` had been split on the word "to"** because the ranges wrap
+  across table cells: "1 hour to 1 day" had become "1 hour" + "1 day". All four
+  ranges per service restored.
+- **`sourcePages` were wrong on both** (64-66 → 64-65, 66-69 → 66-67).
+- **Then swept the whole Charter for the same fault**: it holds only four
+  "X to Y" ranges in total, all on pp. 64–67, all now fixed. **Not systemic —
+  don't re-check the other services for this.** Requirements, classification,
+  transaction type and who-may-avail all matched exactly, again confirming the
+  bordered-cell fields are the reliable ones.
+
+**A conflict the LGU has to settle: MNAO's vision and mission differ between
+its own two documents.** The Services Offered version is the one in the data
+(fuller — "and other vulnerable groups" — and grammatical: "in abundance",
+"through"); the Office Profile version reads "a nutritionally educated people …
+to abundance …" and stops at "preschool and school children". **That choice is
+a judgement, not a confirmation.** Ask the office which is current before it
+renders.
+
+**Left exactly as written, deliberately:** MSWDO's mission says "contribute to
+family alleviation", almost certainly meant as "poverty alleviation". Changing
+it would alter meaning rather than fix a spelling, so it stands with a flag.
+Plain spelling fixes that *were* made: "FURTHER MIDECATION" → "further
+medication", "PWD TREGISTRATION" → "PWD registration", MEO's "continuos" →
+"continuous", and MEO's mandate item 4 lost its duplicated "compliance with
+existing" (the sentence is still awkward — confirm the wording).
+
+**Two standing rules this pass added to `offices.json`'s `_schema`:**
+- `developmentFundProjects` (MEO's ten CY2027 20%-DF projects) carries **titles
+  only — the form has no cost figures.** Never render these with an implied budget.
+- CY2027 figures for **both MBO and MEO are a PROPOSED budget** on a preparation
+  form. If they ever render, the page must say "proposed", not just the data.
+
+Also new in the data: `requirementSets` (MSWDO's nine "what to bring"
+checklists), `committee` (MNAO's 16-member Municipal Nutrition Committee),
+`barangayNutritionScholars` (7, Poblacion vacant as an empty name, not "TBA").
+MNAO's Weight-for-Age counts do total 900; the "C.Y. 2026" label is still
+unconfirmed and may be CY2025 data reported in 2026. MNAO's two staff mobile
+numbers are personal mobiles from the office's own profile — confirm the office
+wants them public before they render. MEO's office number is still unrecorded:
+the Sept profile's "+6939 695236538" is not a valid PH length.
+
 ## 2026-11-16, later — five uploaded documents: Accounting's FDP forms published
 
 RJ was away from his main machine and uploaded five documents to the session
