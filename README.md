@@ -145,9 +145,35 @@ The predecessor repo, `rjfabella/calatrava-tourism-portal`, is archived and
 read-only; its Pages site still serves a frozen pre-merge copy at its own
 github.io URL.
 
+### The admin editor's GitHub token
+
 One job is left over from the move: `admin.html` needs a fresh fine-grained
 PAT with Contents read & write on `rjfabella/calatrava-lgu`. The token saved
 on the LGU's device is scoped to the archived repo and will fail on Save.
+Signing in with it now says so explicitly — GitHub answers `404` (not `403`)
+for a repo a fine-grained token cannot see, so the editor reports "that token
+cannot reach rjfabella/calatrava-lgu" rather than "incorrect password".
+
+To replace it:
+
+1. github.com → Settings → Developer settings → **Personal access tokens →
+   Fine-grained tokens** → *Generate new token*.
+2. **Resource owner**: `rjfabella`. **Repository access**: *Only select
+   repositories* → `rjfabella/calatrava-lgu`.
+3. **Permissions → Repository permissions → Contents: Read and write.**
+   Nothing else is needed; `Metadata: Read-only` is added automatically.
+4. Set an expiry you will actually renew (GitHub caps fine-grained tokens at
+   1 year; the editor degrades to export-only drafts when it lapses, it does
+   not lose work).
+5. Open `admin.html`, paste the token into the sign-in box once. It is kept in
+   that device's `localStorage`, after which the ordinary admin password
+   unlocks it. On a shared computer, use *Log out* and answer OK to the
+   "forget the saved token" prompt.
+
+The token is a **publishing credential for a live government site** — it can
+commit to `main`, which deploys. Don't paste it into a chat, an issue, or a
+file in this repo; if it leaks, revoke it on the same page and generate
+another.
 
 If the domain ever has to move between Pages sites again — it can only be
 attached to one at a time, so release it from the old repo's Settings → Pages

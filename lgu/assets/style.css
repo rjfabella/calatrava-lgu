@@ -206,6 +206,10 @@ html{scroll-behavior:smooth}
 .svc-group-head{display:flex;align-items:center;gap:.9rem;margin-bottom:1.5rem;padding-bottom:.9rem;border-bottom:2px solid var(--border)}
 .svc-group-head svg{width:30px;height:30px;color:var(--ocean);stroke-width:1.6}
 .svc-group-head h2{font-family:var(--fd);font-size:1.55rem;font-weight:700;color:var(--deep)}
+.svc-group-intro{color:var(--muted);max-width:62ch;margin:-.75rem 0 1.5rem}
+.form-meta{display:block;margin-top:.2rem;color:var(--muted);font-weight:600}
+.forms-charter-link{margin-top:1rem}
+.forms-charter-link a{font-weight:600}
 .svc-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .svc-item{background:var(--white);padding:1.5rem 1.7rem}
 .svc-item--lead{grid-column:1 / -1;background:var(--cream);border-left:4px solid var(--gold)}
@@ -525,11 +529,77 @@ footer{background:var(--deep);color:rgba(255,255,255,.88);padding:4rem 2.5rem 2r
   font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--deep);background:var(--sand)}
 .dept-body{min-width:0}
 .dept-body h3{font-size:16.5px;font-weight:700;color:var(--deep);line-height:1.38;margin-bottom:.55rem}
-.dept-acr{display:inline-block;font-family:var(--fb);font-size:12px;font-weight:700;letter-spacing:.08em;
+.dept-acr{display:inline-block;font-family:var(--fb);font-size:12.5px;font-weight:700;letter-spacing:.08em;
   color:var(--ocean);background:var(--sand);border-radius:3px;padding:.15rem .45rem;vertical-align:2px;
   white-space:nowrap}
 .dept-head-name{font-size:16px;font-weight:700;color:var(--text);line-height:1.4}
 .dept-head-title{font-size:14.5px;color:var(--muted);line-height:1.45;margin-top:.15rem}
+
+/* ── OFFICE DETAIL PANELS (about.html) ──
+   A department card whose office has supplied content becomes a <details>.
+   When open it spans the whole grid, because a mandate and a service list do
+   not read in a one-third column. Offices with nothing on file stay plain
+   cards, so a gap looks like a gap. */
+.dept-card-x{display:block;padding:0;cursor:pointer}
+.dept-card-x summary{display:flex;gap:1.1rem;padding:1.3rem 1.4rem;align-items:flex-start;
+  list-style:none;position:relative}
+.dept-card-x summary::-webkit-details-marker{display:none}
+.dept-card-x summary::after{content:'+';position:absolute;right:1.1rem;top:1rem;
+  font-size:22px;font-weight:700;color:var(--ocean);line-height:1}
+.dept-card-x[open] summary::after{content:'\2013'}
+.dept-card-x summary:focus-visible{outline:3px solid var(--ocean);outline-offset:-3px}
+.dept-card-x .dept-body{padding-right:1.6rem}
+.dept-card-x[open]{grid-column:1/-1;transform:none;box-shadow:var(--shadow)}
+.dept-card-x[open]:hover{transform:none}
+
+.dept-detail{border-top:1px solid var(--border);padding:1.5rem 1.4rem 1.6rem;
+  columns:2;column-gap:2.5rem}
+.od-block{break-inside:avoid;margin-bottom:1.5rem}
+.od-block:last-child{margin-bottom:0}
+.od-block h4{font-family:var(--fd);font-size:15px;font-weight:700;color:var(--deep);
+  letter-spacing:.02em;margin-bottom:.5rem;padding-bottom:.35rem;border-bottom:2px solid var(--sand)}
+.od-block p{line-height:1.6;margin-bottom:.5rem}
+.od-list{list-style:none;margin:0;padding:0}
+.od-list li{position:relative;padding-left:1.1rem;margin-bottom:.5rem;line-height:1.55}
+.od-list li::before{content:'';position:absolute;left:0;top:.62em;width:5px;height:5px;
+  border-radius:50%;background:var(--ocean)}
+.od-services li{margin-bottom:.7rem}
+.od-muted{color:var(--muted)}
+.od-note{font-size:15px;margin-bottom:.6rem}
+.od-xref{margin-top:.6rem;font-weight:600}
+.od-vm{display:grid;gap:1.25rem}
+.od-cols{columns:2;column-gap:1.75rem}
+
+.od-reqs{display:grid;gap:.4rem}
+.od-req{border:1px solid var(--border);border-radius:4px;background:var(--cream)}
+.od-req summary{cursor:pointer;padding:.6rem .85rem;font-weight:700;color:var(--deep);
+  list-style:none;position:relative;padding-right:2rem}
+.od-req summary::-webkit-details-marker{display:none}
+.od-req summary::after{content:'+';position:absolute;right:.85rem;top:.5rem;
+  color:var(--ocean);font-weight:700}
+.od-req[open] summary::after{content:'\2013'}
+.od-req summary:focus-visible{outline:3px solid var(--ocean);outline-offset:-3px}
+.od-req .od-list{padding:0 .85rem .75rem}
+
+.od-stats{margin:0}
+.od-stats>div{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding:.5rem 0;border-bottom:1px solid var(--border)}
+.od-stats>div:last-child{border-bottom:0}
+.od-stats dt{color:var(--muted);line-height:1.45}
+.od-stats dd{margin:0;text-align:right;white-space:nowrap}
+.od-figure{font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--deep)}
+.od-unit{color:var(--muted);font-size:14.5px}
+.od-asof{display:block;color:var(--muted);font-size:13.5px}
+
+.dept-subhead{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--deep);
+  margin:2.75rem 0 .35rem}
+.dept-subnote{color:var(--muted);max-width:62ch;margin-bottom:1.25rem}
+
+@media (max-width:900px){
+  .dept-detail{columns:1}
+  .od-cols{columns:1}
+}
+
 
 /* ── TABS (Public Services) ── */
 /* `display:flex` would otherwise beat the hidden attribute's UA rule, and the

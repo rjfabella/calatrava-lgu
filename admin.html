@@ -25,7 +25,7 @@ body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:15.7px;m
 .auth-box input:focus{border-color:var(--ocean)}
 .auth-box button{width:100%;background:var(--deep);color:#fff;border:none;padding:.7rem;border-radius:4px;font-size:14.6px;font-weight:500;letter-spacing:.05em;cursor:pointer;transition:background .2s}
 .auth-box button:hover{background:var(--ocean)}
-.auth-error{font-size:13.4px;color:var(--danger);margin-top:.5rem;display:none}
+.auth-error{font-size:13.4px;color:var(--danger);margin-top:.5rem;display:none;line-height:1.55;text-align:left}
 
 /* ── LAYOUT ── */
 #app{display:none;min-height:100vh}
@@ -174,8 +174,8 @@ textarea{resize:vertical;min-height:80px}
     <p>Calatrava Tourism Council<br>Municipality of Calatrava<br>Province of Romblon</p>
     <input type="password" id="pwInput" placeholder="Admin password or GitHub token" autocomplete="current-password">
     <button onclick="doLogin()">Sign In</button>
-    <p class="auth-error" id="authErr">Incorrect password. Try again.</p>
-    <p style="font-size:12.3px;color:rgba(255,255,255,.45);margin-top:1rem;line-height:1.6">On GitHub Pages hosting: paste a fine-grained GitHub token (Contents read &amp; write) the first time — it's remembered on this device, then the admin password works as usual.</p>
+    <p class="auth-error" id="authErr" role="alert">Incorrect password. Try again.</p>
+    <p style="font-size:12.8px;color:var(--muted);margin-top:1rem;margin-bottom:0;line-height:1.6;text-align:left">To publish, paste a fine-grained GitHub token for <strong>rjfabella/calatrava-lgu</strong> with <strong>Contents: Read and write</strong>. It is remembered on this device, after which the admin password signs you in. Without one you can still edit and Export JSON, but Save will not publish.</p>
     <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,0.1);display:flex;justify-content:center;">
       <img src="https://hits.sh/rjfabella.github.io/calatrava-tourism-portal.svg?label=Site%20Visits&color=1A5C7A" alt="Site Visits">
     </div>
@@ -509,38 +509,68 @@ let importTarget = null;
 // ══ AUTH ══
 const looksLikeGhToken = s => /^(github_pat_|ghp_)/.test(s);
 
+// Returns { ok } or { ok:false, reason } so the login screen can say *why*
+// a token was refused. The common failure after the 2026-11 repo merge is a
+// token still scoped to the archived calatrava-tourism-portal: GitHub answers
+// 404 (not 403) for a repo a fine-grained token cannot see, which is
+// indistinguishable from a typo unless we say so.
 async function validateGhToken(token) {
+  let res;
   try {
-    const res = await fetch('https://api.github.com/repos/' + GH_REPO, {
+    res = await fetch('https://api.github.com/repos/' + GH_REPO, {
       headers: { authorization: 'Bearer ' + token, accept: 'application/vnd.github+json' }
     });
-    if (!res.ok) return false;
+  } catch (e) { return { ok: false, reason: 'offline' }; }
+  if (res.status === 401) return { ok: false, reason: 'invalid' };
+  if (res.status === 404) return { ok: false, reason: 'scope' };
+  if (!res.ok) return { ok: false, reason: 'offline' };
+  try {
     const repo = await res.json();
-    return !!repo.permissions?.push;
-  } catch (e) { return false; }
+    // GitHub only returns `permissions` on an authenticated request. This repo
+    // is public, so a token that failed to authenticate can still come back 200
+    // with public repo data and no `permissions` at all — that is a bad token,
+    // not a read-only one.
+    if (!repo.permissions) return { ok: false, reason: 'invalid' };
+    if (!repo.permissions.push) return { ok: false, reason: 'readonly' };
+  } catch (e) { return { ok: false, reason: 'offline' }; }
+  return { ok: true };
 }
+
+const GH_TOKEN_ERRORS = {
+  invalid:  'That GitHub token is not valid (it may have expired or been revoked). Generate a new one.',
+  scope:    'That token cannot reach ' + GH_REPO + '. A token scoped to the old calatrava-tourism-portal repo will do this — generate a new fine-grained token with Contents: Read and write on ' + GH_REPO + '.',
+  readonly: 'That token can read ' + GH_REPO + ' but not write to it. It needs Contents: Read and write.',
+  offline:  'Could not reach GitHub to check that token. Check the internet connection and try again.'
+};
 
 async function doLogin() {
   const pw = document.getElementById('pwInput').value;
+  const errEl = document.getElementById('authErr');
   let ok = false;
+  let errMsg = 'Incorrect password. Try again.';
   // A pasted GitHub token is the real credential; the fallback password
   // unlocks a token previously saved on this device.
   if (looksLikeGhToken(pw)) {
-    if (await validateGhToken(pw)) {
+    const check = await validateGhToken(pw);
+    if (check.ok) {
       ok = true; ghToken = pw; publishMode = 'github';
       try { localStorage.setItem('admin_gh_token', pw); } catch(e) {}
+    } else {
+      errMsg = GH_TOKEN_ERRORS[check.reason] || errMsg;
     }
   } else if (pw === FALLBACK_PW) {
     ok = true;
     const stored = localStorage.getItem('admin_gh_token');
-    if (stored && await validateGhToken(stored)) {
+    const check = stored ? await validateGhToken(stored) : null;
+    if (check && check.ok) {
       ghToken = stored; publishMode = 'github';
     } else {
       publishMode = 'static';
-      if (stored) toast('Saved GitHub token no longer works — paste a new one to publish', 'error');
+      if (check) toast(GH_TOKEN_ERRORS[check.reason] || 'Saved GitHub token no longer works — paste a new one to publish', 'error');
     }
   }
 
+  errEl.textContent = errMsg;
   if (ok) {
     adminPw = pw;
     document.getElementById('authScreen').style.display = 'none';

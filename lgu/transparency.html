@@ -54,6 +54,7 @@ function renderSections(sections){
   document.getElementById('sections').innerHTML = sections.map(sec =>
     `<div class="svc-group">
       <div class="svc-group-head">${DOC_SVG}<h2>${sec.title}</h2></div>
+      ${sec.intro ? `<p class="svc-group-intro">${sec.intro}</p>` : ''}
       <div class="doc-list">${(sec.docs || []).map(renderDoc).join('')}</div>
     </div>`).join('');
 }

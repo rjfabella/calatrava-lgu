@@ -37,13 +37,21 @@
       <h2 class="s-title">Who does <em>what</em></h2>
       <p class="charter-intro">Each office below delivers the frontline services listed in the Citizen's Charter. Acronyms are the ones used in the Charter itself. <a href="services.html#charter">See what each office can do for you &rarr;</a></p>
     </div>
-    <div class="dept-grid" id="departments"><!-- rendered from data/officials.json --></div>
+    <div class="dept-grid" id="departments"><!-- rendered from data/officials.json, detail from data/offices.json --></div>
+
+    <div id="otherOffices" hidden>
+      <h3 class="dept-subhead">Other offices &amp; units</h3>
+      <p class="dept-subnote">Units that serve the public but do not appear as separate offices on the 2026 plantilla.</p>
+      <div class="dept-grid" id="departmentsExtra"></div>
+    </div>
+
     <p class="mandate-note"><a href="assets/contents/Organizational%20Chart%202026.pptx">Download the full Organizational Chart 2026</a></p>
   </div>
 </section>
 
 <script src="assets/app.js"></script>
 <script>
+const OFFICES_FALLBACK = { offices: [] };
 const FALLBACK = {
   elected: [{ name: "Engr. Robert M. Fabella", role: "Municipal Mayor", term: "2025–2028", photo: "assets/images/Portrait_Mayor.jpg" }],
   departments: [{ name: "Office of the Sangguniang Bayan", acronym: "SB", head: "Joseph M. Fedelicio", headTitle: "Secretary to the Sangguniang Bayan", photo: "assets/images/dept-heads/sec.jpg" }]
@@ -68,26 +76,181 @@ function renderOfficial(o){
   </div>`;
 }
 
-function renderDept(dep){
+function deptFace(dep, headFallback){
+  // The monogram stands for a person. An office with nobody on file gets no
+  // portrait slot at all — initials built from the office name read as a
+  // person's ("BPA" for the Business Permits office), which is worse than a gap.
   const photo = dep.photo
     ? `<img src="${esc(dep.photo)}" alt="${esc(dep.head)}" loading="lazy" onerror="this.parentElement.innerHTML=monogram('${(dep.head||'').replace(/'/g,'')}')">`
-    : monogram(dep.head || '');
-  return `<article class="dept-card reveal">
-    <div class="dept-photo">${photo}</div>
+    : (dep.head ? monogram(dep.head) : '');
+  // An office that simply has no head on file shows nothing rather than
+  // "To be announced", which would imply a vacancy that may not exist.
+  const headLine = dep.head
+    ? `<div class="dept-head-name">${esc(dep.head)}</div>`
+    : (headFallback ? '' : `<div class="dept-head-name">To be announced</div>`);
+  return `${photo ? `<div class="dept-photo">${photo}</div>` : ''}
     <div class="dept-body">
       <h3>${esc(dep.name)}${dep.acronym ? ` <span class="dept-acr">${esc(dep.acronym)}</span>` : ''}</h3>
-      <div class="dept-head-name">${esc(dep.head || 'To be announced')}</div>
+      ${headLine}
       ${dep.headTitle ? `<div class="dept-head-title">${esc(dep.headTitle)}</div>` : ''}
-    </div>
-  </article>`;
+    </div>`;
 }
+
+function renderDept(dep, office){
+  const face = deptFace(dep, !!office && !dep.head);
+  if (!office) return `<article class="dept-card reveal">${face}</article>`;
+  return `<details class="dept-card dept-card-x reveal">
+    <summary>${face}</summary>
+    <div class="dept-detail">${officeDetail(office)}</div>
+  </details>`;
+}
+
+/* ── OFFICE DETAIL (data/offices.json) ──
+   Only offices whose status is 'parsed' get a panel; the rest stay plain
+   cards, so an office that has sent nothing reads as a gap rather than as an
+   office with nothing to say.
+
+   Two deliberate omissions:
+   • `statistics` whose source is marked PROPOSED are NOT rendered. Those are
+     CY2027 office budget proposals on an LBP Form 4, not appropriations, and a
+     peso figure on a "who does what" card reads as money spent. Budget belongs
+     on transparency.html. Descriptive statistics (farmers registered, children
+     weighed) do render.
+   • Fees, requirements and processing times are never restated here — they
+     live in citizens-charter.json and each service links across instead. */
+
+const isProposed = st => /PROPOSED/i.test(st && st.source || '');
+
+const block = (title, body) => body
+  ? `<section class="od-block"><h4>${esc(title)}</h4>${body}</section>` : '';
+
+const list = (items, cls) => items && items.length
+  ? `<ul class="${cls || 'od-list'}">${items.map(i => `<li>${i}</li>`).join('')}</ul>` : '';
+
+function officeDetail(o){
+  const out = [];
+
+  const mandate = Array.isArray(o.mandate)
+    ? list(o.mandate.map(esc))
+    : (o.mandate ? `<p>${esc(o.mandate)}</p>` : '');
+  out.push(block('Mandate', mandate));
+
+  if (o.vision || o.mission) {
+    out.push(`<section class="od-block od-vm">
+      ${o.vision ? `<div><h4>Vision</h4><p>${esc(o.vision)}</p></div>` : ''}
+      ${o.mission ? `<div><h4>Mission</h4><p>${esc(o.mission)}</p></div>` : ''}
+    </section>`);
+  }
+  if (o.organizationalOutcome)
+    out.push(block('Organizational outcome', `<p>${esc(o.organizationalOutcome)}</p>`));
+
+  out.push(block('Key functions', list((o.keyFunctions || []).map(esc))));
+
+  if ((o.services || []).length) {
+    const items = o.services.map(sv => `<strong>${esc(sv.name)}</strong>${
+      sv.description ? `<br><span class="od-muted">${esc(sv.description)}</span>` : ''}`);
+    out.push(block('Services', list(items, 'od-list od-services')
+      + `<p class="od-xref"><a href="services.html#charter">Requirements, fees and processing time in the Citizen's Charter &rarr;</a></p>`));
+  }
+
+  if ((o.requirementSets || []).length) {
+    out.push(block('What to bring', `<div class="od-reqs">${o.requirementSets.map(r =>
+      `<details class="od-req"><summary>${esc(r.title)}</summary>${list((r.items||[]).map(esc))}</details>`
+    ).join('')}</div>`));
+  }
+
+  out.push(block('Programmes', list((o.programs || []).map(p =>
+    `${esc(p.name)}${p.description ? `<br><span class="od-muted">${esc(p.description)}</span>` : ''}`))));
+
+  if ((o.developmentFundProjects || []).length) {
+    out.push(block('Planned projects',
+      `<p class="od-muted od-note">Programmed under the 20% Development Fund for CY2027. The source form carries no cost figures, so none are shown.</p>`
+      + list(o.developmentFundProjects.map(esc))));
+  }
+
+  const stats = (o.statistics || []).filter(st => !isProposed(st));
+  if (stats.length) {
+    out.push(block('At a glance', `<dl class="od-stats">${stats.map(st => `
+      <div><dt>${esc(st.label)}</dt><dd><span class="od-figure">${esc(st.value)}</span>${
+        st.unit ? ` <span class="od-unit">${esc(st.unit)}</span>` : ''}${
+        st.asOf ? `<span class="od-asof">${esc(st.asOf)}</span>` : ''}</dd></div>`).join('')}</dl>`));
+  }
+
+  if (o.committee && (o.committee.members || []).length) {
+    out.push(block(o.committee.name || 'Committee', list(o.committee.members.map(m =>
+      `${esc(m.name)}${m.position ? ` <span class="od-muted">— ${esc(m.position)}</span>` : ''}`), 'od-list od-cols')));
+  }
+
+  if ((o.barangayNutritionScholars || []).length) {
+    out.push(block('Barangay Nutrition Scholars', list(o.barangayNutritionScholars.map(b =>
+      `${esc(b.barangay)} <span class="od-muted">— ${b.name ? esc(b.name) : 'vacant'}</span>`), 'od-list od-cols')));
+  }
+
+  if ((o.staff || []).length) {
+    out.push(block('Staff', list(o.staff.map(st =>
+      `${esc(st.name)}${st.position ? ` <span class="od-muted">— ${esc(st.position)}</span>` : ''}${
+        st.mobile ? `<br><a href="tel:${esc(st.mobile.replace(/\s/g,''))}">${esc(st.mobile)}</a>` : ''}`))));
+  }
+
+  const c = o.contact || {};
+  if (c.phone || c.email || c.hours) {
+    out.push(block('Office contact', `<ul class="od-list">
+      ${c.phone ? `<li><a href="tel:${esc(c.phone.replace(/\s/g,''))}">${esc(c.phone)}</a></li>` : ''}
+      ${c.email ? `<li><a href="mailto:${esc(c.email)}">${esc(c.email)}</a></li>` : ''}
+      ${c.hours ? `<li>${esc(c.hours)}</li>` : ''}</ul>`));
+  }
+
+  const body = out.filter(Boolean).join('');
+  return body || `<p class="od-muted">No further detail has been supplied by this office yet.</p>`;
+}
+
+// Offices are keyed by the Citizen's Charter acronym, which both files carry.
+// The Accountant's office has no acronym in the Charter and is matched on name
+// instead; `key` must never collapse two offices onto the same string.
+const officeKey = o => (o.acronym || '').trim().toUpperCase()
+  || (o.office || o.name || '').trim().toUpperCase().replace(/\s+/g, ' ');
 
 (async function(){
   initChrome('about');
-  const d = await loadJSON('data/officials.json', FALLBACK);
-  document.getElementById('officials').innerHTML = (d.elected || []).map(renderOfficial).join('');
-  document.getElementById('departments').innerHTML = (d.departments || []).map(renderDept).join('');
+  const [d, off] = await Promise.all([
+    loadJSON('data/officials.json', FALLBACK),
+    loadJSON('data/offices.json', OFFICES_FALLBACK),
+  ]);
+
+  // Only 'parsed' offices carry content worth expanding.
+  const byKey = new Map();
+  for (const o of (off.offices || [])) {
+    if (o.status === 'parsed') byKey.set(officeKey(o), o);
+  }
+
+  const departments = d.departments || [];
+  const used = new Set();
+  document.getElementById('departments').innerHTML = departments.map(dep => {
+    const k = officeKey(dep);
+    const o = byKey.get(k);
+    if (o) used.add(k);
+    return renderDept(dep, o);
+  }).join('');
+
+  // An office with content but no card on the 2026 plantilla (BPLO sits under
+  // the Mayor; MNAO is a designated officer, not an office) would otherwise be
+  // invisible. It gets a card of its own rather than being forced into the
+  // org-chart grid, which must keep matching organization.json.
+  const extra = [...byKey.entries()].filter(([k]) => !used.has(k)).map(([, o]) => {
+    const lead = (o.staff || [])[0] || {};
+    return renderDept({
+      name: o.office, acronym: o.acronym,
+      head: lead.name || '', headTitle: lead.position || '', photo: ''
+    }, o);
+  });
+  if (extra.length) {
+    document.getElementById('departmentsExtra').innerHTML = extra.join('');
+    document.getElementById('otherOffices').hidden = false;
+  }
+
   observeReveal();
+
+  // A hash may name an office card; open it so a deep link lands on content.
   if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
 })();
 </script>

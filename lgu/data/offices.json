@@ -1,0 +1,1270 @@
+{
+  "_source": "lgu/assets/reference docs/ — the Sept 2026 batch of office submissions. Per-file audit: that folder's README.md. Checklist mapping: 'Calatrava LGU Website Development.xlsx' -> Checklist tab, columns H (Reference Document(s)) and I (Coverage / Gaps).",
+  "_status": "STRUCTURE ONLY — NO CONTENT PARSED YET. Every content field below is deliberately empty.",
+  "_note": "Target shape for the per-office profiles in the Sept 2026 batch. The raw submissions are .gitignore'd (~30 MB of scans and DOCX) and live only on RJ's machine, so the parse has to run where those files are. Fill each field by typing it from the source document itself -- NOT from the audit README's summary and NOT from memory: the README is a second-hand index written to catalogue the batch, not a transcript. Five of the documents are scans with no text layer (MSWDO, MBO, MEO LBP4, LDRRMF, Supplemental Budgets), so their figures must be double-checked against the scan. Keep every figure, name and peso amount verbatim. Leave a field empty rather than filling it from a plausible guess -- the renderer degrades honestly and an empty field is a visible gap, which is the house rule for this site.",
+  "_statusValues": {
+    "pending-parse": "A source document is on hand; its content has not been typed into this file yet.",
+    "covered-elsewhere": "The office's submission duplicated content already parsed into another data file.",
+    "awaiting-submission": "The office sent nothing in this batch. Listed so the gap is visible and chaseable.",
+    "fdp-only": "Submission is a Full Disclosure document, not office-profile content; belongs in transparency.json.",
+    "parsed": "Content typed in from the source document and checked against it."
+  },
+  "_schema": {
+    "acronym": "Short label as used elsewhere on this site (officials.json departments). Empty string where the Citizen's Charter gives none -- do not invent one.",
+    "office": "Canonical office name. Matches organization.json's 'office' where the office is in the 2026 org chart.",
+    "orgChartOffice": "The organization.json office this profile belongs to, or null for a body that is not a plantilla office (BPLO, MNAO, HRMO, SB).",
+    "sourceDocs": "File names inside 'lgu/assets/reference docs/', exactly as renamed there.",
+    "charterPages": "Pages of Citizen's Charter 2023 covering this office's frontline services, where it has any. Cross-reference only -- the services themselves stay in citizens-charter.json.",
+    "mandate": "Verbatim mandate statement. Plain string, or an array of strings where the source numbers them (MBO has 5, MEO has 4).",
+    "vision": "Verbatim office-level vision. Distinct from the municipal vision in officials.json -- do not merge the two.",
+    "mission": "Verbatim office-level mission.",
+    "keyFunctions": "Array of strings, verbatim.",
+    "services": "Array of { name, description, requirements[], fees, processingTime, charterRef }. Where a service is already in citizens-charter.json, set charterRef and leave fees/processingTime empty rather than copying a second figure that can drift.",
+    "programs": "Array of { name, description, beneficiaries }.",
+    "staff": "Array of { name, position, mobile }. Only where the office supplied it. These are office staff lists, distinct from organization.json's plantilla positions and from contact.json's office-head directory.",
+    "statistics": "Array of { label, value, unit, asOf, source }. 'asOf' is the reference period the document states; 'source' names the document or the cited original (e.g. CLUP).",
+    "contact": "Office-level phone/email/hours as the document gives them. Never publish a number that is not a valid PH length.",
+    "has": "What the source document actually contains, from the audit. A checklist for the parse, not site content -- drop or ignore it once 'status' is 'parsed'.",
+    "gaps": "What the office did not supply, plus any quality warning that must be resolved before publishing.",
+    "requirementSets": "Array of { title, items[] } for offices that publish 'what to bring' checklists separately from their service list (MSWDO). Distinct from services[].requirements, which belongs to one named service.",
+    "organizationalOutcome": "Single-sentence outcome statement from an LBP Form 4 (MBO, MEO).",
+    "developmentFundProjects": "Array of project titles from a 20%-Development-Fund PPA table (MEO). Titles only: the source form carries no cost figures, so never render these with an implied budget.",
+    "committee": "{ name, members[] } for a body an office convenes (MNAO's Municipal Nutrition Committee).",
+    "barangayNutritionScholars": "MNAO-specific: array of { name, barangay }; an empty name means the post is vacant."
+  },
+  "_render": "Not rendered on any page yet, by design. The IA decision comes first: per-office detail pages linked from about.html#departments-section, or an expandable panel per office on that page. Whichever is chosen, office-level vision/mission must stay visually distinct from the municipal vision/mission on the homepage, and a service that is already in citizens-charter.json should link to services.html#charter rather than restate its fees. See MEMORY.md.",
+  "offices": [
+    {
+      "acronym": "BPLO",
+      "office": "Business Permits and Licensing Office",
+      "orgChartOffice": null,
+      "status": "parsed",
+      "sourceDocs": [
+        "BPLO_Mandate Key Functions and Services Offered.docx"
+      ],
+      "charterPages": "7–11",
+      "mandate": "To regulate, facilitate, and monitor the licensing of all businesses within the municipality — ensuring legal operation, compliance with laws/ordinances, revenue generation, and promotion of ease of doing business.",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [
+        "Receive, evaluate, and approve business permit applications (new & renewal)",
+        "Enforce compliance with zoning, health, safety, environmental, and other regulatory standards",
+        "Maintain business registry and records",
+        "Operate under the Electronic Business One Stop Shop (E-BOSS)/BPLS for unified, streamlined processing"
+      ],
+      "services": [
+        {
+          "name": "New Business Permit (Mayor's Permit)",
+          "description": "Primary license to legally operate; verifies DTI/SEC registration, barangay clearance, health and sanitary and other clearances.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Annual Permit Renewal",
+          "description": "January; updates records, confirms tax payment, extends authority to operate.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Business Modifications",
+          "description": "Change of location, business name, ownership, capital, line of business or expansion.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Closure/Retirement of Business",
+          "description": "Formal deactivation of business account; clearance of outstanding obligations.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Special Permit/Clearances",
+          "description": "Temporary operations, sales, events, ambulant vendors, etc.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Compliance Monitoring & Inspection",
+          "description": "Verifies adherence to rules; addresses violations; conducts spot check/complaint investigations.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        }
+      ],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "mandate",
+        "keyFunctions (4)",
+        "services (6): new permit, renewal, modification, closure, special permits, inspection"
+      ],
+      "gaps": "No vision, mission, staff list or office contact supplied. Fees and processing times are deliberately empty here: the business-permit procedure is in citizens-charter.json (Charter pp. 7–11) and must not be restated, or the two will drift."
+    },
+    {
+      "acronym": "MASSO",
+      "office": "Office of the Municipal Assessor",
+      "orgChartOffice": "Office of the Municipal Assessor",
+      "status": "parsed",
+      "sourceDocs": [
+        "MASSO_Mandate Vision Mission and Services.docx",
+        "Masso_for_website.docx (uploaded 2026-11-16)"
+      ],
+      "charterPages": "38–45",
+      "mandate": "Ensure all laws and policies governing the appraisal and assessment of real properties for taxation purposes are properly executed, and exercise the functions of appraisal and assessment primarily for taxation purposes of all real properties in the LGU concerned.",
+      "vision": "A progressive place where real property tax serves as the primary source of local revenue and life blood of development.",
+      "mission": "To install systematic method of appraisal and assessment to ensure fair and realistic valuation for taxation purposes to maximize the yield from real property tax towards achieving local fiscal self-sufficiency.",
+      "keyFunctions": [],
+      "services": [
+        {
+          "name": "Transfer of tax declaration of real property",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Revision of tax declaration of real property due to incorrect entries",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Revision of tax declaration of real property due to reassessment or reclassification",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Assessment and issuance of tax declaration for new improvement on real property",
+          "description": "Buildings, machinery and equipment.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Appraisal/assessment and issuance of tax declaration of land declared for the first time",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Issuance of real property certifications",
+          "description": "Certified true copy of tax declaration, assessment documents and sketch plan.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Annotation/cancellation of encumbrances, liens and adverse claims",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        }
+      ],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "mandate",
+        "vision",
+        "mission",
+        "services (7)"
+      ],
+      "gaps": "No staff list or office contact supplied. The source lists the seven services in capitals with no descriptions, fees or processing times; they are set in sentence case here and the two that needed a gloss got one. Fees and processing times are deliberately absent - the Charter covers the Assessor's services on pp. 38-45 and each service links there instead. Three of the seven appear in the Charter; the other four are office services the Charter does not list, so searching the Charter for them will come up empty."
+    },
+    {
+      "acronym": "MBO",
+      "office": "Office of the Municipal Budget Officer",
+      "orgChartOffice": "Office of the Municipal Budget Officer",
+      "status": "parsed",
+      "sourceDocs": [
+        "MBO_Mandate Vision Mission MFO and Targets CY2027 (LBP Form 4).pdf"
+      ],
+      "charterPages": "62–64",
+      "mandate": [
+        "Review and consolidate budget proposals of different departments and offices of the LGU;",
+        "Assist the LCE in the preparation of the Annual and Supplemental Budgets;",
+        "Study and evaluate budgetary implications of proposed legislation and submit comments and recommendations thereon;",
+        "Review Annual and Supplemental Budgets of the component barangays.",
+        "Acts as member of the Local Finance Committee."
+      ],
+      "vision": "To be proactive development partner/advocate of the financial management team of the Municipal Government in the effective allocation and management of public resources and expenditures towards achieving its pursuit for fiscal strength and good governance.",
+      "mission": "The Municipal Budget Office is committed to promote, implement and strengthen public expenditure management policies and directions that are sustainable and supportive to the program thrusts and development goals of the Municipal Government; Advocate policies and directives that ensure efficiency, effectiveness, transparency and accountability in public spending.",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [
+        {
+          "label": "Budget Management Program — Personal Services",
+          "value": "1,472,457.21",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Budget Management Program — MOOE",
+          "value": "248,000.00",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Budget Management Program — Total",
+          "value": "1,720,457.21",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        }
+      ],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "mandate (5 items)",
+        "vision",
+        "mission",
+        "organizational outcome",
+        "Budget Management Program targets CY2027"
+      ],
+      "gaps": "No staff list or office contact supplied. TWO THINGS TO SETTLE BEFORE RENDERING: (1) the CY2027 figures are a PROPOSED budget on a budget-preparation form, not an approved appropriation — decide whether a proposed figure belongs on a public page at all, and if it is shown, label it 'proposed' on the page, not only here. (2) The scan's page 1 is cropped at the foot, cutting the last performance indicator ('No overdrafts in … appropriation', target 0) across the page break — the full row needs the LGU's original before the indicator list is published. The six fully legible indicators all carry a 100% target. The source mission reads 'effieciency'; corrected to 'efficiency' here, the same way the org chart's doubled 'OFFICE OF THE OFFICE OF THE' was normalised during parsing.",
+      "organizationalOutcome": "Fiscal discipline, effective resources allocation, and efficient government fiscal operation"
+    },
+    {
+      "acronym": "MEO / OBO",
+      "office": "Office of the Municipal Engineer / Office of the Building Official",
+      "orgChartOffice": "Office of the Municipal Engineer",
+      "status": "parsed",
+      "sourceDocs": [
+        "MEO_Mandate Vision Mission MFO and Targets CY2027 (LBP Form 4).pdf",
+        "MEO_Municipal Engineer Profile (Portrait and Office Contact).docx",
+        "MEO_Permits/ (13 NBC permit application forms)"
+      ],
+      "charterPages": "64–67",
+      "mandate": [
+        "To prepare, administer, coordinate, supervise and control all projects of the LGU.",
+        "Administer, coordinate, supervise, and control the construction, maintenance, improvement, and repair of roads, bridges and their engineering and public works projects of LGU concerned;",
+        "Provide engineering services to the LGU concerned, including investigation and survey, engineering designs, feasibility studies, and project management;",
+        "Regulate and ensure compliance with existing policies, infrastructure development and public works."
+      ],
+      "vision": "Committed to provide prompt, honest, responsive and efficient services to meet the demands of general public and implement infrastructure projects that will sustain it general welfare and stability.",
+      "mission": "The Engineering Office of the Municipality of Calatrava is on a mission to sustain development and progress to be globally competitive in terms of implementation of infrastructure projects through the efforts of continuous career development and application of the values of a good public servant as enshrined on the Philippine Constitution adopting the credo for the people working in government.",
+      "keyFunctions": [],
+      "services": [
+        {
+          "name": "Processing of Building Permit and Ancillary Permits",
+          "description": "Issued by the Office of the Building Official to any individual, company or association constructing, renovating or altering a building, to ensure structural safety.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        },
+        {
+          "name": "Processing of Occupancy Permit",
+          "description": "Issued once a building is completed and before it may be occupied, or when the owner changes the required occupancy.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": "services.html#charter"
+        }
+      ],
+      "programs": [
+        {
+          "name": "Supervision, evaluation of construction work and infrastructure projects",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Engineering and Infrastructure Management Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Repairs and Maintenance — Buildings and Other Structures",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Maintenance of Water System",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Maintenance of Municipal Roads",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Repair and Maintenance of Lights for Streetlight and Municipal Building Facilities",
+          "description": "",
+          "beneficiaries": ""
+        }
+      ],
+      "staff": [],
+      "statistics": [
+        {
+          "label": "Engineering & Infrastructure programme — Personal Services",
+          "value": "2,765,549.95",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Engineering & Infrastructure programme — MOOE",
+          "value": "2,629,000.00",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Engineering & Infrastructure programme — Capital Outlay",
+          "value": "150,000.00",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        },
+        {
+          "label": "Engineering & Infrastructure programme — Total",
+          "value": "5,544,549.95",
+          "unit": "PHP",
+          "asOf": "CY2027",
+          "source": "LBP Form 4 (Annex G), CY2027 — PROPOSED, not an approved appropriation"
+        }
+      ],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": "8:00 – 5:00"
+      },
+      "has": [
+        "mandate (4 items)",
+        "vision",
+        "mission",
+        "PPAs CY2027 (5)",
+        "20% Development Fund projects CY2027 (10)",
+        "office hours 8:00–5:00",
+        "13 downloadable permit forms"
+      ],
+      "gaps": "No staff list. The office number in the Sept profile document reads '+6939 695236538' — 12 digits after +63, not a valid PH length — so it is deliberately NOT recorded here; never publish it until the LGU confirms the real number. The CY2027 figures are a PROPOSED budget on a preparation form, not an approved appropriation; label them 'proposed' on any page that shows them. The 10 developmentFundProjects are CY2027 20%-Development-Fund PPAs with NO cost figures on the form — list them as planned projects only, never with an implied budget. Mandate item 4 reads 'Regulate and ensure compliance with existing compliance with existing policies infrastructure development and public works' in the source; the duplicated phrase was removed and a comma added, but the sentence is still awkward — confirm the intended wording. The form heads the office 'OFFICE OF THE MUNICIPAL ENGINEERING'; the site uses 'Office of the Municipal Engineer'. The two charter services carry no fees/processingTime here on purpose — they live in citizens-charter.json.",
+      "organizationalOutcome": "Complete implementation of infrastructure Projects for the satisfaction and benefits of the people.",
+      "developmentFundProjects": [
+        "Electrification of Proposed Sanitary Landfill",
+        "Improvement of Multi Purpose Building — San Roque (BDC Award)",
+        "Installation of Street Lights to Victorio Sixon Balogo NHS–Balogo Annex (BPOC Award)",
+        "Improvement of Day Care Center at Sitio Aguada, Talisay (BCPC Award)",
+        "Construction of Water system of Municipal Lot to Upper Sitio Acacia",
+        "Opening of Access Road to San Roque Barangay Health Station",
+        "Construction of Covered Line Canal at Calatrava NHS",
+        "Concreting of Access Road at Victorio Sixon Balogo NHS, Barangay Balogo",
+        "Improvement/Concreting of Sitio Acacia Access Road",
+        "Construction of Municipal Sanitary Landfill Facilities Phase 2"
+      ]
+    },
+    {
+      "acronym": "MSWDO",
+      "office": "Office of the Municipal Social Welfare and Development Officer",
+      "orgChartOffice": "Office of the Municipal Social Welfare and Development Officer",
+      "status": "parsed",
+      "sourceDocs": [
+        "MSWDO_Vision Mission and Services Offered.pdf"
+      ],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "A society where poor, and disadvantaged individuals, families, and communities are empowered for an improved quality of life.",
+      "mission": "To provide a comprehensive social protection programs and services that will promote the rights and welfare of the poor, vulnerable and disadvantaged individuals, families and communities of Calatrava that will contribute to family alleviation and empowerment through quality service delivery.",
+      "keyFunctions": [],
+      "services": [
+        {
+          "name": "Assistance to Individuals in Crisis Situation (AICS)",
+          "description": "Provision of limited financial assistance to individuals in crisis situation.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Counselling services",
+          "description": "Counselling for VAWC cases, pre-marriage counselling, and counselling on marital conflict.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Issuance of Certificate of Indigency",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Issuance of Social Case Study Report",
+          "description": "For medical cases referred for further evaluation in Manila.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Disaster relief assistance",
+          "description": "",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        }
+      ],
+      "programs": [
+        {
+          "name": "Livelihood assistance for registered solo parents",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Livelihood assistance for indigent women",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Livelihood assistance for PWDs",
+          "description": "",
+          "beneficiaries": ""
+        }
+      ],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "vision",
+        "mission",
+        "services (5)",
+        "requirement lists: medical, burial, fire, social case study, VAWC, PMC",
+        "livelihood programs",
+        "solo parent / PWD / senior citizen registration requirements"
+      ],
+      "gaps": "No mandate, staff list or office contact supplied. VERIFY BEFORE PUBLISHING: the mission reads 'contribute to family alleviation and empowerment' - almost certainly meant to be 'poverty alleviation', but that is a change of meaning, so it is left exactly as written. Two clear heading typos WERE normalised: 'FURTHER MIDECATION' -> 'further medication' and 'PWD TREGISTRATION' -> 'PWD registration'. The requirement sets are the document's 'PROCEDURE ON HOW TO AVAIL' blocks; they are checklists, not the step-by-step procedure, and the office gave no fees or processing times - do not imply any.",
+      "requirementSets": [
+        {
+          "title": "Medical assistance",
+          "items": [
+            "Medical certificate or medical abstract",
+            "Hospital bill / billing",
+            "Prescription and receipt",
+            "Referral and laboratory result",
+            "Certificate of indigency from the barangay captain",
+            "Photocopy of valid ID"
+          ]
+        },
+        {
+          "title": "Burial assistance",
+          "items": [
+            "Photocopy of death certificate",
+            "Funeral contract, certificate of balance",
+            "Barangay indigency",
+            "Permit to transport cadaver if died outside the municipality",
+            "Photocopy of valid ID"
+          ]
+        },
+        {
+          "title": "Rehabilitation of burned / damaged house",
+          "items": [
+            "Fire incidence report from the fire department",
+            "Barangay indigency",
+            "Photocopy of valid ID",
+            "Picture of the incident"
+          ]
+        },
+        {
+          "title": "Social Case Study Report for further medication",
+          "items": [
+            "Medical certificate / medical abstract",
+            "Barangay indigency",
+            "Photocopy of valid ID"
+          ]
+        },
+        {
+          "title": "Counselling for VAWC victims and CICL",
+          "items": [
+            "Referral from PNP and barangay"
+          ]
+        },
+        {
+          "title": "Pre-Marriage Orientation and Counselling",
+          "items": [
+            "Application for marriage",
+            "Cedula"
+          ]
+        },
+        {
+          "title": "Solo Parent registration",
+          "items": [
+            "Application form",
+            "Barangay certificate",
+            "Proof of income",
+            "Child's PSA birth certificate",
+            "Valid ID and photos — at least one government ID",
+            "Proof of solo parent status (separated, widowed, annulled, abandoned, unmarried, spouse detained, spouse incapacitated, OFW family member)"
+          ]
+        },
+        {
+          "title": "PWD registration",
+          "items": [
+            "Birth certificate",
+            "Medical certificate",
+            "Whole body picture",
+            "1x1 photo"
+          ]
+        },
+        {
+          "title": "Senior Citizen registration",
+          "items": [
+            "Birth certificate"
+          ]
+        }
+      ]
+    },
+    {
+      "acronym": "MNAO",
+      "office": "Municipal Nutrition Action Office",
+      "orgChartOffice": null,
+      "status": "parsed",
+      "sourceDocs": [
+        "MNAO_Office Profile and Weight for Age CY2026.docx"
+      ],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "We envision a nutritionally educated people peacefully living with their families and children to abundance and prosperity in a clean and green environment.",
+      "mission": "To create a nutritionally healthy society by providing sustainable and integrated linkages of development services thru the establishment and maintenance of a municipal network of nutrition implementers and workers that shall safeguard and regularly monitor the nutritional status of preschool and school children.",
+      "keyFunctions": [],
+      "services": [
+        {
+          "name": "Nutrition Program Management",
+          "description": "Formulation of the Municipal/Local Nutrition Action Plan; organising and strengthening Barangay Nutrition Committees; MELLPI Pro monitoring and evaluation; nutrition budget tagging and resource mobilisation; coordination with MHO, MSWDO, MAO, DepEd, DILG and MDRRMO.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Nutrition Assessment & Surveillance",
+          "description": "Operation Timbang (OPT) Plus / eOPT; nutrition screening and assessment of children, pregnant and lactating women, senior citizens and PWDs; growth monitoring and promotion; management of nutrition data and reporting.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Nutrition Education and Counseling",
+          "description": "Infant and Young Child Feeding (IYCF) counselling; breastfeeding promotion including Breastfeeding Month and the First 1000 Days Program; Pabasa sa Nutrisyon and nutrition education classes for mothers; Pinggang Pinoy and healthy diet counselling.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Nutrition Intervention",
+          "description": "Dietary supplementation and supplementary feeding for children 6–59 months and pregnant women; micronutrient supplementation (Vitamin A, iron folic acid, micronutrient powder); management of acute malnutrition (MAM/SAM).",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Nutrition-Sensitive Services",
+          "description": "Food production — Gulayan sa Barangay, home and community gardens; food assistance coordination; Nutrition in Emergencies (NIE).",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Capacity Building and Advocacy",
+          "description": "Training and supervision of BNS, BHW, BNC and MNAO staff; Nutrition Month celebration and advocacy campaigns; Barangay and Municipal Nutrition Committee meetings.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        },
+        {
+          "name": "Other Support Services",
+          "description": "Referral to MHO, MSWDO or hospital for malnourished cases; provision of IEC materials; technical assistance on nutrition programme implementation to all barangays.",
+          "requirements": [],
+          "fees": "",
+          "processingTime": "",
+          "charterRef": ""
+        }
+      ],
+      "programs": [],
+      "staff": [
+        {
+          "name": "Login F. Jolejole",
+          "position": "Midwife II / MNAO Designee",
+          "mobile": "0909 152 0739"
+        },
+        {
+          "name": "Maricar F. Factor",
+          "position": "MNAO Staff",
+          "mobile": "0907 458 8650"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Children weighed — normal",
+          "value": "833",
+          "unit": "children (92.56%)",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        },
+        {
+          "label": "Children weighed — overweight",
+          "value": "7",
+          "unit": "children (0.79%)",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        },
+        {
+          "label": "Children weighed — underweight",
+          "value": "39",
+          "unit": "children (4.33%)",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        },
+        {
+          "label": "Children weighed — severely underweight",
+          "value": "21",
+          "unit": "children (2.33%)",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        },
+        {
+          "label": "Children weighed — total",
+          "value": "900",
+          "unit": "children",
+          "asOf": "CY2026",
+          "source": "Weight for Age CY2026"
+        }
+      ],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "vision",
+        "mission",
+        "MNAO designee + staff with mobile numbers",
+        "Municipal Nutrition Committee (16 members)",
+        "Barangay Nutrition Scholars (7 barangays)",
+        "Weight-for-Age CY2026 (900 children, 92.56% normal)",
+        "all 7 barangay seals as embedded images",
+        "NNC logo"
+      ],
+      "gaps": "No mandate. RESOLVED 2026-11-16 (RJ): the office's two documents carried different vision/mission wordings; the Office Profile ('MNAO.docx', the later upload) is the reference, and its wording is what is above. The Services Offered document's variant — 'nutritionally educated people … in abundance …', mission ending 'and other vulnerable groups' — is NOT used; do not reinstate it from that file. Its SERVICES list is still the source for services[], since the Office Profile has none. 'thru' is the office's own wording and is left verbatim rather than modernised to 'through'. The 'Weight for Age C.Y. 2026' label may be CY2025 data reported in 2026 — still unconfirmed. Percentages sum to 100.01% (rounding); the four counts do total 900. Poblacion's BNS post is vacant and left as an empty name, not 'TBA'. Falcutila is spelled 'Norvel Kimwell' in this document; kept as 'NorvelKimwell' per the org-chart ruling in MEMORY.md. The two staff mobile numbers come from the office's own profile and are personal mobiles — confirm the office is content for them to be public before they render.",
+      "committee": {
+        "name": "Municipal Nutrition Committee (MNC)",
+        "members": [
+          {
+            "name": "Engr. Robert M. Fabella",
+            "position": "Municipal Mayor / Chairperson",
+            "mobile": ""
+          },
+          {
+            "name": "Gianne S. Falcutila",
+            "position": "School Principal / Co-Chairperson",
+            "mobile": ""
+          },
+          {
+            "name": "Login F. Jolejole",
+            "position": "Midwife II / MNAO Designee",
+            "mobile": ""
+          },
+          {
+            "name": "Hon. NorvelKimwell F. Falcutila",
+            "position": "ABC President",
+            "mobile": ""
+          },
+          {
+            "name": "Erwin M. Mortel",
+            "position": "Municipal Agriculturist",
+            "mobile": ""
+          },
+          {
+            "name": "Dr. Jennie F. Matta",
+            "position": "Municipal Health Officer",
+            "mobile": ""
+          },
+          {
+            "name": "Hon. Ramon F. Reandelar",
+            "position": "IPMR",
+            "mobile": ""
+          },
+          {
+            "name": "Hon. Carlo C. Fetalvero",
+            "position": "SB Member",
+            "mobile": ""
+          },
+          {
+            "name": "Jeanlyn F. Fallaria",
+            "position": "Municipal Budget Officer",
+            "mobile": ""
+          },
+          {
+            "name": "Aleza F. Refe",
+            "position": "MLGOO VI",
+            "mobile": ""
+          },
+          {
+            "name": "Levie F. Fajilan",
+            "position": "MSWDO",
+            "mobile": ""
+          },
+          {
+            "name": "Charlemagne F. Fortu",
+            "position": "Municipal Treasurer",
+            "mobile": ""
+          },
+          {
+            "name": "Ariel F. Famadulan",
+            "position": "Municipal Accountant",
+            "mobile": ""
+          },
+          {
+            "name": "Engr. Berlito F. Fajel, Jr.",
+            "position": "MPDC / MENRO",
+            "mobile": ""
+          },
+          {
+            "name": "Maricar N. Magbata",
+            "position": "NGO / General Manager",
+            "mobile": ""
+          },
+          {
+            "name": "John Arvill F. Rabino",
+            "position": "MDRRMO II",
+            "mobile": ""
+          }
+        ]
+      },
+      "barangayNutritionScholars": [
+        {
+          "name": "Digna M. Mana",
+          "barangay": "Balogo"
+        },
+        {
+          "name": "Melanie F. Echapari",
+          "barangay": "Talisay"
+        },
+        {
+          "name": "Enily R. Fallaria",
+          "barangay": "Pagsangahan"
+        },
+        {
+          "name": "Evelyn M. Maestro",
+          "barangay": "Pangulo"
+        },
+        {
+          "name": "Edelyn M. Mirabete",
+          "barangay": "Linao"
+        },
+        {
+          "name": "Janet B. Fabic",
+          "barangay": "San Roque"
+        },
+        {
+          "name": "",
+          "barangay": "Poblacion"
+        }
+      ]
+    },
+    {
+      "acronym": "MAO",
+      "office": "Office of the Municipal Agriculturist",
+      "orgChartOffice": "Office of the Municipal Agriculturist",
+      "status": "parsed",
+      "sourceDocs": [
+        "OMAG_Office Profile Agricultural Statistics and Programs.docx"
+      ],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [
+        {
+          "name": "Rice Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "High Value Crops Development Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Livestock Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Fisheries Development Program",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Farmer and Fisherfolk Registration / RSBSA",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "FishR / BoatR and fishing boat registration",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Agricultural insurance / PCIC assistance",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Animal Health Support Services",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Anti-rabies vaccination",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Distribution of seeds, seedlings, fertilizers and other inputs",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Technical assistance and farm visits",
+          "description": "",
+          "beneficiaries": ""
+        },
+        {
+          "name": "Assistance to Farmers' and Fisherfolk Organizations",
+          "description": "",
+          "beneficiaries": ""
+        }
+      ],
+      "staff": [
+        {
+          "name": "Erwin M. Mortel",
+          "position": "Municipal Agriculturist",
+          "mobile": ""
+        },
+        {
+          "name": "Grace Ellen F. Culpa",
+          "position": "Agricultural Technologist / Rice Coordinator",
+          "mobile": ""
+        },
+        {
+          "name": "Dennie Evern F. Fabito",
+          "position": "Agricultural Technologist / Livestock & Fishery Coordinator",
+          "mobile": ""
+        },
+        {
+          "name": "Roy Motin",
+          "position": "MAO Staff / Fishery Coordinator",
+          "mobile": ""
+        },
+        {
+          "name": "Erna Moreno",
+          "position": "MAO Staff / High Value Crop Coordinator",
+          "mobile": ""
+        },
+        {
+          "name": "Rexphil Blasé",
+          "position": "MAO Staff / Corn & Cassava Coordinator",
+          "mobile": ""
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Registered farmers",
+          "value": "1,692",
+          "unit": "",
+          "asOf": "",
+          "source": "RSBSA Dashboard"
+        },
+        {
+          "label": "Registered fisherfolk",
+          "value": "2,327",
+          "unit": "",
+          "asOf": "",
+          "source": "Fisherfolk Registration System"
+        },
+        {
+          "label": "Livestock/poultry raisers",
+          "value": "1,029",
+          "unit": "",
+          "asOf": "",
+          "source": ""
+        },
+        {
+          "label": "Farmers'/fisherfolk associations",
+          "value": "17",
+          "unit": "",
+          "asOf": "",
+          "source": ""
+        },
+        {
+          "label": "Total agricultural land area",
+          "value": "5,987.502",
+          "unit": "hectares",
+          "asOf": "",
+          "source": "CLUP"
+        },
+        {
+          "label": "Total rice area",
+          "value": "60",
+          "unit": "hectares",
+          "asOf": "",
+          "source": ""
+        },
+        {
+          "label": "Registered fishing boats",
+          "value": "121",
+          "unit": "",
+          "asOf": "",
+          "source": ""
+        }
+      ],
+      "contact": {
+        "phone": "",
+        "email": "maocalatrava@gmail.com",
+        "hours": ""
+      },
+      "has": [
+        "staff (6)",
+        "agricultural statistics (7 figures incl. 1,692 farmers; 2,327 fisherfolk; 121 boats)",
+        "programs/services (12)",
+        "letterhead email maocalatrava@gmail.com"
+      ],
+      "gaps": "No mandate, vision or mission supplied. The heading 'LIST OF REGISTERED FARMERS AND FISHERFOLKS ORGANIZATION' is the document's last line and the list itself is absent — confirmed in the file, not inferred; request it. VERIFY BEFORE PUBLISHING: 'Total rice area 60 hectares' against 5,987.502 ha of agricultural land looks low by an order of magnitude — confirm it is not 600 or 6,000. The email is from the document's letterhead, not a directory entry. The office labels itself OMAG in its own documents; the site uses MAO (Citizen's Charter acronym)."
+    },
+    {
+      "acronym": "MDRRMO",
+      "office": "Municipal Disaster Risk Reduction and Management Office",
+      "orgChartOffice": "Municipal Disaster Risk Reduction and Management Office",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "MDRRMO_Municipal Emergency Hotline Calatrava.docx",
+        "MDRRMO_LDRRMF Utilization Reports Jan-Jul 2026 (FDP Form 8).pdf"
+      ],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [
+        "4 hotlines (Emergency Command Center, PNP, BFP, RHU)",
+        "MDRRMO logo (2015)",
+        "letterhead: E. Fetalino St., Poblacion; drrmcalatrava@gmail.com",
+        "LDRRMF utilization Jan–Jul 2026"
+      ],
+      "gaps": "STILL NO OFFICE-PROFILE CONTENT. The file sent on 2026-11-16 as 'MDRRMO.pdf' was NOT a profile - it was the LDRRMF monthly utilisation series (FDP Form 8, Jan-Jul 2026), which is now published on transparency.html. The office has still never supplied a mandate, vision, mission, services, staff, programmes, evacuation centres or hazard maps. Ask for those specifically; asking for 'the MDRRMO documents' has twice produced financial reports instead. HOTLINE DISCREPANCY, STILL UNRESOLVED: the office's own hotline document gives RHU 0962 462 4365, while services.json carries Health 0907 237 1460 from the LGU's 'Calatrava Hotlines' infographic. Both look like live numbers and only one can be right. Confirm with MDRRMO before changing either."
+    },
+    {
+      "acronym": "MCR",
+      "office": "Office of the Municipal Civil Registrar",
+      "orgChartOffice": "Office of the Municipal Civil Registrar",
+      "status": "covered-elsewhere",
+      "sourceDocs": [
+        "MCR_Citizens Charter 2023 pp21-26 Civil Registry Services (DUPLICATE).pdf"
+      ],
+      "charterPages": "21–26",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "The office re-sent Citizen's Charter pp. 21–26; all 5 services are already in citizens-charter.json. Still missing: mandate, vision, mission, staff, office contact."
+    },
+    {
+      "acronym": "MPDO",
+      "office": "Municipal Planning & Development Office",
+      "orgChartOffice": "Municipal Planning & Development Office",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "17–21",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Also the source office for the missing CLUP (item 10) and LDIP (item 12)."
+    },
+    {
+      "acronym": "MTO",
+      "office": "Office of the Municipal Treasurer",
+      "orgChartOffice": "Office of the Municipal Treasurer",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "51–54",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Also the source office for SRE and Statement of Debt Service (FDP)."
+    },
+    {
+      "acronym": "MHO",
+      "office": "Office of the Municipal Health Officer",
+      "orgChartOffice": "Office of the Municipal Health Officer",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch."
+    },
+    {
+      "acronym": "",
+      "office": "Office of the Municipal Accountant",
+      "orgChartOffice": "Office of the Municipal Accountant",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. No acronym in the Citizen's Charter — the chip is deliberately blank, do not invent one. Also the source office for the Annual Financial Statement / Trial Balance (FDP)."
+    },
+    {
+      "acronym": "SB",
+      "office": "Office of the Sangguniang Bayan",
+      "orgChartOffice": null,
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Also the source for ordinances, resolutions and the Annual Budget appropriation ordinance (FDP)."
+    },
+    {
+      "acronym": "",
+      "office": "Office of the Municipal Mayor",
+      "orgChartOffice": "Office of the Municipal Mayor",
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Missing the main trunkline and the Mayor's Office email/phone (checklist item 2)."
+    },
+    {
+      "acronym": "HRMO",
+      "office": "Human Resource Management Office",
+      "orgChartOffice": null,
+      "status": "awaiting-submission",
+      "sourceDocs": [],
+      "charterPages": "",
+      "mandate": "",
+      "vision": "",
+      "mission": "",
+      "keyFunctions": [],
+      "services": [],
+      "programs": [],
+      "staff": [],
+      "statistics": [],
+      "contact": {
+        "phone": "",
+        "email": "",
+        "hours": ""
+      },
+      "has": [],
+      "gaps": "Submitted nothing in this batch. Sits under the Office of the Municipal Mayor in the 2026 org chart (Administrative Officer IV / HRMO II), not as a separate office."
+    }
+  ],
+  "programs": [
+    {
+      "acronym": "KALAHI-CIDSS",
+      "name": "Philippine Community Resilience Project (PCRP)",
+      "leadOffice": "Municipal Planning & Development Office",
+      "status": "pending-parse",
+      "sourceDocs": [
+        "KALAHI_Philippine Community Resilience Project (PCRP) Overview.docx"
+      ],
+      "summary": "",
+      "principles": [],
+      "components": [],
+      "eligibility": {
+        "eligible": [],
+        "negativeList": []
+      },
+      "grant": {
+        "amount": "",
+        "period": "",
+        "schedule": []
+      },
+      "has": [
+        "PCRP overview",
+        "PAGKILOS principles",
+        "components (4)",
+        "targeting criteria",
+        "eligible / negative sub-project list",
+        "₱70M 3-year grant 2026–2029",
+        "6 infographics + logo"
+      ],
+      "gaps": "No Calatrava-specific sub-project list, no MResT/ACT staff, no contact."
+    },
+    {
+      "acronym": "GFPS",
+      "name": "Gender and Development Focal Point System",
+      "leadOffice": "Office of the Municipal Social Welfare and Development Officer",
+      "status": "fdp-only",
+      "sourceDocs": [
+        "GFPS_Annual GAD Accomplishment Report CY2025 (FDP Form 5).xlsx",
+        "GFPS_Annual GAD Plan and Budget FY2027.xlsx"
+      ],
+      "summary": "",
+      "principles": [],
+      "components": [],
+      "eligibility": {
+        "eligible": [],
+        "negativeList": []
+      },
+      "grant": {
+        "amount": "",
+        "period": "",
+        "schedule": []
+      },
+      "has": [
+        "GAD Accomplishment Report CY2025 (FDP Form 5)",
+        "GAD Plan and Budget FY2027 (sheet 'PCM' is the form)"
+      ],
+      "gaps": "Received unrequested; both are FDP-postable documents and belong on transparency.html rather than in an office profile. Only the PCM sheet of the FY2027 workbook is the form — Sheet1–3 are scratch."
+    }
+  ],
+  "_parsed": "2026-11-16: BPLO, MBO and MAO parsed from files RJ uploaded to the session (same documents as the Sept 2026 batch, so the audit entries still apply). The remaining pending-parse offices need the documents that live on RJ's machine. | 2026-11-16, second upload: MEO, MNAO and MSWDO parsed, from two MEO PDFs, two MNAO .docx files and one MSWDO .docx. Six of sixteen offices are now parsed; the rest still need the machine that holds the Sept batch. | 2026-11-16, third upload: MASSO parsed from 'Masso_for_website.docx'. Seven of sixteen offices now have content. MDRRMO is the ONLY office left with a document still to be typed - and the file sent for it on 2026-11-16 was not office-profile content at all but the LDRRMF monthly reports, which went to transparency.html. MDRRMO has still never supplied a mandate, vision, mission, services, staff list or programmes."
+}

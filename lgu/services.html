@@ -30,6 +30,7 @@
       <button class="tab" role="tab" id="tab-charter"   aria-controls="panel-charter"   aria-selected="true"  data-panel="charter">Citizen's Charter</button>
       <button class="tab" role="tab" id="tab-directory" aria-controls="panel-directory" aria-selected="false" data-panel="directory" tabindex="-1">Citizen's Charter Directory</button>
       <button class="tab" role="tab" id="tab-services"  aria-controls="panel-services"  aria-selected="false" data-panel="services" tabindex="-1">View Services</button>
+      <button class="tab" role="tab" id="tab-forms"     aria-controls="panel-forms"     aria-selected="false" data-panel="forms"    tabindex="-1">Forms &amp; Permits</button>
     </div>
   </div>
 </section>
@@ -107,6 +108,19 @@
   </section>
 </div>
 
+<div class="tab-panel" id="panel-forms" role="tabpanel" aria-labelledby="tab-forms" tabindex="0" hidden>
+  <section class="section tight" id="forms">
+    <div class="container">
+      <div class="section-head">
+        <span class="s-label">Download and fill in</span>
+        <h2 class="s-title">Forms &amp; <em>permits</em></h2>
+      </div>
+      <p class="charter-intro" id="formsLede"></p>
+      <div id="formGroups"><!-- rendered from data/forms.json --></div>
+    </div>
+  </section>
+</div>
+
 <!-- EMERGENCY HOTLINES -->
 <section class="section dark" id="hotline">
   <div class="container">
@@ -126,13 +140,14 @@ const FALLBACK = {
   hotlines: [{ name: "Emergency Command Center", number: "0930 326 4161" }]
 };
 const CHARTER_FALLBACK = { offices: [], about: null };
+const FORMS_FALLBACK = { groups: [] };
 
 const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* ── TABS ──
    setupTabs (assets/app.js) carries the WAI-ARIA behaviour; this page only
    has to remember which tab to return to when a search is cleared. */
-const TABS = ['charter', 'directory', 'services'];
+const TABS = ['charter', 'directory', 'services', 'forms'];
 let tabs;
 const selectTab = (name, focus) => tabs.select(name, focus);
 
@@ -377,6 +392,45 @@ function runSearch(query){
   }));
 }
 
+/* ── FORMS & PERMITS ──
+   Blank application forms for download. Deliberately does NOT restate fees,
+   requirements or processing time: those live in citizens-charter.json and are
+   rendered on the Charter Directory tab, so there is one number to keep current.
+   Each group links across to the charter instead. */
+const DL_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+  <line x1="12" y1="12" x2="12" y2="18"/><polyline points="9 15 12 18 15 15"/></svg>`;
+
+function renderForms(data){
+  const groups = data.groups || [];
+  const lede = document.getElementById('formsLede');
+  if (!groups.length) {
+    lede.textContent = 'Downloadable forms will be published here as the offices supply them.';
+    return;
+  }
+  lede.textContent = 'Blank application forms you can download, print and fill in before you visit the office. '
+    + 'Requirements, fees and processing time for each permit are on the Citizen\u2019s Charter Directory tab.';
+
+  document.getElementById('formGroups').innerHTML = groups.map(g => `
+    <div class="svc-group">
+      <div class="svc-group-head">${DL_SVG}<h2>${esc(g.title)}</h2></div>
+      ${g.intro ? `<p class="svc-group-intro">${esc(g.intro)}</p>` : ''}
+      <div class="doc-list">${(g.forms || []).map(renderFormRow).join('')}</div>
+      ${g.charterRef ? `<p class="forms-charter-link"><a href="${esc(g.charterRef)}">Requirements, fees and processing time for these permits &rarr;</a></p>` : ''}
+    </div>`).join('');
+}
+
+function renderFormRow(f){
+  const meta = [f.form, f.sizeKB ? f.sizeKB + ' KB PDF' : ''].filter(Boolean).join(' \u00b7 ');
+  return `<a class="doc-row" href="${esc(f.file)}" target="_blank" rel="noopener"
+      download aria-label="Download ${esc(f.title)} (${esc(meta)})">
+    ${DL_SVG}
+    <span><span class="doc-title">${esc(f.title)}</span><br>
+      <span class="doc-sub">${esc(f.description || '')}<span class="form-meta">${esc(meta)}</span></span></span>
+    <span class="doc-go">Download &darr;</span>
+  </a>`;
+}
+
 (async function(){
   initChrome('services');
   tabs = setupTabs(TABS, { onSelect: name => { lastTab = name; } });
@@ -389,6 +443,8 @@ function runSearch(query){
   const charter = await loadJSON('data/citizens-charter.json', CHARTER_FALLBACK);
   renderCharterAbout(charter.about);
   renderCharter(charter.offices || []);
+
+  renderForms(await loadJSON('data/forms.json', FORMS_FALLBACK));
 
   observeReveal();
 

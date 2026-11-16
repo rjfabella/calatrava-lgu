@@ -143,6 +143,41 @@ Paths in this subsection are relative to `lgu/`.
   - `data/transparency.json` — Full Disclosure document links, including
     the actual Citizen's Charter PDF and Org Chart PPTX
   - `data/contact.json` — office directory, address, map embed
+  - `data/forms.json` — downloadable blank application forms, rendered on the
+    `services.html` **Forms & Permits** tab from `assets/contents/forms/`
+    (12 Engineering/OBO permit forms so far). It deliberately carries **no
+    fees, requirements or processing time** — those live in
+    `citizens-charter.json` and each group links across to
+    `services.html#charter` instead, so there is only one number to keep
+    current. `calatravaBranded: false` means a national NBC form with a blank
+    LGU header, which is correct: the applicant writes in the municipality.
+  - `data/offices.json` — per-office profiles (mandate / vision / mission /
+    key functions / services / programmes / staff / statistics), **rendered as
+    expandable panels on `about.html#departments-section`**. A department card
+    whose office has `status: "parsed"` becomes a `<details>`; everything else
+    stays a plain card, so an office that has sent nothing reads as a gap. An
+    open panel takes `grid-column:1/-1` — a mandate does not read in a
+    one-third column. Offices with content but no card on the 2026 plantilla
+    (BPLO, MNAO) render in a second "Other offices & units" grid rather than
+    being forced into the org-chart grid, which must keep matching
+    `organization.json`. **Two deliberate omissions in the renderer:**
+    statistics whose `source` says `PROPOSED` are not rendered (CY2027 office
+    budget proposals are not appropriations, and a peso figure on a "who does
+    what" card reads as money spent — budget belongs on `transparency.html`);
+    and fees/requirements/processing times are never restated, each service
+    linking to `services.html#charter` instead.
+    Matching is on the Citizen's Charter acronym, falling back to the office
+    name — keep `acronym` in step with `officials.json`'s departments and
+    `office` with `organization.json`.
+    Seven of sixteen offices are parsed (BPLO, MASSO, MBO, MAO, MEO/OBO,
+    MNAO, MSWDO). **MDRRMO is the only one left with content outstanding**,
+    and it has never supplied profile fields — asking for "the MDRRMO
+    documents" has twice produced FDP financial reports instead, so ask for
+    mandate/vision/mission/services/staff by name. The rest have submitted
+    nothing. Each entry carries `status`, `sourceDocs` and
+    `gaps`, and `gaps` is where the open questions live — read it before
+    touching an office's content. Type a field from the source document,
+    never from the audit README's summary.
 - **Styling**: single `assets/style.css` design system (Merriweather + Source
   Sans 3 fonts, green/gold palette) driven by `:root` CSS variables. Re-theme
   there, not with inline styles or per-page stylesheets. Type is deliberately
@@ -151,8 +186,8 @@ Paths in this subsection are relative to `lgu/`.
 - **Pages**: `index.html`, `about.html` (Government — elected officials +
   offices/departments), `about-us.html` (three tabs: History / Barangays /
   Map),
-  `services.html` (Public Services, three tabs: Citizen's Charter explainer /
-  Charter directory / services by category), `barangays.html`,
+  `services.html` (Public Services, four tabs: Citizen's Charter explainer /
+  Charter directory / services by category / Forms & Permits), `barangays.html`,
   `transparency.html`, `news.html`, `contact.html` (office directory only),
   `privacy.html`. `barangays.html` is a redirect stub to
   `about-us.html#barangays` — keep it so old links and bookmarks survive.
@@ -192,7 +227,16 @@ Paths in this subsection are relative to `lgu/`.
   collected from the LGU — PDFs, DOCX, PPTX). Parse new source documents
   into the relevant `data/*.json` (that's the pattern for the Citizen's
   Charter and Org Chart); the originals also stay linked from
-  `transparency.json` for FDP/legal completeness.
+  `transparency.json` for FDP/legal completeness. Two subfolders are
+  published directly: `assets/contents/fdp/` (27 Full Disclosure forms, one
+  file per form per period, linked from `transparency.json`) and
+  `assets/contents/forms/` (12 blank permit forms, linked from
+  `forms.json`). **Scans in both are served exactly as the LGU supplied
+  them** — they are financial and legal records whose figures must stay
+  legible, so don't re-encode or rasterise to save bytes; a sideways scan is
+  turned with `/Rotate`, which leaves the image untouched. The one exception
+  is `forms/Unified-Application-for-Building-Permit.pdf`, whose superseded
+  "CEBU" text was removed; `forms.json` records that.
   `assets/reference docs/` is the **staging area** for the Sept 2026 batch
   of office submissions — audited, renamed `Dept_DocName`, and indexed in
   its `README.md`; nothing there is on the site yet. The tracking sheet is

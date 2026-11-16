@@ -82,6 +82,384 @@ municipal government.
   device is scoped to the archived repo, so the content editor cannot publish
   until it is replaced.
 
+## 2026-11-16, seventh pass — MASSO parsed; the MDRRMO file was something else
+
+**MASSO is parsed** — mandate, vision, mission and seven services, from
+`Masso_for_website.docx`, a document the office wrote for the site. **Seven of
+sixteen offices now have content** and five of the twelve org-chart cards
+expand. Worth knowing: only three of MASSO's seven services appear in the
+Citizen's Charter (pp. 38–45); the other four are office services the Charter
+does not list, so a reader following the "see the Charter" link will not find
+them. The services are listed in capitals in the source and are set in
+sentence case in the data.
+
+**The file sent as MDRRMO's was not an office profile.** `MDRRMO.pdf` is the
+**LDRRMF monthly utilisation series (FDP Form 8, January–July 2026)** — the
+document this repo already had a pending Transparency row for. Split into seven
+monthly files and published; the placeholder row is replaced by the real set.
+Transparency now carries **33 available documents against 17 pending**, up from
+6 available when this session started.
+
+**MDRRMO is now the only office whose panel cannot be built**, and it has still
+never supplied a mandate, vision, mission, services, staff, programmes,
+evacuation centres or hazard maps. **Asking for "the MDRRMO documents" has
+twice produced financial reports instead — ask for the profile fields by
+name.** Its hotline discrepancy (the office's own document says RHU
+0962 462 4365, `services.json` carries Health 0907 237 1460) is still
+unresolved and still recorded in its `gaps`.
+
+**Rotation, fixed the lossless way.** Every page of the LDRRMF scan was
+sideways. Each file carries `/Rotate 270`, a viewer instruction, so the scan is
+never re-encoded — **don't "fix" these by rasterising.** The Sept audit warned
+that alternate pages ran in opposite directions; in this copy all seven run the
+same way. Verified page by page after rotating, not assumed: all seven render
+landscape and upright.
+
+Re-verified after the change: 33 Transparency links resolve, five office panels
+open, no WCAG AA contrast failures, zero text under 12.5px across all nine LGU
+pages, no console errors.
+
+## 2026-11-16, sixth pass — the office panels are built (batch 5)
+
+`offices.json` now renders. A department card on
+`about.html#departments-section` whose office is `parsed` becomes a
+`<details>`; everything else stays a plain card, so an office that has sent
+nothing still reads as a gap rather than as an office with nothing to say.
+Four of the twelve org-chart cards expand (MSWDO, MAO, MBO, MEO/OBO).
+
+**Design decisions worth not re-litigating:**
+- **An open panel takes `grid-column:1/-1`.** A mandate and a seven-item
+  service list do not read in a one-third column, and pulling the card out of
+  the grid would have been far more code for a worse result.
+- **BPLO and MNAO get a second grid, "Other offices & units."** Neither is a
+  separate office on the 2026 plantilla — BPLO sits under the Mayor, MNAO is a
+  designated officer — so neither has a card in `officials.json`. Forcing them
+  into the org-chart grid would break the rule that it matches
+  `organization.json`. Matching is on the Charter acronym, falling back to the
+  office name; the Accountant's office has no acronym and matches by name.
+- **Proposed budget figures are NOT rendered.** The renderer drops any
+  statistic whose `source` says `PROPOSED`, which is MBO's and MEO's CY2027
+  LBP Form 4 figures. They are proposals on a preparation form, not
+  appropriations, and a peso figure on a "who does what" card reads as money
+  spent. Budget belongs on `transparency.html`. This is the open question the
+  third pass flagged, now answered — the data keeps the figures, the page does
+  not show them. Verified by test: none of the six amounts appears anywhere in
+  the section. MEO's ten planned projects DO render, labelled, because they
+  carry no money.
+- **Fees, requirements and processing times are never restated** in a panel.
+  Each service block links to `services.html#charter` instead, so there is one
+  number to keep current. Four such links render.
+- **An office with no head on file gets no portrait slot at all.** The
+  monogram stands for a person, and initials built from an office name read as
+  one — BPLO rendered as "BPA" before this was fixed. Caught by looking at the
+  render, which is the only way it would have been.
+
+**Fixed in passing, pre-existing:** `.dept-acr` (the acronym chip) was 12px,
+below this half's 12.5px floor. It post-dates the 2026-09-06 readability audit,
+so the audit never saw it. Now 12.5px, and **all nine LGU pages sweep clean at
+zero text nodes under 12.5px** — that sweep is worth re-running after any type
+change.
+
+Verified: no WCAG AA contrast failures in the panels (computed colour against
+real backdrop, not eyeballed), no console errors, `<summary>` toggles on Enter
+and takes a visible focus ring, open card spans the full grid width, and at
+375px there is no overflow, no undersized text and no summary shorter than 44px.
+
+## 2026-11-16, fifth pass — the building-permit form was actually broken, and is fixed
+
+**Correcting what the fourth pass said.** I reported that the unified building
+permit form was "visually correct" and that "CEBU" survived only in the hidden
+text layer. **That was wrong**, and it mattered: of the three occurrences, two
+were header text hidden under the Calatrava/Romblon overlays, but the third
+**printed plainly** on the Location of Construction line, which read
+`CITY/ MUNICIPALITY OF CEBU`. Anyone downloading the form would have filed a
+sheet naming the wrong municipality. The Sept 2026 audit row had this right all
+along; my render check read a downscaled image and I downgraded it. **A
+pixel-diff is what caught it — the eyeball check is what missed it.**
+
+**The file is now fixed in place** (RJ's instruction, rather than waiting on the
+LGU). The three `[...]TJ` text-showing operators that draw "CEBU" on page 1 were
+replaced with empty `[]TJ` arrays in the page content stream — fonts, geometry
+and every other operator untouched. The Location line now prints blank for the
+applicant to fill in; the header still reads *City/Municipality of Calatrava,
+Province of Romblon*.
+
+**Why this method, if it ever has to be redone:** painting over the text is what
+the LGU did and is what failed — it leaves the old words readable by copy-paste
+and by screen readers. Rasterising the page would have destroyed the text layer
+and the form's accessibility. Removing the operators is the only option that
+fixes both the print and the text layer. The script used is
+`strip_cebu.py`, kept in the scratchpad, not the repo — it is a
+one-off, and committing it would imply the repo has PDF tooling, which it
+deliberately does not.
+
+**Verified, not assumed:** no "CEBU" anywhere in the text layer; page 2
+pixel-identical; page 1 differing in exactly one region of 268 pixels at 150 dpi,
+which is the corrected line; "Calatrava" and "Romblon" still present once each.
+The file grew 290 KB → 370 KB — that is pypdf's serialisation, not the content:
+decoded content streams and image bytes are byte-identical in both.
+
+**This is the only published file in the repo that we have modified rather than
+passed through unchanged**, and `forms.json` now records that in
+`_corrections`. Everything else under `lgu/assets/contents/` is exactly as the
+LGU supplied it. **The LGU's own copy is still the uncorrected one** — if they
+re-send this form, re-check it rather than assuming it supersedes ours.
+
+## 2026-11-16, fourth pass — permit forms published; MNAO wording settled
+
+**MNAO's vision/mission conflict is RESOLVED (RJ): the Office Profile
+(`MNAO.docx`) is the reference**, being the later of the two uploads
+(06:09:16.05 vs 06:09:15.88 — checked, not assumed). So the data now reads
+"We envision **a** nutritionally educated people … **to** abundance …" and the
+mission ends at "preschool and school children", **without** "and other
+vulnerable groups". The Services Offered document's variant is explicitly
+marked do-not-reinstate in `offices.json`, since on wording alone it looks like
+the better text and someone will be tempted. Its *services* list is still the
+source for `services[]` — the Office Profile has none. "thru" is the office's
+own wording and stays verbatim. MSWDO was confirmed as-is, "family alleviation"
+included.
+
+**Twelve permit forms are now downloadable** — `lgu/assets/contents/forms/`,
+rendered from the new `lgu/data/forms.json` on a fourth `services.html` tab,
+**Forms & Permits**. Grouped into Building & occupancy (the two unified forms)
+and Ancillary permits (ten NBC forms), each group linking across to
+`services.html#charter`.
+- **`forms.json` deliberately carries no fees, requirements or processing
+  time.** Those live in `citizens-charter.json`; restating them here would give
+  the site two numbers to keep current. Keep it that way.
+- Files renamed to carry their NBC number
+  (`NBC-Form-A-01_Architectural-Permit.pdf`). **Form numbers were read off each
+  PDF**, not copied from the audit index — all twelve matched.
+- **The generic B-02 excavation form was deliberately not published**: it
+  duplicates the Calatrava-branded one, and offering two identical forms helps
+  nobody. 13 files in, 12 published.
+- Eight forms have a blank LGU header. **That is correct** — they are national
+  NBC forms and the applicant writes in the municipality. Don't "fix" it.
+- The occupancy unified form has gained a Calatrava header since the Sept
+  audit recorded it as generic.
+
+**The "CEBU" leftover is not fixed, and the standalone re-upload is not a fix.**
+Both copies extract identical text; only the MD5 differs. What renders is
+correct — header reads Calatrava/Romblon, the Location of Construction line is
+blank — but three "CEBU" strings, including `CITY/ MUNICIPALITY OF CEBU`, sit in
+the PDF's text layer **underneath** the correction. Invisible on screen and in
+print; still extractable by copy-paste and readable by a screen reader.
+Published anyway, because a usable form beats no form; recorded in `forms.json`.
+**Ask the LGU for a clean master rather than another re-save.**
+
+Verified in a browser: 12 downloads resolve as PDFs, `#forms` deep-links to the
+tab, arrow-key roving tabindex still works with four tabs, no overflow or
+undersized text at 375px, no console errors.
+
+**Worth doing later:** the site search (`buildSearchIndex` in `assets/app.js`)
+indexes `citizens-charter.json` + `services.json` only, so a resident searching
+"building permit form" finds the service but not the downloadable form. Adding
+`forms.json` to the index is a small change to shared code — not done here to
+keep this pass to what was asked.
+
+## 2026-11-16, third pass — six of sixteen offices parsed; two permits corrected
+
+A second upload of five documents (two MEO PDFs, two MNAO .docx, one MSWDO
+.docx). **MEO, MNAO and MSWDO are now parsed**, joining BPLO, MBO and MAO —
+six of sixteen offices. Only MASSO and MDRRMO are still `pending-parse`; the
+rest sent nothing.
+
+**The Engineering re-send of Charter pp. 64–67 found three real errors** in
+`citizens-charter.json`, which is the first time a duplicate has earned its
+keep twice over:
+- Both permits had **empty `fees`** where the form says "No fixed amount,
+  computed based on Rule II, Section 6 (6.10 for occupancy) of the IRR of
+  P.D. 1096" — a real answer to "what does a building permit cost", now recorded.
+- **`processingTime` had been split on the word "to"** because the ranges wrap
+  across table cells: "1 hour to 1 day" had become "1 hour" + "1 day". All four
+  ranges per service restored.
+- **`sourcePages` were wrong on both** (64-66 → 64-65, 66-69 → 66-67).
+- **Then swept the whole Charter for the same fault**: it holds only four
+  "X to Y" ranges in total, all on pp. 64–67, all now fixed. **Not systemic —
+  don't re-check the other services for this.** Requirements, classification,
+  transaction type and who-may-avail all matched exactly, again confirming the
+  bordered-cell fields are the reliable ones.
+
+**A conflict the LGU has to settle: MNAO's vision and mission differ between
+its own two documents.** The Services Offered version is the one in the data
+(fuller — "and other vulnerable groups" — and grammatical: "in abundance",
+"through"); the Office Profile version reads "a nutritionally educated people …
+to abundance …" and stops at "preschool and school children". **That choice is
+a judgement, not a confirmation.** Ask the office which is current before it
+renders.
+
+**Left exactly as written, deliberately:** MSWDO's mission says "contribute to
+family alleviation", almost certainly meant as "poverty alleviation". Changing
+it would alter meaning rather than fix a spelling, so it stands with a flag.
+Plain spelling fixes that *were* made: "FURTHER MIDECATION" → "further
+medication", "PWD TREGISTRATION" → "PWD registration", MEO's "continuos" →
+"continuous", and MEO's mandate item 4 lost its duplicated "compliance with
+existing" (the sentence is still awkward — confirm the wording).
+
+**Two standing rules this pass added to `offices.json`'s `_schema`:**
+- `developmentFundProjects` (MEO's ten CY2027 20%-DF projects) carries **titles
+  only — the form has no cost figures.** Never render these with an implied budget.
+- CY2027 figures for **both MBO and MEO are a PROPOSED budget** on a preparation
+  form. If they ever render, the page must say "proposed", not just the data.
+
+Also new in the data: `requirementSets` (MSWDO's nine "what to bring"
+checklists), `committee` (MNAO's 16-member Municipal Nutrition Committee),
+`barangayNutritionScholars` (7, Poblacion vacant as an empty name, not "TBA").
+MNAO's Weight-for-Age counts do total 900; the "C.Y. 2026" label is still
+unconfirmed and may be CY2025 data reported in 2026. MNAO's two staff mobile
+numbers are personal mobiles from the office's own profile — confirm the office
+wants them public before they render. MEO's office number is still unrecorded:
+the Sept profile's "+6939 695236538" is not a valid PH length.
+
+## 2026-11-16, later — five uploaded documents: Accounting's FDP forms published
+
+RJ was away from his main machine and uploaded five documents to the session
+instead, which is how work continued without the gitignored batch. Three were
+re-sends of Sept 2026 files (BPLO, OMAG, MBO) — which is exactly what made them
+parseable here. One was a duplicate. One was new and substantial.
+
+**The Accounting office's submission is 20 FDP forms in a single 20-page scan**,
+covering CY2025 Q3–Q4 and CY2026 Q1–Q2: Form 6 (Trust Fund), Form 8 (LDRRMF),
+Form 9 (Statement of Cash Flows), Form 11 (SEF) and Form 12 (Unliquidated Cash
+Advances), four quarters each. Accounting had submitted nothing before.
+- **Split one file per form per quarter** into `lgu/assets/contents/fdp/` and
+  linked individually from a new "Quarterly Financial Reports (Full Disclosure)"
+  section on `transparency.html`. RJ's call, and it matches how DILG FDP expects
+  them posted — a reader can reach one period without paging a bundle.
+- **The scans were NOT re-encoded**, deliberately: ~267 DPI CamScanner JPEGs,
+  ~400 KB each, 7.9 MB total against a repo already carrying 155 MB of tourism
+  assets. These are financial forms whose peso figures must stay readable, and
+  re-encoding an already-compressed LGU export has backfired before (portraits).
+- `transparency.html` gained support for an optional per-section `intro`; the
+  renderer ignored the field before, so it would have been silently dropped.
+- **Flagged to the Accountant, published anyway on RJ's explicit decision:** the
+  CY2025 Q3 Form 12's listed balances sum to ₱731,332.00 while the form's total
+  reads ₱651,357.00 — the ₱79,975 gap is exactly the three aged rows, so the
+  total looks like it counts only the current column. Same form carries an
+  advance dated 01/09/2019 sitting in the under-30-days column. Form 12 also
+  names ~24 individuals with amounts; FDP prescribes that column, so it is
+  required disclosure. All three are written up in the reference-docs README so
+  they reach the office rather than living in a chat log.
+
+**Three offices are now actually parsed** in `offices.json` — BPLO (mandate,
+4 key functions, 6 services), MBO (mandate of 5, vision, mission, organizational
+outcome, CY2027 figures) and MAO/OMAG (6 staff, 7 statistics, 12 programmes,
+letterhead email). Nothing renders them yet.
+- **MBO's CY2027 figures are a PROPOSED budget** on a budget-preparation form,
+  not an approved appropriation. Recorded with that label in `source`; decide
+  whether a proposed figure belongs on a public page at all before rendering it,
+  and if it is shown, say "proposed" on the page itself.
+- MBO's scan is **cropped at the foot of page 1**, cutting the last performance
+  indicator across the page break. Needs the LGU's original.
+- OMAG's **"Total rice area 60 hectares"** against 5,987.502 ha of agricultural
+  land looks low by an order of magnitude — confirm before rendering.
+- OMAG's missing organisations list is now **confirmed from the file itself**,
+  not inferred: the heading is the document's last line and nothing follows it.
+
+**The MCR re-send verified part of the Citizen's Charter.** It duplicates
+pp. 21–26, so no new content, but it is legible: Marriage Licence ₱450.00,
+Marriage Certificate ₱100.00 and Death Certificate ₱50.00 are now **confirmed
+against the source**, and two services that had empty `fees` were filled with
+the form's own "Based on Revenue Code" rather than left blank. A stray
+"30 minutes" on the birth-registration entry belonged to the facing page and was
+removed. The Charter's own requirement numbering jumps 1 → 6 for births —
+**that is the source document, not a parse error; don't "fix" it.** This clears
+the civil-registry half of next-step 2 below; business permit and RPT are next.
+
+**IA decision taken (RJ, 2026-11-16):** office profiles render as **expandable
+panels on `about.html#departments-section`**, not as per-office pages and not as
+a combined offices page. Not built yet — only 3 of 16 offices have content.
+
+## 2026-11-16 — admin PAT diagnostics, and the reference-doc parse structure
+
+**The admin editor's token (the job left over from the merge).** The code side
+was already right — `GH_REPO` in `admin.html` has pointed at
+`rjfabella/calatrava-lgu` since commit `1dcee55`. What was missing was a
+usable failure message: GitHub answers **404, not 403**, for a repo a
+fine-grained token cannot see, so the old token (scoped to the archived
+`calatrava-tourism-portal`) failed identically to a typo'd password. The LGU
+staffer had no way to tell the two apart.
+- `validateGhToken()` now returns `{ ok, reason }` — `invalid` / `scope` /
+  `readonly` / `offline` — and the sign-in screen prints the matching
+  sentence from `GH_TOKEN_ERRORS` instead of "Incorrect password".
+- **This repo is public, so a bad token can still get 200** with public repo
+  data. GitHub only returns a `permissions` object on an *authenticated*
+  request, so the absence of `permissions` is what distinguishes a dead token
+  from a genuinely read-only one. Don't "simplify" that back to
+  `permissions?.push`.
+- The error `<p>` got `role="alert"`, a line-height and left alignment, since
+  the messages are now sentences rather than four words.
+- **Fixed a pre-existing invisible-text bug on the same screen**: the helper
+  paragraph under the Sign In button was `color:rgba(255,255,255,.45)` on a
+  white card — white on white, unreadable, and it was the one line telling
+  staff a token is needed. Now `var(--muted)` (4.83:1 on white) and rewritten
+  to name the repo and the exact permission. The `.auth-box` was evidently
+  dark once; the leftover `rgba(0,0,0,.1)` divider is the other survivor.
+- All four messages verified in a real browser, including a stubbed 404 and a
+  stubbed read-only response.
+- **Still a human job: RJ generates the token.** Step-by-step instructions are
+  now in `README.md` under "The admin editor's GitHub token" so nobody has to
+  reconstruct the scopes. Nothing in the repo can create it.
+- Noticed, not changed: the visit-counter badge on the login screen still
+  points at `hits.sh/rjfabella.github.io/calatrava-tourism-portal.svg`.
+  Repointing it at the live domain restarts the count from zero — RJ's call.
+
+**The reference-doc parse: structure agreed and committed, content still
+blocked.** `lgu/data/offices.json` is new and is the target shape for the
+Sept 2026 office submissions — 16 offices plus KALAHI-CIDSS and GFPS, each
+with `status`, `sourceDocs`, `charterPages`, `has` (what the document
+actually contains) and `gaps` (what it doesn't, plus any quality warning).
+**Every content field is deliberately empty.** `_schema` in the file defines
+each field; `_statusValues` defines `pending-parse` / `covered-elsewhere` /
+`awaiting-submission` / `fdp-only` / `parsed` (nothing is `parsed` yet).
+- **Why no content: the raw submissions are gitignored** (`lgu/assets/
+  reference docs/*`, ~30 MB of scans and DOCX) and exist only on RJ's
+  machine. A cloud session clones from GitHub, so they are simply not here —
+  and no computer folder is shared with this session. The parse has to run
+  where those files are, or the files have to be uploaded.
+- **Do not fill these fields from the audit `README.md`.** It is a
+  second-hand index written to catalogue the batch, not a transcript. Five
+  documents are scans with no text layer (MSWDO, MBO, MEO LBP4, LDRRMF,
+  Supplemental Budgets) and must be re-typed with figures checked against
+  the scan.
+- Offices that submitted nothing (MPDO, MTO, MHO, Accountant, SB, Mayor's
+  Office, HRMO) are listed as `awaiting-submission` rather than omitted, so
+  the file doubles as the chase-list.
+- **A real conflict surfaced, left unresolved on purpose:**
+  `MDRRMO_Municipal Emergency Hotline Calatrava.docx` gives **RHU
+  0962 462 4365**, while `services.json` carries **Health 0907 237 1460**
+  from the LGU's "Calatrava Hotlines" infographic. Both look like live
+  numbers and only one can be right. Recorded in the MDRRMO entry's `gaps`;
+  **confirm with MDRRMO before touching either.** (Note this also corrects a
+  stale line in next-step 6 below: the four hotlines are *not* pending rows —
+  all six have been real since 2026-09-10.)
+- The `MAO` / `OMAG` label split is recorded too: the office calls itself
+  OMAG in its own documents, the site uses MAO from the Citizen's Charter.
+  One label per surface.
+- **Nothing renders `offices.json` yet, by design.** The IA decision comes
+  first: per-office detail pages linked from `about.html#departments-section`,
+  or an expandable panel per office there. Whichever wins, office-level
+  vision/mission must stay visually distinct from the *municipal* vision and
+  mission on the homepage, and any service already in
+  `citizens-charter.json` should link to `services.html#charter` rather than
+  restate a fee that can then drift.
+
+**Transparency page now lists what the batch actually delivered.**
+`transparency.json` gained four rows — Supplemental Budgets Nos. 1–4 CY2025,
+Annual GAD Accomplishment Report CY2025 (FDP Form 5), Annual GAD Plan and
+Budget FY2027, and LDRRM Fund Utilization Reports Jan–Jul 2026 (FDP Form 8).
+The combined "GAD Plan & Accomplishment Report" row was split in two, since
+FDP posts them as separate documents for different periods, and the "Annual
+Budget" row now says plainly that only supplementals have come in.
+- **All four are `pending`, because the files are not in the repo.** DILG FDP
+  expects the actual document to be publicly posted, so flipping one to
+  `available` means committing that file — un-ignore just it, or copy it into
+  the tracked `lgu/assets/contents/` — and setting `href` with spaces
+  URL-encoded. The reasoning is in `_pendingNote` in the file.
+- The LDRRMF scan needs re-orienting before it is linked: landscape pages,
+  alternate pages scanned upside down.
+- Verified in a browser: 24 rows, 18 pending, no console errors.
+
 ## Standards research
 
 Full governing-standards table (DICT GWTD, WCAG 2.0 AA, RA 10173, DILG FDP,

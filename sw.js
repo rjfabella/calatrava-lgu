@@ -1,7 +1,7 @@
 // Calatrava PWA Service Worker
 // Scope is the whole domain, so this sits in front of both halves of the site:
 // the tourism portal at "/" and the LGU government portal at "/lgu/".
-const CACHE_VERSION = "v3";
+const CACHE_VERSION = "v4";
 const SHELL_CACHE = `calatrava-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `calatrava-runtime-${CACHE_VERSION}`;
 
